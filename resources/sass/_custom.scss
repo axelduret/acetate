@@ -1,0 +1,21 @@
+/*!
+* Custom Styles
+* by Axel Duret
+* Released under the MIT License.
+*/
+
+// Text selection (pseudo element)
+::selection {
+  color: $ac-white;
+  background: $ac-primary;
+}
+
+// Vuetify Theme prepend-icon
+.v-input__prepend-outer .v-icon {
+  margin-right: 0.5rem;
+}
+
+// Vuetify Theme append-icon
+.v-input__append-outer .v-icon {
+  margin-left: 0.5rem;
+}

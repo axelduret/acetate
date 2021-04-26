@@ -1,0 +1,18 @@
+// Vuetify
+@import '~vuetify/dist/vuetify.min.css';
+//@import '~vuetify/src/styles/styles.sass';
+
+// Material Design Icons
+@import "@mdi/font/css/materialdesignicons.min.css";
+
+// Variables
+@import 'variables';
+
+// Custom Style
+@import 'custom';
+
+// Dark theme
+@import 'theme_dark';
+
+// Light theme
+@import 'theme_light';

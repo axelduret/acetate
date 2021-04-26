@@ -1,0 +1,16 @@
+/*!
+* Custom Vuetify Dark Theme
+* by Axel Duret
+* Released under the MIT License.
+*/
+
+// Main background
+.theme--dark.v-application,
+// Header background
+.theme--dark.v-app-bar.v-toolbar.v-sheet,
+// Footer background
+.theme--dark.v-footer,
+// Navigation-drawer background
+.theme--dark.v-navigation-drawer{
+  background-color: $ac-black;
+}

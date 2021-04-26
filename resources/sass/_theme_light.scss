@@ -1,0 +1,16 @@
+/*!
+* Custom Vuetify Light Theme
+* by Axel Duret
+* Released under the MIT License.
+*/
+
+// Main background
+.theme--light.v-application,
+// Header background
+.theme--light.v-app-bar.v-toolbar.v-sheet,
+// Footer background
+.theme--light.v-footer,
+// Navigation-drawer background
+.theme--light.v-navigation-drawer{
+  background-color: $ac-white;
+}

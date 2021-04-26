@@ -1,0 +1,51 @@
+{
+    "lang": {
+        "en": "Anglais",
+        "fr": "Français",
+        "switcher": {
+            "title": "Traduction"
+        }
+    },
+    "theme": {
+        "switcher": {
+            "light-title": "Thème clair",
+            "dark-title": "Thème sombre"
+        }
+    },
+    "menu": {
+        "home": {
+            "title": "Accueil"
+        },
+        "account": {
+            "title": "Mon Compte"
+        }
+    },
+    "account-menu": {
+        "title": "Compte personnel",
+        "login": {
+            "title": "Connexion"
+        },
+        "register": {
+            "title": "Inscription"
+        },
+        "dashboard": {
+            "title": "Tableau de bord"
+        }
+    },
+    "page": {
+        "home": {
+            "title": "Bienvenue !",
+            "description": "..."
+        },
+        "dashboard": {
+            "title": "Mon compte",
+            "description": "..."
+        },
+        "error": {
+            "notFound": {
+                "title": "Page non trouvée",
+                "description": "..."
+            }
+        }
+    }
+}
