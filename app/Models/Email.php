@@ -14,7 +14,11 @@ class Email extends Model
    *
    * @var array
    */
-  protected $fillable = [];
+  protected $fillable = [
+    'type',
+    'address',
+    'name',
+  ];
 
   /**
    * The attributes that should be hidden for arrays.

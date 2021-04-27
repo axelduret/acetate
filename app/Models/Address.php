@@ -14,7 +14,21 @@ class Address extends Model
    *
    * @var array
    */
-  protected $fillable = [];
+  protected $fillable = [
+    'type',
+    'street1',
+    'street2',
+    'zip',
+    'canton',
+    'region',
+    'city',
+    'country',
+    'firstname',
+    'lastname',
+    'longitude',
+    'latitude',
+    'company',
+  ];
 
   /**
    * The attributes that should be hidden for arrays.

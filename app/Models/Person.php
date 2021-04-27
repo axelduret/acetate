@@ -14,7 +14,15 @@ class Person extends Model
    *
    * @var array
    */
-  protected $fillable = [];
+  protected $fillable = [
+    'nickname',
+    'firstname',
+    'lastname',
+    'description',
+    'type',
+    'company',
+    'avatar',
+  ];
 
   /**
    * The attributes that should be hidden for arrays.

@@ -14,7 +14,9 @@ class Comment extends Model
    *
    * @var array
    */
-  protected $fillable = [];
+  protected $fillable = [
+    'text',
+  ];
 
   /**
    * The attributes that should be hidden for arrays.

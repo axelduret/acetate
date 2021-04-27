@@ -14,7 +14,12 @@ class Ticket extends Model
    *
    * @var array
    */
-  protected $fillable = [];
+  protected $fillable = [
+    'name',
+    'description',
+    'cost',
+    'status',
+  ];
 
   /**
    * The attributes that should be hidden for arrays.

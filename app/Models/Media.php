@@ -14,7 +14,13 @@ class Media extends Model
    *
    * @var array
    */
-  protected $fillable = [];
+  protected $fillable = [
+    'type',
+    'mimetype',
+    'encrypting',
+    'path',
+    'name',
+  ];
 
   /**
    * The attributes that should be hidden for arrays.

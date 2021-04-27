@@ -14,7 +14,12 @@ class Date extends Model
    *
    * @var array
    */
-  protected $fillable = [];
+  protected $fillable = [
+    'start_date',
+    'end_date',
+    'start_time',
+    'end_time',
+  ];
 
   /**
    * The attributes that should be hidden for arrays.

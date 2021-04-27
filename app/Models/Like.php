@@ -14,7 +14,9 @@ class Like extends Model
    *
    * @var array
    */
-  protected $fillable = [];
+  protected $fillable = [
+    'is_dislike',
+  ];
 
   /**
    * The attributes that should be hidden for arrays.

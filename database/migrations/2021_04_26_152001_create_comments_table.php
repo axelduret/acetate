@@ -17,7 +17,6 @@ class CreateCommentsTable extends Migration
       $table->id();
       $table->timestamps();
       $table->text('text');
-      $table->string('sub_category', 30)->nullable();
 
       $table->unsignedBigInteger('user_id')->nullable();
       $table->foreign('user_id')

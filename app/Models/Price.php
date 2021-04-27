@@ -14,7 +14,12 @@ class Price extends Model
    *
    * @var array
    */
-  protected $fillable = [];
+  protected $fillable = [
+    'type',
+    'name',
+    'description',
+    'cost',
+  ];
 
   /**
    * The attributes that should be hidden for arrays.
