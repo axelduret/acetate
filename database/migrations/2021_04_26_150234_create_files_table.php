@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMediasTable extends Migration
+class CreateFilesTable extends Migration
 {
   /**
    * Run the migrations.
@@ -13,7 +13,7 @@ class CreateMediasTable extends Migration
    */
   public function up()
   {
-    Schema::create('medias', function (Blueprint $table) {
+    Schema::create('files', function (Blueprint $table) {
       $table->id();
       $table->timestamps();
       $table->enum('type', ['image', 'audio', 'video'])->default('image');
@@ -59,6 +59,6 @@ class CreateMediasTable extends Migration
    */
   public function down()
   {
-    Schema::dropIfExists('medias');
+    Schema::dropIfExists('files');
   }
 }

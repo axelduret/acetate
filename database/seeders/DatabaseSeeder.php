@@ -8,6 +8,7 @@ use App\Models\Date;
 use App\Models\Email;
 use App\Models\Event;
 use App\Models\Favorite;
+use App\Models\File;
 use App\Models\Like;
 use App\Models\Media;
 use App\Models\User;
@@ -36,10 +37,10 @@ class DatabaseSeeder extends Seeder
       Storage::makeDirectory('avatar/event');
     }
 
-    // Create 'storage/app/media' directory if doesn't exist.
-    $mediadir = 'app/media';
-    if (!Storage::directories('media')) {
-      Storage::makeDirectory('media');
+    // Create 'storage/app/file' directory if doesn't exist.
+    $filedir = 'app/file';
+    if (!Storage::directories('file')) {
+      Storage::makeDirectory('file');
     }
 
     // Clean 'storage/app/avatar/user' directory before seeding files.
@@ -50,9 +51,9 @@ class DatabaseSeeder extends Seeder
     $file = new Filesystem;
     $file->cleanDirectory(storage_path($eventdir));
 
-    // Clean 'storage/app/media' directory before seeding files.
+    // Clean 'storage/app/file' directory before seeding files.
     $file = new Filesystem;
-    $file->cleanDirectory(storage_path($mediadir));
+    $file->cleanDirectory(storage_path($filedir));
 
     // Create users
     $users = User::factory()
@@ -73,12 +74,12 @@ class DatabaseSeeder extends Seeder
     $events = Event::factory()
       ->count(20)
       ->create();
-    /* 
-    // Create medias
-    $medias = Media::factory()
+
+    // Create files
+    $files = File::factory()
       ->count(20)
       ->create();
- */
+
     // Create dates
     $dates = Date::factory()
       ->count(20)

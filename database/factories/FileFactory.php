@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Media;
+use App\Models\File;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class MediaFactory extends Factory
+class FileFactory extends Factory
 {
   /**
    * The name of the factory's corresponding model.
    *
    * @var string
    */
-  protected $model = Media::class;
+  protected $model = File::class;
 
   /**
    * Define the model's default state.
@@ -21,7 +21,7 @@ class MediaFactory extends Factory
    */
   public function definition()
   {
-    $dir = 'app/media';
+    $dir = 'app/file';
     return [
       'path' => $this->faker->image(storage_path($dir)),
       'type' => $this->faker->randomElement(['image', 'audio', 'video']),
