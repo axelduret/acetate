@@ -15,6 +15,7 @@ class CreatePricesTable extends Migration
   {
     Schema::create('prices', function (Blueprint $table) {
       $table->id();
+      $table->timestamps();
       $table->enum('type', ['adult', 'child', 'family', 'group', 'primary', 'secondary']);
       $table->string('name', 30);
       $table->text('description')->nullable();
