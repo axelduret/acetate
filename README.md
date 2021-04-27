@@ -2,4 +2,4 @@
 
 ## EER Diagram
 
-![Image](EERDiagram.svg)
+![Image](EERDiagram.png)
