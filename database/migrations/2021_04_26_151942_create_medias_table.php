@@ -17,8 +17,8 @@ class CreateMediasTable extends Migration
       $table->id();
       $table->timestamps();
       $table->enum('type', ['image', 'audio', 'video'])->default('image');
-      $table->string('mimetype', 30);
-      $table->string('encrypting', 30);
+      $table->string('mimetype', 100);
+      $table->string('encoding', 100);
       $table->string('path', 100);
       $table->string('name', 30);
 

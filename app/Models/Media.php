@@ -17,7 +17,7 @@ class Media extends Model
   protected $fillable = [
     'type',
     'mimetype',
-    'encrypting',
+    'encoding',
     'path',
     'name',
   ];
