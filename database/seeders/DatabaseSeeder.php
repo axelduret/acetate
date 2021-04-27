@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Address;
+use App\Models\Comment;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Filesystem\Filesystem;
@@ -33,6 +34,11 @@ class DatabaseSeeder extends Seeder
 
     // Create addresses
     $addresses = Address::factory()
+      ->count(20)
+      ->create();
+
+    // Create comments
+    $comments = Comment::factory()
       ->count(20)
       ->create();
   }
