@@ -18,7 +18,6 @@ class CreateEmailsTable extends Migration
       $table->timestamps();
       $table->enum('type', ['main', 'secondary', 'pro'])->default('main');
       $table->string('address', 100);
-      $table->string('name', 30);
 
       $table->unsignedBigInteger('user_id')->nullable();
       $table->foreign('user_id')

@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Address;
 use App\Models\Comment;
 use App\Models\Date;
+use App\Models\Email;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Filesystem\Filesystem;
@@ -45,6 +46,11 @@ class DatabaseSeeder extends Seeder
 
     // Create dates
     $dates = Date::factory()
+      ->count(20)
+      ->create();
+
+    // Create emails
+    $emails = Email::factory()
       ->count(20)
       ->create();
   }

@@ -27,7 +27,7 @@ class CreateAddressesTable extends Migration
       ])->nullable();
       $table->string('region', 30)->nullable();
       $table->string('city', 30);
-      $table->string('country', 30);
+      $table->string('country', 60);
       $table->string('firstname', 30);
       $table->string('lastname', 30);
       $table->string('longitude', 30)->nullable();
