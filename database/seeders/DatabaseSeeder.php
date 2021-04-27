@@ -28,7 +28,7 @@ class DatabaseSeeder extends Seeder
 
     // Create users
     $users = User::factory()
-      ->count(10)
+      ->count(20)
       ->create();
   }
 }
