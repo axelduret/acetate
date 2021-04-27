@@ -21,7 +21,7 @@ class CreatePricesTable extends Migration
       $table->text('description')->nullable();
       $table->string('cost', 10, 2);
 
-      $table->unsignedBigInteger('event_id')->nullable();
+      $table->unsignedBigInteger('event_id');
       $table->foreign('event_id')
         ->references('id')
         ->on('events')

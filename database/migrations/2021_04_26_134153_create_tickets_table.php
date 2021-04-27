@@ -21,14 +21,14 @@ class CreateTicketsTable extends Migration
       $table->string('cost', 10, 2);
       $table->enum('status', ['current', 'sold out', 'promo', 'gift']);
 
-      $table->unsignedBigInteger('user_id')->nullable();
+      $table->unsignedBigInteger('user_id');
       $table->foreign('user_id')
         ->references('id')
         ->on('users')
         ->onDelete('cascade')
         ->onUpdate('cascade');
 
-      $table->unsignedBigInteger('event_id')->nullable();
+      $table->unsignedBigInteger('event_id');
       $table->foreign('event_id')
         ->references('id')
         ->on('events')

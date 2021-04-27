@@ -26,6 +26,7 @@ class DateFactory extends Factory
       'end_date' => $this->faker->date('Y-m-d'),
       'start_time' => $this->faker->time('H:i:s'),
       'end_time' => $this->faker->time('H:i:s'),
+      'event_id' => $this->faker->numberBetween(1, 20),
     ];
   }
 }
