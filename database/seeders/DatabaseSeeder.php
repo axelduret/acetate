@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Address;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Filesystem\Filesystem;
@@ -25,9 +26,13 @@ class DatabaseSeeder extends Seeder
     $file = new Filesystem;
     $file->cleanDirectory(storage_path($dir));
 
-
     // Create users
     $users = User::factory()
+      ->count(20)
+      ->create();
+
+    // Create addresses
+    $addresses = Address::factory()
       ->count(20)
       ->create();
   }
