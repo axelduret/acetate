@@ -14,7 +14,9 @@ use App\Models\Media;
 use App\Models\Person;
 use App\Models\Phone;
 use App\Models\Price;
+use App\Models\SocialNetwork;
 use App\Models\User;
+use App\Models\Website;
 use Illuminate\Database\Seeder;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
@@ -91,6 +93,11 @@ class DatabaseSeeder extends Seeder
       ->count(20)
       ->create();
 
+    // Create websites
+    $websites = Website::factory()
+      ->count(20)
+      ->create();
+
     // Create comments
     $comments = Comment::factory()
       ->count(20)
@@ -123,6 +130,11 @@ class DatabaseSeeder extends Seeder
 
     // Create likes
     $likes = Like::factory()
+      ->count(20)
+      ->create();
+
+    // Create social_networks
+    $social_networks = SocialNetwork::factory()
       ->count(20)
       ->create();
   }

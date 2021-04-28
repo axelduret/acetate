@@ -7,22 +7,24 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class WebsiteFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = Website::class;
+  /**
+   * The name of the factory's corresponding model.
+   *
+   * @var string
+   */
+  protected $model = Website::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition()
-    {
-        return [
-            //
-        ];
-    }
+  /**
+   * Define the model's default state.
+   *
+   * @return array
+   */
+  public function definition()
+  {
+    return [
+      'type' => $this->faker->randomElement(['website', 'social network']),
+      'url' => $this->faker->url,
+      'name' => $this->faker->domainWord,
+    ];
+  }
 }

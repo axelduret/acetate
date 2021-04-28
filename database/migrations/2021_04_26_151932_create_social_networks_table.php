@@ -15,7 +15,8 @@ class CreateSocialNetworksTable extends Migration
   {
     Schema::create('social_networks', function (Blueprint $table) {
       $table->id();
-      $table->enum('type', ['twitter', 'facebook', 'instagram', 'linkedin', 'youtube', 'twitch', 'tiktok', 'snapchat']);
+      $table->timestamps();
+      $table->enum('type', ['twitter', 'facebook', 'instagram', 'linkedin', 'youtube', 'twitch', 'snapchat', 'reddit', 'tiktok']);
 
       $table->unsignedBigInteger('website_id');
       $table->foreign('website_id')
