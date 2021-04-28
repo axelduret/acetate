@@ -7,22 +7,24 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class TaxonomyFactory extends Factory
 {
-    /**
-     * The name of the factory's corresponding model.
-     *
-     * @var string
-     */
-    protected $model = Taxonomy::class;
+  /**
+   * The name of the factory's corresponding model.
+   *
+   * @var string
+   */
+  protected $model = Taxonomy::class;
 
-    /**
-     * Define the model's default state.
-     *
-     * @return array
-     */
-    public function definition()
-    {
-        return [
-            //
-        ];
-    }
+  /**
+   * Define the model's default state.
+   *
+   * @return array
+   */
+  public function definition()
+  {
+    return [
+      'type' => $this->faker->randomElement(['conference', 'exhibition', 'music', 'theater']),
+      'category' => $this->faker->unique()->word,
+      'sub_category' => $this->faker->word,
+    ];
+  }
 }

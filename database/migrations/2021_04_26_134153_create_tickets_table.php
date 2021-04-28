@@ -16,7 +16,7 @@ class CreateTicketsTable extends Migration
     Schema::create('tickets', function (Blueprint $table) {
       $table->id();
       $table->timestamps();
-      $table->string('name', 30);
+      $table->string('name', 100);
       $table->text('description')->nullable();
       $table->string('cost', 10, 2);
       $table->enum('status', ['current', 'sold out', 'promo', 'gift']);

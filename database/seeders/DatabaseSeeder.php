@@ -15,6 +15,8 @@ use App\Models\Person;
 use App\Models\Phone;
 use App\Models\Price;
 use App\Models\SocialNetwork;
+use App\Models\Taxonomy;
+use App\Models\Ticket;
 use App\Models\User;
 use App\Models\Website;
 use Illuminate\Database\Seeder;
@@ -135,6 +137,16 @@ class DatabaseSeeder extends Seeder
 
     // Create social_networks
     $social_networks = SocialNetwork::factory()
+      ->count(20)
+      ->create();
+
+    // Create taxonomies
+    $taxonomies = Taxonomy::factory()
+      ->count(20)
+      ->create();
+
+    // Create tickets
+    $tickets = Ticket::factory()
       ->count(20)
       ->create();
   }
