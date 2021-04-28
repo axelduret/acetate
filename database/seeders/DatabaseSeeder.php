@@ -11,6 +11,7 @@ use App\Models\Favorite;
 use App\Models\File;
 use App\Models\Like;
 use App\Models\Media;
+use App\Models\Person;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Filesystem\Filesystem;
@@ -37,26 +38,44 @@ class DatabaseSeeder extends Seeder
       Storage::makeDirectory('avatar/event');
     }
 
+    // Create 'storage/app/avatar/person' directory if doesn't exist.
+    $persondir = 'app/avatar/person';
+    if (!Storage::directories('avatar/person')) {
+      Storage::makeDirectory('avatar/person');
+    }
+
     // Create 'storage/app/file' directory if doesn't exist.
     $filedir = 'app/file';
     if (!Storage::directories('file')) {
       Storage::makeDirectory('file');
     }
 
-    // Clean 'storage/app/avatar/user' directory before seeding files.
     $file = new Filesystem;
+
+    // Clean 'storage/app/avatar/user' directory before seeding files.
     $file->cleanDirectory(storage_path($userdir));
 
+    // Clean 'storage/app/avatar/person' directory before seeding files.
+    $file->cleanDirectory(storage_path($persondir));
+
     // Clean 'storage/app/avatar/event' directory before seeding files.
-    $file = new Filesystem;
     $file->cleanDirectory(storage_path($eventdir));
 
     // Clean 'storage/app/file' directory before seeding files.
-    $file = new Filesystem;
     $file->cleanDirectory(storage_path($filedir));
 
     // Create users
     $users = User::factory()
+      ->count(20)
+      ->create();
+
+    // Create events
+    $events = Event::factory()
+      ->count(20)
+      ->create();
+
+    // Create people
+    $people = Person::factory()
       ->count(20)
       ->create();
 
@@ -67,11 +86,6 @@ class DatabaseSeeder extends Seeder
 
     // Create comments
     $comments = Comment::factory()
-      ->count(20)
-      ->create();
-
-    // Create events
-    $events = Event::factory()
       ->count(20)
       ->create();
 
