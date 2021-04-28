@@ -133,7 +133,7 @@ class DatabaseSeeder extends Seeder
 
     // Create addresses.
     $addresses = Address::factory()
-      ->count(60)
+      ->count(100)
       ->make()->each(function ($address) use ($users, $events, $people, $venues, $tickets) {
         if ($address->type == 'event') {
           // Attach a random event_id to the address.
@@ -160,26 +160,89 @@ class DatabaseSeeder extends Seeder
 
     // Create emails.
     $emails = Email::factory()
-      ->count(60)
-      ->create();
+      ->count(100)
+      ->make()->each(function ($email) use ($users, $events, $people, $venues, $tickets) {
+        $random = rand(1, 5);
+        if ($random == 1) {
+          // Attach a random event_id to the email.
+          $email->event_id = $events->random()->id;
+          $email->save();
+        } elseif ($random == 2) {
+          // Attach a random person_id to the email.
+          $email->person_id = $people->random()->id;
+          $email->save();
+        } elseif ($random == 3) {
+          // Attach a random venue_id to the email.
+          $email->venue_id = $venues->random()->id;
+          $email->save();
+        } elseif ($random == 4) {
+          // Attach a random ticket_id to the email.
+          $email->ticket_id = $tickets->random()->id;
+          $email->save();
+        } else {
+          // Attach a random user_id to the email.
+          $email->user_id = $users->random()->id;
+          $email->save();
+        }
+      });
 
     // Create phones.
     $phones = Phone::factory()
-      ->count(60)
-      ->create();
+      ->count(100)
+      ->make()->each(function ($phone) use ($users, $events, $people, $venues, $tickets) {
+        $random = rand(1, 5);
+        if ($random == 1) {
+          // Attach a random event_id to the phone.
+          $phone->event_id = $events->random()->id;
+          $phone->save();
+        } elseif ($random == 2) {
+          // Attach a random person_id to the phone.
+          $phone->person_id = $people->random()->id;
+          $phone->save();
+        } elseif ($random == 3) {
+          // Attach a random venue_id to the phone.
+          $phone->venue_id = $venues->random()->id;
+          $phone->save();
+        } elseif ($random == 4) {
+          // Attach a random ticket_id to the phone.
+          $phone->ticket_id = $tickets->random()->id;
+          $phone->save();
+        } else {
+          // Attach a random user_id to the phone.
+          $phone->user_id = $users->random()->id;
+          $phone->save();
+        }
+      });
 
     // Create websites.
     $websites = Website::factory()
-      ->count(60)
-      ->create();
-
-    // Create social_networks.
-    $social_networks = SocialNetwork::factory()
-      ->count(60)
-      ->make()->each(function ($social_network) use ($websites) {
-        // Attach a random website_id to each social_network.
-        $social_network->website_id = $websites->random()->id;
-        $social_network->save();
+      ->count(100)
+      ->make()->each(function ($website) use ($users, $events, $people, $venues) {
+        $random = rand(1, 4);
+        if ($random == 1) {
+          // Attach a random event_id to the website.
+          $website->event_id = $events->random()->id;
+          $website->save();
+        } elseif ($random == 2) {
+          // Attach a random person_id to the website.
+          $website->person_id = $people->random()->id;
+          $website->save();
+        } elseif ($random == 3) {
+          // Attach a random venue_id to the website.
+          $website->venue_id = $venues->random()->id;
+          $website->save();
+        } else {
+          // Attach a random user_id to the website.
+          $website->user_id = $users->random()->id;
+          $website->save();
+        }
+        if ($website->type == 'social network') {
+          // Create a social_network.
+          $social_network = SocialNetwork::factory()->make();
+          // Attach the website_id to the social_network.
+          $social_network->website_id = $website->id;
+          $social_network->save();
+        }
       });
   }
 }
