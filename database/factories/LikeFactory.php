@@ -23,7 +23,6 @@ class LikeFactory extends Factory
   {
     return [
       'is_dislike' => $this->faker->boolean,
-      'user_id' => $this->faker->numberBetween(1, 20),
     ];
   }
 }

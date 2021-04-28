@@ -26,8 +26,6 @@ class TicketFactory extends Factory
       'description' => $this->faker->text,
       'cost' => $this->faker->randomFloat(2, 1, 1000),
       'status' => $this->faker->randomElement(['current', 'sold out', 'promo', 'gift']),
-      'user_id' => $this->faker->numberBetween(1, 20),
-      'event_id' => $this->faker->numberBetween(1, 20),
     ];
   }
 }

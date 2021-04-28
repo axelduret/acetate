@@ -26,7 +26,6 @@ class VenueFactory extends Factory
       'name' => $this->faker->sentence(4),
       'description' => $this->faker->text,
       'avatar' => $this->faker->image(storage_path($dir)),
-      'user_id' => $this->faker->numberBetween(1, 20),
     ];
   }
 }

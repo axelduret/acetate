@@ -10,7 +10,6 @@ use App\Models\Event;
 use App\Models\Favorite;
 use App\Models\File;
 use App\Models\Like;
-use App\Models\Media;
 use App\Models\Person;
 use App\Models\Phone;
 use App\Models\Price;
@@ -21,8 +20,6 @@ use App\Models\User;
 use App\Models\Venue;
 use App\Models\Website;
 use Illuminate\Database\Seeder;
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Facades\Storage;
 
 class DatabaseSeeder extends Seeder
 {
@@ -33,136 +30,156 @@ class DatabaseSeeder extends Seeder
    */
   public function run()
   {
-    // Create 'storage/app/avatar/user' directory if doesn't exist.
-    $userdir = 'app/avatar/user';
-    if (!Storage::directories('avatar/user')) {
-      Storage::makeDirectory('avatar/user');
-    }
+    // Reset the application's storgae folders.
+    $this->call(FolderReset::class);
 
-    // Create 'storage/app/avatar/event' directory if doesn't exist.
-    $eventdir = 'app/avatar/event';
-    if (!Storage::directories('avatar/event')) {
-      Storage::makeDirectory('avatar/event');
-    }
-
-    // Create 'storage/app/avatar/person' directory if doesn't exist.
-    $persondir = 'app/avatar/person';
-    if (!Storage::directories('avatar/person')) {
-      Storage::makeDirectory('avatar/person');
-    }
-
-    // Create 'storage/app/avatar/venue' directory if doesn't exist.
-    $venuedir = 'app/avatar/venue';
-    if (!Storage::directories('avatar/venue')) {
-      Storage::makeDirectory('avatar/venue');
-    }
-
-    // Create 'storage/app/file' directory if doesn't exist.
-    $filedir = 'app/file';
-    if (!Storage::directories('file')) {
-      Storage::makeDirectory('file');
-    }
-
-    $file = new Filesystem;
-
-    // Clean 'storage/app/avatar/user' directory before seeding files.
-    $file->cleanDirectory(storage_path($userdir));
-
-    // Clean 'storage/app/avatar/person' directory before seeding files.
-    $file->cleanDirectory(storage_path($persondir));
-
-    // Clean 'storage/app/avatar/event' directory before seeding files.
-    $file->cleanDirectory(storage_path($eventdir));
-
-    // Clean 'storage/app/avatar/venue' directory before seeding files.
-    $file->cleanDirectory(storage_path($venuedir));
-
-    // Clean 'storage/app/file' directory before seeding files.
-    $file->cleanDirectory(storage_path($filedir));
-
-    // Create users
+    // Create users.
     $users = User::factory()
       ->count(20)
       ->create();
 
-    // Create events
+    // Create events.
     $events = Event::factory()
       ->count(20)
-      ->create();
+      ->make()->each(function ($event) use ($users) {
+        // Attach a random user_id to each event.
+        $event->user_id = $users->random()->id;
+        $event->save();
+      });
 
-    // Create people
+    // Create people.
     $people = Person::factory()
       ->count(20)
-      ->create();
+      ->make()->each(function ($person) use ($users) {
+        // Attach a random user_id to each person.
+        $person->user_id = $users->random()->id;
+        $person->save();
+      });
 
-    // Create venues
+    // Create venues.
     $venues = Venue::factory()
       ->count(20)
-      ->create();
+      ->make()->each(function ($venue) use ($users) {
+        // Attach a random user_id to each venue.
+        $venue->user_id = $users->random()->id;
+        $venue->save();
+      });
 
-    // Create addresses
-    $addresses = Address::factory()
-      ->count(20)
-      ->create();
-
-    // Create phones
-    $phones = Phone::factory()
-      ->count(20)
-      ->create();
-
-    // Create websites
-    $websites = Website::factory()
-      ->count(20)
-      ->create();
-
-    // Create comments
+    // Create comments.
     $comments = Comment::factory()
       ->count(20)
-      ->create();
+      ->make()->each(function ($comment) use ($users) {
+        // Attach a random user_id to each comment.
+        $comment->user_id = $users->random()->id;
+        $comment->save();
+      });
 
-    // Create files
+    // Create files.
     $files = File::factory()
       ->count(20)
       ->create();
 
-    // Create dates
+    // Create dates.
     $dates = Date::factory()
       ->count(20)
-      ->create();
+      ->make()->each(function ($date) use ($events) {
+        // Attach a random event_id to each date.
+        $date->event_id = $events->random()->id;
+        $date->save();
+      });
 
-    // Create prices
+    // Create prices.
     $prices = Price::factory()
       ->count(20)
-      ->create();
+      ->make()->each(function ($price) use ($events) {
+        // Attach a random event_id to each price.
+        $price->event_id = $events->random()->id;
+        $price->save();
+      });
 
-    // Create emails
-    $emails = Email::factory()
-      ->count(20)
-      ->create();
-
-    // Create favorites
+    // Create favorites.
     $favorites = Favorite::factory()
       ->count(20)
-      ->create();
+      ->make()->each(function ($favorite) use ($users) {
+        // Attach a random user_id to each favorite.
+        $favorite->user_id = $users->random()->id;
+        $favorite->save();
+      });
 
-    // Create likes
+    // Create likes.
     $likes = Like::factory()
       ->count(20)
-      ->create();
+      ->make()->each(function ($like) use ($users) {
+        // Attach a random user_id to each like.
+        $like->user_id = $users->random()->id;
+        $like->save();
+      });
 
-    // Create social_networks
-    $social_networks = SocialNetwork::factory()
-      ->count(20)
-      ->create();
-
-    // Create taxonomies
+    // Create taxonomies.
     $taxonomies = Taxonomy::factory()
       ->count(20)
       ->create();
 
-    // Create tickets
+    // Create tickets.
     $tickets = Ticket::factory()
       ->count(20)
+      ->make()->each(function ($ticket) use ($users, $events) {
+        // Attach a random user_id to each ticket.
+        $ticket->user_id = $users->random()->id;
+        // Attach a random event_id to each ticket.
+        $ticket->event_id = $events->random()->id;
+        $ticket->save();
+      });
+
+    // Create addresses.
+    $addresses = Address::factory()
+      ->count(60)
+      ->make()->each(function ($address) use ($users, $events, $people, $venues, $tickets) {
+        if ($address->type == 'event') {
+          // Attach a random event_id to the address.
+          $address->event_id = $events->random()->id;
+          $address->save();
+        } elseif ($address->type == 'person') {
+          // Attach a random person_id to the address.
+          $address->person_id = $people->random()->id;
+          $address->save();
+        } elseif ($address->type == 'venue') {
+          // Attach a random venue_id to the address.
+          $address->venue_id = $venues->random()->id;
+          $address->save();
+        } elseif ($address->type == 'ticket') {
+          // Attach a random ticket_id to the address.
+          $address->ticket_id = $tickets->random()->id;
+          $address->save();
+        } else {
+          // Attach a random user_id to the address.
+          $address->user_id = $users->random()->id;
+          $address->save();
+        }
+      });
+
+    // Create emails.
+    $emails = Email::factory()
+      ->count(60)
       ->create();
+
+    // Create phones.
+    $phones = Phone::factory()
+      ->count(60)
+      ->create();
+
+    // Create websites.
+    $websites = Website::factory()
+      ->count(60)
+      ->create();
+
+    // Create social_networks.
+    $social_networks = SocialNetwork::factory()
+      ->count(60)
+      ->make()->each(function ($social_network) use ($websites) {
+        // Attach a random website_id to each social_network.
+        $social_network->website_id = $websites->random()->id;
+        $social_network->save();
+      });
   }
 }

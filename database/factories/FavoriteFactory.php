@@ -21,8 +21,6 @@ class FavoriteFactory extends Factory
    */
   public function definition()
   {
-    return [
-      'user_id' => $this->faker->numberBetween(1, 20),
-    ];
+    return [];
   }
 }

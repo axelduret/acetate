@@ -17,7 +17,7 @@ class CreateWebsitesTable extends Migration
       $table->id();
       $table->timestamps();
       $table->enum('type', ['website', 'social network'])->default('website');
-      $table->string('url', 100);
+      $table->string('url', 255);
       $table->string('name', 30);
 
       $table->unsignedBigInteger('user_id')->nullable();

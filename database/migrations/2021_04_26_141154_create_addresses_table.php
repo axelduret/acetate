@@ -16,7 +16,7 @@ class CreateAddressesTable extends Migration
     Schema::create('addresses', function (Blueprint $table) {
       $table->id();
       $table->timestamps();
-      $table->enum('type', ['main', 'secondary', 'tertiary', 'company', 'event', 'venue', 'person'])->default('main');
+      $table->enum('type', ['main', 'secondary', 'tertiary', 'company', 'event', 'venue', 'person', 'ticket'])->default('main');
       $table->string('street1', 100);
       $table->string('street2', 100)->nullable();
       $table->string('zip', 10);

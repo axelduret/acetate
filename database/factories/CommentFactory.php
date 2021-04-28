@@ -23,7 +23,6 @@ class CommentFactory extends Factory
   {
     return [
       'text' => $this->faker->text(512),
-      'user_id' => $this->faker->numberBetween(1, 20),
     ];
   }
 }

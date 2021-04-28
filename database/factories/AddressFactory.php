@@ -22,7 +22,7 @@ class AddressFactory extends Factory
   public function definition()
   {
     return [
-      'type' => $this->faker->randomElement(['main', 'secondary', 'tertiary', 'company', 'event', 'venue', 'person']),
+      'type' => $this->faker->randomElement(['main', 'secondary', 'tertiary', 'company', 'event', 'venue', 'person', 'ticket']),
       'street1' => $this->faker->streetAddress,
       'street2' => $this->faker->secondaryAddress,
       'zip' => $this->faker->postcode,

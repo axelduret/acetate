@@ -30,7 +30,6 @@ class PersonFactory extends Factory
       'type' => $this->faker->randomElement(['owner', 'organiser', 'promoter', 'contact', 'presenter', 'artist', 'guest']),
       'avatar' => $this->faker->image(storage_path($dir)),
       'company' => $this->faker->company,
-      'user_id' => $this->faker->numberBetween(1, 20),
     ];
   }
 }

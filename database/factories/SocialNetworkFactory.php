@@ -23,7 +23,6 @@ class SocialNetworkFactory extends Factory
   {
     return [
       'type' => $this->faker->randomElement(['twitter', 'facebook', 'instagram', 'linkedin', 'youtube', 'twitch', 'snapchat', 'reddit', 'tiktok']),
-      'website_id' => $this->faker->numberBetween(1, 20),
     ];
   }
 }

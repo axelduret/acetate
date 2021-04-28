@@ -26,7 +26,6 @@ class PriceFactory extends Factory
       'name' => $this->faker->sentence(4),
       'description' => $this->faker->text,
       'cost' => $this->faker->randomFloat(2, 1, 1000),
-      'event_id' => $this->faker->numberBetween(1, 20),
     ];
   }
 }
