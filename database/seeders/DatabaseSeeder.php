@@ -12,6 +12,7 @@ use App\Models\File;
 use App\Models\Like;
 use App\Models\Media;
 use App\Models\Person;
+use App\Models\Phone;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Filesystem\Filesystem;
@@ -81,6 +82,11 @@ class DatabaseSeeder extends Seeder
 
     // Create addresses
     $addresses = Address::factory()
+      ->count(20)
+      ->create();
+
+    // Create phones
+    $phones = Phone::factory()
       ->count(20)
       ->create();
 
