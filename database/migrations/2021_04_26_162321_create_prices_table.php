@@ -17,7 +17,7 @@ class CreatePricesTable extends Migration
       $table->id();
       $table->timestamps();
       $table->enum('type', ['adult', 'child', 'family', 'group', 'primary', 'secondary']);
-      $table->string('name', 30);
+      $table->string('name', 100);
       $table->text('description')->nullable();
       $table->string('cost', 10, 2);
 
