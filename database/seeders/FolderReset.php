@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 class FolderReset extends Seeder
 {
   /**
-   * Reset the application's storgae folders.
+   * Reset the application's storage folders.
    *
    * @return void
    */

@@ -30,7 +30,7 @@ class DatabaseSeeder extends Seeder
    */
   public function run()
   {
-    // Reset the application's storgae folders.
+    // Reset the application's storage folders.
     $this->call(FolderReset::class);
 
     // Create users.
