@@ -18,6 +18,7 @@ use App\Models\SocialNetwork;
 use App\Models\Taxonomy;
 use App\Models\Ticket;
 use App\Models\User;
+use App\Models\Venue;
 use App\Models\Website;
 use Illuminate\Database\Seeder;
 use Illuminate\Filesystem\Filesystem;
@@ -50,6 +51,12 @@ class DatabaseSeeder extends Seeder
       Storage::makeDirectory('avatar/person');
     }
 
+    // Create 'storage/app/avatar/venue' directory if doesn't exist.
+    $venuedir = 'app/avatar/venue';
+    if (!Storage::directories('avatar/venue')) {
+      Storage::makeDirectory('avatar/venue');
+    }
+
     // Create 'storage/app/file' directory if doesn't exist.
     $filedir = 'app/file';
     if (!Storage::directories('file')) {
@@ -67,6 +74,9 @@ class DatabaseSeeder extends Seeder
     // Clean 'storage/app/avatar/event' directory before seeding files.
     $file->cleanDirectory(storage_path($eventdir));
 
+    // Clean 'storage/app/avatar/venue' directory before seeding files.
+    $file->cleanDirectory(storage_path($venuedir));
+
     // Clean 'storage/app/file' directory before seeding files.
     $file->cleanDirectory(storage_path($filedir));
 
@@ -82,6 +92,11 @@ class DatabaseSeeder extends Seeder
 
     // Create people
     $people = Person::factory()
+      ->count(20)
+      ->create();
+
+    // Create venues
+    $venues = Venue::factory()
       ->count(20)
       ->create();
 
