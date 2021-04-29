@@ -87,7 +87,7 @@ class DatabaseSeeder extends Seeder
             $price->save();
           }
           if (rand(1, 2) == 1) {
-            // Create another optional group price.
+            // Create an optional group price.
             $price = Price::factory()->make();
             // Attach the event_id to the optional group price.
             $price->type = 'group';
