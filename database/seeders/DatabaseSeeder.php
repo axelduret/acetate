@@ -369,7 +369,26 @@ class DatabaseSeeder extends Seeder
 
     // Create taxonomies.
     $taxonomies = Taxonomy::factory()
-      ->count(20)
-      ->create();
+      ->count(100)
+      ->create()
+      ->each(function ($taxonomy) use ($events, $people, $venues) {
+        $random = rand(1, 3);
+        if ($random == 1) {
+          // Attach some random events to the taxonomy.
+          $taxonomy->events()->attach(
+            $events->random(rand(1, 20))->pluck('id')->toArray()
+          );
+        } elseif ($random == 2) {
+          // Attach some random people to the taxonomy.
+          $taxonomy->people()->attach(
+            $people->random(rand(1, 20))->pluck('id')->toArray()
+          );
+        } else {
+          // Attach some random venues to the taxonomy.
+          $taxonomy->venues()->attach(
+            $venues->random(rand(1, 20))->pluck('id')->toArray()
+          );
+        }
+      });
   }
 }
