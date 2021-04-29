@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserEventsResource;
 use App\Http\Traits\RespondsWithHttpStatus;
 
 class UserController extends Controller
@@ -76,10 +77,11 @@ class UserController extends Controller
   /**
    * Display the specified user.
    *
+   * @param  Request  $request
    * @param  int  $id
    * @return Response
    */
-  public function show(int $id)
+  public function show(int $id, Request $request)
   {
     // Check if user exists.
     $user = User::find($id);
@@ -87,8 +89,30 @@ class UserController extends Controller
       return $this->failure('User not found.', 404);
     }
 
-    // Return user.
-    return new UserResource($user);
+    switch ($request->input('content')) {
+      case 'events':
+        // Return events attached to the user.
+        return new UserEventsResource(
+          $user->events
+            ->load('addresses')
+            ->load('emails')
+            ->load('phones')
+            ->load('websites')
+            ->load('websites.socialNetwork')
+        );
+        break;
+      case 'venues':
+        // Return venues attached to the user.
+        return $user->venues; // TODO link response to resource
+        break;
+      case 'people':
+        // Return people attached to the user.
+        return $user->people; // TODO link response to resource
+        break;
+      default:
+        // Return the user data.
+        return new UserResource($user);
+    }
   }
 
   /**
