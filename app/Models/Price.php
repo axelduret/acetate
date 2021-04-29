@@ -18,7 +18,7 @@ class Price extends Model
     'type',
     'name',
     'description',
-    'cost',
+    'cost'
   ];
 
   /**
@@ -26,7 +26,11 @@ class Price extends Model
    *
    * @var array
    */
-  protected $hidden = [];
+  protected $hidden = [
+    "event_id",
+    "created_at",
+    "updated_at"
+  ];
 
   public function event()
   {

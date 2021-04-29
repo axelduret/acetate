@@ -29,7 +29,9 @@ class Website extends Model
     "user_id",
     "event_id",
     "person_id",
-    "venue_id"
+    "venue_id",
+    "created_at",
+    "updated_at"
   ];
 
   public function user()

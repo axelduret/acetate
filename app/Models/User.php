@@ -37,6 +37,22 @@ class User extends Authenticatable
   protected $hidden = [
     'password',
     'remember_token',
+    "address_id",
+    "email_id",
+    "phone_id",
+    "website_id",
+    "event_id",
+    "file_id",
+    "venue_id",
+    "person_id",
+    "comment_id",
+    "like_id",
+    "favorite_id",
+    "ticket_id",
+    "pivot",
+    "created_at",
+    "updated_at",
+    "email_verified_at"
   ];
 
   /**

@@ -25,7 +25,14 @@ class Taxonomy extends Model
    *
    * @var array
    */
-  protected $hidden = [];
+  protected $hidden = [
+    "event_id",
+    "venue_id",
+    "person_id",
+    "pivot",
+    "created_at",
+    "updated_at"
+  ];
 
   public function events()
   {

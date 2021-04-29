@@ -29,7 +29,9 @@ class Email extends Model
     "event_id",
     "person_id",
     "venue_id",
-    "ticket_id"
+    "ticket_id",
+    "created_at",
+    "updated_at"
   ];
 
   public function user()

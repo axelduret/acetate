@@ -26,7 +26,15 @@ class Ticket extends Model
    *
    * @var array
    */
-  protected $hidden = [];
+  protected $hidden = [
+    "user_id",
+    "event_id",
+    "address_id",
+    "email_id",
+    "phone_id",
+    "created_at",
+    "updated_at"
+  ];
 
   public function user()
   {

@@ -23,7 +23,11 @@ class SocialNetwork extends Model
    *
    * @var array
    */
-  protected $hidden = ['website_id'];
+  protected $hidden = [
+    'website_id',
+    "created_at",
+    "updated_at"
+  ];
 
   public function website()
   {

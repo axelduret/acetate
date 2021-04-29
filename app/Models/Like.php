@@ -23,7 +23,15 @@ class Like extends Model
    *
    * @var array
    */
-  protected $hidden = [];
+  protected $hidden = [
+    "id",
+    "event_id",
+    "person_id",
+    "venue_id",
+    "comment_id",
+    "created_at",
+    "updated_at"
+  ];
 
   public function user()
   {

@@ -25,7 +25,23 @@ class Venue extends Model
    *
    * @var array
    */
-  protected $hidden = [];
+  protected $hidden = [
+    "user_id",
+    "address_id",
+    "email_id",
+    "phone_id",
+    "website_id",
+    "comment_id",
+    "like_id",
+    "favorite_id",
+    "file_id",
+    "person_id",
+    "event_id",
+    "taxonomy_id",
+    "pivot",
+    "created_at",
+    "updated_at"
+  ];
 
   public function user()
   {

@@ -18,7 +18,7 @@ class Date extends Model
     'start_date',
     'end_date',
     'start_time',
-    'end_time',
+    'end_time'
   ];
 
   /**
@@ -26,7 +26,11 @@ class Date extends Model
    *
    * @var array
    */
-  protected $hidden = [];
+  protected $hidden = [
+    "event_id",
+    "created_at",
+    "updated_at"
+  ];
 
   public function event()
   {

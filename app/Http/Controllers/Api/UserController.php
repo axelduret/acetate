@@ -8,6 +8,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserEventsResource;
+use App\Http\Resources\UserPeopleResource;
+use App\Http\Resources\UserVenuesResource;
 use App\Http\Traits\RespondsWithHttpStatus;
 
 class UserController extends Controller
@@ -91,20 +93,32 @@ class UserController extends Controller
 
     switch ($request->input('content')) {
       case 'events':
-        // Return events attached to the user.
+        // Return all events attached to the user.
         return new UserEventsResource(
           $user->events
-            ->load('dates')
             ->load('venues')
+            ->load('dates')
+            ->load('prices')
+            ->load('taxonomies')
+            ->load('likes')
         );
         break;
       case 'venues':
-        // Return venues attached to the user.
-        return $user->venues; // TODO link response to resource
+        // Return all venues attached to the user.
+        return new UserVenuesResource(
+          $user->venues
+            ->load('addresses')
+            ->load('taxonomies')
+            ->load('likes')
+        );
         break;
       case 'people':
-        // Return people attached to the user.
-        return $user->people; // TODO link response to resource
+        // Return all people attached to the user.
+        return new UserPeopleResource(
+          $user->people
+            ->load('taxonomies')
+            ->load('likes')
+        );
         break;
       default:
         // Return the user data.
