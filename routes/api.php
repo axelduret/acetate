@@ -2,6 +2,10 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\UserController;
+use App\Http\Controllers\Api\EventController;
+use App\Http\Controllers\Api\PersonController;
+use App\Http\Controllers\Api\VenueController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,7 +17,17 @@ use Illuminate\Support\Facades\Route;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
+/* 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+ */
+
+// Users API endpoints
+Route::apiResource('users', UserController::class);
+// Events API endpoints
+Route::apiResource('events', EventController::class);
+// People API endpoints
+Route::apiResource('people', PersonController::class);
+// Venues API endpoints
+Route::apiResource('venues', VenueController::class);
