@@ -2,13 +2,18 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
-use App\Models\User;
+use App\Http\Traits\RespondsWithHttpStatus;
 
 class UserController extends Controller
 {
+  // Import custom response trait.
+  use RespondsWithHttpStatus;
+
   // Default pagination value.
   const PER_PAGE = 50;
 
@@ -27,14 +32,14 @@ class UserController extends Controller
   protected $searchFields = ['username', 'email', 'firstname', 'lastname', 'company', 'language'];
 
   /**
-   * Display a list of users.
+   * Display the list of all users.
    *
    * @param Request $request
    * @return Response
    */
   public function index(Request $request)
   {
-    // Retrieve the data and sort it.
+    // Retrieve data and sort it.
     $sortField = $request->input('sort_by');
     $sortOrder = $request->input('order_by') ?? 'asc';
     $sortableFields = in_array($sortField, $this->sortFields) ? $sortField : 'id';
@@ -60,8 +65,8 @@ class UserController extends Controller
   /**
    * Store a newly created resource in storage.
    *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
+   * @param  Request  $request
+   * @return Response
    */
   public function store(Request $request)
   {
@@ -69,14 +74,21 @@ class UserController extends Controller
   }
 
   /**
-   * Display the specified resource.
+   * Display the specified user.
    *
    * @param  int  $id
-   * @return \Illuminate\Http\Response
+   * @return Response
    */
-  public function show($id)
+  public function show(int $id)
   {
-    //
+    // Check if user exists.
+    $user = User::find($id);
+    if (!$user) {
+      return $this->failure('User not found.', 404);
+    }
+
+    // Return user.
+    return new UserResource($user);
   }
 
   /**

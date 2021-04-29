@@ -24,7 +24,13 @@ class Email extends Model
    *
    * @var array
    */
-  protected $hidden = [];
+  protected $hidden = [
+    "user_id",
+    "event_id",
+    "person_id",
+    "venue_id",
+    "ticket_id"
+  ];
 
   public function user()
   {

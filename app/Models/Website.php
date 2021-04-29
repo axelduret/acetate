@@ -25,7 +25,12 @@ class Website extends Model
    *
    * @var array
    */
-  protected $hidden = [];
+  protected $hidden = [
+    "user_id",
+    "event_id",
+    "person_id",
+    "venue_id"
+  ];
 
   public function user()
   {
@@ -47,8 +52,8 @@ class Website extends Model
     return $this->belongsTo(Venue::class);
   }
 
-  public function socialNetworks()
+  public function socialNetwork()
   {
-    return $this->hasMany(SocialNetwork::class);
+    return $this->hasOne(SocialNetwork::class);
   }
 }
