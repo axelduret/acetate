@@ -101,6 +101,7 @@ class UserController extends Controller
             ->load('prices')
             ->load('taxonomies')
             ->load('likes')
+            ->load('favorites')
         );
         break;
       case 'venues':
@@ -110,6 +111,7 @@ class UserController extends Controller
             ->load('addresses')
             ->load('taxonomies')
             ->load('likes')
+            ->load('favorites')
         );
         break;
       case 'people':
@@ -118,6 +120,7 @@ class UserController extends Controller
           $user->people
             ->load('taxonomies')
             ->load('likes')
+            ->load('favorites')
         );
         break;
       default:
