@@ -27,4 +27,9 @@ class Date extends Model
    * @var array
    */
   protected $hidden = [];
+
+  public function event()
+  {
+    return $this->belongsTo(Event::class);
+  }
 }

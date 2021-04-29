@@ -27,4 +27,29 @@ class Ticket extends Model
    * @var array
    */
   protected $hidden = [];
+
+  public function user()
+  {
+    return $this->belongsTo(User::class);
+  }
+
+  public function event()
+  {
+    return $this->belongsTo(Event::class);
+  }
+
+  public function addresses()
+  {
+    return $this->hasMany(Address::class);
+  }
+
+  public function emails()
+  {
+    return $this->hasMany(Email::class);
+  }
+
+  public function phones()
+  {
+    return $this->hasMany(Phone::class);
+  }
 }

@@ -45,6 +45,13 @@ class CreateLikesTable extends Migration
         ->on('venues')
         ->onDelete('cascade')
         ->onUpdate('cascade');
+
+      $table->unsignedBigInteger('comment_id')->nullable();
+      $table->foreign('comment_id')
+        ->references('id')
+        ->on('comments')
+        ->onDelete('cascade')
+        ->onUpdate('cascade');
     });
   }
 

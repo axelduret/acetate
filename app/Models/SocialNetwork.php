@@ -24,4 +24,9 @@ class SocialNetwork extends Model
    * @var array
    */
   protected $hidden = [];
+
+  public function website()
+  {
+    return $this->belongsTo(Website::class);
+  }
 }

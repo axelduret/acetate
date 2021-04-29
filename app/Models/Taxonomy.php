@@ -26,4 +26,19 @@ class Taxonomy extends Model
    * @var array
    */
   protected $hidden = [];
+
+  public function events()
+  {
+    return $this->belongsToMany(Event::class);
+  }
+
+  public function venues()
+  {
+    return $this->belongsToMany(Venue::class);
+  }
+
+  public function people()
+  {
+    return $this->belongsToMany(Person::class);
+  }
 }

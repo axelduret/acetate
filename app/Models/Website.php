@@ -26,4 +26,29 @@ class Website extends Model
    * @var array
    */
   protected $hidden = [];
+
+  public function user()
+  {
+    return $this->belongsTo(User::class);
+  }
+
+  public function event()
+  {
+    return $this->belongsTo(Event::class);
+  }
+
+  public function person()
+  {
+    return $this->belongsTo(Person::class);
+  }
+
+  public function venue()
+  {
+    return $this->belongsTo(Venue::class);
+  }
+
+  public function socialNetworks()
+  {
+    return $this->hasMany(SocialNetwork::class);
+  }
 }
