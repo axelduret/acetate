@@ -94,11 +94,8 @@ class UserController extends Controller
         // Return events attached to the user.
         return new UserEventsResource(
           $user->events
-            ->load('addresses')
-            ->load('emails')
-            ->load('phones')
-            ->load('websites')
-            ->load('websites.socialNetwork')
+            ->load('dates')
+            ->load('venues')
         );
         break;
       case 'venues':
