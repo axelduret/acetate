@@ -30,8 +30,6 @@ class Comment extends Model
     "venue_id",
     "ticket_id",
     "like_id",
-    "created_at",
-    "updated_at"
   ];
 
   public function user()

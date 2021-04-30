@@ -16,7 +16,6 @@ use App\Http\Resources\UserTicketsResource;
 use App\Http\Traits\RespondsWithHttpStatus;
 use App\Http\Resources\UserCommentsResource;
 use App\Http\Resources\UserFavoritesResource;
-use App\Models\Event;
 
 class UserController extends Controller
 {
