@@ -27,6 +27,7 @@ class Price extends Model
    * @var array
    */
   protected $hidden = [
+    "id",
     "event_id",
     "created_at",
     "updated_at"

@@ -49,8 +49,9 @@ class UserController extends Controller
   {
     // Retrieve data and sort it.
     $sortField = $request->input('sort_by');
-    $sortOrder = $request->input('order_by') ?? 'asc';
     $sortableFields = in_array($sortField, $this->sortFields) ? $sortField : 'id';
+    $orderField = $request->input('order_by');
+    $sortOrder = in_array($orderField, ['asc', 'desc']) ? $orderField : 'asc';
     $query = User::orderBy($sortableFields, $sortOrder);
 
     // Search data.
@@ -73,10 +74,10 @@ class UserController extends Controller
   /**
    * User login.
    *
-   * @param  Request  $request
+   * @param  int  $id
    * @return Response
    */
-  public function login(Request $request) // TODO Login
+  public function login(int $id) // TODO Login
   {
     //
   }
@@ -84,10 +85,10 @@ class UserController extends Controller
   /**
    * User logout.
    *
-   * @param  Request  $request
+   * @param  int  $id
    * @return Response
    */
-  public function logout(Request $request) // TODO Logout
+  public function logout(int $id) // TODO Logout
   {
     //
   }
@@ -106,13 +107,13 @@ class UserController extends Controller
   /**
    * Display the specified user account.
    *
-   * @param  Request  $request
    * @param  int  $id
+   * @param  Request  $request
    * @return Response
    */
   public function show(int $id, Request $request)
   {
-    // Check if user exists.
+    // Check if the user exists.
     $user = User::find($id);
     if (!$user) {
       return $this->failure('User not found.', 404);
@@ -208,11 +209,11 @@ class UserController extends Controller
   /**
    * Update the specified user account.
    *
-   * @param  \Illuminate\Http\Request  $request
    * @param  int  $id
-   * @return \Illuminate\Http\Response
+   * @param  Request  $request
+   * @return Response
    */
-  public function update(Request $request, $id) // TODO Update
+  public function update(int $id, Request $request) // TODO Update
   {
     //
   }
@@ -221,9 +222,9 @@ class UserController extends Controller
    * Remove the specified user account.
    *
    * @param  int  $id
-   * @return \Illuminate\Http\Response
+   * @return Response
    */
-  public function destroy($id) // TODO Destroy
+  public function destroy(int $id) // TODO Destroy
   {
     //
   }
