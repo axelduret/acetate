@@ -71,18 +71,40 @@ class UserController extends Controller
   }
 
   /**
-   * Store a newly created resource in storage.
+   * User login.
    *
    * @param  Request  $request
    * @return Response
    */
-  public function store(Request $request)
+  public function login(Request $request) // TODO Login
   {
     //
   }
 
   /**
-   * Display the specified user.
+   * User logout.
+   *
+   * @param  Request  $request
+   * @return Response
+   */
+  public function logout(Request $request) // TODO Logout
+  {
+    //
+  }
+
+  /**
+   * Creat a new user account.
+   *
+   * @param  Request  $request
+   * @return Response
+   */
+  public function register(Request $request) // TODO Register
+  {
+    //
+  }
+
+  /**
+   * Display the specified user account.
    *
    * @param  Request  $request
    * @param  int  $id
@@ -184,24 +206,24 @@ class UserController extends Controller
   }
 
   /**
-   * Update the specified resource in storage.
+   * Update the specified user account.
    *
    * @param  \Illuminate\Http\Request  $request
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function update(Request $request, $id)
+  public function update(Request $request, $id) // TODO Update
   {
     //
   }
 
   /**
-   * Remove the specified resource from storage.
+   * Remove the specified user account.
    *
    * @param  int  $id
    * @return \Illuminate\Http\Response
    */
-  public function destroy($id)
+  public function destroy($id) // TODO Destroy
   {
     //
   }
