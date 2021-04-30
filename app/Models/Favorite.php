@@ -23,6 +23,7 @@ class Favorite extends Model
    */
   protected $hidden = [
     "id",
+    "user_id",
     "event_id",
     "person_id",
     "venue_id",

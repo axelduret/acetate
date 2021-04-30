@@ -7,10 +7,16 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use App\Http\Resources\UserCollection;
+use App\Http\Resources\UserFilesResource;
+use App\Http\Resources\UserLikesResource;
 use App\Http\Resources\UserEventsResource;
 use App\Http\Resources\UserPeopleResource;
 use App\Http\Resources\UserVenuesResource;
+use App\Http\Resources\UserTicketsResource;
 use App\Http\Traits\RespondsWithHttpStatus;
+use App\Http\Resources\UserCommentsResource;
+use App\Http\Resources\UserFavoritesResource;
+use App\Models\Event;
 
 class UserController extends Controller
 {
@@ -102,6 +108,17 @@ class UserController extends Controller
             ->load('taxonomies')
             ->load('likes')
             ->load('favorites')
+            ->load('comments')
+        );
+        break;
+      case 'people':
+        // Return all people attached to the user.
+        return new UserPeopleResource(
+          $user->people
+            ->load('taxonomies')
+            ->load('likes')
+            ->load('favorites')
+            ->load('comments')
         );
         break;
       case 'venues':
@@ -112,15 +129,53 @@ class UserController extends Controller
             ->load('taxonomies')
             ->load('likes')
             ->load('favorites')
+            ->load('comments')
         );
         break;
-      case 'people':
-        // Return all people attached to the user.
-        return new UserPeopleResource(
-          $user->people
-            ->load('taxonomies')
+      case 'comments':
+        // Return all comments attached to the user.
+        return new UserCommentsResource(
+          $user->comments
+            ->load('event')
+            ->load('person')
+            ->load('venue')
             ->load('likes')
-            ->load('favorites')
+        );
+        break;
+      case 'likes':
+        // Return all likes attached to the user.
+        return new UserLikesResource(
+          $user->likes
+            ->load('event')
+            ->load('person')
+            ->load('venue')
+            ->load('comment')
+        );
+        break;
+      case 'favorites':
+        // Return all favorites attached to the user.
+        return new UserFavoritesResource(
+          $user->favorites
+            ->load('event')
+            ->load('person')
+            ->load('venue')
+        );
+        break;
+      case 'files':
+        // Return all files attached to the user.
+        return new UserFilesResource(
+          $user->files
+        );
+        break;
+      case 'tickets':
+        // Return all tickets attached to the user.
+        return new UserTicketsResource(
+          $user->tickets
+            ->load('addresses')
+            ->load('emails')
+            ->load('phones')
+            ->load('event')
+            ->load('event.dates')
         );
         break;
       default:
