@@ -82,6 +82,8 @@ class EventController extends Controller
               'comments as comments_count'
             ])
             ->with([
+              // Returns event's addresses.
+              'addresses',
               // Returns people:id and people:nickname.
               'people' => function ($filter) {
                 $filter
@@ -93,6 +95,7 @@ class EventController extends Controller
               'venues' => function ($filter) {
                 $filter
                   ->select('id', 'name')
+                  ->with('addresses')
                   // Order venues by name.
                   ->orderBy('name');
               },
@@ -106,7 +109,11 @@ class EventController extends Controller
               'taxonomies' => function ($filter) {
                 $filter
                   // Order taxonomies by type.
-                  ->orderBy('type');
+                  ->orderBy('type')
+                  // Order taxonomies by category.
+                  ->orderBy('category')
+                  // Order taxonomies by sub_category.
+                  ->orderBy('sub_category');
               },
               // Returns favorites of the specified user.
               'favorites' // TODO show favorite only if user logged in.

@@ -19,6 +19,12 @@ class EventCollection extends ResourceCollection
         return collect([
           'id' => $item->event->id,
           'name' => $item->event->name,
+          'addresses' => $item->event->addresses->map(function ($item) {
+            return [
+              'latitude' => $item['latitude'],
+              'longitude' => $item['longitude']
+            ];
+          }),
           'created_at' => date('Y-m-d H-i-s', strtotime($item['created_at'])),
           'updated_at' => date('Y-m-d H-i-s', strtotime($item['updated_at'])),
           'start_date' => $item->start_date,
@@ -32,7 +38,18 @@ class EventCollection extends ResourceCollection
             ];
           }),
           'people' => $item->event->people,
-          'venues' => $item->event->venues,
+          'venues' => $item->event->venues->map(function ($item) {
+            return [
+              'id' => $item['id'],
+              'name' => $item['name'],
+              'addresses' => $item['addresses']->map(function ($item) {
+                return [
+                  'latitude' => $item['latitude'],
+                  'longitude' => $item['longitude'],
+                ];
+              }),
+            ];
+          }),
           'taxonomies' => $item->event->taxonomies,
           'likes_count' => $item->event->likes_count,
           'dislikes_count' => $item->event->dislikes_count,
