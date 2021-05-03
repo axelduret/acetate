@@ -137,6 +137,11 @@ class EventController extends Controller
     $perPage = $request->input('per_page') ?? self::PER_PAGE;
     $events = $query->paginate((int)$perPage);
 
+    // Check if events exist.
+    if ($events == '') {
+      return $this->failure('No events were found.', 404);
+    }
+
     // Format data.
     return new EventCollection($events);
   }
