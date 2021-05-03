@@ -2,10 +2,11 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\DateController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\EventController;
-use App\Http\Controllers\Api\PersonController;
 use App\Http\Controllers\Api\VenueController;
+use App\Http\Controllers\Api\PersonController;
 
 /*
 |--------------------------------------------------------------------------

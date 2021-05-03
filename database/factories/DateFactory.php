@@ -22,8 +22,8 @@ class DateFactory extends Factory
   public function definition()
   {
     return [
-      'start_date' => $this->faker->date('Y-m-d'),
-      'end_date' => $this->faker->date('Y-m-d'),
+      'start_date' => $this->faker->date('Y-m-d', '+3 years'),
+      'end_date' => $this->faker->date('Y-m-d', '+3 years'),
       'start_time' => $this->faker->time('H:i:s'),
       'end_time' => $this->faker->time('H:i:s'),
     ];
