@@ -18,8 +18,8 @@ class UserCollection extends ResourceCollection
       $this::$wrap => $this->collection->map(function ($item) {
         return collect([
           'id' => $item->id,
-          'created_at' => date('Y-m-d', strtotime($item['created_at'])),
-          'updated_at' => date('Y-m-d', strtotime($item['updated_at'])),
+          'created_at' => date('Y-m-d H-i-s', strtotime($item['created_at'])),
+          'updated_at' => date('Y-m-d H-i-s', strtotime($item['updated_at'])),
           'username' => $item->username,
           'email' => $item->email,
           'firstname' => $item->firstname,

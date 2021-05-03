@@ -42,8 +42,6 @@ class Event extends Model
     "person_id",
     "taxonomy_id",
     "pivot",
-    "created_at",
-    "updated_at"
   ];
 
   public function user()
