@@ -56,7 +56,11 @@ class EventCollection extends ResourceCollection
           'comments_count' => $item->event->comments_count,
           'favorites' => $item->event->favorites,
         ]);
-      })
+      }),
+      'credit' => env('APP_CREDIT'),
+      'website' => env('APP_URL'),
+      'licence' => env('APP_LICENCE'),
+      'timezone' => env('TIME_ZONE'),
     ];
   }
 

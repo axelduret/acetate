@@ -41,7 +41,11 @@ class EventResource extends JsonResource
         'likes' => $this->likes,
         'favorites' => $this->favorites,
         'user' => $this->user->id,
-      ]
+      ],
+      'credit' => env('APP_CREDIT'),
+      'website' => env('APP_URL'),
+      'licence' => env('APP_LICENCE'),
+      'timezone' => env('TIME_ZONE'),
     ];
   }
 

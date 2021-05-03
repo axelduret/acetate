@@ -29,7 +29,11 @@ class UserCollection extends ResourceCollection
           'avatar' => $item->avatar,
           'company' => $item->company,
         ]);
-      })
+      }),
+      'credit' => env('APP_CREDIT'),
+      'website' => env('APP_URL'),
+      'licence' => env('APP_LICENCE'),
+      'timezone' => env('TIME_ZONE'),
     ];
   }
 
