@@ -21,9 +21,11 @@ class DateFactory extends Factory
    */
   public function definition()
   {
+    $startDate = $this->faker->date('Y-m-d', '+3 years');
+    $random = rand(0, 3);
     return [
-      'start_date' => $this->faker->date('Y-m-d', '+3 years'),
-      'end_date' => $this->faker->date('Y-m-d', '+3 years'),
+      'start_date' => $startDate,
+      'end_date' => date('Y-m-d', strtotime($startDate . '+' . $random . ' days')),
       'start_time' => $this->faker->time('H:i:s'),
       'end_time' => $this->faker->time('H:i:s'),
     ];

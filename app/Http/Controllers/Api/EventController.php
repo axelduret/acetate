@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Date;
-use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
@@ -30,7 +29,7 @@ class EventController extends Controller
    *
    * @var array
    */
-  protected $searchFields = ['start_date', 'end_date', 'start_time', 'end_time'];
+  protected $searchFields = ['start_date', 'end_date'];
 
   /**
    * Searchable values.
@@ -47,7 +46,6 @@ class EventController extends Controller
    */
   public function index(Request $request)
   {
-
     // Search data.
     $searchField = $request->input('search_field');
     $searchableFields = in_array($searchField, $this->searchFields) ? $searchField : 'start_date';
@@ -112,7 +110,7 @@ class EventController extends Controller
         }
       ]);
 
-    // Retrieve data and sort it.
+    // Sort data.
     $sortField = $request->input('sort_by');
     $sortableFields = in_array($sortField, $this->sortFields) ? $sortField : 'start_date';
     $orderField = $request->input('order_by');
