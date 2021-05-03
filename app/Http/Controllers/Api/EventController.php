@@ -3,11 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Date;
+use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\EventResource;
+use App\Http\Resources\PriceResource;
 use App\Http\Resources\EventCollection;
 use App\Http\Traits\RespondsWithHttpStatus;
+use App\Models\Price;
 
 class EventController extends Controller
 {
@@ -126,10 +130,10 @@ class EventController extends Controller
   }
 
   /**
-   * Store a newly created resource in storage.
+   * Creat a new event.
    *
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
+   * @param  Request  $request
+   * @return Response
    */
   public function store(Request $request)
   {
@@ -137,22 +141,28 @@ class EventController extends Controller
   }
 
   /**
-   * Display the specified resource.
+   * Display the specified event.
    *
    * @param  int  $id
-   * @return \Illuminate\Http\Response
+   * @return Response
    */
   public function show(int $id)
   {
-    //
+    // Check if the event exists.
+    $event = Event::find($id);
+    if (!$event) {
+      return $this->failure('Event not found.', 404);
+    }
+    // Return the event data.
+    return new EventResource($event);
   }
 
   /**
-   * Update the specified resource in storage.
+   * Update the specified event.
    *
    * @param  int  $id
-   * @param  \Illuminate\Http\Request  $request
-   * @return \Illuminate\Http\Response
+   * @param  Request  $request
+   * @return Response
    */
   public function update(int $id, Request $request)
   {
@@ -160,10 +170,10 @@ class EventController extends Controller
   }
 
   /**
-   * Remove the specified resource from storage.
+   * Remove the specified event.
    *
    * @param  int  $id
-   * @return \Illuminate\Http\Response
+   * @return Response
    */
   public function destroy(int $id)
   {

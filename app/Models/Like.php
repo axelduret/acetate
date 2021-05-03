@@ -24,7 +24,6 @@ class Like extends Model
    * @var array
    */
   protected $hidden = [
-    "id",
     "event_id",
     "person_id",
     "venue_id",
