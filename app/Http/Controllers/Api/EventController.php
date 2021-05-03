@@ -50,6 +50,7 @@ class EventController extends Controller
    */
   public function index(Request $request)
   {
+
     // Search data.
     $searchField = $request->input('search_field');
     $searchableFields = in_array($searchField, $this->searchFields) ? $searchField : 'start_date';
@@ -68,12 +69,14 @@ class EventController extends Controller
             // Order event by name.
             ->orderBy('name')
             // Returns the total number of likes.
+            // TODO show likes of the logged user.
             ->withCount([
               'likes as likes_count' => function ($filter) {
                 $filter
                   ->where('is_dislike', 0);
               },
               // Returns the total number of dislikes.
+              // TODO show dislikes of the logged user.
               'likes as dislikes_count' => function ($filter) {
                 $filter
                   ->where('is_dislike', 1);
@@ -95,6 +98,7 @@ class EventController extends Controller
               'venues' => function ($filter) {
                 $filter
                   ->select('id', 'name')
+                  // Returns venues's addresses.
                   ->with('addresses')
                   // Order venues by name.
                   ->orderBy('name');
@@ -116,7 +120,8 @@ class EventController extends Controller
                   ->orderBy('sub_category');
               },
               // Returns favorites of the specified user.
-              'favorites' // TODO show favorite only if user logged in.
+              // TODO show favorites only if the user is logged in.
+              'favorites'
             ]);
         }
       ]);
