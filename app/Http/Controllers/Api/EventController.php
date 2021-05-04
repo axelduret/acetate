@@ -12,6 +12,7 @@ use App\Http\Resources\EventCollection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Traits\RespondsWithHttpStatus;
+use App\Models\Price;
 
 class EventController extends Controller
 {
@@ -193,6 +194,28 @@ class EventController extends Controller
     // Save the event.
     $event->save();
 
+    // Check if event's dates are submitted.
+    if ($request->input('dates')) {
+      // Create new dates.
+      $dates = [];
+      foreach ($request->input('dates') as $date) {
+        $dates[] = new Date($date);
+      }
+      // Attach dates to the event.
+      $event->dates()->saveMany($dates);
+    }
+
+    // Check if event's prices are submitted.
+    if ($request->input('prices')) {
+      // Create new prices.
+      $prices = [];
+      foreach ($request->input('prices') as $price) {
+        $prices[] = new Price($price);
+      }
+      // Attach prices to the event.
+      $event->prices()->saveMany($prices);
+    }
+
     // Returns the newly created event.
     return new EventResource($event);
   }
@@ -252,7 +275,11 @@ class EventController extends Controller
       'name' => 'required|string|max:100',
       'description' => 'string|nullable',
       'avatar' => 'file|nullable',
-      'user_id' => 'required|integer|digits_between:1,20'
+      'user_id' => 'required|integer|digits_between:1,20',
+      'dates.*.start_date' => 'required|date',
+      'dates.*.end_date' => 'required|date|after:dates.*.start_date',
+      'dates.*.start_time' => 'required|date_format:H:i:s',
+      'dates.*.end_time' => 'required|date_format:H:i:s',
     ];
 
     // Check id when event is updated.
