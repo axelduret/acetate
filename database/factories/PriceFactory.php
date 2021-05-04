@@ -23,8 +23,6 @@ class PriceFactory extends Factory
   {
     return [
       'type' => $this->faker->randomElement(['adult', 'child', 'family', 'group', 'primary', 'secondary']),
-      'name' => $this->faker->sentence(4),
-      'description' => $this->faker->text,
       'cost' => $this->faker->randomFloat(2, 1, 1000),
     ];
   }

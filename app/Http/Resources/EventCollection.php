@@ -31,12 +31,7 @@ class EventCollection extends ResourceCollection
           'end_date' => $item->end_date,
           'start_time' => $item->start_time,
           'end_time' => $item->end_time,
-          'prices' => $item->event->prices->map(function ($item) {
-            return [
-              'type' => $item['type'],
-              'cost' => $item['cost']
-            ];
-          }),
+          'prices' => $item->event->prices,
           'people' => $item->event->people,
           'venues' => $item->event->venues->map(function ($item) {
             return [

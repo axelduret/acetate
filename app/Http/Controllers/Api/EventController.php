@@ -280,6 +280,8 @@ class EventController extends Controller
       'dates.*.end_date' => 'required|date|after:dates.*.start_date',
       'dates.*.start_time' => 'required|date_format:H:i:s',
       'dates.*.end_time' => 'required|date_format:H:i:s',
+      'prices.*.type' => 'required|in:adult,child,family,group,primary,secondary',
+      'prices.*.cost' => 'required|regex:/^\d*(\.\d{1,2})?$/|max:10',
     ];
 
     // Check id when event is updated.
