@@ -22,5 +22,5 @@ class UserLikesResource extends JsonResource
    *
    * @var string
    */
-  public static $wrap = 'likes';
+  public static $wrap = 'user_likes';
 }

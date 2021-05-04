@@ -2,63 +2,68 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Traits\RespondsWithHttpStatus;
 
 class VenueController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+  // Import custom response trait.
+  use RespondsWithHttpStatus;
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+  /**
+   * Display the list of all venues.
+   *
+   * @param Request $request
+   * @return Response
+   */
+  public function index(Request $request)
+  {
+    //
+  }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+  /**
+   * Creat a new venue.
+   *
+   * @param  Request  $request
+   * @return Response
+   */
+  public function store(Request $request)
+  {
+    //
+  }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+  /**
+   * Display the specified venue.
+   *
+   * @param  int  $id
+   * @return Response
+   */
+  public function show(int $id)
+  {
+    //
+  }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+  /**
+   * Update the specified venue.
+   *
+   * @param  int  $id
+   * @param  Request  $request
+   * @return Response
+   */
+  public function update(int $id, Request $request)
+  {
+    //
+  }
+
+  /**
+   * Remove the specified venue.
+   *
+   * @param  int  $id
+   * @return Response
+   */
+  public function destroy(int $id)
+  {
+    //
+  }
 }

@@ -22,5 +22,5 @@ class UserPeopleResource extends JsonResource
    *
    * @var string
    */
-  public static $wrap = 'people';
+  public static $wrap = 'user_people';
 }

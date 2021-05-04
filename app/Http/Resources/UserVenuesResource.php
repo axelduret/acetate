@@ -2,10 +2,12 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Traits\RespondsWithHttpStatus;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserVenuesResource extends JsonResource
 {
+
   /**
    * Transform the resource into an array.
    *
@@ -22,5 +24,5 @@ class UserVenuesResource extends JsonResource
    *
    * @var string
    */
-  public static $wrap = 'venues';
+  public static $wrap = 'user_venues';
 }

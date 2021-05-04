@@ -22,5 +22,5 @@ class UserTicketsResource extends JsonResource
    *
    * @var string
    */
-  public static $wrap = 'tickets';
+  public static $wrap = 'user_tickets';
 }

@@ -22,5 +22,5 @@ class UserEventsResource extends JsonResource
    *
    * @var string
    */
-  public static $wrap = 'events';
+  public static $wrap = 'user_events';
 }

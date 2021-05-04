@@ -8,10 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EventResource;
-use App\Http\Resources\PriceResource;
 use App\Http\Resources\EventCollection;
 use App\Http\Traits\RespondsWithHttpStatus;
-use App\Models\Price;
 
 class EventController extends Controller
 {

@@ -22,5 +22,5 @@ class UserFilesResource extends JsonResource
    *
    * @var string
    */
-  public static $wrap = 'files';
+  public static $wrap = 'user_files';
 }

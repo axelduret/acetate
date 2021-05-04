@@ -22,5 +22,5 @@ class UserCommentsResource extends JsonResource
    *
    * @var string
    */
-  public static $wrap = 'comments';
+  public static $wrap = 'user_comments';
 }
