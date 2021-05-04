@@ -15,6 +15,7 @@ class SocialNetwork extends Model
    * @var array
    */
   protected $fillable = [
+    'website_id',
     'type',
   ];
 

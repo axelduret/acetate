@@ -14,7 +14,10 @@ use Illuminate\Support\Facades\Validator;
 use App\Http\Traits\RespondsWithHttpStatus;
 use App\Models\Address;
 use App\Models\Email;
+use App\Models\Phone;
 use App\Models\Price;
+use App\Models\SocialNetwork;
+use App\Models\Website;
 
 class EventController extends Controller
 {
@@ -241,6 +244,39 @@ class EventController extends Controller
       $event->emails()->saveMany($emails);
     }
 
+    // Check if event's phones are submitted.
+    if ($request->input('phones')) {
+      // Create new phones.
+      $phones = [];
+      foreach ($request->input('phones') as $phone) {
+        $phones[] = new Phone($phone);
+      }
+      // Attach phones to the event.
+      $event->phones()->saveMany($phones);
+    }
+
+    // Check if event's websites are submitted.
+    if ($request->input('websites')) {
+      // Create new websites.
+      $websites = [];
+      foreach ($request->input('websites') as $website) {
+        $newWebsite = new Website($website);
+        $newWebsite->save();
+        // Check if the new website is a social network.
+        if ($newWebsite->type == 'social network') {
+          // Create a new social network.
+          $socialNetwork = new SocialNetwork([
+            'type' => $website['social_network']['type'],
+            'website_id' => $newWebsite->id
+          ]);
+          $socialNetwork->save();
+        }
+        $websites[] = $newWebsite;
+      }
+      // Attach websites to the event.
+      $event->websites()->saveMany($websites);
+    }
+
     // Returns the newly created event.
     return new EventResource($event);
   }
@@ -314,13 +350,18 @@ class EventController extends Controller
       'addresses.*.region' => 'string|max:30|nullable',
       'addresses.*.city' => 'required|string|max:30',
       'addresses.*.country' => 'required|string|max:4',
-      'addresses.*.firstname' => 'required|string|max:30',
-      'addresses.*.lastname' => 'required|string|max:30',
+      'addresses.*.firstname' => 'string|max:30|nullable',
+      'addresses.*.lastname' => 'string|max:30|nullable',
       'addresses.*.latitude' => 'string|max:30|nullable',
       'addresses.*.longitude' => 'string|max:30|nullable',
       'addresses.*.company' => 'string|max:100|nullable',
       'emails.*.type' => 'required|in:main,secondary,pro',
       'emails.*.address' => 'required|email|max:100',
+      'phones.*.type' => 'required|in:mobile,home,pro',
+      'phones.*.number' => 'required|string|max:30',
+      'phones.*.firstname' => 'string|max:30|nullable',
+      'phones.*.lastname' => 'string|max:30|nullable',
+      'phones.*.company' => 'string|max:100|nullable',
     ];
 
     // Check id when event is updated.

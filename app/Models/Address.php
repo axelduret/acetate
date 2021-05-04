@@ -18,16 +18,16 @@ class Address extends Model
     'type',
     'street1',
     'street2',
-    'zip',
     'canton',
     'region',
+    'zip',
     'city',
     'country',
     'firstname',
     'lastname',
+    'company',
     'longitude',
     'latitude',
-    'company',
   ];
 
   /**

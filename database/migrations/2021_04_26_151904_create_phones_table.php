@@ -18,8 +18,8 @@ class CreatePhonesTable extends Migration
       $table->timestamps();
       $table->enum('type', ['mobile', 'home', 'pro'])->default('mobile');
       $table->string('number', 30);
-      $table->string('firstname', 30);
-      $table->string('lastname', 30);
+      $table->string('firstname', 30)->nullable();
+      $table->string('lastname', 30)->nullable();
       $table->string('company', 100)->nullable();
 
       $table->unsignedBigInteger('user_id')->nullable();
