@@ -19,12 +19,12 @@ class CreateAddressesTable extends Migration
       $table->enum('type', ['main', 'secondary', 'tertiary', 'company', 'user', 'event', 'venue', 'person', 'ticket'])->default('main');
       $table->string('street1', 100);
       $table->string('street2', 100)->nullable();
-      $table->string('zip', 10);
       $table->enum('canton', [
         'AG', 'AI', 'AR', 'BE', 'BL', 'BS', 'FR', 'GE', 'GL', 'GR', 'JU', 'LU', 'NE', 'NW',
         'OW', 'SG', 'SH', 'SO', 'SZ', 'TG', 'TI', 'UR', 'VD', 'VS', 'ZG', 'ZH'
       ]);
       $table->string('region', 30)->nullable();
+      $table->string('zip', 10);
       $table->string('city', 30);
       $table->string('country', 4)->default('CH');
       $table->string('firstname', 30)->nullable();

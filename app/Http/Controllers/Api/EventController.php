@@ -131,7 +131,6 @@ class EventController extends Controller
             ]);
         }
       ]);
-
     // Sort data.
     $sortField = $request->input('sort_by');
     $sortableFields = in_array($sortField, $this->sortFields) ? $sortField : 'start_date';
@@ -147,7 +146,6 @@ class EventController extends Controller
     if ($events == '') {
       return $this->failure('No events were found.', 404);
     }
-
     // Format data.
     return new EventCollection($events);
   }
@@ -169,7 +167,6 @@ class EventController extends Controller
       $errors = $validator->errors();
       return $this->failure($errors);
     }
-
     // Check if event's avatar is submitted.
     if ($request->file('avatar')) {
       // Prepare avatar's file to upload.
@@ -187,7 +184,6 @@ class EventController extends Controller
       // Store the avatar's file into storage avatar/event folder.
       $upload->storeAs('avatar/event', $file_name);
     }
-
     // Create a new event.
     $event = new Event([
       'name' => $request->input('name'),
@@ -209,7 +205,6 @@ class EventController extends Controller
       // Attach dates to the event.
       $event->dates()->saveMany($dates);
     }
-
     // Check if event's prices are submitted.
     if ($request->input('prices')) {
       // Create new prices.
@@ -220,7 +215,6 @@ class EventController extends Controller
       // Attach prices to the event.
       $event->prices()->saveMany($prices);
     }
-
     // Check if event's addresses are submitted.
     if ($request->input('addresses')) {
       // Create new addresses.
@@ -232,7 +226,6 @@ class EventController extends Controller
       // Attach addresses to the event.
       $event->addresses()->saveMany($addresses);
     }
-
     // Check if event's emails are submitted.
     if ($request->input('emails')) {
       // Create new emails.
@@ -243,7 +236,6 @@ class EventController extends Controller
       // Attach emails to the event.
       $event->emails()->saveMany($emails);
     }
-
     // Check if event's phones are submitted.
     if ($request->input('phones')) {
       // Create new phones.
@@ -254,7 +246,6 @@ class EventController extends Controller
       // Attach phones to the event.
       $event->phones()->saveMany($phones);
     }
-
     // Check if event's websites are submitted.
     if ($request->input('websites')) {
       // Create new websites.
@@ -262,12 +253,11 @@ class EventController extends Controller
       foreach ($request->input('websites') as $website) {
         $newWebsite = new Website($website);
         $newWebsite->save();
+
         // Check if the new website is a social network.
         if ($newWebsite->type == 'social network') {
           // Validate submitted fields.
-          $validatorRules = [
-            'type' => 'required|in:twitter,facebook,instagram,linkedin,youtube,twitch,snapchat,reddit,tiktok',
-          ];
+          $validatorRules = ['type' => 'required|in:twitter,facebook,instagram,linkedin,youtube,twitch,snapchat,reddit,tiktok'];
           $validator = Validator::make($website['social_network'], $validatorRules);
 
           // If validation fails, returns error messages.
