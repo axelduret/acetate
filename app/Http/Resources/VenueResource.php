@@ -35,7 +35,11 @@ class VenueResource extends JsonResource
         'events' => $this->events->load('dates'),
         'taxonomies' => $this->taxonomies,
         'comments' => $this->comments,
-        'likes' => $this->likes,
+        // TODO show likes of the logged user.
+        'likes_count' => $this->likes->where('is_dislike', 0)->count(),
+        // TODO show dislikes of the logged user.
+        'dislikes_count' => $this->likes->where('is_dislike', 1)->count(),
+        // TODO show favorites only if the user is logged in.
         'favorites' => $this->favorites,
         'user' => $this->user->id,
       ],
