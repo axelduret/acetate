@@ -264,6 +264,17 @@ class EventController extends Controller
         $newWebsite->save();
         // Check if the new website is a social network.
         if ($newWebsite->type == 'social network') {
+          // Validate submitted fields.
+          $validatorRules = [
+            'type' => 'required|in:twitter,facebook,instagram,linkedin,youtube,twitch,snapchat,reddit,tiktok',
+          ];
+          $validator = Validator::make($website['social_network'], $validatorRules);
+
+          // If validation fails, returns error messages.
+          if ($validator->fails()) {
+            $errors = $validator->errors();
+            return $this->failure($errors);
+          }
           // Create a new social network.
           $socialNetwork = new SocialNetwork([
             'type' => $website['social_network']['type'],
@@ -331,7 +342,7 @@ class EventController extends Controller
   {
     $validatorRules = [];
 
-    // Validating fields.
+    // Validate submitted fields.
     $validatorRules = [
       'name' => 'required|string|max:100',
       'description' => 'string|nullable',
@@ -362,6 +373,9 @@ class EventController extends Controller
       'phones.*.firstname' => 'string|max:30|nullable',
       'phones.*.lastname' => 'string|max:30|nullable',
       'phones.*.company' => 'string|max:100|nullable',
+      'websites.*.type' => 'required|in:website,social network',
+      'websites.*.url' => 'required|string|max:255',
+      'websites.*.name' => 'required|string|max:30',
     ];
 
     // Check id when event is updated.
