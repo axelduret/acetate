@@ -114,7 +114,7 @@ class DatabaseSeeder extends Seeder
 
     // Create venues.
     $venues = Venue::factory()
-      ->count(50)
+      ->count(150)
       ->make()->each(function ($venue) use ($users, $events) {
         // Attach a random user_id to each venue.
         $venue->user_id = $users->random()->id;
@@ -127,7 +127,7 @@ class DatabaseSeeder extends Seeder
 
     // Create people.
     $people = Person::factory()
-      ->count(200)
+      ->count(150)
       ->make()->each(function ($person) use ($users, $events, $venues) {
         // Attach a random user_id to each person.
         $person->user_id = $users->random()->id;

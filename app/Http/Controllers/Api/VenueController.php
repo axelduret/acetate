@@ -94,6 +94,11 @@ class VenueController extends Controller
     $perPage = $request->input('per_page') ?? self::PER_PAGE;
     $venues = $query->paginate((int)$perPage);
 
+    // Check if venues exist.
+    if ($venues == '') {
+      return $this->failure('No venues were found.', 404);
+    }
+
     // Format data.
     return new VenueCollection($venues);
   }

@@ -67,6 +67,11 @@ class UserController extends Controller
     $perPage = $request->input('per_page') ?? self::PER_PAGE;
     $users = $query->paginate((int)$perPage);
 
+    // Check if users exist.
+    if ($users == '') {
+      return $this->failure('No users were found.', 404);
+    }
+
     // Format data.
     return new UserCollection($users);
   }
