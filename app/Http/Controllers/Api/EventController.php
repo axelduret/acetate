@@ -164,30 +164,34 @@ class EventController extends Controller
       return $this->failure($errors);
     }
 
-    // Prepare avatar's file to upload.
-    $upload = $request->file('avatar');
-    // Format avatar's filename.
-    $current = Carbon::now()->format('YmdHis_');
-    $clean_filename = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $upload->getClientOriginalName());
-    $file_name =  $current . $clean_filename;
+    // Check if event's avatar is submitted.
+    if ($request->file('avatar')) {
+      // Prepare avatar's file to upload.
+      $upload = $request->file('avatar');
+      // Retrieve current datetime.
+      $current = Carbon::now()->format('YmdHis_');
+      // Format avatar's filename.
+      $clean_filename = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $upload->getClientOriginalName());
+      // Add current datetime to avatar's formatted filename.
+      $file_name =  $current . $clean_filename;
+      // Create avatar/event folder if doesn't exist.
+      if (!Storage::directories('avatar/event')) {
+        Storage::makeDirectory('avatar/event');
+      }
+      // Store the avatar's file into storage avatar/event folder.
+      $upload->storeAs('avatar/event', $file_name);
+    }
 
     // Create a new event.
     $event = new Event([
       'name' => $request->input('name'),
       'description' => $request->input('description'),
-      'avatar' => 'avatar/event/' . $file_name,
+      // TODO create a default event's avatar if not submitted.
+      'avatar' => $request->file('avatar') ? 'avatar/event/' . $file_name : null,
       'user_id' => $request->input('user_id')
     ]);
     // Save the event.
     $event->save();
-
-    // Create avatar/event folder if doesn't exist.
-    if (!Storage::directories('avatar/event')) {
-      Storage::makeDirectory('avatar/event');
-    }
-
-    // Store the avatar's file into storage avatar/event folder.
-    $upload->storeAs('avatar/event', $file_name);
 
     // Returns the newly created event.
     return new EventResource($event);
