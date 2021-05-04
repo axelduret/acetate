@@ -12,6 +12,8 @@ use App\Http\Resources\EventCollection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Traits\RespondsWithHttpStatus;
+use App\Models\Address;
+use App\Models\Email;
 use App\Models\Price;
 
 class EventController extends Controller
@@ -216,6 +218,29 @@ class EventController extends Controller
       $event->prices()->saveMany($prices);
     }
 
+    // Check if event's addresses are submitted.
+    if ($request->input('addresses')) {
+      // Create new addresses.
+      $addresses = [];
+      foreach ($request->input('addresses') as $address) {
+        $address['type'] = 'event';
+        $addresses[] = new Address($address);
+      }
+      // Attach addresses to the event.
+      $event->addresses()->saveMany($addresses);
+    }
+
+    // Check if event's emails are submitted.
+    if ($request->input('emails')) {
+      // Create new emails.
+      $emails = [];
+      foreach ($request->input('emails') as $email) {
+        $emails[] = new Email($email);
+      }
+      // Attach emails to the event.
+      $event->emails()->saveMany($emails);
+    }
+
     // Returns the newly created event.
     return new EventResource($event);
   }
@@ -282,6 +307,20 @@ class EventController extends Controller
       'dates.*.end_time' => 'required|date_format:H:i:s',
       'prices.*.type' => 'required|in:adult,child,family,group,primary,secondary',
       'prices.*.cost' => 'required|regex:/^\d*(\.\d{1,2})?$/|max:10',
+      'addresses.*.street1' => 'required|string|max:100',
+      'addresses.*.street2' => 'string|max:100|nullable',
+      'addresses.*.zip' => 'required|string|max:10',
+      'addresses.*.canton' => 'required|in:AG,AI,AR,BE,BL,BS,FR,GE,GL,GR,JU,LU,NE,NW,OW,SG,SH,SO,SZ,TG,TI,UR,VD,VS,ZG,ZH',
+      'addresses.*.region' => 'string|max:30|nullable',
+      'addresses.*.city' => 'required|string|max:30',
+      'addresses.*.country' => 'required|string|max:4',
+      'addresses.*.firstname' => 'required|string|max:30',
+      'addresses.*.lastname' => 'required|string|max:30',
+      'addresses.*.latitude' => 'string|max:30|nullable',
+      'addresses.*.longitude' => 'string|max:30|nullable',
+      'addresses.*.company' => 'string|max:100|nullable',
+      'emails.*.type' => 'required|in:main,secondary,pro',
+      'emails.*.address' => 'required|email|max:100',
     ];
 
     // Check id when event is updated.

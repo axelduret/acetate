@@ -27,13 +27,12 @@ class AddressFactory extends Factory
       'street2' => $this->faker->secondaryAddress,
       'zip' => $this->faker->postcode,
       'canton' => $this->faker->randomElement([
-        'Appenzell Inner-Rhodes', 'Appenzell Outer-Rhodes', 'Argovia', 'Basel-City', 'Basel-Country', 'Berne', 'Friburg',
-        'Geneva', 'Glarus', 'Grisons', 'Jura', 'Lucerne', 'Neuchâtel', 'Nidwald', 'Obwald', 'Schaffhouse', 'Schwyz', 'Soleure', 'St. Gall', 'Tessin',
-        'Thurgovia', 'Uri', 'Vaud', 'Wallis', 'Zoug', 'Zurich'
+        'AG', 'AI', 'AR', 'BE', 'BL', 'BS', 'FR', 'GE', 'GL', 'GR', 'JU', 'LU', 'NE', 'NW',
+        'OW', 'SG', 'SH', 'SO', 'SZ', 'TG', 'TI', 'UR', 'VD', 'VS', 'ZG', 'ZH'
       ]),
       'region' => $this->faker->region,
       'city' => $this->faker->city,
-      'country' => $this->faker->country,
+      'country' => 'CH',
       'firstname' => $this->faker->firstName,
       'lastname' => $this->faker->lastName,
       'longitude' => $this->faker->longitude,

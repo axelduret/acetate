@@ -21,15 +21,14 @@ class CreateAddressesTable extends Migration
       $table->string('street2', 100)->nullable();
       $table->string('zip', 10);
       $table->enum('canton', [
-        'Appenzell Inner-Rhodes', 'Appenzell Outer-Rhodes', 'Argovia', 'Basel-City', 'Basel-Country', 'Berne', 'Friburg',
-        'Geneva', 'Glarus', 'Grisons', 'Jura', 'Lucerne', 'Neuchâtel', 'Nidwald', 'Obwald', 'Schaffhouse', 'Schwyz', 'Soleure', 'St. Gall', 'Tessin',
-        'Thurgovia', 'Uri', 'Vaud', 'Wallis', 'Zoug', 'Zurich'
-      ])->nullable();
+        'AG', 'AI', 'AR', 'BE', 'BL', 'BS', 'FR', 'GE', 'GL', 'GR', 'JU', 'LU', 'NE', 'NW',
+        'OW', 'SG', 'SH', 'SO', 'SZ', 'TG', 'TI', 'UR', 'VD', 'VS', 'ZG', 'ZH'
+      ]);
       $table->string('region', 30)->nullable();
       $table->string('city', 30);
-      $table->string('country', 60);
-      $table->string('firstname', 30);
-      $table->string('lastname', 30);
+      $table->string('country', 4)->default('CH');
+      $table->string('firstname', 30)->nullable();
+      $table->string('lastname', 30)->nullable();
       $table->string('longitude', 30)->nullable();
       $table->string('latitude', 30)->nullable();
       $table->string('company', 100)->nullable();
