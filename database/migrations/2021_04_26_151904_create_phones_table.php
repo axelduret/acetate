@@ -20,7 +20,7 @@ class CreatePhonesTable extends Migration
       $table->string('number', 30);
       $table->string('firstname', 30);
       $table->string('lastname', 30);
-      $table->string('company', 30)->nullable();
+      $table->string('company', 100)->nullable();
 
       $table->unsignedBigInteger('user_id')->nullable();
       $table->foreign('user_id')

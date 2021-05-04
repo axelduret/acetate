@@ -184,7 +184,7 @@ class DatabaseSeeder extends Seeder
           // Attach a random person_id to the like.
           $like->person_id = $people->random()->id;
           $like->save();
-        } elseif ($random == 2) {
+        } elseif ($random == 3) {
           // Attach a random venue_id to the like.
           $like->venue_id = $venues->random()->id;
           $like->save();

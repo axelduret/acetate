@@ -21,7 +21,7 @@ class CreatePeopleTable extends Migration
       $table->string('lastname', 30)->nullable();
       $table->text('description')->nullable();
       $table->enum('type', ['owner', 'organiser', 'promoter', 'contact', 'presenter', 'artist', 'guest'])->nullable();
-      $table->string('company', 30)->nullable();
+      $table->string('company', 100)->nullable();
       $table->string('avatar', 100)->nullable();
 
       $table->unsignedBigInteger('user_id');

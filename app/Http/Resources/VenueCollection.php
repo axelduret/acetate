@@ -16,6 +16,10 @@ class VenueCollection extends ResourceCollection
   {
     return [
       $this::$wrap => $this->collection,
+      'credit' => env('APP_CREDIT'),
+      'website' => env('APP_URL'),
+      'licence' => env('APP_LICENCE'),
+      'timezone' => env('TIME_ZONE'),
     ];
   }
 

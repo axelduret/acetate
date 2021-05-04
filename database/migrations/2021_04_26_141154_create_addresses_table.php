@@ -32,7 +32,7 @@ class CreateAddressesTable extends Migration
       $table->string('lastname', 30);
       $table->string('longitude', 30)->nullable();
       $table->string('latitude', 30)->nullable();
-      $table->string('company', 30)->nullable();
+      $table->string('company', 100)->nullable();
 
       $table->unsignedBigInteger('user_id')->nullable();
       $table->foreign('user_id')

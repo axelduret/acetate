@@ -26,7 +26,7 @@ class CreateUsersTable extends Migration
       $table->enum('language', ['fr', 'en'])->default('fr');
       $table->enum('theme', ['dark', 'light'])->default('dark');
       $table->string('avatar', 100)->nullable();
-      $table->string('company', 30)->nullable();
+      $table->string('company', 100)->nullable();
     });
   }
 
