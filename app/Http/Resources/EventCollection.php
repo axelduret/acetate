@@ -25,8 +25,8 @@ class EventCollection extends ResourceCollection
               'longitude' => $item['longitude']
             ];
           }),
-          'created_at' => date('Y-m-d H-i-s', strtotime($item['created_at'])),
-          'updated_at' => date('Y-m-d H-i-s', strtotime($item['updated_at'])),
+          'created_at' => date('Y-m-d H:i:s', strtotime($item['created_at'])),
+          'updated_at' => date('Y-m-d H:i:s', strtotime($item['updated_at'])),
           'start_date' => $item->start_date,
           'end_date' => $item->end_date,
           'start_time' => $item->start_time,

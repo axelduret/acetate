@@ -18,6 +18,7 @@ class Event extends Model
     'name',
     'description',
     'avatar',
+    'user_id'
   ];
 
   /**
@@ -27,20 +28,6 @@ class Event extends Model
    */
   protected $hidden = [
     "user_id",
-    "address_id",
-    "email_id",
-    "phone_id",
-    "website_id",
-    "date_id",
-    "price_id",
-    "ticket_id",
-    "comment_id",
-    "like_id",
-    "favorite_id",
-    "file_id",
-    "venue_id",
-    "person_id",
-    "taxonomy_id",
     "pivot",
   ];
 

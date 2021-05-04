@@ -14,7 +14,14 @@ class EventResource extends JsonResource
    */
   public function toArray($request)
   {
-    return parent::toArray($request);
+    return [
+      'id' => $this->id,
+      'created_at' => date('Y-m-d H:i:s', strtotime($this->created_at)),
+      'updated_at' => date('Y-m-d H:i:s', strtotime($this->updated_at)),
+      'name' => $this->name,
+      'description' => $this->description,
+      'avatar' => $this->avatar
+    ];
   }
 
   /**
@@ -29,7 +36,7 @@ class EventResource extends JsonResource
       $this::$wrap => [
         'dates' => $this->dates,
         'prices' => $this->prices,
-        'venues' => $this->venues,
+        'venues' => $this->venues->load('addresses')->load('emails')->load('phones')->load('websites')->load('websites.socialNetwork'),
         'people' => $this->people,
         'addresses' => $this->addresses,
         'emails' => $this->emails,
@@ -44,7 +51,7 @@ class EventResource extends JsonResource
         'dislikes_count' => $this->likes->where('is_dislike', 1)->count(),
         // TODO show favorites only if the user is logged in.
         'favorites' => $this->favorites,
-        'user' => $this->user->id,
+        'user_id' => $this->user_id,
       ],
       'credit' => env('APP_CREDIT'),
       'website' => env('APP_URL'),

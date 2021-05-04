@@ -17,8 +17,8 @@ class UserResource extends JsonResource
   {
     return [
       'id' => $this->id,
-      'created_at' => date('Y-m-d H-i-s', strtotime($this->created_at)),
-      'updated_at' => date('Y-m-d H-i-s', strtotime($this->updated_at)),
+      'created_at' => date('Y-m-d H:i:s', strtotime($this->created_at)),
+      'updated_at' => date('Y-m-d H:i:s', strtotime($this->updated_at)),
       'username' => $this->username,
       'email' => $this->email,
       'firstname' => $this->firstname,

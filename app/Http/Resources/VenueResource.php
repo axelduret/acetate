@@ -41,7 +41,7 @@ class VenueResource extends JsonResource
         'dislikes_count' => $this->likes->where('is_dislike', 1)->count(),
         // TODO show favorites only if the user is logged in.
         'favorites' => $this->favorites,
-        'user' => $this->user->id,
+        'user_id' => $this->user_id,
       ],
       'credit' => env('APP_CREDIT'),
       'website' => env('APP_URL'),

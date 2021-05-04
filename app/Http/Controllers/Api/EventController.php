@@ -9,6 +9,8 @@ use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EventResource;
 use App\Http\Resources\EventCollection;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Traits\RespondsWithHttpStatus;
 
 class EventController extends Controller
@@ -152,7 +154,43 @@ class EventController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    // Validation.
+    $validatorRules = $this->validateEvent();
+    $validator = Validator::make($request->all(), $validatorRules);
+
+    // If validation fails, returns error messages.
+    if ($validator->fails()) {
+      $errors = $validator->errors();
+      return $this->failure($errors);
+    }
+
+    // Prepare avatar's file to upload.
+    $upload = $request->file('avatar');
+    // Format avatar's filename.
+    $current = Carbon::now()->format('YmdHis_');
+    $clean_filename = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $upload->getClientOriginalName());
+    $file_name =  $current . $clean_filename;
+
+    // Create a new event.
+    $event = new Event([
+      'name' => $request->input('name'),
+      'description' => $request->input('description'),
+      'avatar' => 'avatar/event/' . $file_name,
+      'user_id' => $request->input('user_id')
+    ]);
+    // Save the event.
+    $event->save();
+
+    // Create avatar/event folder if doesn't exist.
+    if (!Storage::directories('avatar/event')) {
+      Storage::makeDirectory('avatar/event');
+    }
+
+    // Store the avatar's file into storage avatar/event folder.
+    $upload->storeAs('avatar/event', $file_name);
+
+    // Returns the newly created event.
+    return new EventResource($event);
   }
 
   /**
@@ -193,5 +231,31 @@ class EventController extends Controller
   public function destroy(int $id)
   {
     //
+  }
+
+  /**
+   * Validate an event.
+   *
+   * @param  bool $update
+   * @return array
+   */
+  protected function validateEvent($update = false)
+  {
+    $validatorRules = [];
+
+    // Validating fields.
+    $validatorRules = [
+      'name' => 'required|string|max:100',
+      'description' => 'string|nullable',
+      'avatar' => 'file|nullable',
+      'user_id' => 'required|integer|digits_between:1,20'
+    ];
+
+    // Check id when event is updated.
+    if ($update) {
+      $validatorRules['id'] = 'required|integer|digits_between:1,20';
+    }
+
+    return $validatorRules;
   }
 }
