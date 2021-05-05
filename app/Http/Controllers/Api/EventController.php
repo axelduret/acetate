@@ -24,11 +24,11 @@ class EventController extends Controller
   const PER_PAGE = 10;
 
   /**
-   * Error messages.
+   * Warning messages.
    *
    * @var array
    */
-  protected $errors = [];
+  protected $warning = [];
 
   /**
    * Sortable fields.
@@ -183,7 +183,7 @@ class EventController extends Controller
       $errors = $validator->errors();
       return $this->failure($errors);
     }
-    // Default success response messages.
+    // Default response message.
     $messages = [];
     $messages[] = 'Event created successfully.';
     // Check if event's avatar is submitted.
@@ -247,7 +247,7 @@ class EventController extends Controller
           );
           // If validation fails, add error messages.
           if ($validator->fails()) {
-            $this->errors[] = 'Wrong social network type in website ' . $newWebsite->id;
+            $this->warning[] = 'Wrong social network type in website ' . $newWebsite->id;
           } else {
             // Create a new social network.
             $socialNetwork = new SocialNetwork([
@@ -262,9 +262,9 @@ class EventController extends Controller
       // Attach websites to the event.
       $event->websites()->saveMany($websites);
     }
-    // Returns response messages.
-    if ($this->errors != null) {
-      $messages[] = $this->errors;
+    // Warning messages.
+    if ($this->warning != null) {
+      $messages[] = $this->warning;
     }
     // Returns the newly created event with response messages.
     return $this->success($messages, new EventResource($event), 201);
@@ -356,7 +356,7 @@ class EventController extends Controller
         $entity = $model::find($id);
         if (!$entity) {
           $error = true;
-          $this->errors[] = $name . ' ' . $id . ' not found.';
+          $this->warning[] = $name . ' ' . $id . ' not found.';
         }
         if ($error == false) {
           $array[] = $entity;
