@@ -438,7 +438,7 @@ class EventController extends Controller
       'avatar' => 'file|nullable',
       'user_id' => 'required|integer|digits_between:1,20',
       'dates.*.start_date' => 'required|date',
-      'dates.*.end_date' => 'required|date|after:dates.*.start_date',
+      'dates.*.end_date' => 'required|date|after_or_equal:dates.*.start_date',
       'dates.*.start_time' => 'required|date_format:H:i:s',
       'dates.*.end_time' => 'required|date_format:H:i:s',
       'prices.*.type' => 'required|in:adult,child,family,group,primary,secondary',
