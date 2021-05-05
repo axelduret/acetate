@@ -16,8 +16,8 @@ trait RespondsWithHttpStatus
   {
     return response([
       'success' => true,
-      'data' => $data,
       'message' => $message,
+      'data' => $data,
     ], $status);
   }
 
@@ -28,11 +28,12 @@ trait RespondsWithHttpStatus
    * @param  int $status
    * @return Response
    */
-  protected function failure($message, $status = 422)
+  protected function failure($message, $data = [], $status = 422)
   {
     return response([
       'success' => false,
       'message' => $message,
+      'data' => $data,
     ], $status);
   }
 }

@@ -15,25 +15,14 @@ class EventResource extends JsonResource
   public function toArray($request)
   {
     return [
-      'id' => $this->id,
-      'created_at' => date('Y-m-d H:i:s', strtotime($this->created_at)),
-      'updated_at' => date('Y-m-d H:i:s', strtotime($this->updated_at)),
-      'name' => $this->name,
-      'description' => $this->description,
-      'avatar' => $this->avatar
-    ];
-  }
-
-  /**
-   * Get additional data that should be returned with the resource array.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return array
-   */
-  public function with($request)
-  {
-    return [
       $this::$wrap => [
+        'id' => $this->id,
+        'created_at' => date('Y-m-d H:i:s', strtotime($this->created_at)),
+        'updated_at' => date('Y-m-d H:i:s', strtotime($this->updated_at)),
+        'name' => $this->name,
+        'description' => $this->description,
+        'avatar' => $this->avatar,
+        'test2' => 'test',
         'dates' => $this->dates,
         'prices' => $this->prices,
         'venues' => $this->venues->load('addresses')->load('emails')->load('phones')->load('websites')->load('websites.socialNetwork'),
@@ -51,7 +40,6 @@ class EventResource extends JsonResource
         'dislikes_count' => $this->likes->where('is_dislike', 1)->count(),
         // TODO show favorites only if the user is logged in.
         'favorites' => $this->favorites,
-        'user_id' => $this->user_id,
       ],
       'credit' => env('APP_CREDIT'),
       'website' => env('APP_URL'),

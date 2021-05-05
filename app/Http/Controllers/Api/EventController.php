@@ -3,8 +3,15 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Date;
+use App\Models\File;
+use App\Models\Email;
 use App\Models\Event;
+use App\Models\Phone;
+use App\Models\Price;
+use App\Models\Address;
+use App\Models\Website;
 use Illuminate\Http\Request;
+use App\Models\SocialNetwork;
 use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EventResource;
@@ -12,12 +19,9 @@ use App\Http\Resources\EventCollection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Traits\RespondsWithHttpStatus;
-use App\Models\Address;
-use App\Models\Email;
-use App\Models\Phone;
-use App\Models\Price;
-use App\Models\SocialNetwork;
-use App\Models\Website;
+use App\Models\Person;
+use App\Models\Taxonomy;
+use App\Models\Venue;
 
 class EventController extends Controller
 {
@@ -161,12 +165,14 @@ class EventController extends Controller
     // Validation.
     $validatorRules = $this->validateEvent();
     $validator = Validator::make($request->all(), $validatorRules);
-
     // If validation fails, returns error messages.
     if ($validator->fails()) {
       $errors = $validator->errors();
       return $this->failure($errors);
     }
+    // Collect response messages.
+    $errors = [];
+    $messages = [];
     // Check if event's avatar is submitted.
     if ($request->file('avatar')) {
       // Prepare avatar's file to upload.
@@ -194,7 +200,6 @@ class EventController extends Controller
     ]);
     // Save the event.
     $event->save();
-
     // Check if event's dates are submitted.
     if ($request->input('dates')) {
       // Create new dates.
@@ -214,6 +219,50 @@ class EventController extends Controller
       }
       // Attach prices to the event.
       $event->prices()->saveMany($prices);
+    }
+    // Check if event's venues are submitted.
+    if ($request->input('venues')) {
+      // Collect venues.
+      $venues = [];
+      foreach ($request->input('venues') as $venue) {
+        $venueError = false;
+        // Check if the venue exists.
+        $id = $venue['id'];
+        $venue = Venue::find($id);
+        if (!$venue) {
+          $venueError = true;
+          $errors[] = 'Venue ' . $id . ' not found.';
+        }
+        if ($venueError == false) {
+          $venues[] = $venue;
+        }
+      }
+      // Attach venues to the event.
+      if ($venues != null) {
+        $event->venues()->saveMany($venues);
+      }
+    }
+    // Check if event's people are submitted.
+    if ($request->input('people')) {
+      // Collect people.
+      $people = [];
+      foreach ($request->input('people') as $person) {
+        $personError = false;
+        // Check if the person exists.
+        $id = $person['id'];
+        $person = Person::find($id);
+        if (!$person) {
+          $personError = true;
+          $errors[] = 'Person ' . $id . ' not found.';
+        }
+        if ($personError == false) {
+          $people[] = $person;
+        }
+      }
+      // Attach people to the event.
+      if ($people != null) {
+        $event->people()->saveMany($people);
+      }
     }
     // Check if event's addresses are submitted.
     if ($request->input('addresses')) {
@@ -253,7 +302,6 @@ class EventController extends Controller
       foreach ($request->input('websites') as $website) {
         $newWebsite = new Website($website);
         $newWebsite->save();
-
         // Check if the new website is a social network.
         if ($newWebsite->type == 'social network') {
           // Validate submitted fields.
@@ -277,9 +325,60 @@ class EventController extends Controller
       // Attach websites to the event.
       $event->websites()->saveMany($websites);
     }
-
-    // Returns the newly created event.
-    return new EventResource($event);
+    // Check if event's files are submitted.
+    if ($request->input('files')) {
+      // Collect files.
+      $files = [];
+      foreach ($request->input('files') as $file) {
+        $fileError = false;
+        // Check if the file exists.
+        $id = $file['id'];
+        $file = File::find($id);
+        if (!$file) {
+          $fileError = true;
+          $errors[] = 'File ' . $id . ' not found.';
+        }
+        if ($fileError == false) {
+          $files[] = $file;
+        }
+      }
+      // Attach files to the event.
+      if ($files != null) {
+        $event->files()->saveMany($files);
+      }
+    }
+    // Check if event's taxonomies are submitted.
+    if ($request->input('taxonomies')) {
+      // Collect taxonomies.
+      $taxonomies = [];
+      foreach ($request->input('taxonomies') as $taxonomy) {
+        $taxonomyError = false;
+        // Check if the file exists.
+        $id = $taxonomy['id'];
+        $taxonomy = Taxonomy::find($id);
+        if (!$taxonomy) {
+          $taxonomyError = true;
+          $errors[] = 'Taxonomy ' . $id . ' not found.';
+        }
+        if ($taxonomyError == false) {
+          $taxonomies[] = $taxonomy;
+        }
+      }
+      // Attach taxonomies to the event.
+      if ($taxonomies != null) {
+        $event->taxonomies()->saveMany($taxonomies);
+      }
+    }
+    // Returns response messages.
+    $success = 'New event has been created.';
+    if ($errors != null) {
+      $messages[] = $success;
+      $messages[] = $errors;
+    } else {
+      $messages = $success;
+    }
+    // Returns the newly created event with response messages.
+    return $this->success($messages, new EventResource($event), 201);
   }
 
   /**
@@ -344,6 +443,8 @@ class EventController extends Controller
       'dates.*.end_time' => 'required|date_format:H:i:s',
       'prices.*.type' => 'required|in:adult,child,family,group,primary,secondary',
       'prices.*.cost' => 'required|regex:/^\d*(\.\d{1,2})?$/|max:10',
+      'venues.*.id' => 'required|integer|digits_between:1,20',
+      'people.*.id' => 'required|integer|digits_between:1,20',
       'addresses.*.street1' => 'required|string|max:100',
       'addresses.*.street2' => 'string|max:100|nullable',
       'addresses.*.zip' => 'required|string|max:10',
@@ -366,6 +467,8 @@ class EventController extends Controller
       'websites.*.type' => 'required|in:website,social network',
       'websites.*.url' => 'required|string|max:255',
       'websites.*.name' => 'required|string|max:30',
+      'files.*.id' => 'required|integer|digits_between:1,20',
+      'taxonomies.*.id' => 'required|integer|digits_between:1,20',
     ];
 
     // Check id when event is updated.
