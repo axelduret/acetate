@@ -3,12 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\Date;
-use App\Models\File;
-use App\Models\Email;
 use App\Models\Event;
-use App\Models\Phone;
-use App\Models\Price;
-use App\Models\Address;
 use App\Models\Website;
 use Illuminate\Http\Request;
 use App\Models\SocialNetwork;
@@ -19,9 +14,6 @@ use App\Http\Resources\EventCollection;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Traits\RespondsWithHttpStatus;
-use App\Models\Person;
-use App\Models\Taxonomy;
-use App\Models\Venue;
 
 class EventController extends Controller
 {
@@ -51,6 +43,13 @@ class EventController extends Controller
    * @var array
    */
   protected $searchValues = ['>=', '=', '<='];
+
+  /**
+   * Error messages.
+   *
+   * @var array
+   */
+  protected $errors = [];
 
   /**
    * Display the list of all events.
@@ -167,7 +166,6 @@ class EventController extends Controller
       return $this->failure($errors);
     }
     // Collect response messages.
-    $errors = [];
     $messages = [];
     // Check if event's avatar is submitted.
     if ($request->file('avatar')) {
@@ -200,81 +198,16 @@ class EventController extends Controller
     $this->storeEntity($event, 'dates', 'App\Models\Date', $request);
     // Create and attach prices to the event.
     $this->storeEntity($event, 'prices', 'App\Models\Price', $request);
-    // Check if event's venues are submitted.
-    if ($request->input('venues')) {
-      // Collect venues.
-      $venues = [];
-      foreach ($request->input('venues') as $venue) {
-        $venueError = false;
-        // Check if the venue exists.
-        $id = $venue['id'];
-        $venue = Venue::find($id);
-        if (!$venue) {
-          $venueError = true;
-          $errors[] = 'Venue ' . $id . ' not found.';
-        }
-        if ($venueError == false) {
-          $venues[] = $venue;
-        }
-      }
-      // Attach venues to the event.
-      if ($venues != null) {
-        $event->venues()->saveMany($venues);
-      }
-    }
-    // Check if event's people are submitted.
-    if ($request->input('people')) {
-      // Collect people.
-      $people = [];
-      foreach ($request->input('people') as $person) {
-        $personError = false;
-        // Check if the person exists.
-        $id = $person['id'];
-        $person = Person::find($id);
-        if (!$person) {
-          $personError = true;
-          $errors[] = 'Person ' . $id . ' not found.';
-        }
-        if ($personError == false) {
-          $people[] = $person;
-        }
-      }
-      // Attach people to the event.
-      if ($people != null) {
-        $event->people()->saveMany($people);
-      }
-    }
-    // Check if event's addresses are submitted.
-    if ($request->input('addresses')) {
-      // Create new addresses.
-      $addresses = [];
-      foreach ($request->input('addresses') as $address) {
-        $address['type'] = 'event';
-        $addresses[] = new Address($address);
-      }
-      // Attach addresses to the event.
-      $event->addresses()->saveMany($addresses);
-    }
-    // Check if event's emails are submitted.
-    if ($request->input('emails')) {
-      // Create new emails.
-      $emails = [];
-      foreach ($request->input('emails') as $email) {
-        $emails[] = new Email($email);
-      }
-      // Attach emails to the event.
-      $event->emails()->saveMany($emails);
-    }
-    // Check if event's phones are submitted.
-    if ($request->input('phones')) {
-      // Create new phones.
-      $phones = [];
-      foreach ($request->input('phones') as $phone) {
-        $phones[] = new Phone($phone);
-      }
-      // Attach phones to the event.
-      $event->phones()->saveMany($phones);
-    }
+    // Attach venues to the event.
+    $this->attachEntity($event, 'venues', 'Venue', 'App\Models\Venue', $request);
+    // Attach people to the event.
+    $this->attachEntity($event, 'people', 'Person', 'App\Models\Person', $request);
+    // Create and attach addresses to the event.
+    $this->storeEntity($event, 'addresses', 'App\Models\Address', $request);
+    // Create and attach emails to the event.
+    $this->storeEntity($event, 'emails', 'App\Models\Email', $request);
+    // Create and attach phones to the event.
+    $this->storeEntity($event, 'phones', 'App\Models\Phone', $request);
     // Check if event's websites are submitted.
     if ($request->input('websites')) {
       // Create new websites.
@@ -287,7 +220,6 @@ class EventController extends Controller
           // Validate submitted fields.
           $validatorRules = ['type' => 'required|in:twitter,facebook,instagram,linkedin,youtube,twitch,snapchat,reddit,tiktok'];
           $validator = Validator::make($website['social_network'], $validatorRules);
-
           // If validation fails, returns error messages.
           if ($validator->fails()) {
             $errors = $validator->errors();
@@ -305,55 +237,15 @@ class EventController extends Controller
       // Attach websites to the event.
       $event->websites()->saveMany($websites);
     }
-    // Check if event's files are submitted.
-    if ($request->input('files')) {
-      // Collect files.
-      $files = [];
-      foreach ($request->input('files') as $file) {
-        $fileError = false;
-        // Check if the file exists.
-        $id = $file['id'];
-        $file = File::find($id);
-        if (!$file) {
-          $fileError = true;
-          $errors[] = 'File ' . $id . ' not found.';
-        }
-        if ($fileError == false) {
-          $files[] = $file;
-        }
-      }
-      // Attach files to the event.
-      if ($files != null) {
-        $event->files()->saveMany($files);
-      }
-    }
-    // Check if event's taxonomies are submitted.
-    if ($request->input('taxonomies')) {
-      // Collect taxonomies.
-      $taxonomies = [];
-      foreach ($request->input('taxonomies') as $taxonomy) {
-        $taxonomyError = false;
-        // Check if the file exists.
-        $id = $taxonomy['id'];
-        $taxonomy = Taxonomy::find($id);
-        if (!$taxonomy) {
-          $taxonomyError = true;
-          $errors[] = 'Taxonomy ' . $id . ' not found.';
-        }
-        if ($taxonomyError == false) {
-          $taxonomies[] = $taxonomy;
-        }
-      }
-      // Attach taxonomies to the event.
-      if ($taxonomies != null) {
-        $event->taxonomies()->saveMany($taxonomies);
-      }
-    }
+    // Attach files to the event.
+    $this->attachEntity($event, 'files', 'File', 'App\Models\File', $request);
+    // Attach taxonomies to the event.
+    $this->attachEntity($event, 'taxonomies', 'Taxonomy', 'App\Models\Taxonomy', $request);
     // Returns response messages.
     $success = 'New event has been created.';
-    if ($errors != null) {
+    if ($this->errors != null) {
       $messages[] = $success;
-      $messages[] = $errors;
+      $messages[] = $this->errors;
     } else {
       $messages = $success;
     }
@@ -421,6 +313,41 @@ class EventController extends Controller
       }
       // Attach entities to the event.
       $event->$entities()->saveMany($array);
+    }
+  }
+
+  /**
+   * Creat new event's entities.
+   *
+   * @param  object  $event
+   * @param  string  $entities
+   * @param  object  $model
+   * @param  Request  $request
+   * @return Response
+   */
+  protected function attachEntity($event, $entities, $name, $model, Request $request)
+  {
+    // Check if event's entities are submitted.
+    if ($request->input($entities)) {
+      // Collect entities.
+      $array = [];
+      foreach ($request->input($entities) as $entity) {
+        $error = false;
+        // Check if the entity exists.
+        $id = $entity['id'];
+        $entity = $model::find($id);
+        if (!$entity) {
+          $error = true;
+          $this->errors[] = $name . ' ' . $id . ' not found.';
+        }
+        if ($error == false) {
+          $array[] = $entity;
+        }
+      }
+      // Attach entities to the event.
+      if ($array != null) {
+        $event->$entities()->saveMany($array);
+      }
     }
   }
 
