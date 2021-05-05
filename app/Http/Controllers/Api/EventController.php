@@ -247,7 +247,7 @@ class EventController extends Controller
           );
           // If validation fails, add error messages.
           if ($validator->fails()) {
-            $messages[] = 'Wrong social network type in website ' . $newWebsite->id;
+            $this->errors[] = 'Wrong social network type in website ' . $newWebsite->id;
           } else {
             // Create a new social network.
             $socialNetwork = new SocialNetwork([
