@@ -24,6 +24,13 @@ class EventController extends Controller
   const PER_PAGE = 10;
 
   /**
+   * Error messages.
+   *
+   * @var array
+   */
+  protected $errors = [];
+
+  /**
    * Sortable fields.
    *
    * @var array
@@ -45,13 +52,6 @@ class EventController extends Controller
   protected $searchValues = ['>=', '=', '<='];
 
   /**
-   * Error messages.
-   *
-   * @var array
-   */
-  protected $errors = [];
-
-  /**
    * Display the list of all events.
    *
    * @param Request $request
@@ -59,14 +59,24 @@ class EventController extends Controller
    */
   public function index(Request $request)
   {
-    // Search data.
-    $searchField = $request->input('search_field');
-    $searchableFields = in_array($searchField, $this->searchFields) ? $searchField : 'start_date';
-    $searchValue = $request->input('search_value');
-    $searchableValues = in_array($searchValue, $this->searchValues) ? $searchValue : '>=';
-    $searchReference = $request->input('search_reference') ? Carbon::parse($request->input('search_reference'))->toDateString() : Carbon::now()->toDateString();
+    // Search dates.
+    $searchField = in_array(
+      $request->input('search_field'),
+      $this->searchFields
+    )
+      ? $request->input('search_field')
+      : 'start_date';
+    $searchValue = in_array(
+      $request->input('search_value'),
+      $this->searchValues
+    )
+      ? $request->input('search_value')
+      : '>=';
+    $searchReference = $request->input('search_reference')
+      ? Carbon::parse($request->input('search_reference'))->toDateString()
+      : Carbon::now()->toDateString();
     // By default, only returns events where date is superior or equal to today.
-    $query = Date::whereDate($searchableFields, $searchableValues, $searchReference)
+    $query = Date::whereDate($searchField, $searchValue, $searchReference)
       // Returns the list of dates with attached relationships.
       ->with([
         // Returns event:id and event:name.
@@ -133,11 +143,19 @@ class EventController extends Controller
         }
       ]);
     // Sort data.
-    $sortField = $request->input('sort_by');
-    $sortableFields = in_array($sortField, $this->sortFields) ? $sortField : 'start_date';
-    $orderField = $request->input('order_by');
-    $sortOrder = in_array($orderField, ['asc', 'desc']) ? $orderField : 'asc';
-    $query = $query->orderBy($sortableFields, $sortOrder);
+    $sortField = in_array(
+      $request->input('sort_by'),
+      $this->sortFields
+    )
+      ? $request->input('sort_by')
+      : 'start_date';
+    $sortOrder = in_array(
+      $request->input('order_by'),
+      ['asc', 'desc']
+    )
+      ? $request->input('order_by')
+      : 'asc';
+    $query = $query->orderBy($sortField, $sortOrder);
     // Pagination.
     $perPage = $request->input('per_page') ?? self::PER_PAGE;
     $events = $query->paginate((int)$perPage);
@@ -165,8 +183,9 @@ class EventController extends Controller
       $errors = $validator->errors();
       return $this->failure($errors);
     }
-    // Collect response messages.
+    // Default success response messages.
     $messages = [];
+    $messages[] = 'Event created successfully.';
     // Check if event's avatar is submitted.
     if ($request->file('avatar')) {
       // Prepare avatar's file to upload.
@@ -208,6 +227,10 @@ class EventController extends Controller
     $this->storeEntity($event, 'emails', 'App\Models\Email', $request);
     // Create and attach phones to the event.
     $this->storeEntity($event, 'phones', 'App\Models\Phone', $request);
+    // Attach files to the event.
+    $this->attachEntity($event, 'files', 'File', 'App\Models\File', $request);
+    // Attach taxonomies to the event.
+    $this->attachEntity($event, 'taxonomies', 'Taxonomy', 'App\Models\Taxonomy', $request);
     // Check if event's websites are submitted.
     if ($request->input('websites')) {
       // Create new websites.
@@ -217,37 +240,31 @@ class EventController extends Controller
         $newWebsite->save();
         // Check if the new website is a social network.
         if ($newWebsite->type == 'social network') {
-          // Validate submitted fields.
-          $validatorRules = ['type' => 'required|in:twitter,facebook,instagram,linkedin,youtube,twitch,snapchat,reddit,tiktok'];
-          $validator = Validator::make($website['social_network'], $validatorRules);
-          // If validation fails, returns error messages.
+          // Validate submitted social network fields.
+          $validator = Validator::make(
+            $website['social_network'],
+            ['type' => 'required|in:twitter,facebook,instagram,linkedin,youtube,twitch,snapchat,reddit,tiktok']
+          );
+          // If validation fails, add error messages.
           if ($validator->fails()) {
-            $errors = $validator->errors();
-            return $this->failure($errors);
+            $messages[] = 'Wrong social network type in website ' . $newWebsite->id;
+          } else {
+            // Create a new social network.
+            $socialNetwork = new SocialNetwork([
+              'type' => $website['social_network']['type'],
+              'website_id' => $newWebsite->id
+            ]);
+            $socialNetwork->save();
           }
-          // Create a new social network.
-          $socialNetwork = new SocialNetwork([
-            'type' => $website['social_network']['type'],
-            'website_id' => $newWebsite->id
-          ]);
-          $socialNetwork->save();
         }
         $websites[] = $newWebsite;
       }
       // Attach websites to the event.
       $event->websites()->saveMany($websites);
     }
-    // Attach files to the event.
-    $this->attachEntity($event, 'files', 'File', 'App\Models\File', $request);
-    // Attach taxonomies to the event.
-    $this->attachEntity($event, 'taxonomies', 'Taxonomy', 'App\Models\Taxonomy', $request);
     // Returns response messages.
-    $success = 'New event has been created.';
     if ($this->errors != null) {
-      $messages[] = $success;
       $messages[] = $this->errors;
-    } else {
-      $messages = $success;
     }
     // Returns the newly created event with response messages.
     return $this->success($messages, new EventResource($event), 201);
@@ -294,7 +311,7 @@ class EventController extends Controller
   }
 
   /**
-   * Creat new event's entities.
+   * Create new event's entities.
    *
    * @param  object  $event
    * @param  string  $entities
@@ -317,10 +334,11 @@ class EventController extends Controller
   }
 
   /**
-   * Creat new event's entities.
+   * Attach specified event's entities.
    *
    * @param  object  $event
    * @param  string  $entities
+   * @param  string  $name
    * @param  object  $model
    * @param  Request  $request
    * @return Response
