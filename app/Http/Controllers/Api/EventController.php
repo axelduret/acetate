@@ -65,7 +65,7 @@ class EventController extends Controller
     $searchField = $request->input('search_field');
     $searchableFields = in_array($searchField, $this->searchFields) ? $searchField : 'start_date';
     $searchValue = $request->input('search_value');
-    $searchableValues = in_array($searchValue, $this->searchValues) ? $searchValue : '>=';
+    $searchableValues = in_array($searchValue, $this->searchValues) ? $searchValue : '>='; // TODO fix bug with equal operator.
     $searchReference = $request->input('search_reference') ? $request->input('search_reference') : Carbon::now()->toDateString();
 
     // By default, only returns events where date is superior or equal to today.
