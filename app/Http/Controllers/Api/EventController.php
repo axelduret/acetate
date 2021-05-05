@@ -196,26 +196,10 @@ class EventController extends Controller
     ]);
     // Save the event.
     $event->save();
-    // Check if event's dates are submitted.
-    if ($request->input('dates')) {
-      // Create new dates.
-      $dates = [];
-      foreach ($request->input('dates') as $date) {
-        $dates[] = new Date($date);
-      }
-      // Attach dates to the event.
-      $event->dates()->saveMany($dates);
-    }
-    // Check if event's prices are submitted.
-    if ($request->input('prices')) {
-      // Create new prices.
-      $prices = [];
-      foreach ($request->input('prices') as $price) {
-        $prices[] = new Price($price);
-      }
-      // Attach prices to the event.
-      $event->prices()->saveMany($prices);
-    }
+    // Create and attach dates to the event.
+    $this->storeEntity($event, 'dates', 'App\Models\Date', $request);
+    // Create and attach prices to the event.
+    $this->storeEntity($event, 'prices', 'App\Models\Price', $request);
     // Check if event's venues are submitted.
     if ($request->input('venues')) {
       // Collect venues.
@@ -415,6 +399,29 @@ class EventController extends Controller
   public function destroy(int $id)
   {
     //
+  }
+
+  /**
+   * Creat new event's entities.
+   *
+   * @param  object  $event
+   * @param  string  $entities
+   * @param  object  $model
+   * @param  Request  $request
+   * @return Response
+   */
+  protected function storeEntity($event, $entities, $model, Request $request)
+  {
+    // Check if event's entities are submitted.
+    if ($request->input($entities)) {
+      // Create new entities.
+      $array = [];
+      foreach ($request->input($entities) as $entity) {
+        $array[] = new $model($entity);
+      }
+      // Attach entities to the event.
+      $event->$entities()->saveMany($array);
+    }
   }
 
   /**
