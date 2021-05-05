@@ -60,16 +60,14 @@ class EventController extends Controller
    */
   public function index(Request $request)
   {
-
     // Search data.
     $searchField = $request->input('search_field');
     $searchableFields = in_array($searchField, $this->searchFields) ? $searchField : 'start_date';
     $searchValue = $request->input('search_value');
-    $searchableValues = in_array($searchValue, $this->searchValues) ? $searchValue : '>='; // TODO fix bug with equal operator.
-    $searchReference = $request->input('search_reference') ? $request->input('search_reference') : Carbon::now()->toDateString();
-
+    $searchableValues = in_array($searchValue, $this->searchValues) ? $searchValue : '>=';
+    $searchReference = $request->input('search_reference') ? Carbon::parse($request->input('search_reference'))->toDateString() : Carbon::now()->toDateString();
     // By default, only returns events where date is superior or equal to today.
-    $query = Date::where($searchableFields, $searchableValues, $searchReference)
+    $query = Date::whereDate($searchableFields, $searchableValues, $searchReference)
       // Returns the list of dates with attached relationships.
       ->with([
         // Returns event:id and event:name.
@@ -141,13 +139,11 @@ class EventController extends Controller
     $orderField = $request->input('order_by');
     $sortOrder = in_array($orderField, ['asc', 'desc']) ? $orderField : 'asc';
     $query = $query->orderBy($sortableFields, $sortOrder);
-
     // Pagination.
     $perPage = $request->input('per_page') ?? self::PER_PAGE;
     $events = $query->paginate((int)$perPage);
-
     // Check if events exist.
-    if ($events == '') {
+    if ($events->isEmpty()) {
       return $this->failure('No events were found.', 404);
     }
     // Format data.
