@@ -82,7 +82,7 @@ class UserController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function login(int $id) // TODO Login
+  public function login($id) // TODO Login
   {
     //
   }
@@ -93,7 +93,7 @@ class UserController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function logout(int $id) // TODO Logout
+  public function logout($id) // TODO Logout
   {
     //
   }
@@ -116,7 +116,7 @@ class UserController extends Controller
    * @param  Request  $request
    * @return Response
    */
-  public function show(int $id, Request $request)
+  public function show($id, Request $request)
   {
     // Check if the user exists.
     $user = User::find($id);
@@ -218,7 +218,7 @@ class UserController extends Controller
    * @param  Request  $request
    * @return Response
    */
-  public function update(int $id, Request $request) // TODO Update
+  public function update($id, Request $request) // TODO Update
   {
     //
   }
@@ -229,7 +229,7 @@ class UserController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function destroy(int $id) // TODO Destroy
+  public function destroy($id) // TODO Destroy
   {
     //
   }

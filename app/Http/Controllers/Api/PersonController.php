@@ -118,7 +118,7 @@ class PersonController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function show(int $id)
+  public function show($id)
   {
     // Check if the person exists.
     $person = Person::find($id);
@@ -136,7 +136,7 @@ class PersonController extends Controller
    * @param  Request  $request
    * @return Response
    */
-  public function update(int $id, Request $request)
+  public function update($id, Request $request)
   {
     //
   }
@@ -147,7 +147,7 @@ class PersonController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function destroy(int $id)
+  public function destroy($id)
   {
     //
   }
