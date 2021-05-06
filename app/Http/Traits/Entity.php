@@ -90,7 +90,7 @@ trait Entity
    * @param  string  $entities
    * @return Response
    */
-  protected function deleteEntity($controller, $entities)
+  protected function deleteEntity($controller, $entities) // TODO add more generic methods.
   {
     // Delete entities only if it has no other attached relationship.
     foreach ($controller->$entities as $entity) {
