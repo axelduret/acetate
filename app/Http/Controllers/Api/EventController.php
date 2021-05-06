@@ -336,8 +336,7 @@ class EventController extends Controller
     $this->updateEntity($event, 'emails', 'Email', 'App\Models\Email', $request);
     // Update phones into event.
     $this->updateEntity($event, 'phones', 'Phone', 'App\Models\Phone', $request);
-    // Detach current files from the event.
-    $event->files()->detach();
+    // TODO Detach current files from the event.
     // Attach submitted files to the event.
     $this->attachEntity($event, 'files', 'File', 'App\Models\File', $request);
     // Detach current taxonomies from the event.
