@@ -28,6 +28,7 @@ class File extends Model
    * @var array
    */
   protected $hidden = [
+    "event",
     "user_id",
     "event_id",
     "person_id",
