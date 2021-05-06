@@ -317,9 +317,9 @@ class EventController extends Controller
     $event->name = $request->input('name');
     $event->description = $request->input('description');
     // Update dates into event.
-    $this->updateEntity($event, 'dates', 'Date', 'App\Models\Date', $request);
+    $this->updateEntity($event, 'dates', 'App\Models\Date', $request);
     // Update prices into event.
-    $this->updateEntity($event, 'prices', 'Price', 'App\Models\Price', $request);
+    $this->updateEntity($event, 'prices', 'App\Models\Price', $request);
     // Detach current venues from the event.
     $event->venues()->detach();
     // Attach submitted venues to the event.
@@ -329,14 +329,18 @@ class EventController extends Controller
     // Attach submitted people to the event.
     $this->attachEntity($event, 'people', 'Person', 'App\Models\Person', $request);
     // Update addresses into event.
-    $this->updateEntity($event, 'addresses', 'Address', 'App\Models\Address', $request);
+    $this->updateEntity($event, 'addresses', 'App\Models\Address', $request);
     // Update emails into event.
-    $this->updateEntity($event, 'emails', 'Email', 'App\Models\Email', $request);
+    $this->updateEntity($event, 'emails', 'App\Models\Email', $request);
     // Update phones into event.
-    $this->updateEntity($event, 'phones', 'Phone', 'App\Models\Phone', $request);
+    $this->updateEntity($event, 'phones', 'App\Models\Phone', $request);
     // Detach current files from the event.
     foreach ($event->files as $file) {
       $file->event()->dissociate()->save();
+      // Delete current file only if it has no other attached relationship.
+      if (!$file->user && !$file->person && !$file->venue) {
+        $file->delete();
+      }
     }
     // Attach submitted files to the event.
     $this->attachEntity($event, 'files', 'File', 'App\Models\File', $request);
@@ -376,9 +380,13 @@ class EventController extends Controller
     }
  */
 
-    // Delete current websites from the event.
+    // Detach current websites from the event.
     foreach ($event->websites as $currentWebsite) {
-      $currentWebsite->delete();
+      $currentWebsite->event()->dissociate()->save();
+      // Delete current website only if it has no other attached relationship.
+      if (!$currentWebsite->user && !$currentWebsite->person && !$currentWebsite->venue) {
+        $currentWebsite->delete();
+      }
     }
     // Check if event's websites are submitted.
     if ($request->input('websites')) {
@@ -464,11 +472,14 @@ class EventController extends Controller
    * @param  Request  $request
    * @return Response
    */
-  protected function updateEntity($event, $entities, $name, $model, Request $request)
+  protected function updateEntity($event, $entities, $model, Request $request)
   {
     // Delete current entities from the event.
     foreach ($event->$entities as $entity) {
-      $entity->delete();
+      // Delete entity only if it has no other attached relationship.
+      if (!$entity->user && !$entity->person && !$entity->venue) {
+        $entity->delete();
+      }
     }
     // Check if event's entities are submitted.
     if ($request->input($entities)) {
@@ -477,7 +488,7 @@ class EventController extends Controller
       foreach ($request->input($entities) as $entity) {
         $array[] = new $model($entity);
       }
-      // Attach entities to the event.
+      // Attach new entities to the event.
       $event->$entities()->saveMany($array);
     }
   }
