@@ -322,12 +322,28 @@ class EventController extends Controller
     $this->updateEntity($event, 'dates', 'Date', 'App\Models\Date', $request);
     // Update prices into event.
     $this->updateEntity($event, 'prices', 'Price', 'App\Models\Price', $request);
+    // Detach current venues from the event.
+    $event->venues()->detach();
+    // Attach new venues to the event.
+    $this->attachEntity($event, 'venues', 'Venue', 'App\Models\Venue', $request);
+    // Detach current people from the event.
+    $event->people()->detach();
+    // Attach new people to the event.
+    $this->attachEntity($event, 'people', 'Person', 'App\Models\Person', $request);
     // Update addresses into event.
     $this->updateEntity($event, 'addresses', 'Address', 'App\Models\Address', $request);
     // Update emails into event.
     $this->updateEntity($event, 'emails', 'Email', 'App\Models\Email', $request);
     // Update phones into event.
     $this->updateEntity($event, 'phones', 'Phone', 'App\Models\Phone', $request);
+    // Detach current files from the event.
+    $event->files()->detach();
+    // Attach new files to the event.
+    $this->attachEntity($event, 'files', 'File', 'App\Models\File', $request);
+    // Detach current taxonomies from the event.
+    $event->taxonomies()->detach();
+    // Attach new taxonomies to the event.
+    $this->attachEntity($event, 'taxonomies', 'Taxonomy', 'App\Models\Taxonomy', $request);
 
     /* TODO update event's avatar.
 
@@ -472,10 +488,13 @@ class EventController extends Controller
             // Save the current entity.
             $currentEntity->save();
           }
-        } else {
+        }
+        // TODO delete unsubmitted entities.
+        // TODO create new entities.
+        /*  else {
           // Create new entities.
           $array[] = new $model($entity);
-        }
+        } */
       }
       // Attach new entities to the event.
       if ($array != null) {
