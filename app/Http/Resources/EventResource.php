@@ -22,7 +22,6 @@ class EventResource extends JsonResource
         'name' => $this->name,
         'description' => $this->description,
         'avatar' => $this->avatar,
-        'test2' => 'test',
         'dates' => $this->dates,
         'prices' => $this->prices,
         'venues' => $this->venues->load('addresses')->load('emails')->load('phones')->load('websites')->load('websites.socialNetwork'),

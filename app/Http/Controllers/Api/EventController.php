@@ -296,7 +296,75 @@ class EventController extends Controller
    */
   public function update(int $id, Request $request)
   {
-    //
+    // Validation.
+    $validatorRules = $this->validateEvent(true);
+    $validator = Validator::make($request->all(), $validatorRules);
+    // If validation fails, returns error messages.
+    if ($validator->fails()) {
+      $errors = $validator->errors();
+      return $this->failure($errors);
+    }
+    // Default response message.
+    $messages = [];
+    $messages[] = 'Event edited successfully.';
+    // Load the event.
+    $event = Event::find($id);
+    // Check if the event exists.
+    if (!$event) {
+      return $this->failure('Event not found.', 404);
+    }
+    // Update the event.
+    $event->name = $request->input('name');
+    $event->description = $request->input('description');
+    // Save the event.
+    $event->save();
+    // Update dates into event.
+    $this->updateEntity($event, 'dates', 'Date', 'App\Models\Date', $request);
+    // Update prices into event.
+    $this->updateEntity($event, 'prices', 'Price', 'App\Models\Price', $request);
+    // Update addresses into event.
+    $this->updateEntity($event, 'addresses', 'Address', 'App\Models\Address', $request);
+    // Update emails into event.
+    $this->updateEntity($event, 'emails', 'Email', 'App\Models\Email', $request);
+    // Update phones into event.
+    $this->updateEntity($event, 'phones', 'Phone', 'App\Models\Phone', $request);
+
+    /* TODO update event's avatar.
+
+    // Check if submitted avatar is different from stored avatar.
+    if ($request->file('avatar') != $event->avatar) {
+      // Delete currently stored avatar
+      Storage::delete($event->avatar);
+      // Check if the submitted avatar is not null.
+      if ($request->file('avatar') != null) {
+        // Prepare the new avatar's file to upload.
+        $upload = $request->file('avatar');
+        // Retrieve current datetime.
+        $current = Carbon::now()->format('YmdHis_');
+        // Format avatar's filename.
+        $clean_filename = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $upload->getClientOriginalName());
+        // Add current datetime to avatar's formatted filename.
+        $file_name =  $current . $clean_filename;
+        // Create avatar/event folder if doesn't exist.
+        if (!Storage::directories('avatar/event')) {
+          Storage::makeDirectory('avatar/event');
+        }
+        // Store the new avatar's file into storage avatar/event folder.
+        $upload->storeAs('avatar/event', $file_name);
+        // Save the new avatar's path into event.
+        $event->avatar = 'avatar/event/' . $file_name;
+      } else {
+        // Delete the current avatar's path into event.
+        $event->avatar = null;
+      }
+    }
+ */
+    // Warning messages.
+    if ($this->warning != null) {
+      $messages[] = $this->warning;
+    }
+    // Returns the edited event with response messages.
+    return $this->success($messages, new EventResource($event), 201);
   }
 
   /**
@@ -353,6 +421,7 @@ class EventController extends Controller
         $error = false;
         // Check if the entity exists.
         $id = $entity['id'];
+        // Load the entity.
         $entity = $model::find($id);
         if (!$entity) {
           $error = true;
@@ -363,6 +432,52 @@ class EventController extends Controller
         }
       }
       // Attach entities to the event.
+      if ($array != null) {
+        $event->$entities()->saveMany($array);
+      }
+    }
+  }
+
+  /**
+   * Update specified event's entities.
+   *
+   * @param  object  $event
+   * @param  string  $entities
+   * @param  object  $model
+   * @param  Request  $request
+   * @return Response
+   */
+  protected function updateEntity($event, $entities, $name, $model, Request $request)
+  {
+    // Check if event's entities are submitted.
+    if ($request->input($entities)) {
+      $array = [];
+      // Retrieve all submitted entities.
+      foreach ($request->input($entities) as $entity) {
+        if (isset($entity['id'])) {
+          $id = $entity['id'];
+          $error = false;
+          // Load the current entity corresponding to the submitted entity id.
+          $currentEntity = $model::find($id);
+          // Check if the current entity already exists.
+          if (!$currentEntity) {
+            $error = true;
+            $this->warning[] = $name . ' ' . $id . ' not found.';
+          }
+          if ($error == false) {
+            foreach ($entity as $key => $value) {
+              // Edit the current entity.
+              $currentEntity->$key = $value;
+            }
+            // Save the current entity.
+            $currentEntity->save();
+          }
+        } else {
+          // Create new entities.
+          $array[] = new $model($entity);
+        }
+      }
+      // Attach new entities to the event.
       if ($array != null) {
         $event->$entities()->saveMany($array);
       }
@@ -393,6 +508,7 @@ class EventController extends Controller
       'prices.*.cost' => 'required|regex:/^\d*(\.\d{1,2})?$/|max:10',
       'venues.*.id' => 'required|integer|digits_between:1,20',
       'people.*.id' => 'required|integer|digits_between:1,20',
+      'addresses.*.type' => 'required|in:event',
       'addresses.*.street1' => 'required|string|max:100',
       'addresses.*.street2' => 'string|max:100|nullable',
       'addresses.*.zip' => 'required|string|max:10',
