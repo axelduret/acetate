@@ -319,10 +319,14 @@ class EventController extends Controller
     // Update the event.
     $event->name = $request->input('name');
     $event->description = $request->input('description');
-    // Update dates into event.
-    $this->updateEntity($event, 'dates', 'App\Models\Date', $request);
-    // Update prices into event.
-    $this->updateEntity($event, 'prices', 'App\Models\Price', $request);
+    // Delete dates from the event.
+    $this->deleteEntity($event, 'dates');
+    // Store new dates into event.
+    $this->storeEntity($event, 'dates', 'App\Models\Date', $request);
+    // Delete prices from the event.
+    $this->deleteEntity($event, 'prices');
+    // Store new prices into event.
+    $this->storeEntity($event, 'prices', 'App\Models\Price', $request);
     // Detach current venues from the event.
     $event->venues()->detach();
     // Attach submitted venues to the event.
@@ -333,16 +337,22 @@ class EventController extends Controller
     $this->attachEntity($event, 'people', 'Person', 'App\Models\Person', $request);
     // Detach current addresses from event.
     $this->detachEntity($event, 'event', 'addresses');
-    // Update addresses into event.
-    $this->updateEntity($event, 'addresses', 'App\Models\Address', $request);
+    // Delete addresses from the event.
+    $this->deleteEntity($event, 'addresses');
+    // Store new addresses into event.
+    $this->storeEntity($event, 'addresses', 'App\Models\Address', $request);
     // Detach current emails from event.
     $this->detachEntity($event, 'event', 'emails');
-    // Update emails into event.
-    $this->updateEntity($event, 'emails', 'App\Models\Email', $request);
+    // Delete emails from the event.
+    $this->deleteEntity($event, 'emails');
+    // Store new emails into event.
+    $this->storeEntity($event, 'emails', 'App\Models\Email', $request);
     // Detach current phones from event.
+    $this->detachEntity($event, 'event', 'phones');
+    // Delete phones from the event.
     $this->deleteEntity($event, 'phones');
-    // Update phones into event.
-    $this->updateEntity($event, 'phones', 'App\Models\Phone', $request);
+    // Store new phones into event.
+    $this->storeEntity($event, 'phones', 'App\Models\Phone', $request);
     // Detach current files from event.
     $this->detachEntity($event, 'event', 'files');
     // Delete current files from event.

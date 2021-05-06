@@ -31,31 +31,6 @@ trait Entity
   }
 
   /**
-   * Update specified controller's entities.
-   *
-   * @param  object  $controller
-   * @param  string  $entities
-   * @param  object  $model
-   * @param  Request  $request
-   * @return Response
-   */
-  protected function updateEntity($controller, $entities, $model, Request $request)
-  {
-    // Delete current entities from controller.
-    $this->deleteEntity($controller, $entities);
-    // Check if controller's entities are submitted.
-    if ($request->input($entities)) {
-      // Create new entities.
-      $array = [];
-      foreach ($request->input($entities) as $entity) {
-        $array[] = new $model($entity);
-      }
-      // Attach new entities to the controller.
-      $controller->$entities()->saveMany($array);
-    }
-  }
-
-  /**
    * Attach specified controller's entities.
    *
    * @param  object  $controller
@@ -102,7 +77,7 @@ trait Entity
    */
   protected function detachEntity($controller, $method, $entities)
   {
-    // Detach current entities from the controller.
+    // Detach entities from the controller.
     foreach ($controller->$entities as $entity) {
       $entity->$method()->dissociate()->save();
     }
@@ -117,9 +92,9 @@ trait Entity
    */
   protected function deleteEntity($controller, $entities)
   {
-    // Delete current entities only if it has no other attached relationship.
+    // Delete entities only if it has no other attached relationship.
     foreach ($controller->$entities as $entity) {
-      if (!$entity->user && !$entity->event && !$entity->person && !$entity->venue) {
+      if (!$entity->user && !$entity->person && !$entity->venue) {
         $entity->delete();
       }
     }
