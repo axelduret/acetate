@@ -316,8 +316,6 @@ class EventController extends Controller
     // Update the event.
     $event->name = $request->input('name');
     $event->description = $request->input('description');
-    // Save the event.
-    $event->save();
     // Update dates into event.
     $this->updateEntity($event, 'dates', 'Date', 'App\Models\Date', $request);
     // Update prices into event.
@@ -346,6 +344,8 @@ class EventController extends Controller
     $event->taxonomies()->detach();
     // Attach submitted taxonomies to the event.
     $this->attachEntity($event, 'taxonomies', 'Taxonomy', 'App\Models\Taxonomy', $request);
+    // Save the event.
+    $event->save();
 
     /* TODO update event's avatar.
 
@@ -423,6 +423,33 @@ class EventController extends Controller
   }
 
   /**
+   * Update specified event's entities.
+   *
+   * @param  object  $event
+   * @param  string  $entities
+   * @param  object  $model
+   * @param  Request  $request
+   * @return Response
+   */
+  protected function updateEntity($event, $entities, $name, $model, Request $request)
+  {
+    // Delete current entities from the event.
+    foreach ($event->$entities as $entity) {
+      $entity->delete();
+    }
+    // Check if event's entities are submitted.
+    if ($request->input($entities)) {
+      // Create new entities.
+      $array = [];
+      foreach ($request->input($entities) as $entity) {
+        $array[] = new $model($entity);
+      }
+      // Attach entities to the event.
+      $event->$entities()->saveMany($array);
+    }
+  }
+
+  /**
    * Attach specified event's entities.
    *
    * @param  object  $event
@@ -439,69 +466,20 @@ class EventController extends Controller
       // Collect entities.
       $array = [];
       foreach ($request->input($entities) as $entity) {
-        $error = false;
+        $warning = false;
         // Check if the entity exists.
         $id = $entity['id'];
         // Load the entity.
         $entity = $model::find($id);
         if (!$entity) {
-          $error = true;
+          $warning = true;
           $this->warning[] = $name . ' ' . $id . ' not found.';
         }
-        if ($error == false) {
+        if ($warning == false) {
           $array[] = $entity;
         }
       }
       // Attach entities to the event.
-      if ($array != null) {
-        $event->$entities()->saveMany($array);
-      }
-    }
-  }
-
-  /**
-   * Update specified event's entities.
-   *
-   * @param  object  $event
-   * @param  string  $entities
-   * @param  object  $model
-   * @param  Request  $request
-   * @return Response
-   */
-  protected function updateEntity($event, $entities, $name, $model, Request $request)
-  {
-    // Check if event's entities are submitted.
-    if ($request->input($entities)) {
-      $array = [];
-      // Retrieve all submitted entities.
-      foreach ($request->input($entities) as $entity) {
-        if (isset($entity['id'])) {
-          $id = $entity['id'];
-          $error = false;
-          // Load the current entity corresponding to the submitted entity id.
-          $currentEntity = $model::find($id);
-          // Check if the current entity already exists.
-          if (!$currentEntity) {
-            $error = true;
-            $this->warning[] = $name . ' ' . $id . ' not found.';
-          }
-          if ($error == false) {
-            foreach ($entity as $key => $value) {
-              // Edit the current entity.
-              $currentEntity->$key = $value;
-            }
-            // Save the current entity.
-            $currentEntity->save();
-          }
-        }
-        // TODO delete unsubmitted entities.
-        // TODO create new entities.
-        /*  else {
-          // Create new entities.
-          $array[] = new $model($entity);
-        } */
-      }
-      // Attach new entities to the event.
       if ($array != null) {
         $event->$entities()->saveMany($array);
       }
