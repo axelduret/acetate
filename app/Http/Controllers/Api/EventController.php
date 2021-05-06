@@ -344,8 +344,6 @@ class EventController extends Controller
     $event->taxonomies()->detach();
     // Attach submitted taxonomies to the event.
     $this->attachEntity($event, 'taxonomies', 'Taxonomy', 'App\Models\Taxonomy', $request);
-    // Save the event.
-    $event->save();
 
     /* TODO update event's avatar.
 
@@ -378,14 +376,49 @@ class EventController extends Controller
     }
  */
 
-    // TODO Update event's websites and social networks.
-
+    // Delete current websites from the event.
+    foreach ($event->websites as $currentWebsite) {
+      $currentWebsite->delete();
+    }
+    // Check if event's websites are submitted.
+    if ($request->input('websites')) {
+      // Create new websites.
+      $websites = [];
+      foreach ($request->input('websites') as $website) {
+        $newWebsite = new Website($website);
+        $newWebsite->save();
+        // Check if the new website is a social network.
+        if ($newWebsite->type == 'social network') {
+          // Validate submitted social network fields.
+          $validator = Validator::make(
+            $website['social_network'],
+            ['type' => 'required|in:twitter,facebook,instagram,linkedin,youtube,twitch,snapchat,reddit,tiktok']
+          );
+          // If validation fails, add error messages.
+          if ($validator->fails()) {
+            $this->warning[] = 'Wrong social network type in website ' . $newWebsite->id;
+          } else {
+            // Create a new social network.
+            $socialNetwork = new SocialNetwork([
+              'type' => $website['social_network']['type'],
+              'website_id' => $newWebsite->id
+            ]);
+            $socialNetwork->save();
+          }
+        }
+        $websites[] = $newWebsite;
+      }
+      // Attach websites to the event.
+      $event->websites()->saveMany($websites);
+    }
+    // Save the event.
+    $event->save();
     // Warning messages.
     if ($this->warning != null) {
       $messages[] = $this->warning;
     }
     // Returns the edited event with response messages.
-    return $this->success($messages, new EventResource($event), 201);
+    return $this->success($messages, new EventResource(Event::find($id)), 201);
   }
 
   /**
