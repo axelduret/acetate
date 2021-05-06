@@ -11,6 +11,7 @@ use Illuminate\Support\Carbon;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EventResource;
 use App\Http\Resources\EventCollection;
+use App\Http\Traits\Entity;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Traits\RespondsWithHttpStatus;
@@ -19,6 +20,8 @@ class EventController extends Controller
 {
   // Import custom response trait.
   use RespondsWithHttpStatus;
+  // Import Entity trait.
+  use Entity;
 
   // Default pagination value.
   const PER_PAGE = 10;
@@ -329,11 +332,11 @@ class EventController extends Controller
     // Attach submitted people to the event.
     $this->attachEntity($event, 'people', 'Person', 'App\Models\Person', $request);
     // Detach current addresses from event.
-    $this->detachEntity($event, 'addresses');
+    $this->detachEntity($event, 'event', 'addresses');
     // Update addresses into event.
     $this->updateEntity($event, 'addresses', 'App\Models\Address', $request);
     // Detach current emails from event.
-    $this->detachEntity($event, 'emails');
+    $this->detachEntity($event, 'event', 'emails');
     // Update emails into event.
     $this->updateEntity($event, 'emails', 'App\Models\Email', $request);
     // Detach current phones from event.
@@ -341,7 +344,7 @@ class EventController extends Controller
     // Update phones into event.
     $this->updateEntity($event, 'phones', 'App\Models\Phone', $request);
     // Detach current files from event.
-    $this->detachEntity($event, 'files');
+    $this->detachEntity($event, 'event', 'files');
     // Delete current files from event.
     $this->deleteEntity($event, 'files');
     // Attach submitted files to the event.
@@ -383,7 +386,7 @@ class EventController extends Controller
  */
 
     // Detach current websites from event.
-    $this->detachEntity($event, 'websites');
+    $this->detachEntity($event, 'event', 'websites');
     // Delete current websites from event.
     $this->deleteEntity($event, 'websites');
     // Check if event's websites are submitted.
@@ -436,123 +439,6 @@ class EventController extends Controller
   public function destroy($id)
   {
     //
-  }
-
-  /**
-   * Create new event's entities.
-   *
-   * @param  object  $event
-   * @param  string  $entities
-   * @param  object  $model
-   * @param  Request  $request
-   * @return Response
-   */
-  protected function storeEntity($event, $entities, $model, Request $request)
-  {
-    // Check if event's entities are submitted.
-    if ($request->input($entities)) {
-      // Create new entities.
-      $array = [];
-      foreach ($request->input($entities) as $entity) {
-        $array[] = new $model($entity);
-      }
-      // Attach entities to the event.
-      $event->$entities()->saveMany($array);
-    }
-  }
-
-  /**
-   * Update specified event's entities.
-   *
-   * @param  object  $event
-   * @param  string  $entities
-   * @param  object  $model
-   * @param  Request  $request
-   * @return Response
-   */
-  protected function updateEntity($event, $entities, $model, Request $request)
-  {
-    // Delete current entities from event.
-    $this->deleteEntity($event, $entities);
-    // Check if event's entities are submitted.
-    if ($request->input($entities)) {
-      // Create new entities.
-      $array = [];
-      foreach ($request->input($entities) as $entity) {
-        $array[] = new $model($entity);
-      }
-      // Attach new entities to the event.
-      $event->$entities()->saveMany($array);
-    }
-  }
-
-  /**
-   * Attach specified event's entities.
-   *
-   * @param  object  $event
-   * @param  string  $entities
-   * @param  string  $name
-   * @param  object  $model
-   * @param  Request  $request
-   * @return Response
-   */
-  protected function attachEntity($event, $entities, $name, $model, Request $request)
-  {
-    // Check if event's entities are submitted.
-    if ($request->input($entities)) {
-      // Collect entities.
-      $array = [];
-      foreach ($request->input($entities) as $entity) {
-        $warning = false;
-        // Check if the entity exists.
-        $id = $entity['id'];
-        // Load the entity.
-        $entity = $model::find($id);
-        if (!$entity) {
-          $warning = true;
-          $this->warning[] = $name . ' ' . $id . ' not found.';
-        }
-        if ($warning == false) {
-          $array[] = $entity;
-        }
-      }
-      // Attach entities to the event.
-      if ($array != null) {
-        $event->$entities()->saveMany($array);
-      }
-    }
-  }
-
-  /**
-   * Detach specified event's entities.
-   *
-   * @param  object  $event
-   * @param  string  $entities
-   * @return Response
-   */
-  protected function detachEntity($event, $entities)
-  {
-    // Detach current entities from the event.
-    foreach ($event->$entities as $entity) {
-      $entity->event()->dissociate()->save();
-    }
-  }
-
-  /**
-   * Delete specified event's entities.
-   *
-   * @param  object  $event
-   * @param  string  $entities
-   * @return Response
-   */
-  protected function deleteEntity($event, $entities)
-  {
-    // Delete current entities only if it has no other attached relationship.
-    foreach ($event->$entities as $entity) {
-      if (!$entity->user && !$entity->person && !$entity->venue) {
-        $entity->delete();
-      }
-    }
   }
 
   /**
