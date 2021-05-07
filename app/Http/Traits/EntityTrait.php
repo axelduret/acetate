@@ -96,13 +96,15 @@ trait EntityTrait
   {
     // Delete entities only if it has no other attached relationships.
     foreach ($controller->$entities as $entity) {
-      $relation_1 = $related[0];
-      $relation_2 = $related[1];
-      $relation_3 = $related[2];
-      $relation_4 = $related[3];
-      if (!$entity->$relation_1 && !$entity->$relation_2 && !$entity->$relation_3 && !$entity->$relation_4) {
-        $entity->delete();
+      $deleteRelated = [];
+      for ($i = 0; $i < count($related); ++$i) {
+        $item = $related[$i];
+        if (!$entity->$item) {
+          $deleteRelated[] = $item;
+        }
       }
+      if (count($related) == count($deleteRelated))
+        $entity->delete();
     }
   }
 }
