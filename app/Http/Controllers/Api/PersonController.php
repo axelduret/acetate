@@ -10,6 +10,7 @@ use App\Http\Traits\WebsiteTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PersonResource;
 use App\Http\Resources\PersonCollection;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Traits\RespondsWithHttpStatus;
 
 class PersonController extends Controller
@@ -149,7 +150,51 @@ class PersonController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    // Validation.
+    $validatorRules = $this->validators();
+    $validator = Validator::make($request->all(), $validatorRules);
+    // If validation fails, returns error messages.
+    if ($validator->fails()) {
+      $errors = $validator->errors();
+      return $this->failure($errors);
+    }
+    // Success message.
+    $this->messages[] = 'Person created successfully.';
+    // Store person's avatar.
+    $this->storeAvatar('person', $request);
+    // Create a new person.
+    $person = new Person([
+      'name' => $request->input('name'),
+      'description' => $request->input('description'),
+      // TODO create a default person's avatar if not submitted.
+      'avatar' => $request->file('avatar') ? 'avatar/person/' . $this->file_name : null,
+      'user_id' => $request->input('user_id')
+    ]);
+    // Save the person.
+    $person->save();
+    // Attach venues to the person.
+    $this->attachEntity($person, 'venues', 'Venue', 'App\Models\Venue', $request);
+    // Attach people to the person.
+    $this->attachEntity($person, 'people', 'Person', 'App\Models\Person', $request);
+    // Create and attach addresses to the person.
+    $this->storeEntity($person, 'addresses', 'App\Models\Address', $request);
+    // Create and attach emails to the person.
+    $this->storeEntity($person, 'emails', 'App\Models\Email', $request);
+    // Create and attach phones to the person.
+    $this->storeEntity($person, 'phones', 'App\Models\Phone', $request);
+    // Attach files to the person.
+    $this->attachEntity($person, 'files', 'File', 'App\Models\File', $request);
+    // TODO Check if new taxonomies's types are valid.
+    // Attach submitted taxonomies to the person.
+    $this->attachEntity($person, 'taxonomies', 'Taxonomy', 'App\Models\Taxonomy', $request);
+    // Create and attach websites to the person.
+    $this->storeWebsite($person, $request);
+    // Add warning messages to the response.
+    if ($this->warning != null) {
+      $this->messages[] = $this->warning;
+    }
+    // Returns the newly created person data with response messages.
+    return $this->success($this->messages, new PersonResource($person), 201);
   }
 
   /**
@@ -163,7 +208,7 @@ class PersonController extends Controller
     // Check if the person exists.
     $person = Person::find($id);
     if (!$person) {
-      return $this->failure('Person not found.', 404);
+      return $this->failure('Person ' . $id . ' not found.', 404);
     }
     // Success message.
     $message = 'OK';
@@ -195,7 +240,7 @@ class PersonController extends Controller
     $person = Person::find($id);
     // Check if the person exists.
     if (!$person) {
-      return $this->failure('Person not found.', 404);
+      return $this->failure('Person ' . $id . ' not found.', 404);
     }
     // Delete the person's avatar.
     $this->deleteAvatar($person);
@@ -228,7 +273,7 @@ class PersonController extends Controller
     // Delete the person.
     $person->delete();
     // Success message.
-    $message = 'Person removed successfully.';
+    $message = 'Person ' . $id . ' removed successfully.';
     // Returns success message.
     return $this->success($message, null, 200);
   }

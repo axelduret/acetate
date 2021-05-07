@@ -14,25 +14,25 @@ class PersonResource extends JsonResource
    */
   public function toArray($request)
   {
-    return parent::toArray($request);
-  }
-
-  /**
-   * Get additional data that should be returned with the resource array.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return array
-   */
-  public function with($request)
-  {
     return [
       $this::$wrap => [
+        'id' => $this->id,
+        'created_at' => date('Y-m-d H:i:s', strtotime($this->created_at)),
+        'updated_at' => date('Y-m-d H:i:s', strtotime($this->updated_at)),
+        'nickname' => $this->nickname,
+        'firstname' => $this->firstname,
+        'lastname' => $this->lastname,
+        'description' => $this->description,
+        'type' => $this->type,
+        'company' => $this->company,
+        'avatar' => $this->avatar,
+        'events' => $this->events->load('dates'),
+        'venues' => $this->venues->load('addresses')->load('emails')->load('phones')->load('websites')->load('websites.socialNetwork'),
         'addresses' => $this->addresses,
         'emails' => $this->emails,
         'phones' => $this->phones,
         'websites' => $this->websites->load('socialNetwork'),
         'files' => $this->files,
-        'events' => $this->events->load('dates'),
         'taxonomies' => $this->taxonomies,
         'comments' => $this->comments,
         // TODO show likes of the logged user.

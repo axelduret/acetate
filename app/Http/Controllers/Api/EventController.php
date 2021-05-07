@@ -259,7 +259,7 @@ class EventController extends Controller
     // Check if the event exists.
     $event = Event::find($id);
     if (!$event) {
-      return $this->failure('Event not found.', 404);
+      return $this->failure('Event ' . $id . ' not found.', 404);
     }
     // Success message.
     $message = 'OK';
@@ -285,13 +285,13 @@ class EventController extends Controller
       return $this->failure($errors);
     }
     // Success message.
-    $this->messages[] = 'Event edited successfully.';
+    $this->messages[] = 'Event ' . $id . ' edited successfully.';
     // TODO update event's avatar.
     // Load the event.
     $event = Event::find($id);
     // Check if the event exists.
     if (!$event) {
-      return $this->failure('Event not found.', 404);
+      return $this->failure('Event ' . $id . ' not found.', 404);
     }
     // Update the event's fields.
     $event->name = $request->input('name');
@@ -369,7 +369,7 @@ class EventController extends Controller
     $event = Event::find($id);
     // Check if the event exists.
     if (!$event) {
-      return $this->failure('Event not found.', 404);
+      return $this->failure('Event ' . $id . ' not found.', 404);
     }
     // Delete the event's avatar.
     $this->deleteAvatar($event);
@@ -406,7 +406,7 @@ class EventController extends Controller
     // Delete the event.
     $event->delete();
     // Success message.
-    $message = 'Event removed successfully.';
+    $message = 'Event ' . $id . ' removed successfully.';
     // Returns success message.
     return $this->success($message, null, 200);
   }
