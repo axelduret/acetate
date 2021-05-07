@@ -405,8 +405,6 @@ class EventController extends Controller
     $this->deleteEntity($event, $this->related, 'websites');
     // Delete the event.
     $event->delete();
-    // Returns response message.
-    return $this->success('Event removed successfully.', null, 200);
     // Success message.
     $message = 'Event removed successfully.';
     // Returns success message.

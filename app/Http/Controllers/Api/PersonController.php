@@ -191,6 +191,63 @@ class PersonController extends Controller
    */
   public function destroy($id)
   {
-    //
+    // Load the person.
+    $person = Person::find($id);
+    // Check if the person exists.
+    if (!$person) {
+      return $this->failure('Person not found.', 404);
+    }
+    // Delete the person's avatar.
+    $this->deleteAvatar($person);
+    // Detach venues from the person.
+    $person->venues()->detach();
+    // Detach events from the person.
+    $person->events()->detach();
+    // Detach addresses from the person.
+    $this->detachEntity($person, 'person', 'addresses');
+    // Delete addresses from the person.
+    $this->deleteEntity($person, $this->related, 'addresses');
+    // Detach emails from the person.
+    $this->detachEntity($person, 'person', 'emails');
+    // Delete emails from the person.
+    $this->deleteEntity($person, $this->related, 'emails');
+    // Detach phones from the person.
+    $this->detachEntity($person, 'person', 'phones');
+    // Delete phones from the person.
+    $this->deleteEntity($person, $this->related, 'phones');
+    // Detach files from the person.
+    $this->detachEntity($person, 'person', 'files');
+    // Delete files from the person.
+    $this->deleteEntity($person, $this->related, 'files');
+    // Detach taxonomies from the person.
+    $person->taxonomies()->detach();
+    // Detach websites from the person.
+    $this->detachEntity($person, 'person', 'websites');
+    // Delete websites from the person.
+    $this->deleteEntity($person, $this->related, 'websites');
+    // Delete the person.
+    $person->delete();
+    // Success message.
+    $message = 'Person removed successfully.';
+    // Returns success message.
+    return $this->success($message, null, 200);
+  }
+
+  /**
+   * Validators.
+   *
+   * @param  bool $update
+   * @return array
+   */
+  protected function validators($update = false)
+  {
+    $validatorRules = [];
+    // Validators for all submitted fields.
+    $validatorRules = [];
+    // Validate id when update method is requested.
+    if ($update) {
+      $validatorRules['id'] = 'required|integer|digits_between:1,20';
+    }
+    return $validatorRules;
   }
 }
