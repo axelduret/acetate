@@ -75,7 +75,7 @@ class EventController extends Controller
    * Display the list of all events.
    *
    * @param Request $request
-   * @return Response
+   * @return EventCollection
    */
   public function index(Request $request)
   {
@@ -189,7 +189,7 @@ class EventController extends Controller
     // Returns events data with success message.
     return $this->success($message, new EventCollection($events), 200);
      */
-    // Returns events data.
+    // Returns events data's collection.
     return new EventCollection($events);
   }
 

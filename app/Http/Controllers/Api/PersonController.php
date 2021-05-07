@@ -66,7 +66,7 @@ class PersonController extends Controller
    * Display the list of all people.
    *
    * @param Request $request
-   * @return Response
+   * @return PersonCollection
    */
   public function index(Request $request)
   {
@@ -141,7 +141,7 @@ class PersonController extends Controller
     // Returns people data with success message.
     return $this->success($message, new PersonCollection($people), 200);
      */
-    // Returns people data.
+    // Returns people data's collection.
     return new PersonCollection($people);
   }
 

@@ -66,7 +66,7 @@ class VenueController extends Controller
    * Display the list of all venues.
    *
    * @param Request $request
-   * @return Response
+   * @return VenueCollection
    */
   public function index(Request $request)
   {
@@ -143,7 +143,7 @@ class VenueController extends Controller
     // Returns venues data with success message.
     return $this->success($message, new VenueCollection($venues), 200);
      */
-    // Returns venues data.
+    // Returns venues data's collection.
     return new VenueCollection($venues);
   }
 
