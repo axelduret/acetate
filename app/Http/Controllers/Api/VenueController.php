@@ -155,7 +155,51 @@ class VenueController extends Controller
    */
   public function store(Request $request)
   {
-    // TODO
+    // Validation.
+    $validatorRules = $this->validators();
+    $validator = Validator::make($request->all(), $validatorRules);
+    // If validation fails, returns error messages.
+    if ($validator->fails()) {
+      $errors = $validator->errors();
+      return $this->failure($errors);
+    }
+    // Success message.
+    $this->messages[] = 'Venue created successfully.';
+    // Store venue's avatar.
+    $this->storeAvatar('venue', $request);
+    // Create a new venue.
+    $venue = new Venue([
+      'name' => $request->input('lastname'),
+      'description' => $request->input('description'),
+      // TODO create a default venue's avatar if not submitted.
+      'avatar' => $request->file('avatar') ? 'avatar/venue/' . $this->file_name : null,
+      'user_id' => $request->input('user_id')
+    ]);
+    // Save the venue.
+    $venue->save();
+    // Attach people to the venue.
+    $this->attachEntity($venue, 'people', 'Person', 'App\Models\Person', $request);
+    // Attach events to the venue.
+    $this->attachEntity($venue, 'events', 'Event', 'App\Models\Event', $request);
+    // Create and attach addresses to the venue.
+    $this->storeEntity($venue, 'addresses', 'App\Models\Address', $request);
+    // Create and attach emails to the venue.
+    $this->storeEntity($venue, 'emails', 'App\Models\Email', $request);
+    // Create and attach phones to the venue.
+    $this->storeEntity($venue, 'phones', 'App\Models\Phone', $request);
+    // Attach files to the venue.
+    $this->attachEntity($venue, 'files', 'File', 'App\Models\File', $request);
+    // TODO Check if new taxonomies's types are valid.
+    // Attach submitted taxonomies to the venue.
+    $this->attachEntity($venue, 'taxonomies', 'Taxonomy', 'App\Models\Taxonomy', $request);
+    // Create and attach websites to the venue.
+    $this->storeWebsite($venue, $request);
+    // Add warning messages to the response.
+    if ($this->warning != null) {
+      $this->messages[] = $this->warning;
+    }
+    // Returns the newly created venue data with response messages.
+    return $this->success($this->messages, new VenueResource($venue), 201);
   }
 
   /**
@@ -186,7 +230,77 @@ class VenueController extends Controller
    */
   public function update($id, Request $request)
   {
-    // TODO
+    // Validation.
+    $validatorRules = $this->validators(true);
+    $validator = Validator::make($request->all(), $validatorRules);
+    // If validation fails, returns error messages.
+    if ($validator->fails()) {
+      $errors = $validator->errors();
+      return $this->failure($errors);
+    }
+    // Success message.
+    $this->messages[] = 'Venue ' . $id . ' edited successfully.';
+    // TODO update venue's avatar.
+    // Load the venue.
+    $venue = Venue::find($id);
+    // Check if the venue exists.
+    if (!$venue) {
+      return $this->failure('Venue ' . $id . ' not found.', 404);
+    }
+    // Update the venue's fields.
+    $venue->name = $request->input('name');
+    $venue->description = $request->input('description');
+    // Detach current people from the venue.
+    $venue->people()->detach();
+    // Attach submitted people to the venue.
+    $this->attachEntity($venue, 'people', 'Person', 'App\Models\Person', $request);
+    // Detach current events from the venue.
+    $venue->events()->detach();
+    // Attach submitted events to the venue.
+    $this->attachEntity($venue, 'events', 'Event', 'App\Models\Event', $request);
+    // Detach current addresses from the venue.
+    $this->detachEntity($venue, 'venue', 'addresses');
+    // Delete current addresses from the venue.
+    $this->deleteEntity($venue, $this->related, 'addresses');
+    // Store new addresses into the venue.
+    $this->storeEntity($venue, 'addresses', 'App\Models\Address', $request);
+    // Detach current emails from the venue.
+    $this->detachEntity($venue, 'venue', 'emails');
+    // Delete current emails from the venue.
+    $this->deleteEntity($venue, $this->related, 'emails');
+    // Store new emails into the venue.
+    $this->storeEntity($venue, 'emails', 'App\Models\Email', $request);
+    // Detach current phones from the venue.
+    $this->detachEntity($venue, 'venue', 'phones');
+    // Delete current phones from the venue.
+    $this->deleteEntity($venue, $this->related, 'phones');
+    // Store new phones into the venue.
+    $this->storeEntity($venue, 'phones', 'App\Models\Phone', $request);
+    // Detach current files from the venue.
+    $this->detachEntity($venue, 'venue', 'files');
+    // Delete current files from the venue.
+    $this->deleteEntity($venue, $this->related, 'files');
+    // Attach submitted files to the venue.
+    $this->attachEntity($venue, 'files', 'File', 'App\Models\File', $request);
+    // Detach current taxonomies from the venue.
+    $venue->taxonomies()->detach();
+    // TODO Check if new taxonomies's types are valid.
+    // Attach submitted taxonomies to the venue.
+    $this->attachEntity($venue, 'taxonomies', 'Taxonomy', 'App\Models\Taxonomy', $request);
+    // Detach current websites from the venue.
+    $this->detachEntity($venue, 'venue', 'websites');
+    // Delete current websites from the venue.
+    $this->deleteEntity($venue, $this->related, 'websites');
+    // Store new websites into the venue.
+    $this->storeWebsite($venue, $request);
+    // Save the venue.
+    $venue->save();
+    // Add warning messages to the response.
+    if ($this->warning != null) {
+      $this->messages[] = $this->warning;
+    }
+    // Returns the edited venue data with response messages.
+    return $this->success($this->messages, new VenueResource(Venue::find($id)), 200);
   }
 
   /**
