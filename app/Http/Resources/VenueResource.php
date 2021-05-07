@@ -30,7 +30,15 @@ class VenueResource extends JsonResource
         'websites' => $this->websites->load('socialNetwork'),
         'files' => $this->files,
         'taxonomies' => $this->taxonomies,
-        'comments' => $this->comments,
+        'comments' => $this->comments->map(function ($item) {
+          return [
+            'id' => $item['id'],
+            'created_at' => date('Y-m-d H:i:s', strtotime($item['created_at'])),
+            'updated_at' => date('Y-m-d H:i:s', strtotime($item['updated_at'])),
+            'text' => $item['text'],
+            'user_id' => $item['user_id'],
+          ];
+        }),
         // TODO show likes of the logged user.
         'likes_count' => $this->likes->where('is_dislike', 0)->count(),
         // TODO show dislikes of the logged user.
