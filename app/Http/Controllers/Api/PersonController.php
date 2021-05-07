@@ -305,7 +305,7 @@ class PersonController extends Controller
       $this->messages[] = $this->warning;
     }
     // Returns the edited person data with response messages.
-    return $this->success($this->messages, new PersonResource(Person::find($id)), 201);
+    return $this->success($this->messages, new PersonResource(Person::find($id)), 200);
   }
 
   /**

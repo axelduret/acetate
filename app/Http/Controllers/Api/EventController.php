@@ -358,7 +358,7 @@ class EventController extends Controller
       $this->messages[] = $this->warning;
     }
     // Returns the edited event data with response messages.
-    return $this->success($this->messages, new EventResource(Event::find($id)), 201);
+    return $this->success($this->messages, new EventResource(Event::find($id)), 200);
   }
 
   /**
