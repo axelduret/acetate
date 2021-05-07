@@ -24,12 +24,6 @@ class PersonCollection extends ResourceCollection
           'company' => $item->company,
           'created_at' => date('Y-m-d H:i:s', strtotime($item['created_at'])),
           'updated_at' => date('Y-m-d H:i:s', strtotime($item['updated_at'])),
-          'venues' => $item->venues->map(function ($item) {
-            return [
-              'id' => $item['id'],
-              'name' => $item['name']
-            ];
-          }),
           'events' => $item->events->map(function ($item) {
             return [
               'id' => $item['id'],
@@ -42,6 +36,12 @@ class PersonCollection extends ResourceCollection
                   'end_time' => $item['end_time'],
                 ];
               }),
+            ];
+          }),
+          'venues' => $item->venues->map(function ($item) {
+            return [
+              'id' => $item['id'],
+              'name' => $item['name']
             ];
           }),
           'taxonomies' => $item->taxonomies,
