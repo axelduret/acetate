@@ -26,7 +26,7 @@ class EventController extends Controller
   // Import Website trait.
   use WebsiteTrait;
 
-  // Default pagination value.
+  // Pagination.
   const PER_PAGE = 10;
 
   /**
@@ -44,7 +44,7 @@ class EventController extends Controller
   protected $warning = [];
 
   /**
-   * Define relationships.
+   * Attached relationships.
    *
    * @var array
    */
@@ -83,15 +83,15 @@ class EventController extends Controller
     $searchField = in_array(
       $request->input('search_field'),
       $this->searchFields
-    )
-      ? $request->input('search_field')
-      : 'start_date';
+    ) // Accepted values.
+      ? $request->input('search_field') // Submitted value.
+      : 'start_date'; // Default value.
     $searchValue = in_array(
       $request->input('search_value'),
       $this->searchValues
-    )
-      ? $request->input('search_value')
-      : '>=';
+    ) // Accepted values.
+      ? $request->input('search_value') // Submitted value.
+      : '>='; // Default value.
     $searchReference = $request->input('search_reference')
       ? Carbon::parse($request->input('search_reference'))->toDateString()
       : Carbon::now()->toDateString();
@@ -166,15 +166,15 @@ class EventController extends Controller
     $sortField = in_array(
       $request->input('sort_by'),
       $this->sortFields
-    )
-      ? $request->input('sort_by')
-      : 'start_date';
+    ) // Accepted values.
+      ? $request->input('sort_by') // Submitted value.
+      : 'start_date'; // Default value.
     $sortOrder = in_array(
       $request->input('order_by'),
       ['asc', 'desc']
-    )
-      ? $request->input('order_by')
-      : 'asc';
+    ) // Accepted values.
+      ? $request->input('order_by') // Submitted value.
+      : 'asc'; // Default value.
     $query = $query->orderBy($sortField, $sortOrder);
     // Pagination.
     $perPage = $request->input('per_page') ?? self::PER_PAGE;
