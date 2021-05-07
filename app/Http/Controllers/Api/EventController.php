@@ -414,7 +414,7 @@ class EventController extends Controller
   }
 
   /**
-   * Validate an event.
+   * Validators.
    *
    * @param  bool $update
    * @return array
@@ -422,8 +422,7 @@ class EventController extends Controller
   protected function validateEvent($update = false)
   {
     $validatorRules = [];
-
-    // Validate submitted fields.
+    // Validators for all submitted fields.
     $validatorRules = [
       'name' => 'required|string|max:100',
       'description' => 'string|nullable',
@@ -463,12 +462,10 @@ class EventController extends Controller
       'files.*.id' => 'required|integer|digits_between:1,20',
       'taxonomies.*.id' => 'required|integer|digits_between:1,20',
     ];
-
-    // Check id when event is updated.
+    // Validate id when update method is requested.
     if ($update) {
       $validatorRules['id'] = 'required|integer|digits_between:1,20';
     }
-
     return $validatorRules;
   }
 }
