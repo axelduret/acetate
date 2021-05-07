@@ -198,7 +198,7 @@ class EventController extends Controller
   public function store(Request $request)
   {
     // Validation.
-    $validatorRules = $this->validateEvent();
+    $validatorRules = $this->validators();
     $validator = Validator::make($request->all(), $validatorRules);
     // If validation fails, returns error messages.
     if ($validator->fails()) {
@@ -277,7 +277,7 @@ class EventController extends Controller
   public function update($id, Request $request)
   {
     // Validation.
-    $validatorRules = $this->validateEvent(true);
+    $validatorRules = $this->validators(true);
     $validator = Validator::make($request->all(), $validatorRules);
     // If validation fails, returns error messages.
     if ($validator->fails()) {
@@ -419,7 +419,7 @@ class EventController extends Controller
    * @param  bool $update
    * @return array
    */
-  protected function validateEvent($update = false)
+  protected function validators($update = false)
   {
     $validatorRules = [];
     // Validators for all submitted fields.
