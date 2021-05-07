@@ -25,10 +25,13 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 // Users API endpoints
 Route::apiResource('users', UserController::class);
+Route::post('users/{id}/avatar', [UserController::class, 'updateAvatar']);
 // Events API endpoints
 Route::apiResource('events', EventController::class);
 Route::post('events/{id}/avatar', [EventController::class, 'updateAvatar']);
 // People API endpoints
 Route::apiResource('people', PersonController::class);
+Route::post('people/{id}/avatar', [PersonController::class, 'updateAvatar']);
 // Venues API endpoints
 Route::apiResource('venues', VenueController::class);
+Route::post('venues/{id}/avatar', [VenueController::class, 'updateAvatar']);
