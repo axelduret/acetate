@@ -321,11 +321,11 @@ class EventController extends Controller
     $event->description = $request->input('description');
     // Delete dates from the event.
     $this->deleteEntity($event, 'dates');
-    // Store new dates into event.
+    // Store new dates into the event.
     $this->storeEntity($event, 'dates', 'App\Models\Date', $request);
     // Delete prices from the event.
     $this->deleteEntity($event, 'prices');
-    // Store new prices into event.
+    // Store new prices into the event.
     $this->storeEntity($event, 'prices', 'App\Models\Price', $request);
     // Detach current venues from the event.
     $event->venues()->detach();
@@ -335,27 +335,27 @@ class EventController extends Controller
     $event->people()->detach();
     // Attach submitted people to the event.
     $this->attachEntity($event, 'people', 'Person', 'App\Models\Person', $request);
-    // Detach current addresses from event.
+    // Detach current addresses from the event.
     $this->detachEntity($event, 'event', 'addresses');
     // Delete addresses from the event.
     $this->deleteEntity($event, 'addresses');
-    // Store new addresses into event.
+    // Store new addresses into the event.
     $this->storeEntity($event, 'addresses', 'App\Models\Address', $request);
-    // Detach current emails from event.
+    // Detach current emails from the event.
     $this->detachEntity($event, 'event', 'emails');
     // Delete emails from the event.
     $this->deleteEntity($event, 'emails');
-    // Store new emails into event.
+    // Store new emails into the event.
     $this->storeEntity($event, 'emails', 'App\Models\Email', $request);
-    // Detach current phones from event.
+    // Detach current phones from the event.
     $this->detachEntity($event, 'event', 'phones');
     // Delete phones from the event.
     $this->deleteEntity($event, 'phones');
-    // Store new phones into event.
+    // Store new phones into the event.
     $this->storeEntity($event, 'phones', 'App\Models\Phone', $request);
-    // Detach current files from event.
+    // Detach current files from the event.
     $this->detachEntity($event, 'event', 'files');
-    // Delete current files from event.
+    // Delete current files from the event.
     $this->deleteEntity($event, 'files');
     // Attach submitted files to the event.
     $this->attachEntity($event, 'files', 'File', 'App\Models\File', $request);
@@ -395,9 +395,9 @@ class EventController extends Controller
     }
  */
 
-    // Detach current websites from event.
+    // Detach current websites from the event.
     $this->detachEntity($event, 'event', 'websites');
-    // Delete current websites from event.
+    // Delete current websites from the event.
     $this->deleteEntity($event, 'websites');
     // Check if event's websites are submitted.
     if ($request->input('websites')) {
@@ -448,7 +448,51 @@ class EventController extends Controller
    */
   public function destroy($id)
   {
-    //
+    // Load the event.
+    $event = Event::find($id);
+    // Check if the event exists.
+    if (!$event) {
+      return $this->failure('Event not found.', 404);
+    }
+    // Delete event's avatar.
+    $avatar = $event->avatar;
+    if (isset($avatar)) {
+      Storage::delete($avatar);
+    }
+    // Delete dates from the event.
+    $this->deleteEntity($event, 'dates');
+    // Delete prices from the event.
+    $this->deleteEntity($event, 'prices');
+    // Detach current venues from the event.
+    $event->venues()->detach();
+    // Detach current people from the event.
+    $event->people()->detach();
+    // Detach current addresses from the event.
+    $this->detachEntity($event, 'event', 'addresses');
+    // Delete addresses from the event.
+    $this->deleteEntity($event, 'addresses');
+    // Detach current emails from the event.
+    $this->detachEntity($event, 'event', 'emails');
+    // Delete emails from the event.
+    $this->deleteEntity($event, 'emails');
+    // Detach current phones from the event.
+    $this->detachEntity($event, 'event', 'phones');
+    // Delete phones from the event.
+    $this->deleteEntity($event, 'phones');
+    // Detach current files from the event.
+    $this->detachEntity($event, 'event', 'files');
+    // Delete current files from the event.
+    $this->deleteEntity($event, 'files');
+    // Detach current taxonomies from the event.
+    $event->taxonomies()->detach();
+    // Detach current websites from the event.
+    $this->detachEntity($event, 'event', 'websites');
+    // Delete current websites from the event.
+    $this->deleteEntity($event, 'websites');
+    // Delete the event.
+    $event->delete();
+    // Returns response messages.
+    return $this->success('Event removed successfully.', null, 200);
   }
 
   /**
