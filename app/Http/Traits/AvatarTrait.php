@@ -3,7 +3,6 @@
 namespace App\Http\Traits;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
 
@@ -14,7 +13,7 @@ trait AvatarTrait
    *
    * @param  string  $controller
    * @param  Request  $request
-   * @return Response
+   * @return void
    */
   protected function storeAvatar($controller, Request  $request)
   {
@@ -41,6 +40,7 @@ trait AvatarTrait
    * Delete the specified controller's avatar.
    *
    * @param  object  $controller
+   * @return void
    */
   protected function deleteAvatar($controller)
   {

@@ -3,7 +3,6 @@
 namespace App\Http\Traits;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 
 trait EntityTrait
 {
@@ -14,7 +13,7 @@ trait EntityTrait
    * @param  string  $entities
    * @param  object  $model
    * @param  Request  $request
-   * @return Response
+   * @return void
    */
   protected function storeEntity($controller, $entities, $model, Request $request)
   {
@@ -38,7 +37,7 @@ trait EntityTrait
    * @param  string  $name
    * @param  object  $model
    * @param  Request  $request
-   * @return Response
+   * @return void
    */
   protected function attachEntity($controller, $entities, $name, $model, Request $request)
   {
@@ -75,7 +74,7 @@ trait EntityTrait
    * @param  object  $controller
    * @param  string  $method
    * @param  string  $entities
-   * @return Response
+   * @return void
    */
   protected function detachEntity($controller, $method, $entities)
   {
@@ -91,7 +90,7 @@ trait EntityTrait
    * @param  object  $controller
    * @param  array  $related
    * @param  string  $entities
-   * @return Response
+   * @return void
    */
   protected function deleteEntity($controller, $related, $entities)
   {

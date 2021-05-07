@@ -5,7 +5,6 @@ namespace App\Http\Traits;
 use App\Models\Website;
 use Illuminate\Http\Request;
 use App\Models\SocialNetwork;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
 trait WebsiteTrait
@@ -15,7 +14,7 @@ trait WebsiteTrait
    *
    * @param  object  $controller
    * @param  Request  $request
-   * @return Response
+   * @return void
    */
   protected function storeWebsite($controller, Request  $request)
   {
