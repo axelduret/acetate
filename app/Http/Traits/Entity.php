@@ -99,7 +99,8 @@ trait Entity
       $relation_1 = $related[0];
       $relation_2 = $related[1];
       $relation_3 = $related[2];
-      if (!$entity->$relation_1 && !$entity->$relation_2 && !$entity->$relation_3) {
+      $relation_4 = $related[3];
+      if (!$entity->$relation_1 && !$entity->$relation_2 && !$entity->$relation_3 && !$entity->$relation_4) {
         $entity->delete();
       }
     }

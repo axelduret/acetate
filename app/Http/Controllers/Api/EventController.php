@@ -294,7 +294,7 @@ class EventController extends Controller
     $event->description = $request->input('description');
     // TODO update event's avatar.
     // Define event's relationships.
-    $related = ['user', 'people', 'venue'];
+    $related = ['user', 'people', 'venue', 'ticket'];
     // Delete current dates from the event.
     $this->deleteEntity($event, $related, 'dates');
     // Store new dates into the event.
@@ -376,7 +376,7 @@ class EventController extends Controller
       Storage::delete($avatar);
     }
     // Define event's relationships.
-    $related = ['user', 'people', 'venue'];
+    $related = ['user', 'people', 'venue', 'ticket'];
     // Delete dates from the event.
     $this->deleteEntity($event, $related, 'dates');
     // Delete prices from the event.
