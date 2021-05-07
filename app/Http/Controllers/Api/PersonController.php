@@ -250,8 +250,11 @@ class PersonController extends Controller
       return $this->failure('Person ' . $id . ' not found.', 404);
     }
     // Update the person's fields.
-    $person->name = $request->input('name');
+    $person->nickname = $request->input('nickname');
+    $person->firstname = $request->input('firstname');
+    $person->lastname = $request->input('lastname');
     $person->description = $request->input('description');
+    $person->company = $request->input('company');
     // Detach current venues from the person.
     $person->venues()->detach();
     // Attach submitted venues to the person.
