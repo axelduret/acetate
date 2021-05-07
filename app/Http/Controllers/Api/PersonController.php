@@ -131,7 +131,6 @@ class PersonController extends Controller
     // Pagination.
     $perPage = $request->input('per_page') ?? self::PER_PAGE;
     $people = $query->paginate((int)$perPage);
-
     // Check if people exist.
     if ($people->isEmpty()) {
       return $this->failure('No people found.', 404);

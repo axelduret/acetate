@@ -4,18 +4,49 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Venue;
 use Illuminate\Http\Request;
+use App\Http\Traits\AvatarTrait;
+use App\Http\Traits\EntityTrait;
+use App\Http\Traits\WebsiteTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\VenueResource;
 use App\Http\Resources\VenueCollection;
+use Illuminate\Support\Facades\Validator;
 use App\Http\Traits\RespondsWithHttpStatus;
 
 class VenueController extends Controller
 {
   // Import custom response trait.
   use RespondsWithHttpStatus;
+  // Import Entity trait.
+  use EntityTrait;
+  // Import Avatar trait.
+  use AvatarTrait;
+  // Import Website trait.
+  use WebsiteTrait;
 
-  // Default pagination value.
-  const PER_PAGE = 20;
+  // Pagination.
+  const PER_PAGE = 10;
+
+  /**
+   * Response messages.
+   *
+   * @var array
+   */
+  protected $messages = [];
+
+  /**
+   * Warning messages.
+   *
+   * @var array
+   */
+  protected $warning = [];
+
+  /**
+   * Attached relationships.
+   *
+   * @var array
+   */
+  protected $related = ['user', 'event', 'people', 'ticket'];
 
   /**
    * Sortable fields.
@@ -39,13 +70,20 @@ class VenueController extends Controller
    */
   public function index(Request $request)
   {
-    // Retrieve data and sort it.
-    $sortField = $request->input('sort_by');
-    $sortableFields = in_array($sortField, $this->sortFields) ? $sortField : 'name';
-    $orderField = $request->input('order_by');
-    $sortOrder = in_array($orderField, ['asc', 'desc']) ? $orderField : 'asc';
-    $query = Venue::orderBy($sortableFields, $sortOrder);
-
+    // Retrieve and sort data.
+    $sortField = in_array(
+      $request->input('sort_by'),
+      $this->sortFields
+    ) // Accepted values.
+      ? $request->input('sort_by') // Submitted value.
+      : 'name'; // Default value.
+    $sortOrder = in_array(
+      $request->input('order_by'),
+      ['asc', 'desc']
+    ) // Accepted values.
+      ? $request->input('order_by') // Submitted value.
+      : 'asc'; // Default value.
+    $query = Venue::orderBy($sortField, $sortOrder);
     // Returns the list of venues with attached relationships.
     $query = $query->withCount([
       // Returns the total number of likes.
@@ -80,26 +118,32 @@ class VenueController extends Controller
         // TODO show favorites only if the user is logged in.
         'favorites'
       ]);
-
     // Search data.
-    $searchField = $request->input('search_field');
     $searchValue = $request->input('search_value');
-    $searchableFields = in_array($searchField, $this->searchFields) ? $searchField : null;
-    if (!is_null($searchValue) && !is_null($searchableFields)) {
+    $searchField = in_array(
+      $request->input('search_field'),
+      $this->searchFields
+    ) // Accepted values.
+      ? $request->input('search_field') // Submitted value.
+      : null; // Default value.
+    if (!is_null($searchValue) && !is_null($searchField)) {
       $searchQuery = "%$searchValue%";
-      $query = $query->where($searchableFields, 'like', $searchQuery);
+      $query = $query->where($searchField, 'like', $searchQuery);
     }
-
     // Pagination.
     $perPage = $request->input('per_page') ?? self::PER_PAGE;
     $venues = $query->paginate((int)$perPage);
-
-    // Check if venues exist.
-    if ($venues == '') {
-      return $this->failure('No venues were found.', 404);
+    // Check if people exist.
+    if ($venues->isEmpty()) {
+      return $this->failure('No venues found.', 404);
     }
-
-    // Format data.
+    /* TODO add pagination to response.
+    // Success message.
+    $message = 'OK';
+    // Returns venues data with success message.
+    return $this->success($message, new VenueCollection($venues), 200);
+     */
+    // Returns venues data.
     return new VenueCollection($venues);
   }
 
@@ -125,10 +169,12 @@ class VenueController extends Controller
     // Check if the venue exists.
     $venue = Venue::find($id);
     if (!$venue) {
-      return $this->failure('Venue not found.', 404);
+      return $this->failure('Venue ' . $id . ' not found.', 404);
     }
-    // Return the venue data.
-    return new VenueResource($venue);
+    // Success message.
+    $message = 'OK';
+    // Returns the venue data with success message.
+    return $this->success($message, new VenueResource($venue), 200);
   }
 
   /**
@@ -152,5 +198,24 @@ class VenueController extends Controller
   public function destroy($id)
   {
     //
+  }
+
+  /**
+   * Validators.
+   *
+   * @param  bool $update
+   * @return array
+   */
+  protected function validators($update = false)
+  {
+    $validatorRules = [];
+    // Validators for all submitted fields.
+    // TODO
+    $validatorRules = [];
+    // Validate id when update method is requested.
+    if ($update) {
+      $validatorRules['id'] = 'required|integer|digits_between:1,20';
+    }
+    return $validatorRules;
   }
 }
