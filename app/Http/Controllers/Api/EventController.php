@@ -15,6 +15,7 @@ use App\Http\Traits\Entity;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Traits\RespondsWithHttpStatus;
+use App\Models\Taxonomy;
 
 class EventController extends Controller
 {
@@ -232,7 +233,8 @@ class EventController extends Controller
     $this->storeEntity($event, 'phones', 'App\Models\Phone', $request);
     // Attach files to the event.
     $this->attachEntity($event, 'files', 'File', 'App\Models\File', $request);
-    // Attach taxonomies to the event.
+    // TODO Check if new taxonomies's types are valid.
+    // Attach submitted taxonomies to the event.
     $this->attachEntity($event, 'taxonomies', 'Taxonomy', 'App\Models\Taxonomy', $request);
     // Check if event's websites are submitted.
     if ($request->input('websites')) {
@@ -248,7 +250,7 @@ class EventController extends Controller
             $website['social_network'],
             ['type' => 'required|in:twitter,facebook,instagram,linkedin,youtube,twitch,snapchat,reddit,tiktok']
           );
-          // If validation fails, add error messages.
+          // If validation fails, add warning messages.
           if ($validator->fails()) {
             $this->warning[] = 'Wrong social network type in website ' . $newWebsite->id;
           } else {
@@ -319,12 +321,14 @@ class EventController extends Controller
     // Update the event.
     $event->name = $request->input('name');
     $event->description = $request->input('description');
+    // Define event's relationships.
+    $related = ['user', 'people', 'venue'];
     // Delete dates from the event.
-    $this->deleteEntity($event, 'dates');
+    $this->deleteEntity($event, $related, 'dates');
     // Store new dates into the event.
     $this->storeEntity($event, 'dates', 'App\Models\Date', $request);
     // Delete prices from the event.
-    $this->deleteEntity($event, 'prices');
+    $this->deleteEntity($event, $related, 'prices');
     // Store new prices into the event.
     $this->storeEntity($event, 'prices', 'App\Models\Price', $request);
     // Detach current venues from the event.
@@ -338,29 +342,30 @@ class EventController extends Controller
     // Detach current addresses from the event.
     $this->detachEntity($event, 'event', 'addresses');
     // Delete addresses from the event.
-    $this->deleteEntity($event, 'addresses');
+    $this->deleteEntity($event, $related, 'addresses');
     // Store new addresses into the event.
     $this->storeEntity($event, 'addresses', 'App\Models\Address', $request);
     // Detach current emails from the event.
     $this->detachEntity($event, 'event', 'emails');
     // Delete emails from the event.
-    $this->deleteEntity($event, 'emails');
+    $this->deleteEntity($event, $related, 'emails');
     // Store new emails into the event.
     $this->storeEntity($event, 'emails', 'App\Models\Email', $request);
     // Detach current phones from the event.
     $this->detachEntity($event, 'event', 'phones');
     // Delete phones from the event.
-    $this->deleteEntity($event, 'phones');
+    $this->deleteEntity($event, $related, 'phones');
     // Store new phones into the event.
     $this->storeEntity($event, 'phones', 'App\Models\Phone', $request);
     // Detach current files from the event.
     $this->detachEntity($event, 'event', 'files');
     // Delete current files from the event.
-    $this->deleteEntity($event, 'files');
+    $this->deleteEntity($event, $related, 'files');
     // Attach submitted files to the event.
     $this->attachEntity($event, 'files', 'File', 'App\Models\File', $request);
     // Detach current taxonomies from the event.
     $event->taxonomies()->detach();
+    // TODO Check if new taxonomies's types are valid.
     // Attach submitted taxonomies to the event.
     $this->attachEntity($event, 'taxonomies', 'Taxonomy', 'App\Models\Taxonomy', $request);
 
@@ -398,7 +403,7 @@ class EventController extends Controller
     // Detach current websites from the event.
     $this->detachEntity($event, 'event', 'websites');
     // Delete current websites from the event.
-    $this->deleteEntity($event, 'websites');
+    $this->deleteEntity($event, $related, 'websites');
     // Check if event's websites are submitted.
     if ($request->input('websites')) {
       // Create new websites.
@@ -413,7 +418,7 @@ class EventController extends Controller
             $website['social_network'],
             ['type' => 'required|in:twitter,facebook,instagram,linkedin,youtube,twitch,snapchat,reddit,tiktok']
           );
-          // If validation fails, add error messages.
+          // If validation fails, add warning messages.
           if ($validator->fails()) {
             $this->warning[] = 'Wrong social network type in website ' . $newWebsite->id;
           } else {
@@ -459,10 +464,12 @@ class EventController extends Controller
     if (isset($avatar)) {
       Storage::delete($avatar);
     }
+    // Define event's relationships.
+    $related = ['user', 'people', 'venue'];
     // Delete dates from the event.
-    $this->deleteEntity($event, 'dates');
+    $this->deleteEntity($event, $related, 'dates');
     // Delete prices from the event.
-    $this->deleteEntity($event, 'prices');
+    $this->deleteEntity($event, $related, 'prices');
     // Detach current venues from the event.
     $event->venues()->detach();
     // Detach current people from the event.
@@ -470,25 +477,25 @@ class EventController extends Controller
     // Detach current addresses from the event.
     $this->detachEntity($event, 'event', 'addresses');
     // Delete addresses from the event.
-    $this->deleteEntity($event, 'addresses');
+    $this->deleteEntity($event, $related, 'addresses');
     // Detach current emails from the event.
     $this->detachEntity($event, 'event', 'emails');
     // Delete emails from the event.
-    $this->deleteEntity($event, 'emails');
+    $this->deleteEntity($event, $related, 'emails');
     // Detach current phones from the event.
     $this->detachEntity($event, 'event', 'phones');
     // Delete phones from the event.
-    $this->deleteEntity($event, 'phones');
+    $this->deleteEntity($event, $related, 'phones');
     // Detach current files from the event.
     $this->detachEntity($event, 'event', 'files');
     // Delete current files from the event.
-    $this->deleteEntity($event, 'files');
+    $this->deleteEntity($event, $related, 'files');
     // Detach current taxonomies from the event.
     $event->taxonomies()->detach();
     // Detach current websites from the event.
     $this->detachEntity($event, 'event', 'websites');
     // Delete current websites from the event.
-    $this->deleteEntity($event, 'websites');
+    $this->deleteEntity($event, $related, 'websites');
     // Delete the event.
     $event->delete();
     // Returns response messages.

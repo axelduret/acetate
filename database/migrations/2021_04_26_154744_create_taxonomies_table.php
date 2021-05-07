@@ -16,7 +16,7 @@ class CreateTaxonomiesTable extends Migration
     Schema::create('taxonomies', function (Blueprint $table) {
       $table->id();
       $table->timestamps();
-      $table->enum('type', ['conference', 'exhibition', 'music', 'theater']);
+      $table->enum('type', ['conference', 'exhibition', 'music', 'theater', 'people', 'venue']);
       $table->string('category', 30)->unique();
       $table->string('sub_category', 30)->nullable();
     });

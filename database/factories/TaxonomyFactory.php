@@ -22,7 +22,7 @@ class TaxonomyFactory extends Factory
   public function definition()
   {
     return [
-      'type' => $this->faker->randomElement(['conference', 'exhibition', 'music', 'theater']),
+      'type' => $this->faker->randomElement(['conference', 'exhibition', 'music', 'theater', 'people', 'venue']),
       'category' => $this->faker->unique()->word,
       'sub_category' => $this->faker->word,
     ];

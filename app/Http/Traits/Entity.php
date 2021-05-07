@@ -52,6 +52,7 @@ trait Entity
         $id = $entity['id'];
         // Load the entity.
         $entity = $model::find($id);
+        // Check if entity exists.
         if (!$entity) {
           $warning = true;
           $this->warning[] = $name . ' ' . $id . ' not found.';
@@ -87,14 +88,18 @@ trait Entity
    * Delete specified controller's entities.
    *
    * @param  object  $controller
+   * @param  array  $related
    * @param  string  $entities
    * @return Response
    */
-  protected function deleteEntity($controller, $entities) // TODO add more generic methods.
+  protected function deleteEntity($controller, $related, $entities)
   {
-    // Delete entities only if it has no other attached relationship.
+    // Delete entities only if it has no other attached relationships.
     foreach ($controller->$entities as $entity) {
-      if (!$entity->user && !$entity->person && !$entity->venue) {
+      $relation_1 = $related[0];
+      $relation_2 = $related[1];
+      $relation_3 = $related[2];
+      if (!$entity->$relation_1 && !$entity->$relation_2 && !$entity->$relation_3) {
         $entity->delete();
       }
     }
