@@ -443,6 +443,7 @@ class PersonController extends Controller
     if ($comment) {
       $validatorRules = [
         'text' => 'required|string|min:10|max:255',
+        'user_id' => 'required|integer|digits_between:1,20',
       ];
     }
     // Validate id when update method is requested.
