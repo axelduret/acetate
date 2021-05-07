@@ -5,7 +5,7 @@ namespace App\Http\Traits;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-trait Entity
+trait EntityTrait
 {
   /**
    * Create new controller's entities.

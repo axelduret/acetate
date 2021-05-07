@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Date;
 use App\Models\Event;
-use App\Http\Traits\Entity;
 use Illuminate\Http\Request;
-use App\Http\Traits\AvatarTrait;
 use Illuminate\Support\Carbon;
+use App\Http\Traits\AvatarTrait;
+use App\Http\Traits\EntityTrait;
 use App\Http\Traits\WebsiteTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EventResource;
@@ -20,7 +20,7 @@ class EventController extends Controller
   // Import custom response trait.
   use RespondsWithHttpStatus;
   // Import Entity trait.
-  use Entity;
+  use EntityTrait;
   // Import Avatar trait.
   use AvatarTrait;
   // Import Website trait.
