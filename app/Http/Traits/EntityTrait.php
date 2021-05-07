@@ -55,6 +55,7 @@ trait EntityTrait
         // Check if entity exists.
         if (!$entity) {
           $warning = true;
+          // Add warning message to the response.
           $this->warning[] = $name . ' ' . $id . ' not found.';
         }
         if ($warning == false) {

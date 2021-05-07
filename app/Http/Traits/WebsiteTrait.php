@@ -33,7 +33,7 @@ trait WebsiteTrait
             $website['social_network'],
             ['type' => 'required|in:twitter,facebook,instagram,linkedin,youtube,twitch,snapchat,reddit,tiktok']
           );
-          // If validation fails, add warning messages.
+          // If validation fails, add warning message to the response.
           if ($validator->fails()) {
             $this->warning[] = 'Wrong social network type in website ' . $newWebsite->id;
           } else {

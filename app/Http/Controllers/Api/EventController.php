@@ -30,6 +30,13 @@ class EventController extends Controller
   const PER_PAGE = 10;
 
   /**
+   * Response messages.
+   *
+   * @var array
+   */
+  protected $messages = [];
+
+  /**
    * Warning messages.
    *
    * @var array
@@ -196,9 +203,8 @@ class EventController extends Controller
       $errors = $validator->errors();
       return $this->failure($errors);
     }
-    // Default response message.
-    $messages = [];
-    $messages[] = 'Event created successfully.';
+    // Success message.
+    $this->messages[] = 'Event created successfully.';
     // Store event's avatar.
     $this->storeAvatar('event', $request);
     // Create a new event.
@@ -232,12 +238,12 @@ class EventController extends Controller
     $this->attachEntity($event, 'taxonomies', 'Taxonomy', 'App\Models\Taxonomy', $request);
     // Create and attach websites to the event.
     $this->storeWebsite($event, $request);
-    // Warning messages.
+    // Add warning messages to the response.
     if ($this->warning != null) {
-      $messages[] = $this->warning;
+      $this->messages[] = $this->warning;
     }
     // Returns the newly created event data with response messages.
-    return $this->success($messages, new EventResource($event), 201);
+    return $this->success($this->messages, new EventResource($event), 201);
   }
 
   /**
@@ -274,9 +280,9 @@ class EventController extends Controller
       $errors = $validator->errors();
       return $this->failure($errors);
     }
-    // Default response message.
-    $messages = [];
-    $messages[] = 'Event edited successfully.';
+    // Success message.
+    $this->messages[] = 'Event edited successfully.';
+    // TODO update event's avatar.
     // Load the event.
     $event = Event::find($id);
     // Check if the event exists.
@@ -286,7 +292,6 @@ class EventController extends Controller
     // Update the event's fields.
     $event->name = $request->input('name');
     $event->description = $request->input('description');
-    // TODO update event's avatar.
     // Delete current dates from the event.
     $this->deleteEntity($event, $this->related, 'dates');
     // Store new dates into the event.
@@ -340,12 +345,12 @@ class EventController extends Controller
     $this->storeWebsite($event, $request);
     // Save the event.
     $event->save();
-    // Warning messages.
+    // Add warning messages to the response.
     if ($this->warning != null) {
-      $messages[] = $this->warning;
+      $this->messages[] = $this->warning;
     }
     // Returns the edited event data with response messages.
-    return $this->success($messages, new EventResource(Event::find($id)), 201);
+    return $this->success($this->messages, new EventResource(Event::find($id)), 201);
   }
 
   /**
