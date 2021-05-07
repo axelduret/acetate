@@ -10,15 +10,15 @@ use Illuminate\Support\Facades\Validator;
 trait WebsiteTrait
 {
   /**
-   * Create new controller's websites.
+   * Create new $controller's websites.
    *
    * @param  object  $controller
    * @param  Request  $request
    * @return void
    */
-  protected function storeWebsite($controller, Request  $request)
+  protected function storeWebsite($controller, Request $request)
   {
-    // Check if controller's websites are submitted.
+    // Check if $controller's websites are submitted.
     if ($request->input('websites')) {
       // Create new websites.
       $websites = [];
@@ -46,7 +46,7 @@ trait WebsiteTrait
         }
         $websites[] = $newWebsite;
       }
-      // Attach websites to the controller.
+      // Attach websites to the $controller.
       $controller->websites()->saveMany($websites);
     }
   }
