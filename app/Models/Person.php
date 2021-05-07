@@ -22,6 +22,7 @@ class Person extends Model
     'type',
     'company',
     'avatar',
+    'user_id'
   ];
 
   /**

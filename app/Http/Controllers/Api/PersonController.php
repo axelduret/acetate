@@ -164,8 +164,12 @@ class PersonController extends Controller
     $this->storeAvatar('person', $request);
     // Create a new person.
     $person = new Person([
-      'name' => $request->input('name'),
+      'nickname' => $request->input('nickname'),
+      'firstname' => $request->input('firstname'),
+      'lastname' => $request->input('lastname'),
       'description' => $request->input('description'),
+      'type' => $request->input('type'),
+      'company' => $request->input('company'),
       // TODO create a default person's avatar if not submitted.
       'avatar' => $request->file('avatar') ? 'avatar/person/' . $this->file_name : null,
       'user_id' => $request->input('user_id')
@@ -174,8 +178,8 @@ class PersonController extends Controller
     $person->save();
     // Attach venues to the person.
     $this->attachEntity($person, 'venues', 'Venue', 'App\Models\Venue', $request);
-    // Attach people to the person.
-    $this->attachEntity($person, 'people', 'Person', 'App\Models\Person', $request);
+    // Attach events to the person.
+    $this->attachEntity($person, 'events', 'Event', 'App\Models\Event', $request);
     // Create and attach addresses to the person.
     $this->storeEntity($person, 'addresses', 'App\Models\Address', $request);
     // Create and attach emails to the person.

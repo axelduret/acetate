@@ -18,6 +18,7 @@ class Venue extends Model
     'name',
     'description',
     'avatar',
+    'user_id'
   ];
 
   /**

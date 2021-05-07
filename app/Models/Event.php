@@ -29,6 +29,8 @@ class Event extends Model
   protected $hidden = [
     "user_id",
     "pivot",
+    "created_at",
+    "updated_at"
   ];
 
   public function user()
