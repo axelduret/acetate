@@ -4,14 +4,13 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Date;
 use App\Models\Event;
-use App\Models\Website;
+use App\Http\Traits\Entity;
 use Illuminate\Http\Request;
-use App\Models\SocialNetwork;
 use Illuminate\Support\Carbon;
+use App\Http\Traits\WebsiteTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EventResource;
 use App\Http\Resources\EventCollection;
-use App\Http\Traits\Entity;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Traits\RespondsWithHttpStatus;
@@ -22,6 +21,8 @@ class EventController extends Controller
   use RespondsWithHttpStatus;
   // Import Entity trait.
   use Entity;
+  // Import Website trait.
+  use WebsiteTrait;
 
   // Default pagination value.
   const PER_PAGE = 10;
@@ -235,37 +236,7 @@ class EventController extends Controller
     // TODO Check if new taxonomies's types are valid.
     // Attach submitted taxonomies to the event.
     $this->attachEntity($event, 'taxonomies', 'Taxonomy', 'App\Models\Taxonomy', $request);
-    // Check if event's websites are submitted.
-    if ($request->input('websites')) {
-      // Create new websites.
-      $websites = [];
-      foreach ($request->input('websites') as $website) {
-        $newWebsite = new Website($website);
-        $newWebsite->save();
-        // Check if the new website is a social network.
-        if ($newWebsite->type == 'social network') {
-          // Validate submitted social network fields.
-          $validator = Validator::make(
-            $website['social_network'],
-            ['type' => 'required|in:twitter,facebook,instagram,linkedin,youtube,twitch,snapchat,reddit,tiktok']
-          );
-          // If validation fails, add warning messages.
-          if ($validator->fails()) {
-            $this->warning[] = 'Wrong social network type in website ' . $newWebsite->id;
-          } else {
-            // Create a new social network.
-            $socialNetwork = new SocialNetwork([
-              'type' => $website['social_network']['type'],
-              'website_id' => $newWebsite->id
-            ]);
-            $socialNetwork->save();
-          }
-        }
-        $websites[] = $newWebsite;
-      }
-      // Attach websites to the event.
-      $event->websites()->saveMany($websites);
-    }
+    $this->storeWebsite($event, $request);
     // Warning messages.
     if ($this->warning != null) {
       $messages[] = $this->warning;
@@ -372,37 +343,7 @@ class EventController extends Controller
     $this->detachEntity($event, 'event', 'websites');
     // Delete current websites from the event.
     $this->deleteEntity($event, $related, 'websites');
-    // Check if event's websites are submitted.
-    if ($request->input('websites')) {
-      // Create new websites.
-      $websites = [];
-      foreach ($request->input('websites') as $website) {
-        $newWebsite = new Website($website);
-        $newWebsite->save();
-        // Check if the new website is a social network.
-        if ($newWebsite->type == 'social network') {
-          // Validate submitted social network fields.
-          $validator = Validator::make(
-            $website['social_network'],
-            ['type' => 'required|in:twitter,facebook,instagram,linkedin,youtube,twitch,snapchat,reddit,tiktok']
-          );
-          // If validation fails, add warning messages.
-          if ($validator->fails()) {
-            $this->warning[] = 'Wrong social network type in website ' . $newWebsite->id;
-          } else {
-            // Create a new social network.
-            $socialNetwork = new SocialNetwork([
-              'type' => $website['social_network']['type'],
-              'website_id' => $newWebsite->id
-            ]);
-            $socialNetwork->save();
-          }
-        }
-        $websites[] = $newWebsite;
-      }
-      // Attach websites to the event.
-      $event->websites()->saveMany($websites);
-    }
+    $this->storeWebsite($event, $request);
     // Save the event.
     $event->save();
     // Warning messages.
