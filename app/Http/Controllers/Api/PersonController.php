@@ -232,7 +232,77 @@ class PersonController extends Controller
    */
   public function update($id, Request $request)
   {
-    // TODO
+    // Validation.
+    $validatorRules = $this->validators(true);
+    $validator = Validator::make($request->all(), $validatorRules);
+    // If validation fails, returns error messages.
+    if ($validator->fails()) {
+      $errors = $validator->errors();
+      return $this->failure($errors);
+    }
+    // Success message.
+    $this->messages[] = 'Person ' . $id . ' edited successfully.';
+    // TODO update person's avatar.
+    // Load the person.
+    $person = Person::find($id);
+    // Check if the person exists.
+    if (!$person) {
+      return $this->failure('Person ' . $id . ' not found.', 404);
+    }
+    // Update the person's fields.
+    $person->name = $request->input('name');
+    $person->description = $request->input('description');
+    // Detach current venues from the person.
+    $person->venues()->detach();
+    // Attach submitted venues to the person.
+    $this->attachEntity($person, 'venues', 'Venue', 'App\Models\Venue', $request);
+    // Detach current events from the person.
+    $person->events()->detach();
+    // Attach submitted events to the person.
+    $this->attachEntity($person, 'events', 'Event', 'App\Models\Event', $request);
+    // Detach current addresses from the person.
+    $this->detachEntity($person, 'person', 'addresses');
+    // Delete current addresses from the person.
+    $this->deleteEntity($person, $this->related, 'addresses');
+    // Store new addresses into the person.
+    $this->storeEntity($person, 'addresses', 'App\Models\Address', $request);
+    // Detach current emails from the person.
+    $this->detachEntity($person, 'person', 'emails');
+    // Delete current emails from the person.
+    $this->deleteEntity($person, $this->related, 'emails');
+    // Store new emails into the person.
+    $this->storeEntity($person, 'emails', 'App\Models\Email', $request);
+    // Detach current phones from the person.
+    $this->detachEntity($person, 'person', 'phones');
+    // Delete current phones from the person.
+    $this->deleteEntity($person, $this->related, 'phones');
+    // Store new phones into the person.
+    $this->storeEntity($person, 'phones', 'App\Models\Phone', $request);
+    // Detach current files from the person.
+    $this->detachEntity($person, 'person', 'files');
+    // Delete current files from the person.
+    $this->deleteEntity($person, $this->related, 'files');
+    // Attach submitted files to the person.
+    $this->attachEntity($person, 'files', 'File', 'App\Models\File', $request);
+    // Detach current taxonomies from the person.
+    $person->taxonomies()->detach();
+    // TODO Check if new taxonomies's types are valid.
+    // Attach submitted taxonomies to the person.
+    $this->attachEntity($person, 'taxonomies', 'Taxonomy', 'App\Models\Taxonomy', $request);
+    // Detach current websites from the person.
+    $this->detachEntity($person, 'person', 'websites');
+    // Delete current websites from the person.
+    $this->deleteEntity($person, $this->related, 'websites');
+    // Store new websites into the person.
+    $this->storeWebsite($person, $request);
+    // Save the person.
+    $person->save();
+    // Add warning messages to the response.
+    if ($this->warning != null) {
+      $this->messages[] = $this->warning;
+    }
+    // Returns the edited person data with response messages.
+    return $this->success($this->messages, new PersonResource(Person::find($id)), 201);
   }
 
   /**
