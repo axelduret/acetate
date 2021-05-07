@@ -209,7 +209,7 @@ class PersonController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function show($id)
+  public function show(int $id)
   {
     // Check if the person exists.
     $person = Person::find($id);
@@ -229,7 +229,7 @@ class PersonController extends Controller
    * @param  Request  $request
    * @return Response
    */
-  public function update($id, Request $request)
+  public function update(int $id, Request $request)
   {
     // Validation.
     $validatorRules = $this->validators(true);
@@ -308,12 +308,44 @@ class PersonController extends Controller
   }
 
   /**
+   * Update the specified avatar.
+   *
+   * @param  int  $id
+   * @param  Request  $request
+   * @return Response
+   */
+  public function updateAvatar(int $id, Request $request)
+  {
+    // Load the person.
+    $person = Person::find($id);
+    // Check if the person exists.
+    if (!$person) {
+      return $this->failure('Person ' . $id . ' not found.', 404);
+    }
+    // Success message.
+    $this->messages[] = 'Avatar of person ' . $id . ' edited successfully.';
+    // Delete the current person's avatar.
+    $this->deleteAvatar($person);
+    // Store the new person's avatar.
+    $this->storeAvatar('person', $request);
+    // Update the person's avatar field.
+    $person->avatar = $request->file('avatar') ? 'avatar/person/' . $this->file_name : null;
+    $person->save();
+    // Add warning messages to the response.
+    if ($this->warning != null) {
+      $this->messages[] = $this->warning;
+    }
+    // Returns the edited person data with response messages.
+    return $this->success($this->messages, new PersonResource(Person::find($id)), 200);
+  }
+
+  /**
    * Remove the specified person.
    *
    * @param  int  $id
    * @return Response
    */
-  public function destroy($id)
+  public function destroy(int $id)
   {
     // Load the person.
     $person = Person::find($id);

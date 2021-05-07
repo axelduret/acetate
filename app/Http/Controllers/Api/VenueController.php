@@ -208,7 +208,7 @@ class VenueController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function show($id)
+  public function show(int $id)
   {
     // Check if the venue exists.
     $venue = Venue::find($id);
@@ -228,7 +228,7 @@ class VenueController extends Controller
    * @param  Request  $request
    * @return Response
    */
-  public function update($id, Request $request)
+  public function update(int $id, Request $request)
   {
     // Validation.
     $validatorRules = $this->validators(true);
@@ -304,12 +304,44 @@ class VenueController extends Controller
   }
 
   /**
+   * Update the specified avatar.
+   *
+   * @param  int  $id
+   * @param  Request  $request
+   * @return Response
+   */
+  public function updateAvatar(int $id, Request $request)
+  {
+    // Load the venue.
+    $venue = Venue::find($id);
+    // Check if the venue exists.
+    if (!$venue) {
+      return $this->failure('Venue ' . $id . ' not found.', 404);
+    }
+    // Success message.
+    $this->messages[] = 'Avatar of venue ' . $id . ' edited successfully.';
+    // Delete the current venue's avatar.
+    $this->deleteAvatar($venue);
+    // Store the new venue's avatar.
+    $this->storeAvatar('venue', $request);
+    // Update the venue's avatar field.
+    $venue->avatar = $request->file('avatar') ? 'avatar/venue/' . $this->file_name : null;
+    $venue->save();
+    // Add warning messages to the response.
+    if ($this->warning != null) {
+      $this->messages[] = $this->warning;
+    }
+    // Returns the edited venue data with response messages.
+    return $this->success($this->messages, new VenueResource(Venue::find($id)), 200);
+  }
+
+  /**
    * Remove the specified venue.
    *
    * @param  int  $id
    * @return Response
    */
-  public function destroy($id)
+  public function destroy(int $id)
   {
     // Load the venue.
     $venue = Venue::find($id);

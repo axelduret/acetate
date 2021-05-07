@@ -258,7 +258,7 @@ class EventController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function show($id)
+  public function show(int $id)
   {
     // Check if the event exists.
     $event = Event::find($id);
@@ -278,7 +278,7 @@ class EventController extends Controller
    * @param  Request  $request
    * @return Response
    */
-  public function update($id, Request $request)
+  public function update(int $id, Request $request)
   {
     // Validation.
     $validatorRules = $this->validators(true);
@@ -368,7 +368,7 @@ class EventController extends Controller
    * @param  Request  $request
    * @return Response
    */
-  public function updateAvatar($id, Request $request)
+  public function updateAvatar(int $id, Request $request)
   {
     // Load the event.
     $event = Event::find($id);
@@ -399,7 +399,7 @@ class EventController extends Controller
    * @param  int  $id
    * @return Response
    */
-  public function destroy($id)
+  public function destroy(int $id)
   {
     // Load the event.
     $event = Event::find($id);
