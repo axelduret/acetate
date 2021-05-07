@@ -183,8 +183,10 @@ class EventController extends Controller
     if ($events->isEmpty()) {
       return $this->failure('No events were found.', 404);
     }
-    // Returns events data.
-    return new EventCollection($events);
+    // Success message.
+    $message = 'OK';
+    // Returns events data with the success message.
+    return $this->success($message, new EventCollection($events), 200);
   }
 
   /**
@@ -259,8 +261,10 @@ class EventController extends Controller
     if (!$event) {
       return $this->failure('Event not found.', 404);
     }
-    // Returns the event data.
-    return new EventResource($event);
+    // Success message.
+    $message = 'OK';
+    // Returns the event data with the success message.
+    return $this->success($message, new EventResource($event), 200);
   }
 
   /**
@@ -403,6 +407,10 @@ class EventController extends Controller
     $event->delete();
     // Returns response message.
     return $this->success('Event removed successfully.', null, 200);
+    // Success message.
+    $message = 'Event removed successfully.';
+    // Returns success message.
+    return $this->success($message, null, 200);
   }
 
   /**
