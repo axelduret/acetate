@@ -181,11 +181,11 @@ class EventController extends Controller
     $events = $query->paginate((int)$perPage);
     // Check if events exist.
     if ($events->isEmpty()) {
-      return $this->failure('No events were found.', 404);
+      return $this->failure('No events found.', 404);
     }
     // Success message.
     $message = 'OK';
-    // Returns events data with the success message.
+    // Returns events data with success message.
     return $this->success($message, new EventCollection($events), 200);
   }
 
@@ -263,7 +263,7 @@ class EventController extends Controller
     }
     // Success message.
     $message = 'OK';
-    // Returns the event data with the success message.
+    // Returns the event data with success message.
     return $this->success($message, new EventResource($event), 200);
   }
 

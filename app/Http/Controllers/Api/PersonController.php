@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Person;
 use Illuminate\Http\Request;
+use App\Http\Traits\AvatarTrait;
+use App\Http\Traits\EntityTrait;
+use App\Http\Traits\WebsiteTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PersonResource;
 use App\Http\Resources\PersonCollection;
@@ -13,9 +16,36 @@ class PersonController extends Controller
 {
   // Import custom response trait.
   use RespondsWithHttpStatus;
+  // Import Entity trait.
+  use EntityTrait;
+  // Import Avatar trait.
+  use AvatarTrait;
+  // Import Website trait.
+  use WebsiteTrait;
 
-  // Default pagination value.
+  // Pagination.
   const PER_PAGE = 20;
+
+  /**
+   * Response messages.
+   *
+   * @var array
+   */
+  protected $messages = [];
+
+  /**
+   * Warning messages.
+   *
+   * @var array
+   */
+  protected $warning = [];
+
+  /**
+   * Attached relationships.
+   *
+   * @var array
+   */
+  protected $related = ['user', 'event', 'venue', 'ticket'];
 
   /**
    * Sortable fields.
@@ -39,13 +69,20 @@ class PersonController extends Controller
    */
   public function index(Request $request)
   {
-    // Retrieve data and sort it.
-    $sortField = $request->input('sort_by');
-    $sortableFields = in_array($sortField, $this->sortFields) ? $sortField : 'nickname';
-    $orderField = $request->input('order_by');
-    $sortOrder = in_array($orderField, ['asc', 'desc']) ? $orderField : 'asc';
-    $query = Person::orderBy($sortableFields, $sortOrder);
-
+    // Retrieve and sort data.
+    $sortField = in_array(
+      $request->input('sort_by'),
+      $this->sortFields
+    ) // Accepted values.
+      ? $request->input('sort_by') // Submitted value.
+      : 'nickname'; // Default value.
+    $sortOrder = in_array(
+      $request->input('order_by'),
+      ['asc', 'desc']
+    ) // Accepted values.
+      ? $request->input('order_by') // Submitted value.
+      : 'asc'; // Default value.
+    $query = Person::orderBy($sortField, $sortOrder);
     // Returns the list of people with attached relationships.
     $query = $query->withCount([
       // Returns the total number of likes.
@@ -78,27 +115,30 @@ class PersonController extends Controller
         // TODO show favorites only if the user is logged in.
         'favorites'
       ]);
-
     // Search data.
-    $searchField = $request->input('search_field');
     $searchValue = $request->input('search_value');
-    $searchableFields = in_array($searchField, $this->searchFields) ? $searchField : null;
-    if (!is_null($searchValue) && !is_null($searchableFields)) {
+    $searchField = in_array(
+      $request->input('search_field'),
+      $this->searchFields
+    ) // Accepted values.
+      ? $request->input('search_field') // Submitted value.
+      : null; // Default value.
+    if (!is_null($searchValue) && !is_null($searchField)) {
       $searchQuery = "%$searchValue%";
-      $query = $query->where($searchableFields, 'like', $searchQuery);
+      $query = $query->where($searchField, 'like', $searchQuery);
     }
-
     // Pagination.
     $perPage = $request->input('per_page') ?? self::PER_PAGE;
     $people = $query->paginate((int)$perPage);
 
     // Check if people exist.
-    if ($people == '') {
-      return $this->failure('No people were found.', 404);
+    if ($people->isEmpty()) {
+      return $this->failure('No people found.', 404);
     }
-
-    // Format data.
-    return new PersonCollection($people);
+    // Success message.
+    $message = 'OK';
+    // Returns people data with success message.
+    return $this->success($message, new PersonCollection($people), 200);
   }
 
   /**
@@ -125,8 +165,10 @@ class PersonController extends Controller
     if (!$person) {
       return $this->failure('Person not found.', 404);
     }
-    // Return the person data.
-    return new PersonResource($person);
+    // Success message.
+    $message = 'OK';
+    // Returns the person data with success message.
+    return $this->success($message, new PersonResource($person), 200);
   }
 
   /**
