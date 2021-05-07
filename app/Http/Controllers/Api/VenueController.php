@@ -6,6 +6,7 @@ use App\Models\Venue;
 use Illuminate\Http\Request;
 use App\Http\Traits\AvatarTrait;
 use App\Http\Traits\EntityTrait;
+use App\Http\Traits\CommentTrait;
 use App\Http\Traits\WebsiteTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\VenueResource;
@@ -23,6 +24,8 @@ class VenueController extends Controller
   use AvatarTrait;
   // Import Website trait.
   use WebsiteTrait;
+  // Import Comment trait.
+  use CommentTrait;
 
   // Pagination.
   const PER_PAGE = 10;
@@ -326,6 +329,43 @@ class VenueController extends Controller
     // Update the venue's avatar field.
     $venue->avatar = $request->file('avatar') ? 'avatar/venue/' . $this->file_name : null;
     $venue->save();
+    // Add warning messages to the response.
+    if ($this->warning != null) {
+      $this->messages[] = $this->warning;
+    }
+    // Returns the edited venue data with response messages.
+    return $this->success($this->messages, new VenueResource(Venue::find($id)), 200);
+  }
+
+  /**
+   * Create a new comment.
+   *
+   * @param  int  $id
+   * @param  Request  $request
+   * @return Response
+   */
+  public function storeComment(int $id, Request $request)
+  {
+    /* 
+    // TODO Validation.
+    $validatorRules = $this->validators();
+    $validator = Validator::make($request->all(), $validatorRules);
+    // If validation fails, returns error messages.
+    if ($validator->fails()) {
+      $errors = $validator->errors();
+      return $this->failure($errors);
+    }
+ */
+    // Load the venue.
+    $venue = Venue::find($id);
+    // Check if the venue exists.
+    if (!$venue) {
+      return $this->failure('Venue ' . $id . ' not found.', 404);
+    }
+    // Success message.
+    $this->messages[] = 'Comment created successfully.';
+    // Store the new comment.
+    $this->addComment($venue, 'venue', $request);
     // Add warning messages to the response.
     if ($this->warning != null) {
       $this->messages[] = $this->warning;

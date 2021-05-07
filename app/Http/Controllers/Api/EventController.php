@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
 use App\Http\Traits\AvatarTrait;
 use App\Http\Traits\EntityTrait;
+use App\Http\Traits\CommentTrait;
 use App\Http\Traits\WebsiteTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EventResource;
@@ -25,6 +26,8 @@ class EventController extends Controller
   use AvatarTrait;
   // Import Website trait.
   use WebsiteTrait;
+  // Import Comment trait.
+  use CommentTrait;
 
   // Pagination.
   const PER_PAGE = 10;
@@ -384,6 +387,43 @@ class EventController extends Controller
     // Update the event's avatar field.
     $event->avatar = $request->file('avatar') ? 'avatar/event/' . $this->file_name : null;
     $event->save();
+    // Add warning messages to the response.
+    if ($this->warning != null) {
+      $this->messages[] = $this->warning;
+    }
+    // Returns the edited event data with response messages.
+    return $this->success($this->messages, new EventResource(Event::find($id)), 200);
+  }
+
+  /**
+   * Create a new comment.
+   *
+   * @param  int  $id
+   * @param  Request  $request
+   * @return Response
+   */
+  public function storeComment(int $id, Request $request)
+  {
+    /* 
+    // TODO Validation.
+    $validatorRules = $this->validators();
+    $validator = Validator::make($request->all(), $validatorRules);
+    // If validation fails, returns error messages.
+    if ($validator->fails()) {
+      $errors = $validator->errors();
+      return $this->failure($errors);
+    }
+ */
+    // Load the event.
+    $event = Event::find($id);
+    // Check if the event exists.
+    if (!$event) {
+      return $this->failure('Event ' . $id . ' not found.', 404);
+    }
+    // Success message.
+    $this->messages[] = 'Comment created successfully.';
+    // Store the new comment.
+    $this->addComment($event, 'event', $request);
     // Add warning messages to the response.
     if ($this->warning != null) {
       $this->messages[] = $this->warning;

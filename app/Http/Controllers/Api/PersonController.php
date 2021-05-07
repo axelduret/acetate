@@ -6,6 +6,7 @@ use App\Models\Person;
 use Illuminate\Http\Request;
 use App\Http\Traits\AvatarTrait;
 use App\Http\Traits\EntityTrait;
+use App\Http\Traits\CommentTrait;
 use App\Http\Traits\WebsiteTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\PersonResource;
@@ -23,6 +24,8 @@ class PersonController extends Controller
   use AvatarTrait;
   // Import Website trait.
   use WebsiteTrait;
+  // Import Comment trait.
+  use CommentTrait;
 
   // Pagination.
   const PER_PAGE = 20;
@@ -330,6 +333,43 @@ class PersonController extends Controller
     // Update the person's avatar field.
     $person->avatar = $request->file('avatar') ? 'avatar/person/' . $this->file_name : null;
     $person->save();
+    // Add warning messages to the response.
+    if ($this->warning != null) {
+      $this->messages[] = $this->warning;
+    }
+    // Returns the edited person data with response messages.
+    return $this->success($this->messages, new PersonResource(Person::find($id)), 200);
+  }
+
+  /**
+   * Create a new comment.
+   *
+   * @param  int  $id
+   * @param  Request  $request
+   * @return Response
+   */
+  public function storeComment(int $id, Request $request)
+  {
+    /* 
+    // TODO Validation.
+    $validatorRules = $this->validators();
+    $validator = Validator::make($request->all(), $validatorRules);
+    // If validation fails, returns error messages.
+    if ($validator->fails()) {
+      $errors = $validator->errors();
+      return $this->failure($errors);
+    }
+ */
+    // Load the person.
+    $person = Person::find($id);
+    // Check if the person exists.
+    if (!$person) {
+      return $this->failure('Person ' . $id . ' not found.', 404);
+    }
+    // Success message.
+    $this->messages[] = 'Comment created successfully.';
+    // Store the new comment.
+    $this->addComment($person, 'person', $request);
     // Add warning messages to the response.
     if ($this->warning != null) {
       $this->messages[] = $this->warning;
