@@ -23,7 +23,7 @@ class VenueFactory extends Factory
   {
     $dir = 'app/avatar/venue';
     return [
-      'name' => $this->faker->sentence(4),
+      'name' => $this->faker->unique()->sentence(4),
       'description' => $this->faker->text,
       'avatar' => $this->faker->image(storage_path($dir)),
     ];
