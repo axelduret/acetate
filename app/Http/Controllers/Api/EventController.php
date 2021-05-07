@@ -15,7 +15,6 @@ use App\Http\Traits\Entity;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Traits\RespondsWithHttpStatus;
-use App\Models\Taxonomy;
 
 class EventController extends Controller
 {
@@ -321,6 +320,7 @@ class EventController extends Controller
     // Update the event.
     $event->name = $request->input('name');
     $event->description = $request->input('description');
+    // TODO update event's avatar.
     // Define event's relationships.
     $related = ['user', 'people', 'venue'];
     // Delete dates from the event.
@@ -368,38 +368,6 @@ class EventController extends Controller
     // TODO Check if new taxonomies's types are valid.
     // Attach submitted taxonomies to the event.
     $this->attachEntity($event, 'taxonomies', 'Taxonomy', 'App\Models\Taxonomy', $request);
-
-    /* TODO update event's avatar.
-
-    // Check if submitted avatar is different from stored avatar.
-    if ($request->file('avatar') != $event->avatar) {
-      // Delete currently stored avatar
-      Storage::delete($event->avatar);
-      // Check if the submitted avatar is not null.
-      if ($request->file('avatar') != null) {
-        // Prepare the new avatar's file to upload.
-        $upload = $request->file('avatar');
-        // Retrieve current datetime.
-        $current = Carbon::now()->format('YmdHis_');
-        // Format avatar's filename.
-        $clean_filename = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $upload->getClientOriginalName());
-        // Add current datetime to avatar's formatted filename.
-        $file_name =  $current . $clean_filename;
-        // Create avatar/event folder if doesn't exist.
-        if (!Storage::directories('avatar/event')) {
-          Storage::makeDirectory('avatar/event');
-        }
-        // Store the new avatar's file into storage avatar/event folder.
-        $upload->storeAs('avatar/event', $file_name);
-        // Save the new avatar's path into event.
-        $event->avatar = 'avatar/event/' . $file_name;
-      } else {
-        // Delete the current avatar's path into event.
-        $event->avatar = null;
-      }
-    }
- */
-
     // Detach current websites from the event.
     $this->detachEntity($event, 'event', 'websites');
     // Delete current websites from the event.
