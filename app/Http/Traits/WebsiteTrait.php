@@ -3,7 +3,6 @@
 namespace App\Http\Traits;
 
 use App\Models\Website;
-use App\Http\Traits\Entity;
 use Illuminate\Http\Request;
 use App\Models\SocialNetwork;
 use Illuminate\Http\Response;
@@ -11,11 +10,8 @@ use Illuminate\Support\Facades\Validator;
 
 trait WebsiteTrait
 {
-  // Import Entity trait.
-  use Entity;
-
   /**
-   * Create new websites.
+   * Create new controller's websites.
    *
    * @param  object  $controller
    * @param  Request  $request

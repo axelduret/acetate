@@ -6,12 +6,12 @@ use App\Models\Date;
 use App\Models\Event;
 use App\Http\Traits\Entity;
 use Illuminate\Http\Request;
+use App\Http\Traits\AvatarTrait;
 use Illuminate\Support\Carbon;
 use App\Http\Traits\WebsiteTrait;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EventResource;
 use App\Http\Resources\EventCollection;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Traits\RespondsWithHttpStatus;
 
@@ -21,6 +21,8 @@ class EventController extends Controller
   use RespondsWithHttpStatus;
   // Import Entity trait.
   use Entity;
+  // Import Avatar trait.
+  use AvatarTrait;
   // Import Website trait.
   use WebsiteTrait;
 
@@ -190,29 +192,14 @@ class EventController extends Controller
     // Default response message.
     $messages = [];
     $messages[] = 'Event created successfully.';
-    // Check if event's avatar is submitted.
-    if ($request->file('avatar')) {
-      // Prepare avatar's file to upload.
-      $upload = $request->file('avatar');
-      // Retrieve current datetime.
-      $current = Carbon::now()->format('YmdHis_');
-      // Format avatar's filename.
-      $clean_filename = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $upload->getClientOriginalName());
-      // Add current datetime to avatar's formatted filename.
-      $file_name =  $current . $clean_filename;
-      // Create avatar/event folder if doesn't exist.
-      if (!Storage::directories('avatar/event')) {
-        Storage::makeDirectory('avatar/event');
-      }
-      // Store the avatar's file into storage avatar/event folder.
-      $upload->storeAs('avatar/event', $file_name);
-    }
+    // Store event's avatar.
+    $this->storeAvatar('event', $request);
     // Create a new event.
     $event = new Event([
       'name' => $request->input('name'),
       'description' => $request->input('description'),
       // TODO create a default event's avatar if not submitted.
-      'avatar' => $request->file('avatar') ? 'avatar/event/' . $file_name : null,
+      'avatar' => $request->file('avatar') ? 'avatar/event/' . $this->file_name : null,
       'user_id' => $request->input('user_id')
     ]);
     // Save the event.
@@ -370,42 +357,39 @@ class EventController extends Controller
     if (!$event) {
       return $this->failure('Event not found.', 404);
     }
-    // Delete event's avatar.
-    $avatar = $event->avatar;
-    if (isset($avatar)) {
-      Storage::delete($avatar);
-    }
+    // Delete the event's avatar.
+    $this->deleteAvatar($event);
     // Define event's relationships.
     $related = ['user', 'people', 'venue', 'ticket'];
     // Delete dates from the event.
     $this->deleteEntity($event, $related, 'dates');
     // Delete prices from the event.
     $this->deleteEntity($event, $related, 'prices');
-    // Detach current venues from the event.
+    // Detach venues from the event.
     $event->venues()->detach();
-    // Detach current people from the event.
+    // Detach people from the event.
     $event->people()->detach();
-    // Detach current addresses from the event.
+    // Detach addresses from the event.
     $this->detachEntity($event, 'event', 'addresses');
     // Delete addresses from the event.
     $this->deleteEntity($event, $related, 'addresses');
-    // Detach current emails from the event.
+    // Detach emails from the event.
     $this->detachEntity($event, 'event', 'emails');
     // Delete emails from the event.
     $this->deleteEntity($event, $related, 'emails');
-    // Detach current phones from the event.
+    // Detach phones from the event.
     $this->detachEntity($event, 'event', 'phones');
     // Delete phones from the event.
     $this->deleteEntity($event, $related, 'phones');
-    // Detach current files from the event.
+    // Detach files from the event.
     $this->detachEntity($event, 'event', 'files');
-    // Delete current files from the event.
+    // Delete files from the event.
     $this->deleteEntity($event, $related, 'files');
-    // Detach current taxonomies from the event.
+    // Detach taxonomies from the event.
     $event->taxonomies()->detach();
-    // Detach current websites from the event.
+    // Detach websites from the event.
     $this->detachEntity($event, 'event', 'websites');
-    // Delete current websites from the event.
+    // Delete websites from the event.
     $this->deleteEntity($event, $related, 'websites');
     // Delete the event.
     $event->delete();
