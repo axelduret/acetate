@@ -169,7 +169,7 @@ class VenueController extends Controller
     $this->storeAvatar('venue', $request);
     // Create a new venue.
     $venue = new Venue([
-      'name' => $request->input('lastname'),
+      'name' => $request->input('name'),
       'description' => $request->input('description'),
       // TODO create a default venue's avatar if not submitted.
       'avatar' => $request->file('avatar') ? 'avatar/venue/' . $this->file_name : null,
