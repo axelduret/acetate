@@ -15,7 +15,7 @@ trait WebsiteTrait
   use Entity;
 
   /**
-   * Create new website.
+   * Create new websites.
    *
    * @param  object  $controller
    * @param  Request  $request

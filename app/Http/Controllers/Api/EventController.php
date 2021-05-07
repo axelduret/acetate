@@ -236,6 +236,7 @@ class EventController extends Controller
     // TODO Check if new taxonomies's types are valid.
     // Attach submitted taxonomies to the event.
     $this->attachEntity($event, 'taxonomies', 'Taxonomy', 'App\Models\Taxonomy', $request);
+    // Create and attach websites to the event.
     $this->storeWebsite($event, $request);
     // Warning messages.
     if ($this->warning != null) {
@@ -294,11 +295,11 @@ class EventController extends Controller
     // TODO update event's avatar.
     // Define event's relationships.
     $related = ['user', 'people', 'venue'];
-    // Delete dates from the event.
+    // Delete current dates from the event.
     $this->deleteEntity($event, $related, 'dates');
     // Store new dates into the event.
     $this->storeEntity($event, 'dates', 'App\Models\Date', $request);
-    // Delete prices from the event.
+    // Delete current prices from the event.
     $this->deleteEntity($event, $related, 'prices');
     // Store new prices into the event.
     $this->storeEntity($event, 'prices', 'App\Models\Price', $request);
@@ -312,19 +313,19 @@ class EventController extends Controller
     $this->attachEntity($event, 'people', 'Person', 'App\Models\Person', $request);
     // Detach current addresses from the event.
     $this->detachEntity($event, 'event', 'addresses');
-    // Delete addresses from the event.
+    // Delete current addresses from the event.
     $this->deleteEntity($event, $related, 'addresses');
     // Store new addresses into the event.
     $this->storeEntity($event, 'addresses', 'App\Models\Address', $request);
     // Detach current emails from the event.
     $this->detachEntity($event, 'event', 'emails');
-    // Delete emails from the event.
+    // Delete current emails from the event.
     $this->deleteEntity($event, $related, 'emails');
     // Store new emails into the event.
     $this->storeEntity($event, 'emails', 'App\Models\Email', $request);
     // Detach current phones from the event.
     $this->detachEntity($event, 'event', 'phones');
-    // Delete phones from the event.
+    // Delete current phones from the event.
     $this->deleteEntity($event, $related, 'phones');
     // Store new phones into the event.
     $this->storeEntity($event, 'phones', 'App\Models\Phone', $request);
@@ -343,6 +344,7 @@ class EventController extends Controller
     $this->detachEntity($event, 'event', 'websites');
     // Delete current websites from the event.
     $this->deleteEntity($event, $related, 'websites');
+    // Store new websites into the event.
     $this->storeWebsite($event, $request);
     // Save the event.
     $event->save();
