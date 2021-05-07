@@ -229,7 +229,7 @@ class PersonController extends Controller
    */
   public function update($id, Request $request)
   {
-    //
+    // TODO
   }
 
   /**
@@ -292,6 +292,7 @@ class PersonController extends Controller
   {
     $validatorRules = [];
     // Validators for all submitted fields.
+    // TODO
     $validatorRules = [];
     // Validate id when update method is requested.
     if ($update) {
