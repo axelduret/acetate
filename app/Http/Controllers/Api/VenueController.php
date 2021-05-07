@@ -240,7 +240,6 @@ class VenueController extends Controller
     }
     // Success message.
     $this->messages[] = 'Venue ' . $id . ' edited successfully.';
-    // TODO update venue's avatar.
     // Load the venue.
     $venue = Venue::find($id);
     // Check if the venue exists.

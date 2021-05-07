@@ -290,7 +290,6 @@ class EventController extends Controller
     }
     // Success message.
     $this->messages[] = 'Event ' . $id . ' edited successfully.';
-    // TODO update event's avatar.
     // Load the event.
     $event = Event::find($id);
     // Check if the event exists.

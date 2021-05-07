@@ -241,7 +241,6 @@ class PersonController extends Controller
     }
     // Success message.
     $this->messages[] = 'Person ' . $id . ' edited successfully.';
-    // TODO update person's avatar.
     // Load the person.
     $person = Person::find($id);
     // Check if the person exists.
