@@ -365,9 +365,9 @@ class PersonController extends Controller
    */
   protected function validators($update = false)
   {
+    // TODO
     $validatorRules = [];
     // Validators for all submitted fields.
-    // TODO
     $validatorRules = [];
     // Validate id when update method is requested.
     if ($update) {

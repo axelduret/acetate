@@ -14,25 +14,21 @@ class VenueResource extends JsonResource
    */
   public function toArray($request)
   {
-    return parent::toArray($request);
-  }
-
-  /**
-   * Get additional data that should be returned with the resource array.
-   *
-   * @param  \Illuminate\Http\Request  $request
-   * @return array
-   */
-  public function with($request)
-  {
     return [
       $this::$wrap => [
+        'id' => $this->id,
+        'created_at' => date('Y-m-d H:i:s', strtotime($this->created_at)),
+        'updated_at' => date('Y-m-d H:i:s', strtotime($this->updated_at)),
+        'name' => $this->name,
+        'description' => $this->description,
+        'avatar' => $this->avatar,
+        'events' => $this->events->load('dates'),
+        'people' => $this->people,
         'addresses' => $this->addresses,
         'emails' => $this->emails,
         'phones' => $this->phones,
         'websites' => $this->websites->load('socialNetwork'),
         'files' => $this->files,
-        'events' => $this->events->load('dates'),
         'taxonomies' => $this->taxonomies,
         'comments' => $this->comments,
         // TODO show likes of the logged user.

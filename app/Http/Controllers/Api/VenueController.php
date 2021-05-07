@@ -155,7 +155,7 @@ class VenueController extends Controller
    */
   public function store(Request $request)
   {
-    //
+    // TODO
   }
 
   /**
@@ -186,7 +186,7 @@ class VenueController extends Controller
    */
   public function update($id, Request $request)
   {
-    //
+    // TODO
   }
 
   /**
@@ -197,7 +197,46 @@ class VenueController extends Controller
    */
   public function destroy($id)
   {
-    //
+    // Load the venue.
+    $venue = Venue::find($id);
+    // Check if the venue exists.
+    if (!$venue) {
+      return $this->failure('Venue ' . $id . ' not found.', 404);
+    }
+    // Delete the venue's avatar.
+    $this->deleteAvatar($venue);
+    // Detach people from the venue.
+    $venue->people()->detach();
+    // Detach events from the venue.
+    $venue->events()->detach();
+    // Detach addresses from the venue.
+    $this->detachEntity($venue, 'venue', 'addresses');
+    // Delete addresses from the venue.
+    $this->deleteEntity($venue, $this->related, 'addresses');
+    // Detach emails from the venue.
+    $this->detachEntity($venue, 'venue', 'emails');
+    // Delete emails from the venue.
+    $this->deleteEntity($venue, $this->related, 'emails');
+    // Detach phones from the venue.
+    $this->detachEntity($venue, 'venue', 'phones');
+    // Delete phones from the venue.
+    $this->deleteEntity($venue, $this->related, 'phones');
+    // Detach files from the venue.
+    $this->detachEntity($venue, 'venue', 'files');
+    // Delete files from the venue.
+    $this->deleteEntity($venue, $this->related, 'files');
+    // Detach taxonomies from the venue.
+    $venue->taxonomies()->detach();
+    // Detach websites from the venue.
+    $this->detachEntity($venue, 'venue', 'websites');
+    // Delete websites from the venue.
+    $this->deleteEntity($venue, $this->related, 'websites');
+    // Delete the venue.
+    $venue->delete();
+    // Success message.
+    $message = 'Venue ' . $id . ' removed successfully.';
+    // Returns success message.
+    return $this->success($message, null, 200);
   }
 
   /**
@@ -208,9 +247,9 @@ class VenueController extends Controller
    */
   protected function validators($update = false)
   {
+    // TODO
     $validatorRules = [];
     // Validators for all submitted fields.
-    // TODO
     $validatorRules = [];
     // Validate id when update method is requested.
     if ($update) {
