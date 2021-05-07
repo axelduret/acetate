@@ -2,7 +2,6 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\DateController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\EventController;
 use App\Http\Controllers\Api\VenueController;
@@ -28,6 +27,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 Route::apiResource('users', UserController::class);
 // Events API endpoints
 Route::apiResource('events', EventController::class);
+Route::post('events/{id}/avatar', [EventController::class, 'updateAvatar']);
 // People API endpoints
 Route::apiResource('people', PersonController::class);
 // Venues API endpoints

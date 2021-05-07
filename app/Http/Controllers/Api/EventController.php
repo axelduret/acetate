@@ -362,6 +362,38 @@ class EventController extends Controller
   }
 
   /**
+   * Update the specified avatar.
+   *
+   * @param  int  $id
+   * @param  Request  $request
+   * @return Response
+   */
+  public function updateAvatar($id, Request $request)
+  {
+    // Load the event.
+    $event = Event::find($id);
+    // Check if the event exists.
+    if (!$event) {
+      return $this->failure('Event ' . $id . ' not found.', 404);
+    }
+    // Success message.
+    $this->messages[] = 'Avatar of event ' . $id . ' edited successfully.';
+    // Delete the current event's avatar.
+    $this->deleteAvatar($event);
+    // Store the new event's avatar.
+    $this->storeAvatar('event', $request);
+    // Update the event's avatar field.
+    $event->avatar = $request->file('avatar') ? 'avatar/event/' . $this->file_name : null;
+    $event->save();
+    // Add warning messages to the response.
+    if ($this->warning != null) {
+      $this->messages[] = $this->warning;
+    }
+    // Returns the edited event data with response messages.
+    return $this->success($this->messages, new EventResource(Event::find($id)), 200);
+  }
+
+  /**
    * Remove the specified event.
    *
    * @param  int  $id
