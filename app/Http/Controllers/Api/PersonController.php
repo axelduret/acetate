@@ -136,10 +136,14 @@ class PersonController extends Controller
     if ($people->isEmpty()) {
       return $this->failure('No people found.', 404);
     }
+    /* TODO add pagination to response.
     // Success message.
     $message = 'OK';
     // Returns people data with success message.
     return $this->success($message, new PersonCollection($people), 200);
+     */
+    // Returns people data.
+    return new PersonCollection($people);
   }
 
   /**
@@ -168,7 +172,6 @@ class PersonController extends Controller
       'firstname' => $request->input('firstname'),
       'lastname' => $request->input('lastname'),
       'description' => $request->input('description'),
-      'type' => $request->input('type'),
       'company' => $request->input('company'),
       // TODO create a default person's avatar if not submitted.
       'avatar' => $request->file('avatar') ? 'avatar/person/' . $this->file_name : null,

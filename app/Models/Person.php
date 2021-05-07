@@ -19,7 +19,6 @@ class Person extends Model
     'firstname',
     'lastname',
     'description',
-    'type',
     'company',
     'avatar',
     'user_id'

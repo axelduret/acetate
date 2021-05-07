@@ -23,7 +23,6 @@ class PersonResource extends JsonResource
         'firstname' => $this->firstname,
         'lastname' => $this->lastname,
         'description' => $this->description,
-        'type' => $this->type,
         'company' => $this->company,
         'avatar' => $this->avatar,
         'events' => $this->events->load('dates'),

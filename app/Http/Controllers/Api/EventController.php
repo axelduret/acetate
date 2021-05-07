@@ -183,10 +183,14 @@ class EventController extends Controller
     if ($events->isEmpty()) {
       return $this->failure('No events found.', 404);
     }
+    /* TODO add pagination to response.
     // Success message.
     $message = 'OK';
     // Returns events data with success message.
     return $this->success($message, new EventCollection($events), 200);
+     */
+    // Returns events data.
+    return new EventCollection($events);
   }
 
   /**

@@ -27,7 +27,6 @@ class PersonFactory extends Factory
       'firstname' => $this->faker->firstName,
       'lastname' => $this->faker->lastName,
       'description' => $this->faker->text,
-      'type' => $this->faker->randomElement(['owner', 'organiser', 'promoter', 'contact', 'presenter', 'artist', 'guest']),
       'avatar' => $this->faker->image(storage_path($dir)),
       'company' => $this->faker->company,
     ];
