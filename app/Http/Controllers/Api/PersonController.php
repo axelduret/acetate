@@ -350,16 +350,14 @@ class PersonController extends Controller
    */
   public function storeComment(int $id, Request $request)
   {
-    /* 
     // TODO Validation.
-    $validatorRules = $this->validators();
+    $validatorRules = $this->validators(false, true);
     $validator = Validator::make($request->all(), $validatorRules);
     // If validation fails, returns error messages.
     if ($validator->fails()) {
       $errors = $validator->errors();
       return $this->failure($errors);
     }
- */
     // Load the person.
     $person = Person::find($id);
     // Check if the person exists.
@@ -432,14 +430,21 @@ class PersonController extends Controller
    * Validators.
    *
    * @param  bool $update
+   * @param  bool $comment
    * @return array
    */
-  protected function validators($update = false)
+  protected function validators($update = false, $comment = false)
   {
     // TODO
     $validatorRules = [];
-    // Validators for all submitted fields.
+    // Validator rules for all submitted fields.
     $validatorRules = [];
+    // Validator rules for comments.
+    if ($comment) {
+      $validatorRules = [
+        'text' => 'required|string|min:10|max:255',
+      ];
+    }
     // Validate id when update method is requested.
     if ($update) {
       $validatorRules['id'] = 'required|integer|digits_between:1,20';

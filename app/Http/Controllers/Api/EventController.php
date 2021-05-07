@@ -404,16 +404,16 @@ class EventController extends Controller
    */
   public function storeComment(int $id, Request $request)
   {
-    /* 
+
     // TODO Validation.
-    $validatorRules = $this->validators();
+    $validatorRules = $this->validators(false, true);
     $validator = Validator::make($request->all(), $validatorRules);
     // If validation fails, returns error messages.
     if ($validator->fails()) {
       $errors = $validator->errors();
       return $this->failure($errors);
     }
- */
+
     // Load the event.
     $event = Event::find($id);
     // Check if the event exists.
@@ -490,12 +490,13 @@ class EventController extends Controller
    * Validators.
    *
    * @param  bool $update
+   * @param  bool $comment
    * @return array
    */
-  protected function validators($update = false)
+  protected function validators($update = false, $comment = false)
   {
     $validatorRules = [];
-    // Validators for all submitted fields.
+    // Validator rules for all submitted fields.
     $validatorRules = [
       'name' => 'required|string|max:100',
       'description' => 'string|nullable',
@@ -535,6 +536,12 @@ class EventController extends Controller
       'files.*.id' => 'required|integer|digits_between:1,20',
       'taxonomies.*.id' => 'required|integer|digits_between:1,20',
     ];
+    // Validator rules for comments.
+    if ($comment) {
+      $validatorRules = [
+        'text' => 'required|string|min:10|max:255',
+      ];
+    }
     // Validate id when update method is requested.
     if ($update) {
       $validatorRules['id'] = 'required|integer|digits_between:1,20';
