@@ -404,8 +404,7 @@ class EventController extends Controller
    */
   public function storeComment(int $id, Request $request)
   {
-
-    // TODO Validation.
+    // Validation.
     $validatorRules = $this->validators(false, true);
     $validator = Validator::make($request->all(), $validatorRules);
     // If validation fails, returns error messages.
