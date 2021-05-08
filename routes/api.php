@@ -33,6 +33,7 @@ Route::post('users/{user}/comments', [UserController::class, 'storeComment']);
 Route::apiResource('events', EventController::class);
 Route::post('events/{event}/avatar', [EventController::class, 'updateAvatar']);
 Route::post('events/{event}/comments', [EventController::class, 'storeComment']);
+Route::post('events/{event}/files', [EventController::class, 'storeFile']);
 // People API endpoints
 Route::apiResource('people', PersonController::class);
 Route::post('people/{person}/avatar', [PersonController::class, 'updateAvatar']);

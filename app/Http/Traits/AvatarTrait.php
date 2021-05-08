@@ -19,13 +19,13 @@ trait AvatarTrait
   {
     // Check if $controller's avatar is submitted.
     if ($request->file('avatar')) {
-      // Prepare avatar's file to upload.
+      // Prepare the avatar's file to upload.
       $upload = $request->file('avatar');
-      // Retrieve current datetime.
+      // Retrieve the current datetime.
       $current = Carbon::now()->format('YmdHis_');
-      // Format avatar's filename.
+      // Format the avatar's filename.
       $clean_filename = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $upload->getClientOriginalName());
-      // Add current datetime to avatar's formatted filename.
+      // Add the current datetime to the avatar's formatted filename.
       $this->file_name =  $current . $clean_filename;
       // Create avatar/$controller folder if doesn't exist.
       if (!Storage::directories('avatar/' . $controller)) {

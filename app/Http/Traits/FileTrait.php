@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use \Illuminate\Http\Response;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\Validator;
 use App\Http\Traits\RespondsWithHttpStatus;
 
 trait FileTrait
@@ -15,82 +14,44 @@ trait FileTrait
   use RespondsWithHttpStatus;
 
   /**
-   * Define $file property.
-   *
-   * @var object
-   */
-  protected $file = null;
-
-  // TODO Swagger
-
-  /**
    * Store a newly created file in database.
    *
-   * @param  string  $controller
+   * @param  object  $controller
+   * @param  string  $entity
    * @param  Request  $request
    * @return Response
    */
-  protected function storeFile($controller, Request $request)
+  protected function addFile($controller, $entity, Request $request)
   {
-
-    // Validating fields.
-    $validatorRules = $this->validateFile();
-    $validator = Validator::make($request->all(), $validatorRules);
-
-    // If validation fails
-    // Return error messages and exit.
-    if ($validator->fails()) {
-      $errors = $validator->errors();
-      return $this->failure($errors);
+    // Check if $controller's upload is submitted.
+    if ($request->file('upload')) {
+      // Prepare the file to upload.
+      $upload = $request->file('upload');
+      // Retrieve the current datetime.
+      $current = Carbon::now()->format('Ymd-His_');
+      // Format the file's name.
+      $clean_filename = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $upload->getClientOriginalName());
+      // Add the current datetime to the avatar's formatted filename.
+      $file_name =  $current . $clean_filename;
+      // Create a new file.
+      $file = new File([
+        'name' => $request->input('name'),
+        'encoding' => mb_detect_encoding($upload, mb_list_encodings(), true),
+        'mimetype' => $upload->getClientMimeType(),
+        'path' => 'file/' . $entity . '/' . $file_name,
+        'size' => $upload->getSize(),
+        'user_id' => $request->input('user_id')
+      ]);
+      // Create file/$controller folder if doesn't exist
+      if (!Storage::directories('file/' . $entity)) {
+        Storage::makeDirectory('file/' . $entity);
+      }
+      // Store the file into storage file/$controller folder.
+      $upload->storeAs('file/' . $entity, $file_name);
+      // Attach $entities to the $controller.
+      $file->$entity()->associate($controller);
+      // Save the new file.
+      $file->save();
     }
-
-    // If validation succeeds
-    // Store fields in the database.
-
-    $upload = $request->file('upload');
-    $current = Carbon::now()->format('Ymd-His_');
-    $clean_filename = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $upload->getClientOriginalName());
-    $file_name =  $current . $clean_filename;
-
-    // Create a file model with status 0.
-    $this->file = new File([
-      'name' => $request->input('name'),
-      'encoding' => mb_detect_encoding($upload, mb_list_encodings(), true),
-      'mimetype' => $upload->getClientMimeType(),
-      'path' => 'temp/' . $file_name,
-      'size' => $upload->getSize(),
-      'user_id' => $request->input('user_id')
-    ]);
-    $this->file->save();
-
-    // Create $controller folder if doesn't exist
-    if (!Storage::directories($controller)) {
-      Storage::makeDirectory($controller);
-    }
-
-    // Store the file.
-    $upload->storeAs($controller, $file_name);
-
-    return $this->file;
-  }
-
-  /**
-   * Validate a file.
-   *
-   * @return array
-   */
-  protected function validateFile()
-  {
-    $validatorRules = [];
-
-    // Validating fields.
-    $validatorRules = [
-      'upload' => 'required|file',
-      'filename' => 'required|string|max:128',
-      'user_id' => 'required|integer|digits_between:1,20',
-      'uuid' => 'string|max:32'
-    ];
-
-    return $validatorRules;
   }
 }
