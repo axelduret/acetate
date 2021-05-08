@@ -40,6 +40,13 @@ class UserController extends Controller
   protected $searchFields = ['username', 'email', 'firstname', 'lastname', 'company', 'language'];
 
   /**
+   * User's contents.
+   *
+   * @var array
+   */
+  protected $contents = ['events', 'people', 'venues', 'files', 'tickets', 'comments', 'likes', 'favorites'];
+
+  /**
    * Display the list of all users.
    *
    * @param Request $request
@@ -113,18 +120,20 @@ class UserController extends Controller
    * Display the specified user account.
    *
    * @param  int  $id
-   * @param  Request  $request
+   * @param  string  $content
    * @return Response
    */
-  public function show($id, Request $request)
+  public function show(int $id, $content = null)
   {
+    $contentField = in_array($content, $this->contents) ? $content : null;
+
     // Check if the user exists.
     $user = User::find($id);
     if (!$user) {
       return $this->failure('User not found.', 404);
     }
 
-    switch ($request->input('content')) {
+    switch ($contentField) {
       case 'events':
         // Return all events attached to the user.
         return new UserEventsResource(

@@ -4,7 +4,6 @@ namespace App\Http\Traits;
 
 use App\Models\Comment;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
 
 trait CommentTrait
 {
