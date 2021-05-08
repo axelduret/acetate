@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Models\User;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
@@ -14,8 +15,8 @@ use App\Http\Resources\UserPeopleResource;
 use App\Http\Resources\UserVenuesResource;
 use App\Http\Resources\UserTicketsResource;
 use App\Http\Traits\RespondsWithHttpStatus;
-use App\Http\Resources\UserCommentsResource;
 use App\Http\Resources\UserFavoritesResource;
+use App\Http\Resources\UserCommentsCollection;
 
 class UserController extends Controller
 {
@@ -60,7 +61,6 @@ class UserController extends Controller
     $orderField = $request->input('order_by');
     $sortOrder = in_array($orderField, ['asc', 'desc']) ? $orderField : 'asc';
     $query = User::orderBy($sortableFields, $sortOrder);
-
     // Search data.
     $searchField = $request->input('search_field');
     $searchValue = $request->input('search_value');
@@ -69,16 +69,13 @@ class UserController extends Controller
       $searchQuery = "%$searchValue%";
       $query = $query->where($searchableFields, 'like', $searchQuery);
     }
-
     // Pagination.
     $perPage = $request->input('per_page') ?? self::PER_PAGE;
     $users = $query->paginate((int)$perPage);
-
     // Check if users exist.
     if ($users == '') {
       return $this->failure('No users were found.', 404);
     }
-
     // Format data.
     return new UserCollection($users);
   }
@@ -121,9 +118,10 @@ class UserController extends Controller
    *
    * @param  int  $id
    * @param  string  $content
+   * @param  Request  $request
    * @return Response
    */
-  public function show(int $id, $content = null)
+  public function show(int $id, $content = null, Request $request)
   {
     $contentField = in_array($content, $this->contents) ? $content : null;
 
@@ -169,13 +167,11 @@ class UserController extends Controller
         );
         break;
       case 'comments':
+        // Pagination.
+        $perPage = $request->input('per_page') ?? 10;
         // Return all comments attached to the user.
-        return new UserCommentsResource(
-          $user->comments
-            ->load('event')
-            ->load('person')
-            ->load('venue')
-            ->load('likes')
+        return new UserCommentsCollection(
+          Comment::where('user_id', $id)->paginate((int)$perPage)
         );
         break;
       case 'likes':

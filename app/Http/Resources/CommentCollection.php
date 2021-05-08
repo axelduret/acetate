@@ -16,27 +16,6 @@ class CommentCollection extends ResourceCollection
   {
     return [
       $this::$wrap => $this->collection->map(function ($item) {
-        $person = null;
-        if ($item->person) {
-          $person = [
-            'id' => $item->person['id'],
-            'nickname' => $item->person['nickname'],
-          ];
-        }
-        $event = null;
-        if ($item->event) {
-          $event = [
-            'id' => $item->event['id'],
-            'name' => $item->event['name'],
-          ];
-        }
-        $venue = null;
-        if ($item->venue) {
-          $venue = [
-            'id' => $item->venue['id'],
-            'name' => $item->venue['name'],
-          ];
-        }
         return collect([
           'id' => $item->id,
           'created_at' => date('Y-m-d H:i:s', strtotime($item->created_at)),
