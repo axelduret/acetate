@@ -20,6 +20,8 @@ class File extends Model
     'encoding',
     'path',
     'name',
+    'size',
+    'user_id'
   ];
 
   /**

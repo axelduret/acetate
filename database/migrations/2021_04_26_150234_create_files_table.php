@@ -21,6 +21,7 @@ class CreateFilesTable extends Migration
       $table->string('encoding', 100);
       $table->string('path', 100);
       $table->string('name', 30);
+      $table->string('size', 100);
 
       $table->unsignedBigInteger('user_id')->nullable();
       $table->foreign('user_id')

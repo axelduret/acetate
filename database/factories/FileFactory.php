@@ -22,12 +22,14 @@ class FileFactory extends Factory
   public function definition()
   {
     $dir = 'app/file';
+    $upload = $this->faker->image(storage_path($dir));
     return [
-      'path' => $this->faker->image(storage_path($dir)),
+      'path' => $upload,
       'type' => $this->faker->randomElement(['image', 'audio', 'video']),
       'mimetype' => $this->faker->mimeType,
       'encoding' => '8bit',
       'name' => $this->faker->word,
+      'size' => fileSize($upload),
     ];
   }
 }
