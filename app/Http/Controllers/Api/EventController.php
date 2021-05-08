@@ -224,7 +224,7 @@ class EventController extends Controller
       'name' => $request->input('name'),
       'description' => $request->input('description'),
       // TODO create a default event's avatar if not submitted.
-      'avatar' => $request->file('avatar') ? 'avatar/event/' . $this->file_name : null,
+      'avatar' => $request->file('upload') ? 'avatar/event/' . $this->file_name : null,
       'user_id' => $request->input('user_id')
     ]);
     // Save the event.
@@ -388,7 +388,7 @@ class EventController extends Controller
     // Store the new event's avatar.
     $this->storeAvatar('event', $request);
     // Update the event's avatar field.
-    $event->avatar = $request->file('avatar') ? 'avatar/event/' . $this->file_name : null;
+    $event->avatar = $request->file('upload') ? 'avatar/event/' . $this->file_name : null;
     $event->save();
     // Add warning messages to the response.
     if ($this->warning != null) {
@@ -536,7 +536,7 @@ class EventController extends Controller
     $validatorRules = [
       'name' => 'required|string|max:100',
       'description' => 'string|nullable',
-      'avatar' => 'file|nullable',
+      'upload' => 'file|nullable',
       'user_id' => 'required|integer|digits_between:1,20',
       'dates.*.start_date' => 'required|date',
       'dates.*.end_date' => 'required|date|after_or_equal:dates.*.start_date',
@@ -583,7 +583,7 @@ class EventController extends Controller
     if ($file) {
       $validatorRules = [
         'upload' => 'required|file',
-        'name' => 'required|string|max:30',
+        'name' => 'required|string|min:10|max:30',
         'type' => 'required|in:audio,video,image',
         'user_id' => 'required|integer|digits_between:1,20',
       ];

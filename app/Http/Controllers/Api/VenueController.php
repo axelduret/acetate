@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Models\Venue;
 use Illuminate\Http\Request;
+use App\Http\Traits\FileTrait;
 use App\Http\Traits\AvatarTrait;
 use App\Http\Traits\EntityTrait;
 use App\Http\Traits\CommentTrait;
@@ -24,6 +25,8 @@ class VenueController extends Controller
   use AvatarTrait;
   // Import Website trait.
   use WebsiteTrait;
+  // Import File trait.
+  use FileTrait;
   // Import Comment trait.
   use CommentTrait;
 
@@ -175,7 +178,7 @@ class VenueController extends Controller
       'name' => $request->input('name'),
       'description' => $request->input('description'),
       // TODO create a default venue's avatar if not submitted.
-      'avatar' => $request->file('avatar') ? 'avatar/venue/' . $this->file_name : null,
+      'avatar' => $request->file('upload') ? 'avatar/venue/' . $this->file_name : null,
       'user_id' => $request->input('user_id')
     ]);
     // Save the venue.
@@ -327,8 +330,43 @@ class VenueController extends Controller
     // Store the new venue's avatar.
     $this->storeAvatar('venue', $request);
     // Update the venue's avatar field.
-    $venue->avatar = $request->file('avatar') ? 'avatar/venue/' . $this->file_name : null;
+    $venue->avatar = $request->file('upload') ? 'avatar/venue/' . $this->file_name : null;
     $venue->save();
+    // Add warning messages to the response.
+    if ($this->warning != null) {
+      $this->messages[] = $this->warning;
+    }
+    // Returns the edited venue data with response messages.
+    return $this->success($this->messages, new VenueResource(Venue::find($id)), 200);
+  }
+
+  /**
+   * Create a new file.
+   *
+   * @param  int  $id
+   * @param  Request  $request
+   * @return Response
+   */
+  public function storeFile(int $id, Request $request)
+  {
+    // Validation.
+    $validatorRules = $this->validators(false, false, true);
+    $validator = Validator::make($request->all(), $validatorRules);
+    // If validation fails, returns error messages.
+    if ($validator->fails()) {
+      $errors = $validator->errors();
+      return $this->failure($errors);
+    }
+    // Load the venue.
+    $venue = Venue::find($id);
+    // Check if the venue exists.
+    if (!$venue) {
+      return $this->failure('Venue ' . $id . ' not found.', 404);
+    }
+    // Success message.
+    $this->messages[] = 'File uploaded successfully.';
+    // Store the new comment.
+    $this->addFile($venue, 'venue', $request);
     // Add warning messages to the response.
     if ($this->warning != null) {
       $this->messages[] = $this->warning;
@@ -429,7 +467,7 @@ class VenueController extends Controller
    * @param  bool $comment
    * @return array
    */
-  protected function validators($update = false, $comment = false)
+  protected function validators($update = false, $comment = false, $file = false)
   {
     // TODO
     $validatorRules = [];
@@ -439,6 +477,15 @@ class VenueController extends Controller
     if ($comment) {
       $validatorRules = [
         'text' => 'required|string|min:10|max:255',
+        'user_id' => 'required|integer|digits_between:1,20',
+      ];
+    }
+    // Validator rules for files.
+    if ($file) {
+      $validatorRules = [
+        'upload' => 'required|file',
+        'name' => 'required|string|min:10|max:30',
+        'type' => 'required|in:audio,video,image',
         'user_id' => 'required|integer|digits_between:1,20',
       ];
     }

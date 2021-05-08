@@ -18,9 +18,9 @@ trait AvatarTrait
   protected function storeAvatar($controller, Request $request)
   {
     // Check if $controller's avatar is submitted.
-    if ($request->file('avatar')) {
+    if ($request->file('upload')) {
       // Prepare the avatar's file to upload.
-      $upload = $request->file('avatar');
+      $upload = $request->file('upload');
       // Retrieve the current datetime.
       $current = Carbon::now()->format('YmdHis_');
       // Format the avatar's filename.

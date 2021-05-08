@@ -2,63 +2,75 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Http\Controllers\Controller;
+use App\Models\File;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Http\Resources\FileCollection;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Traits\RespondsWithHttpStatus;
 
 class FileController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
-    }
+  // Import custom response trait.
+  use RespondsWithHttpStatus;
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+  /**
+   * Display the list of all files.
+   *
+   * @param  Request  $request
+   * @return FileCollection
+   */
+  public function index()
+  {
+    // TODO
+  }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
+  /**
+   * Display the specified file.
+   *
+   * @param  int  $id
+   * @return Response
+   */
+  public function show(int $id)
+  {
+    // TODO
+  }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+  /**
+   * Remove the specified file.
+   *
+   * @param  int  $id
+   * @return Response
+   */
+  public function destroy(int $id)
+  {
+    $file = File::find($id);
+    // Check if the file exists.
+    if (!$file) {
+      return $this->failure('File ' . $id . ' not found.', 404);
     }
+    // Delete the file.
+    Storage::delete($file->path);
+    $file->delete();
+    // Success message.
+    $message = 'File ' . $id . ' removed successfully.';
+    // Returns success message.
+    return $this->success($message, null, 200);
+  }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+  /**
+   * Validators.
+   *
+   * @return array
+   */
+  protected function validators()
+  {
+    $validatorRules = [];
+    // Validator rules for all submitted fields.
+    $validatorRules = [
+      'text' => 'required|string|min:10|max:255',
+      'user_id' => 'required|integer|digits_between:1,20',
+    ];
+    return $validatorRules;
+  }
 }

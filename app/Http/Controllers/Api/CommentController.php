@@ -140,7 +140,7 @@ class CommentController extends Controller
   public function update(int $id, Request $request)
   {
     // Validation.
-    $validatorRules = $this->validators(false, true);
+    $validatorRules = $this->validators();
     $validator = Validator::make($request->all(), $validatorRules);
     // If validation fails, returns error messages.
     if ($validator->fails()) {
@@ -190,11 +190,9 @@ class CommentController extends Controller
   /**
    * Validators.
    *
-   * @param  bool $update
-   * @param  bool $comment
    * @return array
    */
-  protected function validators($update = false, $comment = false)
+  protected function validators()
   {
     $validatorRules = [];
     // Validator rules for all submitted fields.
@@ -202,10 +200,6 @@ class CommentController extends Controller
       'text' => 'required|string|min:10|max:255',
       'user_id' => 'required|integer|digits_between:1,20',
     ];
-    // Validate id when update method is requested.
-    if ($update) {
-      $validatorRules['id'] = 'required|integer|digits_between:1,20';
-    }
     return $validatorRules;
   }
 }
