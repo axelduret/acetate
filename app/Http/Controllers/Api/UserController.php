@@ -11,7 +11,6 @@ use App\Models\Person;
 use App\Models\Comment;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
-use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Hash;
@@ -116,8 +115,11 @@ class UserController extends Controller
     $token = $user->createToken('api_token', $abilities);
     // Data response.
     $data = [
-      'user' => $user->id,
-      'token' => $token->plainTextToken,
+      'user' => collect([
+        'id' => $user->id,
+        'api_token' => $token->plainTextToken
+      ]),
+      'credit' => $this->apiCredit()
     ];
     // Returns data with success message.
     return $this->success('User ' . $user->id . ' successfully logged in.', $data, 201);
