@@ -33,10 +33,31 @@ class DatabaseSeeder extends Seeder
     // Reset the application's storage folders.
     $this->call(FolderReset::class);
 
-    // Create users.
+    // Create roles and permissions.
+    $this->call(RoleAndPermission::class);
+
+    //Create a super-admin.
+    $admin = User::factory()
+      ->create()
+      ->assignRole('super-admin')
+      ->save();
+
+    // Create users and assign random roles.
     $users = User::factory()
       ->count(100)
-      ->create();
+      ->make()->each(function ($user) {
+        $random = rand(1, 2);
+        // Create members.
+        if ($random == 1) {
+          $user->assignRole('member');
+          $user->save();
+        }
+        // Create contributors.
+        if ($random == 2) {
+          $user->assignRole('contributor');
+          $user->save();
+        }
+      });
 
     // Create events.
     $events = Event::factory()

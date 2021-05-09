@@ -16,8 +16,10 @@ class UserCollection extends ResourceCollection
   {
     return [
       $this::$wrap => $this->collection->map(function ($item) {
+        $role = $item->roles->pluck('name')->first();
         return collect([
           'id' => $item->id,
+          'role' => $role,
           'created_at' => date('Y-m-d H:i:s', strtotime($item['created_at'])),
           'updated_at' => date('Y-m-d H:i:s', strtotime($item['updated_at'])),
           'username' => $item->username,

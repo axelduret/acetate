@@ -15,8 +15,10 @@ class UserResource extends JsonResource
    */
   public function toArray($request)
   {
+    $role = $this->roles->pluck('name')->first();
     return [
       'id' => $this->id,
+      'role' => $role,
       'created_at' => date('Y-m-d H:i:s', strtotime($this->created_at)),
       'updated_at' => date('Y-m-d H:i:s', strtotime($this->updated_at)),
       'username' => $this->username,
