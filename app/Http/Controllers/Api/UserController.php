@@ -89,7 +89,7 @@ class UserController extends Controller
    */
   public function login(Request $request)
   // TODO  Add remember_token in the database.
-  // Store token into local stroage.
+  // Store token into local storage.
   {
     $user = User::where('email', $request->email)->first();
     if (!$user || !Hash::check($request->password, $user->password)) {
