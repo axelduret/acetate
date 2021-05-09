@@ -93,19 +93,26 @@ class UserController extends Controller
    * @return Response
    */
   public function login(Request $request)
-  // TODO  Add remember_token in the database.
-  // Store token into local storage.
   {
+    // TODO Store token into local storage.
+    // Check if the submitted user's login is valid.
     $user = User::where('email', $request->email)->first();
     if (!$user || !Hash::check($request->password, $user->password)) {
       return $this->failure('Wrong email or password.', 403);
     }
-    $token = $user->createToken('my-app-token')->plainTextToken;
+    $token = $user->remember_token;
+    // Create a new token.
+    $token = $user->createToken('remember_token')->plainTextToken;
+    // Attach the new token to the specified user.
+    $user->remember_token = $token;
+    $user->save;
+    // Data response.
     $data = [
-      'user' => $user,
+      'user' => $user->id,
       'token' => $token
     ];
-    return $this->success('Token successfully created.', $data, 201);
+    // Returns data with success message.
+    return $this->success('User ' . $user->id . ' successfully logged in.', $data, 201);
   }
 
   /**

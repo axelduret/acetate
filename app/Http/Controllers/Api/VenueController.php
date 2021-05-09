@@ -154,7 +154,7 @@ class VenueController extends Controller
   }
 
   /**
-   * Creat a new venue.
+   * Create a new venue.
    *
    * @param  Request  $request
    * @return Response
@@ -305,7 +305,7 @@ class VenueController extends Controller
       $this->messages[] = $this->warning;
     }
     // Returns the edited venue data with response messages.
-    return $this->success($this->messages, new VenueResource(Venue::find($id)), 200);
+    return $this->success($this->messages, new VenueResource(Venue::find($id)), 201);
   }
 
   /**
@@ -337,7 +337,7 @@ class VenueController extends Controller
       $this->messages[] = $this->warning;
     }
     // Returns the edited venue data with response messages.
-    return $this->success($this->messages, new VenueResource(Venue::find($id)), 200);
+    return $this->success($this->messages, new VenueResource(Venue::find($id)), 201);
   }
 
   /**
@@ -372,7 +372,7 @@ class VenueController extends Controller
       $this->messages[] = $this->warning;
     }
     // Returns the edited venue data with response messages.
-    return $this->success($this->messages, new VenueResource(Venue::find($id)), 200);
+    return $this->success($this->messages, new VenueResource(Venue::find($id)), 201);
   }
 
   /**
@@ -407,7 +407,7 @@ class VenueController extends Controller
       $this->messages[] = $this->warning;
     }
     // Returns the edited venue data with response messages.
-    return $this->success($this->messages, new VenueResource(Venue::find($id)), 200);
+    return $this->success($this->messages, new VenueResource(Venue::find($id)), 201);
   }
 
   /**

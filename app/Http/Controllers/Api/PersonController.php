@@ -152,7 +152,7 @@ class PersonController extends Controller
   }
 
   /**
-   * Creat a new person.
+   * Create a new person.
    *
    * @param  Request  $request
    * @return Response
@@ -309,7 +309,7 @@ class PersonController extends Controller
       $this->messages[] = $this->warning;
     }
     // Returns the edited person data with response messages.
-    return $this->success($this->messages, new PersonResource(Person::find($id)), 200);
+    return $this->success($this->messages, new PersonResource(Person::find($id)), 201);
   }
 
   /**
@@ -341,7 +341,7 @@ class PersonController extends Controller
       $this->messages[] = $this->warning;
     }
     // Returns the edited person data with response messages.
-    return $this->success($this->messages, new PersonResource(Person::find($id)), 200);
+    return $this->success($this->messages, new PersonResource(Person::find($id)), 201);
   }
 
   /**
@@ -376,7 +376,7 @@ class PersonController extends Controller
       $this->messages[] = $this->warning;
     }
     // Returns the edited person data with response messages.
-    return $this->success($this->messages, new PersonResource(Person::find($id)), 200);
+    return $this->success($this->messages, new PersonResource(Person::find($id)), 201);
   }
 
   /**
@@ -411,7 +411,7 @@ class PersonController extends Controller
       $this->messages[] = $this->warning;
     }
     // Returns the edited person data with response messages.
-    return $this->success($this->messages, new PersonResource(Person::find($id)), 200);
+    return $this->success($this->messages, new PersonResource(Person::find($id)), 201);
   }
 
   /**

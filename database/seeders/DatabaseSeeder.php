@@ -2,24 +2,25 @@
 
 namespace Database\Seeders;
 
-use App\Models\Address;
-use App\Models\Comment;
 use App\Models\Date;
-use App\Models\Email;
-use App\Models\Event;
-use App\Models\Favorite;
 use App\Models\File;
 use App\Models\Like;
-use App\Models\Person;
+use App\Models\User;
+use App\Models\Email;
+use App\Models\Event;
 use App\Models\Phone;
 use App\Models\Price;
-use App\Models\SocialNetwork;
-use App\Models\Taxonomy;
-use App\Models\Ticket;
-use App\Models\User;
 use App\Models\Venue;
+use App\Models\Person;
+use App\Models\Ticket;
+use App\Models\Address;
+use App\Models\Comment;
 use App\Models\Website;
+use App\Models\Favorite;
+use App\Models\Taxonomy;
+use App\Models\SocialNetwork;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
@@ -37,10 +38,7 @@ class DatabaseSeeder extends Seeder
     $this->call(RoleAndPermission::class);
 
     //Create a super-admin.
-    $admin = User::factory()
-      ->create()
-      ->assignRole('super-admin')
-      ->save();
+    $this->call(SuperAdminSeeder::class);
 
     // Create users and assign random roles.
     $users = User::factory()

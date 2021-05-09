@@ -200,7 +200,7 @@ class EventController extends Controller
   }
 
   /**
-   * Creat a new event.
+   * Create a new event.
    *
    * @param  Request  $request
    * @return Response
@@ -363,7 +363,7 @@ class EventController extends Controller
       $this->messages[] = $this->warning;
     }
     // Returns the edited event data with response messages.
-    return $this->success($this->messages, new EventResource(Event::find($id)), 200);
+    return $this->success($this->messages, new EventResource(Event::find($id)), 201);
   }
 
   /**
@@ -395,7 +395,7 @@ class EventController extends Controller
       $this->messages[] = $this->warning;
     }
     // Returns the edited event data with response messages.
-    return $this->success($this->messages, new EventResource(Event::find($id)), 200);
+    return $this->success($this->messages, new EventResource(Event::find($id)), 201);
   }
 
   /**
@@ -430,7 +430,7 @@ class EventController extends Controller
       $this->messages[] = $this->warning;
     }
     // Returns the edited event data with response messages.
-    return $this->success($this->messages, new EventResource(Event::find($id)), 200);
+    return $this->success($this->messages, new EventResource(Event::find($id)), 201);
   }
 
   /**
@@ -465,7 +465,7 @@ class EventController extends Controller
       $this->messages[] = $this->warning;
     }
     // Returns the edited event data with response messages.
-    return $this->success($this->messages, new EventResource(Event::find($id)), 200);
+    return $this->success($this->messages, new EventResource(Event::find($id)), 201);
   }
 
   /**

@@ -164,7 +164,7 @@ class CommentController extends Controller
       $this->messages[] = $this->warning;
     }
     // Returns the edited comment data with response messages.
-    return $this->success($this->messages, new CommentResource(Comment::find($id)), 200);
+    return $this->success($this->messages, new CommentResource(Comment::find($id)), 201);
   }
 
   /**
