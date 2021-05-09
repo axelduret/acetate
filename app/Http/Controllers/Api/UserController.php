@@ -7,6 +7,7 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserCollection;
 use App\Http\Resources\UserFilesResource;
 use App\Http\Resources\UserLikesResource;
@@ -83,12 +84,23 @@ class UserController extends Controller
   /**
    * User login.
    *
-   * @param  int  $id
+   * @param Request $request
    * @return Response
    */
-  public function login($id) // TODO Login
+  public function login(Request $request)
+  // TODO  Add remember_token in the database.
+  // Store token into local stroage.
   {
-    //
+    $user = User::where('email', $request->email)->first();
+    if (!$user || !Hash::check($request->password, $user->password)) {
+      return $this->failure('Wrong email or password.', 403);
+    }
+    $token = $user->createToken('my-app-token')->plainTextToken;
+    $data = [
+      'user' => $user,
+      'token' => $token
+    ];
+    return $this->success('Token successfully created.', $data, 201);
   }
 
   /**

@@ -23,12 +23,16 @@ use App\Http\Controllers\Api\TaxonomyController;
 */
 /* 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+  return $request->user();
 });
  */
 
+Route::group(['middleware' => 'auth:sanctum'], function () {
+});
+
 // Users API endpoints
 Route::apiResource('users', UserController::class);
+Route::post("login", [UserController::class, 'login']);
 Route::get('users/{user}/{content}', [UserController::class, 'show']);
 Route::post('users/{user}/avatar', [UserController::class, 'updateAvatar']);
 Route::post('users/{user}/comments', [UserController::class, 'storeComment']);
