@@ -39,20 +39,25 @@ class DatabaseSeeder extends Seeder
     //Create a super-admin.
     $this->call(SuperAdminSeeder::class);
 
-    // Create users and assign random roles.
+    // Create users.
     $users = User::factory()
       ->count(100)
+      // Assign a random role to each user.
       ->make()->each(function ($user) {
         $random = rand(1, 2);
         // Create members.
         if ($random == 1) {
           $user->assignRole('member');
           $user->save();
+          // Create an api-token and attach it to the member.
+          $user->createToken('api_token', ['role:member']);
         }
         // Create contributors.
         if ($random == 2) {
           $user->assignRole('contributor');
           $user->save();
+          // Create an api-token and attach it to the contributor.
+          $user->createToken('api_token', ['role:contributor']);
         }
       });
 

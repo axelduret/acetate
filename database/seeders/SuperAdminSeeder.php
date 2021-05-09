@@ -31,5 +31,7 @@ class SuperAdminSeeder extends Seeder
     ]);
     $admin->assignRole('super-admin');
     $admin->save();
+    // Create an api-token and attach it to the super-admin.
+    $admin->createToken('api_token', ['role:super-admin']);
   }
 }
