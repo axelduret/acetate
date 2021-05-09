@@ -17,16 +17,16 @@ class SuperAdminSeeder extends Seeder
   public function run()
   {
     $admin = new User([
-      'username' => 'admin',
-      'firstname' => 'Super',
-      'lastname' => 'Admin',
-      'language' => 'fr',
-      'theme' => 'dark',
+      'username' => env('ADMIN_USERNAME'),
+      'firstname' => env('ADMIN_FIRSTNAME'),
+      'lastname' => env('ADMIN_LASTNAME'),
+      'language' => env('ADMIN_LANG'),
+      'theme' => env('ADMIN_THEME'),
       'avatar' => '',
-      'company' => 'Acetate',
-      'email' => 'admin@acetate.ch',
+      'company' => env('ADMIN_COMPANY'),
+      'email' => env('ADMIN_EMAIL'),
       'email_verified_at' => now(),
-      'password'  => Hash::make('admin'),
+      'password'  => Hash::make(env('ADMIN_PASSWORD')),
       'remember_token' => Str::random(10),
     ]);
     $admin->assignRole('super-admin');
