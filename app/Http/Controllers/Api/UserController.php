@@ -135,8 +135,8 @@ class UserController extends Controller
    */
   public function show(int $id, $content = null, Request $request)
   {
+    // Available types of contents.
     $contentField = in_array($content, $this->contents) ? $content : null;
-
     // Check if the user exists.
     $user = User::find($id);
     if (!$user) {
@@ -145,6 +145,7 @@ class UserController extends Controller
 
     switch ($contentField) {
       case 'events':
+        // TODO
         // Return all events attached to the user.
         return new UserEventsResource(
           $user->events
@@ -158,6 +159,7 @@ class UserController extends Controller
         );
         break;
       case 'people':
+        // TODO
         // Return all people attached to the user.
         return new UserPeopleResource(
           $user->people
@@ -168,6 +170,7 @@ class UserController extends Controller
         );
         break;
       case 'venues':
+        // TODO
         // Return all venues attached to the user.
         return new UserVenuesResource(
           $user->venues
@@ -179,6 +182,7 @@ class UserController extends Controller
         );
         break;
       case 'comments':
+        // TODO add check if exist.
         // Pagination.
         $perPage = $request->input('per_page') ?? 10;
         // Return all comments attached to the user.
@@ -187,6 +191,7 @@ class UserController extends Controller
         );
         break;
       case 'likes':
+        // TODO
         // Return all likes attached to the user.
         return new UserLikesResource(
           $user->likes
@@ -197,6 +202,7 @@ class UserController extends Controller
         );
         break;
       case 'favorites':
+        // TODO
         // Return all favorites attached to the user.
         return new UserFavoritesResource(
           $user->favorites
@@ -206,12 +212,17 @@ class UserController extends Controller
         );
         break;
       case 'files':
+        // TODO add pagination
+        $files = $user->files;
+        // Check if user's files exist.
+        if ($files->isEmpty()) {
+          return $this->failure('No files found for this user.', 404);
+        }
         // Return all files attached to the user.
-        return new UserFilesResource(
-          $user->files
-        );
+        return new UserFilesResource($files);
         break;
       case 'tickets':
+        // TODO
         // Return all tickets attached to the user.
         return new UserTicketsResource(
           $user->tickets
