@@ -8,7 +8,6 @@ use App\Models\User;
 use App\Models\Event;
 use App\Models\Venue;
 use App\Models\Person;
-use App\Models\Ticket;
 use App\Models\Comment;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
@@ -16,19 +15,12 @@ use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Resources\UserCollection;
-use App\Http\Resources\UserFilesResource;
-use App\Http\Resources\UserLikesResource;
-use App\Http\Resources\UserEventsResource;
-use App\Http\Resources\UserPeopleResource;
-use App\Http\Resources\UserVenuesResource;
 use App\Http\Resources\UserFilesCollection;
 use App\Http\Resources\UserLikesCollection;
-use App\Http\Resources\UserTicketsResource;
 use App\Http\Traits\RespondsWithHttpStatus;
 use App\Http\Resources\UserEventsCollection;
 use App\Http\Resources\UserPeopleCollection;
 use App\Http\Resources\UserVenuesCollection;
-use App\Http\Resources\UserFavoritesResource;
 use App\Http\Resources\UserCommentsCollection;
 use App\Http\Resources\UserFavoritesCollection;
 
@@ -148,7 +140,7 @@ class UserController extends Controller
    */
   public function show(int $id, $content = null, Request $request)
   {
-    // Available types of contents.
+    // Available types of user's contents.
     $contentField = in_array($content, $this->contents) ? $content : null;
     // Check if the user exists.
     $user = User::find($id);
