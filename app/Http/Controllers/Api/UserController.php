@@ -101,16 +101,17 @@ class UserController extends Controller
     if (!$user || !Hash::check($request->password, $user->password)) {
       return $this->failure('Wrong email or password.', 403);
     }
+    // Revoke all current user's tokens.
+    $user->tokens()->delete();
+    // Retrieve user's role.
     $abilities = [];
-    if ($user->hasAllRoles(Role::all())) {
-      $abilities = ['role:super-admin'];
+    if ($user->hasRole('super-admin')) {
+      $abilities = ['*'];
     } elseif ($user->hasRole('member')) {
       $abilities = ['role:member'];
     } elseif ($user->hasRole('contributor')) {
       $abilities = ['role:contributor'];
     }
-    // Revoke all tokens.
-    $user->tokens()->delete();
     // Create a new token and attach it to the current user.
     $token = $user->createToken('api_token', $abilities);
     // Data response.
