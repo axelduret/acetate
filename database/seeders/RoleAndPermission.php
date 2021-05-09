@@ -22,19 +22,11 @@ class RoleAndPermission extends Seeder
     $contributor = Role::create(['name' => 'contributor']);
     $admin = Role::create(['name' => 'super-admin']);
     // Create new permissions.
-    $writeComment = Permission::create(['name' => 'write comment']);
-    $editComment = Permission::create(['name' => 'edit comment']);
-    $deleteComment = Permission::create(['name' => 'delete comment']);
-    $addLike = Permission::create(['name' => 'add like']);
-    $editLike = Permission::create(['name' => 'edit like']);
-    $deleteLike = Permission::create(['name' => 'delete like']);
-    $writePost = Permission::create(['name' => 'write post']);
-    $editPost = Permission::create(['name' => 'edit post']);
-    $deletePost = Permission::create(['name' => 'delete post']);
+    $comments = Permission::create(['name' => 'comments']);
+    $likes = Permission::create(['name' => 'likes']);
+    $posts = Permission::create(['name' => 'posts']);
     // Attach permissions to roles.
-    $memberPermissions = [$writeComment, $editComment, $deleteComment, $addLike, $editLike, $deleteLike];
-    $contributorPermissions = [$memberPermissions, $writePost, $editPost, $deletePost];
-    $member->syncPermissions($memberPermissions);
-    $contributor->syncPermissions($contributorPermissions);
+    $member->syncPermissions([$comments, $likes]);
+    $contributor->syncPermissions([$comments, $likes, $posts]);
   }
 }
