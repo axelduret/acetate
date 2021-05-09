@@ -473,8 +473,8 @@ class PersonController extends Controller
    */
   protected function validators($update = false, $comment = false, $file = false)
   {
-    // TODO
     $validatorRules = [];
+    // TODO
     // Validator rules for all submitted fields.
     $validatorRules = [];
     // Validator rules for comments.

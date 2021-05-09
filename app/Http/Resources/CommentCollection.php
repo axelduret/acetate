@@ -9,6 +9,7 @@ class CommentCollection extends ResourceCollection
 {
   // Import custom credit trait.
   use CreditTrait;
+
   /**
    * Transform the resource collection into an array.
    *

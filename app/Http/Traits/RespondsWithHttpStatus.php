@@ -2,8 +2,13 @@
 
 namespace App\Http\Traits;
 
+use App\Http\Traits\CreditTrait;
+
 trait RespondsWithHttpStatus
 {
+  // Import custom credit trait.
+  use CreditTrait;
+
   /**
    * Return success message.
    *
@@ -14,10 +19,10 @@ trait RespondsWithHttpStatus
    */
   protected function success($message, $data = [], $status = 200)
   {
-    return response([
+    return  response([
       'success' => true,
       'message' => $message,
-      'data' => $data,
+      'data' => $data
     ], $status);
   }
 
@@ -33,6 +38,7 @@ trait RespondsWithHttpStatus
     return response([
       'success' => false,
       'message' => $message,
+      'credit' => $this->apiCredit()
     ], $status);
   }
 }
