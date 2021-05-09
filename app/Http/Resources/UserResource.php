@@ -2,11 +2,14 @@
 
 namespace App\Http\Resources;
 
-use App\Models\SocialNetwork;
+use App\Http\Traits\CreditTrait;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
 {
+  // Import custom credit trait.
+  use CreditTrait;
+
   /**
    * Transform the resource into an array.
    *
@@ -47,10 +50,7 @@ class UserResource extends JsonResource
         'phones' => $this->phones,
         'websites' => $this->websites->load('socialNetwork'),
       ],
-      'credit' => env('APP_CREDIT'),
-      'website' => env('APP_URL'),
-      'licence' => env('APP_LICENCE'),
-      'timezone' => env('TIME_ZONE'),
+      'credit' => $this->apiCredit()
     ];
   }
 

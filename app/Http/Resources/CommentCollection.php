@@ -2,10 +2,13 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Traits\CreditTrait;
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
 class CommentCollection extends ResourceCollection
 {
+  // Import custom credit trait.
+  use CreditTrait;
   /**
    * Transform the resource collection into an array.
    *
@@ -31,10 +34,7 @@ class CommentCollection extends ResourceCollection
           'user_id' => $item->user_id,
         ]);
       }),
-      'credit' => env('APP_CREDIT'),
-      'website' => env('APP_URL'),
-      'licence' => env('APP_LICENCE'),
-      'timezone' => env('TIME_ZONE'),
+      'credit' => $this->apiCredit()
     ];
   }
 

@@ -2,10 +2,14 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Traits\CreditTrait;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PersonResource extends JsonResource
 {
+  // Import custom credit trait.
+  use CreditTrait;
+
   /**
    * Transform the resource into an array.
    *
@@ -54,10 +58,7 @@ class PersonResource extends JsonResource
         'favorites' => $this->favorites,
         'user_id' => $this->user_id,
       ],
-      'credit' => env('APP_CREDIT'),
-      'website' => env('APP_URL'),
-      'licence' => env('APP_LICENCE'),
-      'timezone' => env('TIME_ZONE'),
+      'credit' => $this->apiCredit()
     ];
   }
 

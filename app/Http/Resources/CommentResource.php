@@ -2,10 +2,14 @@
 
 namespace App\Http\Resources;
 
+use App\Http\Traits\CreditTrait;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CommentResource extends JsonResource
 {
+  // Import custom credit trait.
+  use CreditTrait;
+
   /**
    * Transform the resource into an array.
    *
@@ -50,10 +54,7 @@ class CommentResource extends JsonResource
         'dislikes_count' => $this->likes->where('is_dislike', 1)->count(),
         'user_id' => $this->user_id,
       ],
-      'credit' => env('APP_CREDIT'),
-      'website' => env('APP_URL'),
-      'licence' => env('APP_LICENCE'),
-      'timezone' => env('TIME_ZONE'),
+      'credit' => $this->apiCredit()
     ];
   }
 
