@@ -58,7 +58,6 @@ class UserFavoritesCollection extends ResourceCollection
             'person' => $person,
             'venue' => $venue,
             'comments' => $comment,
-            'user_id' => $item->user_id,
           ]);
         }),
       'credit' => $this->apiCredit()

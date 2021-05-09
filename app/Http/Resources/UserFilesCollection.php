@@ -31,7 +31,6 @@ class UserFilesCollection extends ResourceCollection
             'encoding' => $item->encoding,
             'size' => $item->size,
             'path' => $item->path,
-            'user_id' => $item->user_id,
           ]);
         }),
       'credit' => $this->apiCredit()

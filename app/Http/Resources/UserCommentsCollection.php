@@ -54,7 +54,6 @@ class UserCommentsCollection extends ResourceCollection
             'likes_count' => $item->likes->where('is_dislike', 0)->count(),
             // TODO show dislikes of the logged user.
             'dislikes_count' => $item->likes->where('is_dislike', 1)->count(),
-            'user_id' => $item->user_id,
           ]);
         }),
       'credit' => $this->apiCredit()

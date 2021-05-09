@@ -32,7 +32,6 @@ class UserVenuesCollection extends ResourceCollection
             'dislikes_count' => $item->likes->where('is_dislike', 1)->count(),
             // TODO show favorites only if the user is logged in.
             'favorites' => $item->favorites,
-            'user_id' => $item->user_id,
           ]);
         }),
       'credit' => $this->apiCredit()
