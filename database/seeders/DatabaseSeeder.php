@@ -20,7 +20,6 @@ use App\Models\Favorite;
 use App\Models\Taxonomy;
 use App\Models\SocialNetwork;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {

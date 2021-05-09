@@ -103,12 +103,11 @@ class UserController extends Controller
     // Revoke all tokens.
     $user->tokens()->delete();
     // Create a new token and attach it to the current user.
-    $user->remember_token = $user->createToken('remember_token')->plainTextToken;
-    $user->save;
+    $token = $user->createToken('api_token')->plainTextToken;
     // Data response.
     $data = [
       'user' => $user->id,
-      'token' => $user->remember_token
+      'token' => $token
     ];
     // Returns data with success message.
     return $this->success('User ' . $user->id . ' successfully logged in.', $data, 201);

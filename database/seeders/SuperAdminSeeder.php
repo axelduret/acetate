@@ -3,10 +3,9 @@
 namespace Database\Seeders;
 
 use App\Models\User;
+use Illuminate\Support\Str;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\Facades\Storage;
 
 class SuperAdminSeeder extends Seeder
 {
@@ -27,7 +26,8 @@ class SuperAdminSeeder extends Seeder
       'company' => 'Acetate',
       'email' => 'admin@acetate.ch',
       'email_verified_at' => now(),
-      'password'  => Hash::make('admin')
+      'password'  => Hash::make('admin'),
+      'remember_token' => Str::random(10),
     ]);
     $admin->assignRole('super-admin');
     $admin->save();
