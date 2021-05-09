@@ -100,16 +100,15 @@ class UserController extends Controller
     if (!$user || !Hash::check($request->password, $user->password)) {
       return $this->failure('Wrong email or password.', 403);
     }
-    $token = $user->remember_token;
-    // Create a new token.
-    $token = $user->createToken('remember_token')->plainTextToken;
-    // Attach the new token to the specified user.
-    $user->remember_token = $token;
+    // Revoke all tokens.
+    $user->tokens()->delete();
+    // Create a new token and attach it to the current user.
+    $user->remember_token = $user->createToken('remember_token')->plainTextToken;
     $user->save;
     // Data response.
     $data = [
       'user' => $user->id,
-      'token' => $token
+      'token' => $user->remember_token
     ];
     // Returns data with success message.
     return $this->success('User ' . $user->id . ' successfully logged in.', $data, 201);
