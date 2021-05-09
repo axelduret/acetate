@@ -2,8 +2,15 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Models\File;
+use App\Models\Like;
 use App\Models\User;
+use App\Models\Event;
+use App\Models\Venue;
+use App\Models\Person;
+use App\Models\Ticket;
 use App\Models\Comment;
+use App\Models\Favorite;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Resources\UserResource;
@@ -14,10 +21,16 @@ use App\Http\Resources\UserLikesResource;
 use App\Http\Resources\UserEventsResource;
 use App\Http\Resources\UserPeopleResource;
 use App\Http\Resources\UserVenuesResource;
+use App\Http\Resources\UserFilesCollection;
+use App\Http\Resources\UserLikesCollection;
 use App\Http\Resources\UserTicketsResource;
 use App\Http\Traits\RespondsWithHttpStatus;
+use App\Http\Resources\UserEventsCollection;
+use App\Http\Resources\UserPeopleCollection;
+use App\Http\Resources\UserVenuesCollection;
 use App\Http\Resources\UserFavoritesResource;
 use App\Http\Resources\UserCommentsCollection;
+use App\Http\Resources\UserFavoritesCollection;
 
 class UserController extends Controller
 {
@@ -25,7 +38,7 @@ class UserController extends Controller
   use RespondsWithHttpStatus;
 
   // Default pagination value.
-  const PER_PAGE = 50;
+  const PER_PAGE = 10;
 
   /**
    * Sortable fields.
@@ -142,99 +155,124 @@ class UserController extends Controller
     if (!$user) {
       return $this->failure('User not found.', 404);
     }
-
+    // Display specified user's contents.
     switch ($contentField) {
+        // Events.
       case 'events':
-        // TODO
-        // Return all events attached to the user.
-        return new UserEventsResource(
-          $user->events
-            ->load('venues')
-            ->load('dates')
-            ->load('prices')
-            ->load('taxonomies')
-            ->load('likes')
-            ->load('favorites')
-            ->load('comments')
-        );
-        break;
-      case 'people':
-        // TODO
-        // Return all people attached to the user.
-        return new UserPeopleResource(
-          $user->people
-            ->load('taxonomies')
-            ->load('likes')
-            ->load('favorites')
-            ->load('comments')
-        );
-        break;
-      case 'venues':
-        // TODO
-        // Return all venues attached to the user.
-        return new UserVenuesResource(
-          $user->venues
-            ->load('addresses')
-            ->load('taxonomies')
-            ->load('likes')
-            ->load('favorites')
-            ->load('comments')
-        );
-        break;
-      case 'comments':
-        // TODO add check if exist.
+        $events = $user->events;
+        // Check if user's events exist.
+        if ($events->isEmpty()) {
+          return $this->failure('No events found for this user.', 404);
+        }
         // Pagination.
-        $perPage = $request->input('per_page') ?? 10;
+        $perPage = $request->input('per_page') ?? self::PER_PAGE;
+        // Return all events attached to the user.
+        return new UserEventsCollection(
+          Event::where('user_id', $id)->paginate((int)$perPage)
+        );
+        break;
+        // People.
+      case 'people':
+        $people = $user->people;
+        // Check if user's people exist.
+        if ($people->isEmpty()) {
+          return $this->failure('No people found for this user.', 404);
+        }
+        // Pagination.
+        $perPage = $request->input('per_page') ?? self::PER_PAGE;
+        // Return all people attached to the user.
+        return new UserPeopleCollection(
+          Person::where('user_id', $id)->paginate((int)$perPage)
+        );
+        break;
+        // Venues.
+      case 'venues':
+        $venues = $user->venues;
+        // Check if user's venues exist.
+        if ($venues->isEmpty()) {
+          return $this->failure('No venues found for this user.', 404);
+        }
+        // Pagination.
+        $perPage = $request->input('per_page') ?? self::PER_PAGE;
+        // Return all venues attached to the user.
+        return new UserVenuesCollection(
+          Venue::where('user_id', $id)->paginate((int)$perPage)
+        );
+        break;
+        // Comments.
+      case 'comments':
+        $comments = $user->comments;
+        // Check if user's comments exist.
+        if ($comments->isEmpty()) {
+          return $this->failure('No comments found for this user.', 404);
+        }
+        // Pagination.
+        $perPage = $request->input('per_page') ?? self::PER_PAGE;
         // Return all comments attached to the user.
         return new UserCommentsCollection(
           Comment::where('user_id', $id)->paginate((int)$perPage)
         );
         break;
+        // Likes.
       case 'likes':
-        // TODO
+        $likes = $user->likes;
+        // Check if user's likes exist.
+        if ($likes->isEmpty()) {
+          return $this->failure('No likes found for this user.', 404);
+        }
+        // Pagination.
+        $perPage = $request->input('per_page') ?? self::PER_PAGE;
         // Return all likes attached to the user.
-        return new UserLikesResource(
-          $user->likes
-            ->load('event')
-            ->load('person')
-            ->load('venue')
-            ->load('comment')
+        return new UserLikesCollection(
+          Like::where('user_id', $id)->paginate((int)$perPage)
         );
         break;
+        // Favorites.
       case 'favorites':
-        // TODO
+        $favorites = $user->favorites;
+        // Check if user's favorites exist.
+        if ($favorites->isEmpty()) {
+          return $this->failure('No favorites found for this user.', 404);
+        }
+        // Pagination.
+        $perPage = $request->input('per_page') ?? self::PER_PAGE;
         // Return all favorites attached to the user.
-        return new UserFavoritesResource(
-          $user->favorites
-            ->load('event')
-            ->load('person')
-            ->load('venue')
+        return new UserFavoritesCollection(
+          Favorite::where('user_id', $id)->paginate((int)$perPage)
         );
         break;
+        // Files.
       case 'files':
-        // TODO add pagination
         $files = $user->files;
         // Check if user's files exist.
         if ($files->isEmpty()) {
           return $this->failure('No files found for this user.', 404);
         }
-        // Return all files attached to the user.
-        return new UserFilesResource($files);
-        break;
-      case 'tickets':
-        // TODO
-        // Return all tickets attached to the user.
-        return new UserTicketsResource(
-          $user->tickets
-            ->load('addresses')
-            ->load('emails')
-            ->load('phones')
-            ->load('event')
-            ->load('event.dates')
+        // Pagination.
+        $perPage = $request->input('per_page') ?? self::PER_PAGE;
+        // Return all comments attached to the user.
+        return new UserFilesCollection(
+          File::where('user_id', $id)->paginate((int)$perPage)
         );
         break;
+        // TODO Tickets.
+        /* 
+      case 'tickets':
+        $tickets = $user->tickets;
+        // Check if user's tickets exist.
+        if ($tickets->isEmpty()) {
+          return $this->failure('No tickets found for this user.', 404);
+        }
+        // Pagination.
+        $perPage = $request->input('per_page') ?? self::PER_PAGE;
+        // Return all tickets attached to the user.
+        return new UserTicketsCollection(
+          Ticket::where('user_id', $id)->paginate((int)$perPage)
+        );
+        break;
+         */
       default:
-        // Return the user data.
+        // By default, returns the user data.
         return new UserResource($user);
     }
   }
