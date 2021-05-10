@@ -1,46 +1,11 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="showNavigationDrawer" app temporary
-      ><v-app-bar outlined
-        ><v-app-bar-nav-icon
-          class="primary--text"
-          @click="showNavigationDrawer = !showNavigationDrawer"
-        ></v-app-bar-nav-icon>
-        <div class="blue-grey rounded-sm mx-2" :class="bgLogo">
-          <v-toolbar-title
-            class="ml-2 mr-3 primary--text"
-            style="font-family: monospace"
-          >
-            <v-icon class="primary--text mr-0" style="margin-bottom: 0.175rem"
-              >mdi-minidisc</v-icon
-            >
-            {{ appName }}</v-toolbar-title
-          >
-        </div>
-      </v-app-bar>
-      <v-spacer></v-spacer>
-      <v-list nav dense>
-        <v-list-item-group>
-          <v-list-item
-            v-for="(item, index) in getMenu"
-            :key="index"
-            class="primary--text"
-            :to="item.path"
-          >
-            <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-icon>
-            <v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
     <v-app-bar app outlined
       ><v-app-bar-nav-icon
         class="primary--text"
-        @click="showNavigationDrawer = !showNavigationDrawer"
+        @click.stop="$emit('toggle-drawer')"
       ></v-app-bar-nav-icon>
-      <div class="blue-grey rounded-sm mx-2" :class="bgLogo">
+      <div class="rounded-sm mx-2" :class="bgLogo">
         <v-toolbar-title
           class="ml-2 mr-3 primary--text"
           style="font-family: monospace"
@@ -110,7 +75,7 @@ export default {
   data: () => ({
     appName: process.env.MIX_APP_NAME,
     bgLogo: "darken-3",
-    showNavigationDrawer: false,
+    drawer: false,
     themeSwitcherTitle: "theme.switcher.light-title",
     themeSwitcherIcon: "mdi-weather-sunny",
     localeSwitcherTitle: "lang.switcher.title",

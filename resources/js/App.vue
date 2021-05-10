@@ -1,6 +1,7 @@
 <template>
   <v-app>
-    <Header />
+    <Sidebar ref="sidebar" />
+    <Header @toggle-drawer="$refs.sidebar.drawer = !$refs.sidebar.drawer" />
     <v-main>
       <v-container fluid>
         <router-view></router-view>
@@ -12,9 +13,10 @@
 
 <script>
 import Header from "./components/layout/Header";
+import Sidebar from "./components/layout/Sidebar";
 import Footer from "./components/layout/Footer";
 export default {
-  components: { Header, Footer },
+  components: { Header, Sidebar, Footer },
   data: () => ({}),
 };
 </script>
