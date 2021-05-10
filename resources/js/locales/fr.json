@@ -48,7 +48,9 @@
         },
         "events": {
             "title": "Bienvenue !",
-            "description": "..."
+            "description": "...",
+            "From": "Du",
+            "to": "au"
         },
         "people": {
             "title": "Bienvenue !",

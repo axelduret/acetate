@@ -23,6 +23,7 @@ class EventCollection extends ResourceCollection
         return collect([
           'id' => $item->event->id,
           'name' => $item->event->name,
+          'avatar' => $item->event->avatar,
           'addresses' => $item->event->addresses->map(function ($item) {
             return [
               'latitude' => $item['latitude'],

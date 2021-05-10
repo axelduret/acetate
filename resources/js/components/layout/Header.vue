@@ -2,16 +2,20 @@
   <div>
     <v-app-bar app outlined
       ><v-app-bar-nav-icon
-        class="primary--text"
+        :class="$vuetify.theme.dark ? 'secondary--text' : 'primary--text'"
         @click.stop="$emit('toggle-drawer')"
       ></v-app-bar-nav-icon>
       <div
         class="rounded-sm mx-2"
         :class="$vuetify.theme.dark ? 'darken-3' : 'lighten-4'"
       >
-        <v-toolbar-title class="primary--text" style="font-family: monospace">
+        <v-toolbar-title
+          :class="$vuetify.theme.dark ? 'secondary--text' : 'primary--text'"
+          style="font-family: monospace"
+        >
           <v-icon
-            class="flaticon-music-disc-with-white-curve-details primary--text mr-0"
+            class="flaticon-music-disc-with-white-curve-details mr-0"
+            :class="$vuetify.theme.dark ? 'secondary--text' : 'primary--text'"
             style="margin-bottom: 0.175rem"
           ></v-icon>
           {{ appName }}</v-toolbar-title
@@ -24,7 +28,7 @@
             ? $t('theme.switcher.light-title')
             : $t('theme.switcher.dark-title')
         "
-        class="primary--text"
+        :class="$vuetify.theme.dark ? 'secondary--text' : 'primary--text'"
         style="margin-top: 1.32rem"
       >
         <v-switch
@@ -39,7 +43,12 @@
       <div :title="$t(localeSwitcherTitle)">
         <v-menu bottom offset-y>
           <template v-slot:activator="{ on, attrs }">
-            <v-btn class="primary--text" icon v-bind="attrs" v-on="on">
+            <v-btn
+              :class="$vuetify.theme.dark ? 'secondary--text' : 'primary--text'"
+              icon
+              v-bind="attrs"
+              v-on="on"
+            >
               <v-icon>mdi-web</v-icon>
             </v-btn>
           </template>
@@ -62,7 +71,12 @@
       <div :title="$t(accountMenuTitle)">
         <v-menu bottom offset-y>
           <template v-slot:activator="{ on, attrs }">
-            <v-btn class="primary--text" icon v-bind="attrs" v-on="on">
+            <v-btn
+              :class="$vuetify.theme.dark ? 'secondary--text' : 'primary--text'"
+              icon
+              v-bind="attrs"
+              v-on="on"
+            >
               <v-icon>mdi-account-circle</v-icon>
             </v-btn>
           </template>

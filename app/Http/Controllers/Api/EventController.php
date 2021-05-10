@@ -105,10 +105,10 @@ class EventController extends Controller
     $query = Date::whereDate($searchField, $searchValue, $searchReference)
       // Returns the list of dates with attached relationships.
       ->with([
-        // Returns event:id and event:name.
+        // Returns event:id, event:name and event:avatar.
         'event' => function ($filter) {
           $filter
-            ->select('id', 'name')
+            ->select('id', 'name', 'avatar')
             // Order event by name.
             ->orderBy('name')
             // Returns the total number of likes.

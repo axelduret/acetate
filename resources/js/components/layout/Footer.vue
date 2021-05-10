@@ -4,7 +4,8 @@
       <v-btn
         v-for="(icon, index) in footerIcons"
         :key="index"
-        class="mx-4 primary--text"
+        class="mx-4"
+        :class="$vuetify.theme.dark ? 'secondary--text' : 'primary--text'"
         icon
       >
         <v-icon>

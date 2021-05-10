@@ -48,7 +48,9 @@
         },
         "events": {
             "title": "Welcome !",
-            "description": "..."
+            "description": "...",
+            "From": "From",
+            "to": "to"
         },
         "people": {
             "title": "Welcome !",

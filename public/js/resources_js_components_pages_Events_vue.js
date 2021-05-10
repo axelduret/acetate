@@ -23,9 +23,107 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {};
+    return {
+      events: null
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get("/api/events?per_page=100").then(function (response) {
+      _this.events = response.data.events;
+      return _this.events;
+    });
   }
 });
 
@@ -124,15 +222,186 @@ var render = function() {
     [
       _c(
         "v-row",
-        [
-          _c("v-col", [
-            _c("code", { staticClass: "primary--text" }, [
-              _vm._v(
-                "\n        " + _vm._s(_vm.$t("page.events.title")) + "\n      "
-              )
-            ])
-          ])
-        ],
+        { attrs: { dense: "" } },
+        _vm._l(_vm.events, function(event) {
+          return _c(
+            "v-col",
+            {
+              key: event.id,
+              attrs: { cols: "12", sm: "6", md: "4", lg: "3", xl: "2" }
+            },
+            [
+              _c("v-card", {}, [
+                _c(
+                  "div",
+                  { staticClass: "py-4" },
+                  [
+                    _c(
+                      "v-row",
+                      { staticClass: "pb-3" },
+                      [
+                        _c(
+                          "v-col",
+                          { staticClass: "mx-4 col-auto mr-auto" },
+                          [
+                            event.start_date === event.end_date
+                              ? _c(
+                                  "span",
+                                  { staticClass: "caption primary--text" },
+                                  [
+                                    _c(
+                                      "v-icon",
+                                      {
+                                        staticClass: "mr-1 primary--text",
+                                        staticStyle: {
+                                          "margin-bottom": "0.08rem"
+                                        },
+                                        attrs: { small: "" }
+                                      },
+                                      [_vm._v("mdi-calendar-blank")]
+                                    ),
+                                    _vm._v(
+                                      "\n                " +
+                                        _vm._s(
+                                          _vm._f("formatDate")(event.start_date)
+                                        ) +
+                                        "\n              "
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            event.start_date !== event.end_date
+                              ? _c(
+                                  "span",
+                                  { staticClass: "caption primary--text" },
+                                  [
+                                    _c(
+                                      "v-icon",
+                                      {
+                                        staticClass: "mr-1 primary--text",
+                                        staticStyle: {
+                                          "margin-bottom": "0.08rem"
+                                        },
+                                        attrs: { small: "" }
+                                      },
+                                      [_vm._v("mdi-calendar-blank-multiple")]
+                                    ),
+                                    _vm._v(
+                                      "\n                " +
+                                        _vm._s(_vm.$t("page.events.From")) +
+                                        "\n                " +
+                                        _vm._s(
+                                          _vm._f("formatMultipleDates")(
+                                            event.start_date
+                                          )
+                                        ) +
+                                        "\n                " +
+                                        _vm._s(_vm.$t("page.events.to")) +
+                                        "\n                " +
+                                        _vm._s(
+                                          _vm._f("formatMultipleDates")(
+                                            event.end_date
+                                          )
+                                        )
+                                    )
+                                  ],
+                                  1
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            _c("v-spacer"),
+                            _vm._v(" "),
+                            _c(
+                              "span",
+                              { staticClass: "caption primary--text" },
+                              [
+                                _c(
+                                  "v-icon",
+                                  {
+                                    staticClass: "mr-1 primary--text",
+                                    staticStyle: { "margin-bottom": "0.08rem" },
+                                    attrs: { small: "" }
+                                  },
+                                  [_vm._v("mdi-clock-time-four-outline")]
+                                ),
+                                _vm._v(
+                                  "\n                " +
+                                    _vm._s(
+                                      _vm._f("formatTime")(event.start_time)
+                                    ) +
+                                    " -\n                " +
+                                    _vm._s(_vm._f("formatTime")(event.end_time))
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c("v-divider", {}),
+                    _vm._v(" "),
+                    _c(
+                      "v-row",
+                      { staticClass: "pt-3" },
+                      [
+                        _c("v-col", { staticClass: "mx-4 col-auto ml-auto" }, [
+                          _c(
+                            "span",
+                            { staticClass: "orange--text mr-3" },
+                            [
+                              _c(
+                                "v-icon",
+                                {
+                                  staticClass: "orange--text mr-1",
+                                  staticStyle: { "margin-bottom": "0.05rem" },
+                                  attrs: { dark: "", small: "" }
+                                },
+                                [_vm._v("\n                  mdi-comment ")]
+                              ),
+                              _c("span", { staticClass: "subtitle-2" }, [
+                                _vm._v(_vm._s(event.comments_count) + " ")
+                              ])
+                            ],
+                            1
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "span",
+                            { staticClass: "pink--text" },
+                            [
+                              _c(
+                                "v-icon",
+                                {
+                                  staticClass: "pink--text mr-1",
+                                  staticStyle: { "margin-bottom": "0.05rem" },
+                                  attrs: { dark: "", small: "" }
+                                },
+                                [_vm._v("\n                  mdi-heart ")]
+                              ),
+                              _c("span", { staticClass: "subtitle-2" }, [
+                                _vm._v(_vm._s(event.likes_count))
+                              ])
+                            ],
+                            1
+                          )
+                        ])
+                      ],
+                      1
+                    )
+                  ],
+                  1
+                )
+              ])
+            ],
+            1
+          )
+        }),
         1
       )
     ],

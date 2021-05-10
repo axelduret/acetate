@@ -3,16 +3,20 @@
     <v-navigation-drawer v-model="drawer" app temporary
       ><v-app-bar outlined
         ><v-app-bar-nav-icon
-          class="primary--text"
+          :class="$vuetify.theme.dark ? 'secondary--text' : 'primary--text'"
           @click="drawer = !drawer"
         ></v-app-bar-nav-icon>
         <div
           class="rounded-sm mx-2"
           :class="$vuetify.theme.dark ? 'darken-3' : 'lighten-4'"
         >
-          <v-toolbar-title class="primary--text" style="font-family: monospace">
+          <v-toolbar-title
+            :class="$vuetify.theme.dark ? 'secondary--text' : 'primary--text'"
+            style="font-family: monospace"
+          >
             <v-icon
-              class="flaticon-music-disc-with-white-curve-details primary--text mr-0"
+              class="flaticon-music-disc-with-white-curve-details mr-0"
+              :class="$vuetify.theme.dark ? 'secondary--text' : 'primary--text'"
               style="margin-bottom: 0.175rem"
             ></v-icon>
             {{ appName }}</v-toolbar-title

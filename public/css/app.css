@@ -100,11 +100,11 @@ i[class^=flaticon-]:before, i[class*=" flaticon-"]:before {
 */
 ::-moz-selection {
   color: #ECEFF1;
-  background: #4DB6AC;
+  background: #4db6ac;
 }
 ::selection {
   color: #ECEFF1;
-  background: #4DB6AC;
+  background: #4db6ac;
 }
 
 .v-input__prepend-outer .v-icon {
@@ -127,9 +127,18 @@ i[class^=flaticon-]:before, i[class*=" flaticon-"]:before {
   background-color: #263238;
 }
 
+.theme--dark.v-sheet.v-card {
+  background-color: rgba(19, 109, 131, 0.25);
+}
+
 .theme--dark .v-list-item :not(.v-list-item--active) :not(.v-list-item--disabled),
 .theme--dark .v-list-item__title {
-  color: #4DB6AC;
+  color: #4db6ac;
+}
+
+.theme--dark.v-divider {
+  background-color: #4db6ac;
+  opacity: 30%;
 }
 
 /*!
@@ -144,7 +153,15 @@ i[class^=flaticon-]:before, i[class*=" flaticon-"]:before {
   background-color: #ECEFF1;
 }
 
+.theme--light.v-sheet.v-card {
+  background-color: #FFF;
+}
+
 .theme--light .v-list-item :not(.v-list-item--active) :not(.v-list-item--disabled),
 .theme--light .v-list-item__title {
   color: #136c83;
+}
+
+.theme--light.v-divider {
+  background-color: #ECEFF1;
 }
