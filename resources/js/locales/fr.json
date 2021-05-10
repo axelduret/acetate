@@ -16,8 +16,17 @@
         "home": {
             "title": "Accueil"
         },
-        "account": {
-            "title": "Mon Compte"
+        "events": {
+            "title": "Événements"
+        },
+        "people": {
+            "title": "Personnes"
+        },
+        "venues": {
+            "title": "Lieux"
+        },
+        "users": {
+            "title": "Utilisateurs"
         }
     },
     "account-menu": {
@@ -34,6 +43,22 @@
     },
     "page": {
         "home": {
+            "title": "Bienvenue !",
+            "description": "..."
+        },
+        "events": {
+            "title": "Bienvenue !",
+            "description": "..."
+        },
+        "people": {
+            "title": "Bienvenue !",
+            "description": "..."
+        },
+        "venues": {
+            "title": "Bienvenue !",
+            "description": "..."
+        },
+        "users": {
             "title": "Bienvenue !",
             "description": "..."
         },

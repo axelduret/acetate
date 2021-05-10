@@ -38,6 +38,26 @@ const routes = [
                 }
             },
             {
+                path: "events",
+                name: "Events",
+                component: loadPage("pages/Events")
+            },
+            {
+                path: "people",
+                name: "People",
+                component: loadPage("pages/People")
+            },
+            {
+                path: "venues",
+                name: "Venues",
+                component: loadPage("pages/Venues")
+            },
+            {
+                path: "users",
+                name: "Users",
+                component: loadPage("pages/Users")
+            },
+            {
                 path: "register",
                 name: "Register",
                 component: loadPage("pages/Register")

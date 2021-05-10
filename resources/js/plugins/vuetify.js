@@ -11,13 +11,13 @@ export default new Vuetify({
         themes: {
             light: {
                 primary: "#455A64",
-                secondary: colors.purple.lighten3,
+                secondary: "#4DB6AC",
                 accent: colors.shades.black,
                 error: colors.red.accent3
             },
             dark: {
                 primary: "#ECEFF1",
-                secondary: colors.purple.lighten3,
+                secondary: "#4DB6AC",
                 accent: colors.shades.white,
                 error: colors.red.accent3
             }

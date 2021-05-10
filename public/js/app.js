@@ -1861,6 +1861,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -1998,43 +2001,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      // App name.
       appName: "Acetate",
-      bgLogo: "darken-3",
+      // Sidebar.
       drawer: false,
-      themeSwitcherTitle: "theme.switcher.light-title",
-      themeSwitcherIcon: "mdi-weather-sunny",
+      // Theme switch active.
+      themeSwitch: true,
+      // Locale switch title.
       localeSwitcherTitle: "lang.switcher.title",
+      // Available locales.
       locales: "fr,en".split(","),
+      // Account menu title.
       accountMenuTitle: "account-menu.title"
     };
   },
-  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(["getMenu", "getLang", "getAccountMenu"]),
+  // Get locale and account menu contents.
+  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(["getLang", "getAccountMenu"]),
   methods: {
+    // Set default theme.
+    defaultTheme: function defaultTheme() {
+      var defaultTheme = "light";
+
+      if (defaultTheme === "light") {
+        this.$vuetify.theme.light = true;
+        this.themeSwitch = true;
+      }
+
+      if (defaultTheme === "dark") {
+        this.$vuetify.theme.dark = true;
+        this.themeSwitch = false;
+      }
+    },
+    // Theme switch.
     themeSwitcher: function themeSwitcher() {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
-      this.changeBgLogo();
-      this.changeThemeSwitcherTitle();
-      this.changeThemeSwitcherIcon();
     },
-    changeBgLogo: function changeBgLogo() {
-      if (this.bgLogo === "darken-3") {
-        this.bgLogo = "lighten-4";
-      } else this.bgLogo = "darken-3";
-    },
-    changeThemeSwitcherTitle: function changeThemeSwitcherTitle() {
-      if (this.themeSwitcherTitle === "theme.switcher.light-title") {
-        this.themeSwitcherTitle = "theme.switcher.dark-title";
-      } else this.themeSwitcherTitle = "theme.switcher.light-title";
-    },
-    changeThemeSwitcherIcon: function changeThemeSwitcherIcon() {
-      if (this.themeSwitcherIcon === "mdi-weather-sunny") {
-        this.themeSwitcherIcon = "mdi-weather-night";
-      } else this.themeSwitcherIcon = "mdi-weather-sunny";
-    },
+    // Locale switch.
     localeSwitcher: function localeSwitcher(locale) {
       if (this.$i18n.locale !== locale) {
         this.$i18n.locale = locale;
@@ -2044,16 +2062,19 @@ __webpack_require__.r(__webpack_exports__);
           }
         });
         this.$router.push(to.location);
-      }
+      } // Set html lang attribute.
+
 
       document.querySelector("html").setAttribute("lang", locale);
     }
   },
   beforeCreate: function beforeCreate() {
+    // Set html lang attribute.
     document.querySelector("html").setAttribute("lang", this.$i18n.locale);
   },
   created: function created() {
-    this.$vuetify.theme.dark = true;
+    // Set default theme.
+    this.defaultTheme();
   }
 });
 
@@ -2115,59 +2136,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
+      // App name.
       appName: "Acetate",
-      bgLogo: "darken-3",
-      drawer: false,
-      themeSwitcherTitle: "theme.switcher.light-title",
-      themeSwitcherIcon: "mdi-weather-sunny",
-      localeSwitcherTitle: "lang.switcher.title",
-      locales: "fr,en".split(","),
-      accountMenuTitle: "account-menu.title"
+      // Sidebar.
+      drawer: false
     };
   },
-  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(["getMenu", "getLang", "getAccountMenu"]),
-  methods: {
-    themeSwitcher: function themeSwitcher() {
-      this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
-      this.changeBgLogo();
-      this.changeThemeSwitcherTitle();
-      this.changeThemeSwitcherIcon();
-    },
-    changeBgLogo: function changeBgLogo() {
-      if (this.bgLogo === "darken-3") {
-        this.bgLogo = "lighten-4";
-      } else this.bgLogo = "darken-3";
-    },
-    changeThemeSwitcherTitle: function changeThemeSwitcherTitle() {
-      if (this.themeSwitcherTitle === "theme.switcher.light-title") {
-        this.themeSwitcherTitle = "theme.switcher.dark-title";
-      } else this.themeSwitcherTitle = "theme.switcher.light-title";
-    },
-    changeThemeSwitcherIcon: function changeThemeSwitcherIcon() {
-      if (this.themeSwitcherIcon === "mdi-weather-sunny") {
-        this.themeSwitcherIcon = "mdi-weather-night";
-      } else this.themeSwitcherIcon = "mdi-weather-sunny";
-    },
-    localeSwitcher: function localeSwitcher(locale) {
-      if (this.$i18n.locale !== locale) {
-        this.$i18n.locale = locale;
-        var to = this.$router.resolve({
-          params: {
-            locale: locale
-          }
-        });
-        this.$router.push(to.location);
-      }
-
-      document.querySelector("html").setAttribute("lang", locale);
-    }
-  },
-  beforeCreate: function beforeCreate() {
-    document.querySelector("html").setAttribute("lang", this.$i18n.locale);
-  },
-  created: function created() {
-    this.$vuetify.theme.dark = true;
-  }
+  // Get sidebar menu content.
+  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(["getMenu"])
 });
 
 /***/ }),
@@ -2198,10 +2174,10 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 vue__WEBPACK_IMPORTED_MODULE_5__.default.use(vuelidate__WEBPACK_IMPORTED_MODULE_6__.default);
-vue__WEBPACK_IMPORTED_MODULE_5__.default.config.productionTip = false; //document.title = process.env.MIX_APP_NAME;
+vue__WEBPACK_IMPORTED_MODULE_5__.default.config.productionTip = false; // document.title = process.env.MIX_APP_NAME;
+// console.log(i18n.locale);
+// console.log(process.env.MIX_VUE_APP_I18N_SUPPORTED_LOCALE);
 
-console.log(_plugins_vue_i18n__WEBPACK_IMPORTED_MODULE_1__.default.locale);
-console.log("fr,en");
 var app = new vue__WEBPACK_IMPORTED_MODULE_5__.default({
   el: "#app",
   vuetify: _plugins_vuetify__WEBPACK_IMPORTED_MODULE_0__.default,
@@ -2312,13 +2288,13 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.use((vuetify__WEBPACK_IMPORTED_MODULE_1
     themes: {
       light: {
         primary: "#455A64",
-        secondary: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.purple.lighten3,
+        secondary: "#4DB6AC",
         accent: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.shades.black,
         error: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.red.accent3
       },
       dark: {
         primary: "#ECEFF1",
-        secondary: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.purple.lighten3,
+        secondary: "#4DB6AC",
         accent: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.shades.white,
         error: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.red.accent3
       }
@@ -2376,6 +2352,22 @@ var routes = [{
     meta: {
       title: "main.title"
     }
+  }, {
+    path: "events",
+    name: "Events",
+    component: loadPage("pages/Events")
+  }, {
+    path: "people",
+    name: "People",
+    component: loadPage("pages/People")
+  }, {
+    path: "venues",
+    name: "Venues",
+    component: loadPage("pages/Venues")
+  }, {
+    path: "users",
+    name: "Users",
+    component: loadPage("pages/Users")
   }, {
     path: "register",
     name: "Register",
@@ -2463,9 +2455,21 @@ var state = {
     path: "home",
     icon: "mdi-home"
   }, {
-    title: "menu.account.title",
-    path: "account",
-    icon: "mdi-account"
+    title: "menu.events.title",
+    path: "events",
+    icon: "mdi-calendar-clock"
+  }, {
+    title: "menu.people.title",
+    path: "people",
+    icon: "mdi-calendar-account"
+  }, {
+    title: "menu.venues.title",
+    path: "venues",
+    icon: "mdi-office-building-marker"
+  }, {
+    title: "menu.users.title",
+    path: "users",
+    icon: "mdi-account-group"
   }]
 };
 var getters = {
@@ -22469,6 +22473,7 @@ var render = function() {
       _c("Sidebar", { ref: "sidebar" }),
       _vm._v(" "),
       _c("Header", {
+        ref: "header",
         on: {
           "toggle-drawer": function($event) {
             _vm.$refs.sidebar.drawer = !_vm.$refs.sidebar.drawer
@@ -22577,23 +22582,23 @@ var render = function() {
           _vm._v(" "),
           _c(
             "div",
-            { staticClass: "rounded-sm mx-2", class: _vm.bgLogo },
+            {
+              staticClass: "rounded-sm mx-2",
+              class: _vm.$vuetify.theme.dark ? "darken-3" : "lighten-4"
+            },
             [
               _c(
                 "v-toolbar-title",
                 {
-                  staticClass: "ml-2 mr-3 primary--text",
+                  staticClass: "primary--text",
                   staticStyle: { "font-family": "monospace" }
                 },
                 [
-                  _c(
-                    "v-icon",
-                    {
-                      staticClass: "primary--text mr-0",
-                      staticStyle: { "margin-bottom": "0.175rem" }
-                    },
-                    [_vm._v("mdi-minidisc")]
-                  ),
+                  _c("v-icon", {
+                    staticClass:
+                      "flaticon-music-disc-with-white-curve-details primary--text mr-0",
+                    staticStyle: { "margin-bottom": "0.175rem" }
+                  }),
                   _vm._v("\n        " + _vm._s(_vm.appName))
                 ],
                 1
@@ -22607,13 +22612,30 @@ var render = function() {
           _c(
             "div",
             {
+              staticClass: "primary--text",
               staticStyle: { "margin-top": "1.32rem" },
-              attrs: { title: _vm.$t(_vm.themeSwitcherTitle) }
+              attrs: {
+                title: _vm.$vuetify.theme.dark
+                  ? _vm.$t("theme.switcher.light-title")
+                  : _vm.$t("theme.switcher.dark-title")
+              }
             },
             [
               _c("v-switch", {
-                attrs: { inset: "", "prepend-icon": _vm.themeSwitcherIcon },
-                on: { click: _vm.themeSwitcher }
+                attrs: {
+                  inset: "",
+                  "prepend-icon": _vm.$vuetify.theme.dark
+                    ? "mdi-weather-sunny"
+                    : "mdi-weather-night"
+                },
+                on: { click: _vm.themeSwitcher },
+                model: {
+                  value: _vm.themeSwitch,
+                  callback: function($$v) {
+                    _vm.themeSwitch = $$v
+                  },
+                  expression: "themeSwitch"
+                }
               })
             ],
             1
@@ -22827,23 +22849,23 @@ var render = function() {
               _vm._v(" "),
               _c(
                 "div",
-                { staticClass: "rounded-sm mx-2", class: _vm.bgLogo },
+                {
+                  staticClass: "rounded-sm mx-2",
+                  class: _vm.$vuetify.theme.dark ? "darken-3" : "lighten-4"
+                },
                 [
                   _c(
                     "v-toolbar-title",
                     {
-                      staticClass: "ml-2 mr-3 primary--text",
+                      staticClass: "primary--text",
                       staticStyle: { "font-family": "monospace" }
                     },
                     [
-                      _c(
-                        "v-icon",
-                        {
-                          staticClass: "primary--text mr-0",
-                          staticStyle: { "margin-bottom": "0.175rem" }
-                        },
-                        [_vm._v("mdi-minidisc")]
-                      ),
+                      _c("v-icon", {
+                        staticClass:
+                          "flaticon-music-disc-with-white-curve-details primary--text mr-0",
+                        staticStyle: { "margin-bottom": "0.175rem" }
+                      }),
                       _vm._v("\n          " + _vm._s(_vm.appName))
                     ],
                     1
@@ -22866,11 +22888,7 @@ var render = function() {
                 _vm._l(_vm.getMenu, function(item, index) {
                   return _c(
                     "v-list-item",
-                    {
-                      key: index,
-                      staticClass: "primary--text",
-                      attrs: { to: item.path }
-                    },
+                    { key: index, attrs: { to: item.path } },
                     [
                       _c(
                         "v-list-item-icon",
@@ -85554,6 +85572,10 @@ var map = {
 		"./resources/js/components/pages/Dashboard.vue",
 		"resources_js_components_pages_Dashboard_vue"
 	],
+	"./pages/Events.vue": [
+		"./resources/js/components/pages/Events.vue",
+		"resources_js_components_pages_Events_vue"
+	],
 	"./pages/Home.vue": [
 		"./resources/js/components/pages/Home.vue",
 		"resources_js_components_pages_Home_vue"
@@ -85562,9 +85584,21 @@ var map = {
 		"./resources/js/components/pages/Login.vue",
 		"resources_js_components_pages_Login_vue"
 	],
+	"./pages/People.vue": [
+		"./resources/js/components/pages/People.vue",
+		"resources_js_components_pages_People_vue"
+	],
 	"./pages/Register.vue": [
 		"./resources/js/components/pages/Register.vue",
 		"resources_js_components_pages_Register_vue"
+	],
+	"./pages/Users.vue": [
+		"./resources/js/components/pages/Users.vue",
+		"resources_js_components_pages_Users_vue"
+	],
+	"./pages/Venues.vue": [
+		"./resources/js/components/pages/Venues.vue",
+		"resources_js_components_pages_Venues_vue"
 	]
 };
 function webpackAsyncContext(req) {
@@ -85594,7 +85628,7 @@ module.exports = webpackAsyncContext;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"lang":{"en":"English","fr":"French","switcher":{"title":"Language"}},"theme":{"switcher":{"light-title":"Light theme","dark-title":"Dark theme"}},"menu":{"home":{"title":"Home"},"account":{"title":"Account"}},"account-menu":{"title":"Personal account","login":{"title":"Login"},"register":{"title":"Register"},"dashboard":{"title":"Dashboard"}},"page":{"home":{"title":"Welcome !","description":"..."},"dashboard":{"title":"Dashboard","description":"..."},"error":{"notFound":{"title":"Page not found","description":"..."}}}}');
+module.exports = JSON.parse('{"lang":{"en":"English","fr":"French","switcher":{"title":"Language"}},"theme":{"switcher":{"light-title":"Light theme","dark-title":"Dark theme"}},"menu":{"home":{"title":"Home"},"events":{"title":"Events"},"people":{"title":"People"},"venues":{"title":"Venues"},"users":{"title":"Users"}},"account-menu":{"title":"Personal account","login":{"title":"Login"},"register":{"title":"Register"},"dashboard":{"title":"Dashboard"}},"page":{"home":{"title":"Welcome !","description":"..."},"events":{"title":"Welcome !","description":"..."},"people":{"title":"Welcome !","description":"..."},"venues":{"title":"Welcome !","description":"..."},"users":{"title":"Welcome !","description":"..."},"dashboard":{"title":"Dashboard","description":"..."},"error":{"notFound":{"title":"Page not found","description":"..."}}}}');
 
 /***/ }),
 
@@ -85605,7 +85639,7 @@ module.exports = JSON.parse('{"lang":{"en":"English","fr":"French","switcher":{"
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"lang":{"en":"Anglais","fr":"Français","switcher":{"title":"Traduction"}},"theme":{"switcher":{"light-title":"Thème clair","dark-title":"Thème sombre"}},"menu":{"home":{"title":"Accueil"},"account":{"title":"Mon Compte"}},"account-menu":{"title":"Compte personnel","login":{"title":"Connexion"},"register":{"title":"Inscription"},"dashboard":{"title":"Tableau de bord"}},"page":{"home":{"title":"Bienvenue !","description":"..."},"dashboard":{"title":"Mon compte","description":"..."},"error":{"notFound":{"title":"Page non trouvée","description":"..."}}}}');
+module.exports = JSON.parse('{"lang":{"en":"Anglais","fr":"Français","switcher":{"title":"Traduction"}},"theme":{"switcher":{"light-title":"Thème clair","dark-title":"Thème sombre"}},"menu":{"home":{"title":"Accueil"},"events":{"title":"Événements"},"people":{"title":"Personnes"},"venues":{"title":"Lieux"},"users":{"title":"Utilisateurs"}},"account-menu":{"title":"Compte personnel","login":{"title":"Connexion"},"register":{"title":"Inscription"},"dashboard":{"title":"Tableau de bord"}},"page":{"home":{"title":"Bienvenue !","description":"..."},"events":{"title":"Bienvenue !","description":"..."},"people":{"title":"Bienvenue !","description":"..."},"venues":{"title":"Bienvenue !","description":"..."},"users":{"title":"Bienvenue !","description":"..."},"dashboard":{"title":"Mon compte","description":"..."},"error":{"notFound":{"title":"Page non trouvée","description":"..."}}}}');
 
 /***/ }),
 
@@ -85748,7 +85782,7 @@ webpackContext.id = "./resources/js/locales sync recursive [A-Za-z0-9-_,\\s]+\\.
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_errors_NotFound_vue":1,"resources_js_components_pages_Dashboard_vue":1,"resources_js_components_pages_Home_vue":1,"resources_js_components_pages_Login_vue":1,"resources_js_components_pages_Register_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_errors_NotFound_vue":1,"resources_js_components_pages_Dashboard_vue":1,"resources_js_components_pages_Events_vue":1,"resources_js_components_pages_Home_vue":1,"resources_js_components_pages_Login_vue":1,"resources_js_components_pages_People_vue":1,"resources_js_components_pages_Register_vue":1,"resources_js_components_pages_Users_vue":1,"resources_js_components_pages_Venues_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

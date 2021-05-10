@@ -16,8 +16,17 @@
         "home": {
             "title": "Home"
         },
-        "account": {
-            "title": "Account"
+        "events": {
+            "title": "Events"
+        },
+        "people": {
+            "title": "People"
+        },
+        "venues": {
+            "title": "Venues"
+        },
+        "users": {
+            "title": "Users"
         }
     },
     "account-menu": {
@@ -34,6 +43,22 @@
     },
     "page": {
         "home": {
+            "title": "Welcome !",
+            "description": "..."
+        },
+        "events": {
+            "title": "Welcome !",
+            "description": "..."
+        },
+        "people": {
+            "title": "Welcome !",
+            "description": "..."
+        },
+        "venues": {
+            "title": "Welcome !",
+            "description": "..."
+        },
+        "users": {
             "title": "Welcome !",
             "description": "..."
         },

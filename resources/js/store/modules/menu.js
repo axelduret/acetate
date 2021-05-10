@@ -6,9 +6,24 @@ const state = {
             icon: "mdi-home"
         },
         {
-            title: "menu.account.title",
-            path: "account",
-            icon: "mdi-account"
+            title: "menu.events.title",
+            path: "events",
+            icon: "mdi-calendar-clock"
+        },
+        {
+            title: "menu.people.title",
+            path: "people",
+            icon: "mdi-calendar-account"
+        },
+        {
+            title: "menu.venues.title",
+            path: "venues",
+            icon: "mdi-office-building-marker"
+        },
+        {
+            title: "menu.users.title",
+            path: "users",
+            icon: "mdi-account-group"
         }
     ]
 };

@@ -5,22 +5,34 @@
         class="primary--text"
         @click.stop="$emit('toggle-drawer')"
       ></v-app-bar-nav-icon>
-      <div class="rounded-sm mx-2" :class="bgLogo">
-        <v-toolbar-title
-          class="ml-2 mr-3 primary--text"
-          style="font-family: monospace"
-        >
-          <v-icon class="primary--text mr-0" style="margin-bottom: 0.175rem"
-            >mdi-minidisc</v-icon
-          >
+      <div
+        class="rounded-sm mx-2"
+        :class="$vuetify.theme.dark ? 'darken-3' : 'lighten-4'"
+      >
+        <v-toolbar-title class="primary--text" style="font-family: monospace">
+          <v-icon
+            class="flaticon-music-disc-with-white-curve-details primary--text mr-0"
+            style="margin-bottom: 0.175rem"
+          ></v-icon>
           {{ appName }}</v-toolbar-title
         >
       </div>
       <v-spacer></v-spacer>
-      <div :title="$t(themeSwitcherTitle)" style="margin-top: 1.32rem">
+      <div
+        :title="
+          $vuetify.theme.dark
+            ? $t('theme.switcher.light-title')
+            : $t('theme.switcher.dark-title')
+        "
+        class="primary--text"
+        style="margin-top: 1.32rem"
+      >
         <v-switch
           inset
-          :prepend-icon="themeSwitcherIcon"
+          v-model="themeSwitch"
+          :prepend-icon="
+            $vuetify.theme.dark ? 'mdi-weather-sunny' : 'mdi-weather-night'
+          "
           @click="themeSwitcher"
         ></v-switch>
       </div>
@@ -73,52 +85,56 @@
 import { mapGetters } from "vuex";
 export default {
   data: () => ({
+    // App name.
     appName: process.env.MIX_APP_NAME,
-    bgLogo: "darken-3",
+    // Sidebar.
     drawer: false,
-    themeSwitcherTitle: "theme.switcher.light-title",
-    themeSwitcherIcon: "mdi-weather-sunny",
+    // Theme switch active.
+    themeSwitch: true,
+    // Locale switch title.
     localeSwitcherTitle: "lang.switcher.title",
+    // Available locales.
     locales: process.env.MIX_VUE_APP_I18N_SUPPORTED_LOCALE.split(","),
+    // Account menu title.
     accountMenuTitle: "account-menu.title",
   }),
-  computed: mapGetters(["getMenu", "getLang", "getAccountMenu"]),
+  // Get locale and account menu contents.
+  computed: mapGetters(["getLang", "getAccountMenu"]),
   methods: {
+    // Set default theme.
+    defaultTheme: function () {
+      const defaultTheme = process.env.MIX_VUE_DEFAULT_THEME;
+      if (defaultTheme === "light") {
+        this.$vuetify.theme.light = true;
+        this.themeSwitch = true;
+      }
+      if (defaultTheme === "dark") {
+        this.$vuetify.theme.dark = true;
+        this.themeSwitch = false;
+      }
+    },
+    // Theme switch.
     themeSwitcher: function () {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
-      this.changeBgLogo();
-      this.changeThemeSwitcherTitle();
-      this.changeThemeSwitcherIcon();
     },
-    changeBgLogo: function () {
-      if (this.bgLogo === "darken-3") {
-        this.bgLogo = "lighten-4";
-      } else this.bgLogo = "darken-3";
-    },
-    changeThemeSwitcherTitle: function () {
-      if (this.themeSwitcherTitle === "theme.switcher.light-title") {
-        this.themeSwitcherTitle = "theme.switcher.dark-title";
-      } else this.themeSwitcherTitle = "theme.switcher.light-title";
-    },
-    changeThemeSwitcherIcon: function () {
-      if (this.themeSwitcherIcon === "mdi-weather-sunny") {
-        this.themeSwitcherIcon = "mdi-weather-night";
-      } else this.themeSwitcherIcon = "mdi-weather-sunny";
-    },
+    // Locale switch.
     localeSwitcher: function (locale) {
       if (this.$i18n.locale !== locale) {
         this.$i18n.locale = locale;
         const to = this.$router.resolve({ params: { locale } });
         this.$router.push(to.location);
       }
+      // Set html lang attribute.
       document.querySelector("html").setAttribute("lang", locale);
     },
   },
   beforeCreate() {
+    // Set html lang attribute.
     document.querySelector("html").setAttribute("lang", this.$i18n.locale);
   },
   created() {
-    this.$vuetify.theme.dark = true;
+    // Set default theme.
+    this.defaultTheme();
   },
 };
 </script>

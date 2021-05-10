@@ -1,7 +1,10 @@
 <template>
   <v-app>
     <Sidebar ref="sidebar" />
-    <Header @toggle-drawer="$refs.sidebar.drawer = !$refs.sidebar.drawer" />
+    <Header
+      ref="header"
+      @toggle-drawer="$refs.sidebar.drawer = !$refs.sidebar.drawer"
+    />
     <v-main>
       <v-container fluid>
         <router-view></router-view>
