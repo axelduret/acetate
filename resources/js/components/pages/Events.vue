@@ -2,8 +2,8 @@
   <div>
     <v-row dense>
       <v-col
-        v-for="event in events"
-        :key="event.id"
+        v-for="(event, index) in events"
+        :key="index"
         cols="12"
         sm="6"
         md="4"
@@ -11,6 +11,16 @@
         xl="2"
       >
         <v-card class="">
+          <v-img
+            :src="appURL + baseURL + event.avatar"
+            class="white--text align-end"
+            gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
+            height="200px"
+          >
+            <v-card-title>
+              {{ event.name }}
+            </v-card-title>
+          </v-img>
           <div class="py-4">
             <v-row class="pb-3">
               <v-col class="mx-4 col-auto mr-auto">
@@ -103,6 +113,8 @@ export default {
   data() {
     return {
       events: null,
+      appURL: process.env.MIX_APP_URL,
+      baseURL: process.env.MIX_BASE_URL,
     };
   },
   mounted() {

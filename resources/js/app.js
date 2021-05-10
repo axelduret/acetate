@@ -51,7 +51,6 @@ var multipleDateFilter = function(value) {
 
 var timeFilter = function(value) {
     if (value) {
-        console.log(value);
         return moment(String(value), "hh:mm:ss")
             .locale(i18n.locale)
             .format("LT");

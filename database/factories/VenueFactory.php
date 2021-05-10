@@ -21,11 +21,11 @@ class VenueFactory extends Factory
    */
   public function definition()
   {
-    $dir = 'app/avatar/venue';
+    $dir = 'storage/app/avatar/venue';
     return [
       'name' => $this->faker->unique()->sentence(4),
       'description' => $this->faker->text,
-      'avatar' => $this->faker->image(storage_path($dir)),
+      'avatar' => $this->faker->image($dir),
     ];
   }
 }

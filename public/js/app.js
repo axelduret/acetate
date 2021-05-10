@@ -2226,7 +2226,6 @@ var multipleDateFilter = function multipleDateFilter(value) {
 
 var timeFilter = function timeFilter(value) {
   if (value) {
-    console.log(value);
     return moment__WEBPACK_IMPORTED_MODULE_4___default()(String(value), "hh:mm:ss").locale(_plugins_vue_i18n__WEBPACK_IMPORTED_MODULE_1__.default.locale).format("LT");
   }
 };

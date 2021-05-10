@@ -21,11 +21,11 @@ class EventFactory extends Factory
    */
   public function definition()
   {
-    $dir = 'app/avatar/event';
+    $dir = 'storage/app/avatar/event';
     return [
       'name' => $this->faker->sentence(4),
       'description' => $this->faker->text(512),
-      'avatar' => $this->faker->image(storage_path($dir)),
+      'avatar' => $this->faker->image($dir),
     ];
   }
 }
