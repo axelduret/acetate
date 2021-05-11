@@ -24,7 +24,7 @@
                 <div class="overline primary--text">
                   <v-row>
                     <!-- type -->
-                    <v-col class="col-auto">
+                    <v-col v-if="events.taxonomies" class="col-auto">
                       <span
                         class="primary--text"
                         v-if="event.taxonomies[0].type === 'music'"
@@ -47,7 +47,7 @@
                       > </v-col
                     ><v-spacer></v-spacer>
                     <!-- favorite -->
-                    <v-col class="col-auto ml-auto">
+                    <v-col class="col-auto ml-auto" style="margin-bottom: 1rem">
                       <span class="primary--text px-0">
                         <v-icon class="primary--text" dark small>
                           mdi-star-outline
@@ -162,7 +162,7 @@
                   {{ event.end_date | formatMultipleDates }}</span
                 >
                 <v-spacer></v-spacer>
-                <!-- times -->
+                <!-- time -->
                 <span class="caption primary--text">
                   <v-icon
                     class="mr-1 primary--text"
@@ -172,27 +172,66 @@
                   >
                   {{ event.start_time | formatTime }} -
                   {{ event.end_time | formatTime }}</span
-                ><v-spacer></v-spacer>
-              </v-col>
-            </v-row>
-            <v-divider class="mx-2"></v-divider>
-            <v-row class="py-0">
-              <v-col class="my-auto col-auto">
-                <!-- taxonomies -->
-                <span v-if="event.taxonomies.length > 0" class="primary--text">
-                  <v-chip-group class="mx-auto col-auto"
-                    ><v-chip
-                      v-for="(taxonomy, index) in event.taxonomies"
-                      :key="index"
-                      class="greybg primary--text"
-                      x-small
-                      >{{ taxonomy.category }}</v-chip
-                    > </v-chip-group
+                >
+                <v-spacer></v-spacer>
+                <!-- prices -->
+                <span
+                  v-if="event.prices.length > 0"
+                  class="caption primary--text"
+                >
+                  <v-icon
+                    class="mr-1 primary--text"
+                    style="margin-bottom: 0.08rem"
+                    small
+                    >mdi-cash-usd-outline</v-icon
+                  >
+                  <span v-for="(price, index) in event.prices" :key="index">
+                    <span v-if="index < event.prices.length - 1">
+                      <span v-if="price.cost > 0"> {{ price.cost }} chf |</span>
+                      <span v-else> {{ $t("price.free") }} |</span> </span
+                    ><span v-if="index >= event.prices.length - 1">
+                      <span v-if="price.cost > 0"> {{ price.cost }} chf</span>
+                      <span v-else> {{ $t("price.free") }}</span></span
+                    > </span
+                  ><v-spacer></v-spacer>
+                </span>
+                <span
+                  v-if="event.prices.length <= 0"
+                  class="caption primary--text"
+                >
+                  <span
+                    ><v-icon
+                      class="mr-1 primary--text"
+                      style="margin-bottom: 0.08rem"
+                      small
+                      >mdi-cash-usd-outline</v-icon
+                    ><span :title="$t('page.events.no_prices_title')">
+                      {{ $t("page.events.no_prices") }}</span
+                    ></span
                   ><v-spacer></v-spacer>
                 </span>
               </v-col>
             </v-row>
             <v-divider class="mx-2"></v-divider>
+            <div v-if="event.taxonomies.length > 0">
+              <v-row class="py-0">
+                <v-col class="my-auto col-auto">
+                  <!-- taxonomies -->
+                  <span class="primary--text">
+                    <v-chip-group class="mx-auto col-auto"
+                      ><v-chip
+                        v-for="(taxonomy, index) in event.taxonomies"
+                        :key="index"
+                        class="greybg primary--text"
+                        x-small
+                        >{{ taxonomy.category }}</v-chip
+                      >
+                    </v-chip-group>
+                  </span>
+                </v-col>
+              </v-row>
+              <v-divider class="mx-2"></v-divider>
+            </div>
             <v-row class="pt-3">
               <!-- more info button -->
               <v-col class="ml-4 my-auto col-auto">

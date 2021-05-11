@@ -55,6 +55,8 @@
             "no_venues_title": "No venue to display",
             "no_taxonomies": "none",
             "no_taxonomies_title": "No tag to display",
+            "no_prices": "none",
+            "no_prices_title": "No price to display",
             "more_info": "more info",
             "details": "details",
             "From": "From",
@@ -90,5 +92,8 @@
             "exhibition": "exhibition",
             "theater": "theater"
         }
+    },
+    "price": {
+        "free": "free entry"
     }
 }

@@ -245,6 +245,45 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -405,74 +444,96 @@ var render = function() {
                                 _c(
                                   "v-row",
                                   [
-                                    _c("v-col", { staticClass: "col-auto" }, [
-                                      event.taxonomies[0].type === "music"
-                                        ? _c(
-                                            "span",
-                                            { staticClass: "primary--text" },
-                                            [
-                                              _vm._v(
-                                                _vm._s(
-                                                  _vm.$t("taxonomy.type.music")
+                                    _vm.events.taxonomies
+                                      ? _c(
+                                          "v-col",
+                                          { staticClass: "col-auto" },
+                                          [
+                                            event.taxonomies[0].type === "music"
+                                              ? _c(
+                                                  "span",
+                                                  {
+                                                    staticClass: "primary--text"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        _vm.$t(
+                                                          "taxonomy.type.music"
+                                                        )
+                                                      )
+                                                    )
+                                                  ]
                                                 )
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      event.taxonomies[0].type === "conference"
-                                        ? _c(
-                                            "span",
-                                            { staticClass: "primary--text" },
-                                            [
-                                              _vm._v(
-                                                _vm._s(
-                                                  _vm.$t(
-                                                    "taxonomy.type.conference"
-                                                  )
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            event.taxonomies[0].type ===
+                                            "conference"
+                                              ? _c(
+                                                  "span",
+                                                  {
+                                                    staticClass: "primary--text"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        _vm.$t(
+                                                          "taxonomy.type.conference"
+                                                        )
+                                                      )
+                                                    )
+                                                  ]
                                                 )
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      event.taxonomies[0].type === "exhibition"
-                                        ? _c(
-                                            "span",
-                                            { staticClass: "primary--text" },
-                                            [
-                                              _vm._v(
-                                                _vm._s(
-                                                  _vm.$t(
-                                                    "taxonomy.type.exhibition"
-                                                  )
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            event.taxonomies[0].type ===
+                                            "exhibition"
+                                              ? _c(
+                                                  "span",
+                                                  {
+                                                    staticClass: "primary--text"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        _vm.$t(
+                                                          "taxonomy.type.exhibition"
+                                                        )
+                                                      )
+                                                    )
+                                                  ]
                                                 )
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e(),
-                                      _vm._v(" "),
-                                      event.taxonomies[0].type === "theater"
-                                        ? _c(
-                                            "span",
-                                            { staticClass: "primary--text" },
-                                            [
-                                              _vm._v(
-                                                _vm._s(
-                                                  _vm.$t(
-                                                    "taxonomy.type.theater"
-                                                  )
+                                              : _vm._e(),
+                                            _vm._v(" "),
+                                            event.taxonomies[0].type ===
+                                            "theater"
+                                              ? _c(
+                                                  "span",
+                                                  {
+                                                    staticClass: "primary--text"
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        _vm.$t(
+                                                          "taxonomy.type.theater"
+                                                        )
+                                                      )
+                                                    )
+                                                  ]
                                                 )
-                                              )
-                                            ]
-                                          )
-                                        : _vm._e()
-                                    ]),
+                                              : _vm._e()
+                                          ]
+                                        )
+                                      : _vm._e(),
                                     _c("v-spacer"),
                                     _vm._v(" "),
                                     _c(
                                       "v-col",
-                                      { staticClass: "col-auto ml-auto" },
+                                      {
+                                        staticClass: "col-auto ml-auto",
+                                        staticStyle: { "margin-bottom": "1rem" }
+                                      },
                                       [
                                         _c(
                                           "span",
@@ -818,7 +879,127 @@ var render = function() {
                               ],
                               1
                             ),
-                            _c("v-spacer")
+                            _vm._v(" "),
+                            _c("v-spacer"),
+                            _vm._v(" "),
+                            event.prices.length > 0
+                              ? _c(
+                                  "span",
+                                  { staticClass: "caption primary--text" },
+                                  [
+                                    _c(
+                                      "v-icon",
+                                      {
+                                        staticClass: "mr-1 primary--text",
+                                        staticStyle: {
+                                          "margin-bottom": "0.08rem"
+                                        },
+                                        attrs: { small: "" }
+                                      },
+                                      [_vm._v("mdi-cash-usd-outline")]
+                                    ),
+                                    _vm._v(" "),
+                                    _vm._l(event.prices, function(
+                                      price,
+                                      index
+                                    ) {
+                                      return _c("span", { key: index }, [
+                                        index < event.prices.length - 1
+                                          ? _c("span", [
+                                              price.cost > 0
+                                                ? _c("span", [
+                                                    _vm._v(
+                                                      " " +
+                                                        _vm._s(price.cost) +
+                                                        " chf |"
+                                                    )
+                                                  ])
+                                                : _c("span", [
+                                                    _vm._v(
+                                                      " " +
+                                                        _vm._s(
+                                                          _vm.$t("price.free")
+                                                        ) +
+                                                        " |"
+                                                    )
+                                                  ])
+                                            ])
+                                          : _vm._e(),
+                                        index >= event.prices.length - 1
+                                          ? _c("span", [
+                                              price.cost > 0
+                                                ? _c("span", [
+                                                    _vm._v(
+                                                      " " +
+                                                        _vm._s(price.cost) +
+                                                        " chf"
+                                                    )
+                                                  ])
+                                                : _c("span", [
+                                                    _vm._v(
+                                                      " " +
+                                                        _vm._s(
+                                                          _vm.$t("price.free")
+                                                        )
+                                                    )
+                                                  ])
+                                            ])
+                                          : _vm._e()
+                                      ])
+                                    }),
+                                    _c("v-spacer")
+                                  ],
+                                  2
+                                )
+                              : _vm._e(),
+                            _vm._v(" "),
+                            event.prices.length <= 0
+                              ? _c(
+                                  "span",
+                                  { staticClass: "caption primary--text" },
+                                  [
+                                    _c(
+                                      "span",
+                                      [
+                                        _c(
+                                          "v-icon",
+                                          {
+                                            staticClass: "mr-1 primary--text",
+                                            staticStyle: {
+                                              "margin-bottom": "0.08rem"
+                                            },
+                                            attrs: { small: "" }
+                                          },
+                                          [_vm._v("mdi-cash-usd-outline")]
+                                        ),
+                                        _c(
+                                          "span",
+                                          {
+                                            attrs: {
+                                              title: _vm.$t(
+                                                "page.events.no_prices_title"
+                                              )
+                                            }
+                                          },
+                                          [
+                                            _vm._v(
+                                              "\n                    " +
+                                                _vm._s(
+                                                  _vm.$t(
+                                                    "page.events.no_prices"
+                                                  )
+                                                )
+                                            )
+                                          ]
+                                        )
+                                      ],
+                                      1
+                                    ),
+                                    _c("v-spacer")
+                                  ],
+                                  1
+                                )
+                              : _vm._e()
                           ],
                           1
                         )
@@ -828,46 +1009,60 @@ var render = function() {
                     _vm._v(" "),
                     _c("v-divider", { staticClass: "mx-2" }),
                     _vm._v(" "),
-                    _c(
-                      "v-row",
-                      { staticClass: "py-0" },
-                      [
-                        _c("v-col", { staticClass: "my-auto col-auto" }, [
-                          event.taxonomies.length > 0
-                            ? _c(
-                                "span",
-                                { staticClass: "primary--text" },
-                                [
-                                  _c(
-                                    "v-chip-group",
-                                    { staticClass: "mx-auto col-auto" },
-                                    _vm._l(event.taxonomies, function(
-                                      taxonomy,
-                                      index
-                                    ) {
-                                      return _c(
-                                        "v-chip",
-                                        {
-                                          key: index,
-                                          staticClass: "greybg primary--text",
-                                          attrs: { "x-small": "" }
-                                        },
-                                        [_vm._v(_vm._s(taxonomy.category))]
-                                      )
-                                    }),
-                                    1
-                                  ),
-                                  _c("v-spacer")
-                                ],
-                                1
-                              )
-                            : _vm._e()
-                        ])
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("v-divider", { staticClass: "mx-2" }),
+                    event.taxonomies.length > 0
+                      ? _c(
+                          "div",
+                          [
+                            _c(
+                              "v-row",
+                              { staticClass: "py-0" },
+                              [
+                                _c(
+                                  "v-col",
+                                  { staticClass: "my-auto col-auto" },
+                                  [
+                                    _c(
+                                      "span",
+                                      { staticClass: "primary--text" },
+                                      [
+                                        _c(
+                                          "v-chip-group",
+                                          { staticClass: "mx-auto col-auto" },
+                                          _vm._l(event.taxonomies, function(
+                                            taxonomy,
+                                            index
+                                          ) {
+                                            return _c(
+                                              "v-chip",
+                                              {
+                                                key: index,
+                                                staticClass:
+                                                  "greybg primary--text",
+                                                attrs: { "x-small": "" }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(taxonomy.category)
+                                                )
+                                              ]
+                                            )
+                                          }),
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ]
+                                )
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c("v-divider", { staticClass: "mx-2" })
+                          ],
+                          1
+                        )
+                      : _vm._e(),
                     _vm._v(" "),
                     _c(
                       "v-row",
