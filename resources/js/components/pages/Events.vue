@@ -104,14 +104,28 @@
                         v-for="(person, index) in event.people"
                         :key="index"
                       >
-                        <span v-if="event.people.length < 4">
-                          {{ person.nickname }}
+                        <span v-if="event.people.length < 4"
+                          >&nbsp;<a
+                            :title="person.nickname"
+                            @click="showPerson(person.id)"
+                            >{{ person.nickname }}</a
+                          >
                           <span v-if="index < event.people.length - 1">, </span>
                         </span>
                         <span v-if="event.people.length >= 4">
-                          <span v-if="index < 2"> {{ person.nickname }}, </span>
-                          <span v-if="index === 2">
-                            {{ person.nickname }}, ...</span
+                          <span v-if="index < 2"
+                            >&nbsp;<a
+                              :title="person.nickname"
+                              @click="showPerson(person.id)"
+                              >{{ person.nickname }}</a
+                            >,
+                          </span>
+                          <span v-if="index === 2"
+                            >&nbsp;<a
+                              :title="person.nickname"
+                              @click="showPerson(person.id)"
+                              >{{ person.nickname }}</a
+                            >, ...</span
                           >
                         </span> </span
                       ><v-spacer></v-spacer
@@ -142,8 +156,11 @@
                         style="margin-bottom: 0.08rem"
                         small
                         >mdi-office-building-marker</v-icon
+                      >&nbsp;<a
+                        :title="event.venues[0].name"
+                        @click="showVenue(event.venues[0].id)"
+                        >{{ event.venues[0].name }}</a
                       >
-                      {{ event.venues[0].name }}
                       <v-spacer></v-spacer
                     ></span>
                   </span>

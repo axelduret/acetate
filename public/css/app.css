@@ -40,6 +40,10 @@
   font-family: LibreBarcode;
   font-size: 2em;
 } */
+a:hover {
+  text-decoration: underline;
+}
+
 /*!
 * Custom Vuetify Light Theme
 * by Axel Duret

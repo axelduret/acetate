@@ -334,6 +334,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     var _ref;
@@ -722,13 +739,33 @@ var render = function() {
                                                 [
                                                   event.people.length < 4
                                                     ? _c("span", [
-                                                        _vm._v(
-                                                          "\n                        " +
-                                                            _vm._s(
-                                                              person.nickname
-                                                            ) +
-                                                            "\n                        "
+                                                        _vm._v(" "),
+                                                        _c(
+                                                          "a",
+                                                          {
+                                                            attrs: {
+                                                              title:
+                                                                person.nickname
+                                                            },
+                                                            on: {
+                                                              click: function(
+                                                                $event
+                                                              ) {
+                                                                return _vm.showPerson(
+                                                                  person.id
+                                                                )
+                                                              }
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              _vm._s(
+                                                                person.nickname
+                                                              )
+                                                            )
+                                                          ]
                                                         ),
+                                                        _vm._v(" "),
                                                         index <
                                                         event.people.length - 1
                                                           ? _c("span", [
@@ -742,25 +779,67 @@ var render = function() {
                                                     ? _c("span", [
                                                         index < 2
                                                           ? _c("span", [
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "a",
+                                                                {
+                                                                  attrs: {
+                                                                    title:
+                                                                      person.nickname
+                                                                  },
+                                                                  on: {
+                                                                    click: function(
+                                                                      $event
+                                                                    ) {
+                                                                      return _vm.showPerson(
+                                                                        person.id
+                                                                      )
+                                                                    }
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    _vm._s(
+                                                                      person.nickname
+                                                                    )
+                                                                  )
+                                                                ]
+                                                              ),
                                                               _vm._v(
-                                                                " " +
-                                                                  _vm._s(
-                                                                    person.nickname
-                                                                  ) +
-                                                                  ", "
+                                                                ",\n                        "
                                                               )
                                                             ])
                                                           : _vm._e(),
                                                         _vm._v(" "),
                                                         index === 2
                                                           ? _c("span", [
-                                                              _vm._v(
-                                                                "\n                          " +
-                                                                  _vm._s(
-                                                                    person.nickname
-                                                                  ) +
-                                                                  ", ..."
-                                                              )
+                                                              _vm._v(" "),
+                                                              _c(
+                                                                "a",
+                                                                {
+                                                                  attrs: {
+                                                                    title:
+                                                                      person.nickname
+                                                                  },
+                                                                  on: {
+                                                                    click: function(
+                                                                      $event
+                                                                    ) {
+                                                                      return _vm.showPerson(
+                                                                        person.id
+                                                                      )
+                                                                    }
+                                                                  }
+                                                                },
+                                                                [
+                                                                  _vm._v(
+                                                                    _vm._s(
+                                                                      person.nickname
+                                                                    )
+                                                                  )
+                                                                ]
+                                                              ),
+                                                              _vm._v(", ...")
                                                             ])
                                                           : _vm._e()
                                                       ])
@@ -849,11 +928,28 @@ var render = function() {
                                                 )
                                               ]
                                             ),
-                                            _vm._v(
-                                              "\n                    " +
-                                                _vm._s(event.venues[0].name) +
-                                                "\n                    "
+                                            _vm._v(" "),
+                                            _c(
+                                              "a",
+                                              {
+                                                attrs: {
+                                                  title: event.venues[0].name
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.showVenue(
+                                                      event.venues[0].id
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(event.venues[0].name)
+                                                )
+                                              ]
                                             ),
+                                            _vm._v(" "),
                                             _c("v-spacer")
                                           ],
                                           1
