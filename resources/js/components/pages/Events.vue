@@ -1,5 +1,11 @@
 <template>
-  <div>
+  <div
+    :class="
+      $vuetify.theme.dark
+        ? { theme_dark_loading: loading }
+        : { theme_light_loading: loading }
+    "
+  >
     <v-row dense>
       <v-col
         v-for="(event, index) in events"
@@ -301,6 +307,8 @@
 export default {
   data() {
     return {
+      loading: true,
+      loading: true,
       events: "",
       appURL: process.env.MIX_APP_URL,
       baseURL: process.env.MIX_BASE_URL,
@@ -309,6 +317,7 @@ export default {
   mounted() {
     axios.get("/api/events?per_page=100").then((response) => {
       this.events = response.data.events;
+      this.loading = false;
       return this.events;
     });
   },

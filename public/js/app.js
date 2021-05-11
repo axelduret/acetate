@@ -44292,7 +44292,12 @@ var render = function() {
                     _vm._l(_vm.getAccountMenu, function(item, index) {
                       return _c(
                         "v-list-item",
-                        { key: index, attrs: { to: item.path } },
+                        {
+                          key: index,
+                          attrs: {
+                            to: "/" + _vm.$i18n.locale + "/" + item.path
+                          }
+                        },
                         [
                           _c("v-list-item-title", [
                             _vm._v(_vm._s(_vm.$t(item.title)))

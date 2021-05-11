@@ -85,7 +85,7 @@
             <v-list-item
               v-for="(item, index) in getAccountMenu"
               :key="index"
-              :to="item.path"
+              :to="'/' + $i18n.locale + '/' + item.path"
             >
               <v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
             </v-list-item>

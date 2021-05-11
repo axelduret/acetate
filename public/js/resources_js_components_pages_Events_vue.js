@@ -11,6 +11,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -312,17 +320,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {
-      events: "",
-      appURL: "http://127.0.0.1:8001",
-      baseURL: "/"
-    };
+    var _ref;
+
+    return _ref = {
+      loading: true
+    }, _defineProperty(_ref, "loading", true), _defineProperty(_ref, "events", ""), _defineProperty(_ref, "appURL", "http://127.0.0.1:8001"), _defineProperty(_ref, "baseURL", "/"), _ref;
   },
   mounted: function mounted() {
     var _this = this;
 
     axios.get("/api/events?per_page=100").then(function (response) {
       _this.events = response.data.events;
+      _this.loading = false;
       return _this.events;
     });
   },
@@ -431,6 +440,11 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    {
+      class: _vm.$vuetify.theme.dark
+        ? { theme_dark_loading: _vm.loading }
+        : { theme_light_loading: _vm.loading }
+    },
     [
       _c(
         "v-row",

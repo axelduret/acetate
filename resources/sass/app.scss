@@ -8,14 +8,18 @@
 // Variables
 @import 'variables';
 
-// Flaticon fonts
-@import 'flaticon';
-
 // Custom Style
 @import 'custom';
+
+// Light theme
+@import 'theme_light';
 
 // Dark theme
 @import 'theme_dark';
 
-// Light theme
-@import 'theme_light';
+// Flaticon fonts
+@import 'flaticon';
+
+// Loading Spinners
+@import 'theme_light_loading';
+@import 'theme_dark_loading';
