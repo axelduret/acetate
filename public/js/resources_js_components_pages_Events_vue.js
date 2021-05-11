@@ -351,6 +351,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     var _ref;
@@ -515,7 +519,9 @@ var render = function() {
                                 attrs: {
                                   tile: "",
                                   size: "80",
-                                  color: "primary"
+                                  color: _vm.$vuetify.theme.dark
+                                    ? "primary"
+                                    : "white"
                                 }
                               },
                               [
@@ -743,6 +749,8 @@ var render = function() {
                                                         _c(
                                                           "a",
                                                           {
+                                                            staticClass:
+                                                              "events_links",
                                                             attrs: {
                                                               title:
                                                                 person.nickname
@@ -783,6 +791,8 @@ var render = function() {
                                                               _c(
                                                                 "a",
                                                                 {
+                                                                  staticClass:
+                                                                    "events_links",
                                                                   attrs: {
                                                                     title:
                                                                       person.nickname
@@ -817,6 +827,8 @@ var render = function() {
                                                               _c(
                                                                 "a",
                                                                 {
+                                                                  staticClass:
+                                                                    "events_links",
                                                                   attrs: {
                                                                     title:
                                                                       person.nickname
@@ -932,6 +944,7 @@ var render = function() {
                                             _c(
                                               "a",
                                               {
+                                                staticClass: "events_links",
                                                 attrs: {
                                                   title: event.venues[0].name
                                                 },

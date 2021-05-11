@@ -27,7 +27,7 @@
                   tile
                   size="80"
                   class="rounded"
-                  color="primary"
+                  :color="$vuetify.theme.dark ? 'primary' : 'white'"
                   ><v-img
                     :src="appURL + baseURL + event.avatar"
                     :title="event.name"
@@ -106,6 +106,7 @@
                       >
                         <span v-if="event.people.length < 4"
                           >&nbsp;<a
+                            class="events_links"
                             :title="person.nickname"
                             @click="showPerson(person.id)"
                             >{{ person.nickname }}</a
@@ -115,6 +116,7 @@
                         <span v-if="event.people.length >= 4">
                           <span v-if="index < 2"
                             >&nbsp;<a
+                              class="events_links"
                               :title="person.nickname"
                               @click="showPerson(person.id)"
                               >{{ person.nickname }}</a
@@ -122,6 +124,7 @@
                           </span>
                           <span v-if="index === 2"
                             >&nbsp;<a
+                              class="events_links"
                               :title="person.nickname"
                               @click="showPerson(person.id)"
                               >{{ person.nickname }}</a
@@ -157,6 +160,7 @@
                         small
                         >mdi-office-building-marker</v-icon
                       >&nbsp;<a
+                        class="events_links"
                         :title="event.venues[0].name"
                         @click="showVenue(event.venues[0].id)"
                         >{{ event.venues[0].name }}</a
