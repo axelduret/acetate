@@ -41,5 +41,7 @@ background-color: $ac-light-cards-bg;
 }
 // Divider
 .theme--light.v-divider{
-  background-color: $ac-white;
+  background-color: $ac-light-contrast-bg;
+  color: $ac-light-contrast-bg;
+  opacity: 60%;
 }

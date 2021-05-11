@@ -24,27 +24,36 @@
                 <div class="overline primary--text">
                   <v-row>
                     <!-- type -->
-                    <v-col v-if="events.taxonomies" class="col-auto">
+                    <v-col class="col-auto">
                       <span
-                        class="primary--text"
-                        v-if="event.taxonomies[0].type === 'music'"
-                        >{{ $t("taxonomy.type.music") }}</span
+                        v-for="(taxonomy, index) in event.taxonomies"
+                        :key="index"
                       >
-                      <span
-                        class="primary--text"
-                        v-if="event.taxonomies[0].type === 'conference'"
-                        >{{ $t("taxonomy.type.conference") }}</span
-                      >
-                      <span
-                        class="primary--text"
-                        v-if="event.taxonomies[0].type === 'exhibition'"
-                        >{{ $t("taxonomy.type.exhibition") }}</span
-                      >
-                      <span
-                        class="primary--text"
-                        v-if="event.taxonomies[0].type === 'theater'"
-                        >{{ $t("taxonomy.type.theater") }}</span
-                      > </v-col
+                        <span v-if="taxonomy.type"
+                          ><span v-if="index === 0">
+                            <span
+                              class="primary--text"
+                              v-if="taxonomy.type === 'music'"
+                              >{{ $t("taxonomy.type.music") }}</span
+                            >
+                            <span
+                              class="primary--text"
+                              v-if="taxonomy.type === 'conference'"
+                              >{{ $t("taxonomy.type.conference") }}</span
+                            >
+                            <span
+                              class="primary--text"
+                              v-if="taxonomy.type === 'exhibition'"
+                              >{{ $t("taxonomy.type.exhibition") }}</span
+                            >
+                            <span
+                              class="primary--text"
+                              v-if="taxonomy.type === 'theater'"
+                              >{{ $t("taxonomy.type.theater") }}</span
+                            ></span
+                          >
+                        </span></span
+                      ></v-col
                     ><v-spacer></v-spacer>
                     <!-- favorite -->
                     <v-col class="col-auto ml-auto" style="margin-bottom: 1rem">
@@ -57,7 +66,7 @@
                   >
                 </div>
                 <!-- name -->
-                <v-list-item-title class="headline primary--text mb-1"
+                <v-list-item-title class="title primary--text mb-1"
                   >{{ event.name }}
                 </v-list-item-title>
               </v-list-item-content>
@@ -213,12 +222,12 @@
               </v-col>
             </v-row>
             <v-divider class="mx-2"></v-divider>
+            <!-- taxonomies -->
             <div v-if="event.taxonomies.length > 0">
               <v-row class="py-0">
                 <v-col class="my-auto col-auto">
-                  <!-- taxonomies -->
                   <span class="primary--text">
-                    <v-chip-group class="mx-auto col-auto"
+                    <v-chip-group class="mx-auto col-auto my-2 py-0"
                       ><v-chip
                         v-for="(taxonomy, index) in event.taxonomies"
                         :key="index"
@@ -232,12 +241,29 @@
               </v-row>
               <v-divider class="mx-2"></v-divider>
             </div>
+
+            <div v-if="event.taxonomies.length <= 0">
+              <v-row class="py-0">
+                <v-col class="my-auto col-auto">
+                  <span
+                    class="mx-auto col-auto primary--text"
+                    style="line-height: 3rem"
+                  >
+                  </span>
+                </v-col>
+              </v-row>
+              <v-divider class="mx-2"></v-divider>
+            </div>
+
             <v-row class="pt-3">
               <!-- more info button -->
               <v-col class="ml-4 my-auto col-auto">
-                <v-btn text color="info accent-4" @click="">{{
-                  $t("page.events.more_info")
-                }}</v-btn>
+                <v-btn
+                  text
+                  color="info accent-4"
+                  @click="showEvent(event.id)"
+                  >{{ $t("page.events.more_info") }}</v-btn
+                >
               </v-col>
               <v-col class="mx-4 my-auto col-auto ml-auto">
                 <!-- comments count -->
@@ -275,7 +301,7 @@
 export default {
   data() {
     return {
-      events: null,
+      events: "",
       appURL: process.env.MIX_APP_URL,
       baseURL: process.env.MIX_BASE_URL,
     };
@@ -285,6 +311,17 @@ export default {
       this.events = response.data.events;
       return this.events;
     });
+  },
+  methods: {
+    showEvent: function (id) {
+      this.$router.push("events/" + id);
+    },
+    showPerson: function (id) {
+      this.$router.push("people/" + id);
+    },
+    showVenue: function (id) {
+      this.$router.push("venues/" + id);
+    },
   },
 };
 </script>

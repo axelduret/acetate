@@ -2077,6 +2077,8 @@ __webpack_require__.r(__webpack_exports__);
             locale: locale
           }
         });
+        console.log(to);
+        console.log(to.location);
         this.$router.push(to.location);
       } // Set html lang attribute.
 
@@ -2107,7 +2109,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _plugins_vue_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../plugins/vue-i18n */ "./resources/js/plugins/vue-i18n.js");
 //
 //
 //
@@ -2153,6 +2156,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2162,8 +2166,16 @@ __webpack_require__.r(__webpack_exports__);
       drawer: false
     };
   },
+  methods: {
+    showPage: function showPage(path) {
+      console.log();
+      this.$router.push({
+        path: "/" + _plugins_vue_i18n__WEBPACK_IMPORTED_MODULE_0__.default.locale + "/" + path
+      });
+    }
+  },
   // Get sidebar menu content.
-  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(["getMenu"])
+  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(["getMenu"])
 });
 
 /***/ }),
@@ -2425,6 +2437,11 @@ var routes = [{
     path: "events",
     name: "Events",
     component: loadPage("pages/Events")
+  }, {
+    path: "events/:id",
+    name: "Event",
+    props: true,
+    component: loadPage("pages/Event")
   }, {
     path: "people",
     name: "People",
@@ -44411,7 +44428,14 @@ var render = function() {
                 _vm._l(_vm.getMenu, function(item, index) {
                   return _c(
                     "v-list-item",
-                    { key: index, attrs: { to: item.path } },
+                    {
+                      key: index,
+                      on: {
+                        click: function($event) {
+                          return _vm.showPage(item.path)
+                        }
+                      }
+                    },
                     [
                       _c(
                         "v-list-item-icon",
@@ -107095,6 +107119,10 @@ var map = {
 		"./resources/js/components/pages/Dashboard.vue",
 		"resources_js_components_pages_Dashboard_vue"
 	],
+	"./pages/Event.vue": [
+		"./resources/js/components/pages/Event.vue",
+		"resources_js_components_pages_Event_vue"
+	],
 	"./pages/Events.vue": [
 		"./resources/js/components/pages/Events.vue",
 		"resources_js_components_pages_Events_vue"
@@ -107305,7 +107333,7 @@ webpackContext.id = "./resources/js/locales sync recursive [A-Za-z0-9-_,\\s]+\\.
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_errors_NotFound_vue":1,"resources_js_components_pages_Dashboard_vue":1,"resources_js_components_pages_Events_vue":1,"resources_js_components_pages_Home_vue":1,"resources_js_components_pages_Login_vue":1,"resources_js_components_pages_People_vue":1,"resources_js_components_pages_Register_vue":1,"resources_js_components_pages_Users_vue":1,"resources_js_components_pages_Venues_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_errors_NotFound_vue":1,"resources_js_components_pages_Dashboard_vue":1,"resources_js_components_pages_Event_vue":1,"resources_js_components_pages_Events_vue":1,"resources_js_components_pages_Home_vue":1,"resources_js_components_pages_Login_vue":1,"resources_js_components_pages_People_vue":1,"resources_js_components_pages_Register_vue":1,"resources_js_components_pages_Users_vue":1,"resources_js_components_pages_Venues_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

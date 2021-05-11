@@ -29,7 +29,7 @@
           <v-list-item
             v-for="(item, index) in getMenu"
             :key="index"
-            :to="item.path"
+            @click="showPage(item.path)"
           >
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
@@ -44,6 +44,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import i18n from "../../plugins/vue-i18n";
 export default {
   data: () => ({
     // App name.
@@ -51,6 +52,12 @@ export default {
     // Sidebar.
     drawer: false,
   }),
+  methods: {
+    showPage: function (path) {
+      console.log();
+      this.$router.push({ path: "/" + i18n.locale + "/" + path });
+    },
+  },
   // Get sidebar menu content.
   computed: mapGetters(["getMenu"]),
 };

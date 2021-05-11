@@ -46,6 +46,7 @@ background-color: $ac-dark-cards-bg;
 }
 // Divider
 .theme--dark.v-divider{
-  background-color: $ac-dark-primary;
-  opacity: 30%;
+  background-color: $ac-dark-contrast-bg;
+  color: $ac-dark-contrast-bg;
+  opacity: 40%;
 }

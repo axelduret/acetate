@@ -43,6 +43,12 @@ const routes = [
                 component: loadPage("pages/Events")
             },
             {
+                path: "events/:id",
+                name: "Event",
+                props: true,
+                component: loadPage("pages/Event")
+            },
+            {
                 path: "people",
                 name: "People",
                 component: loadPage("pages/People")

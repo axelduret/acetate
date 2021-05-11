@@ -154,8 +154,9 @@ i[class^=flaticon-]:before, i[class*=" flaticon-"]:before {
 }
 
 .theme--dark.v-divider {
-  background-color: #4db6ac;
-  opacity: 30%;
+  background-color: #006064;
+  color: #006064;
+  opacity: 40%;
 }
 
 /*!
@@ -192,5 +193,7 @@ i[class^=flaticon-]:before, i[class*=" flaticon-"]:before {
 }
 
 .theme--light.v-divider {
-  background-color: #ECEFF1;
+  background-color: #e0f2f1;
+  color: #e0f2f1;
+  opacity: 60%;
 }

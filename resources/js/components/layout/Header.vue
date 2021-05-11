@@ -137,6 +137,8 @@ export default {
       if (this.$i18n.locale !== locale) {
         this.$i18n.locale = locale;
         const to = this.$router.resolve({ params: { locale } });
+        console.log(to);
+        console.log(to.location);
         this.$router.push(to.location);
       }
       // Set html lang attribute.
