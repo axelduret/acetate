@@ -2077,8 +2077,6 @@ __webpack_require__.r(__webpack_exports__);
             locale: locale
           }
         });
-        console.log(to);
-        console.log(to.location);
         this.$router.push(to.location);
       } // Set html lang attribute.
 
@@ -2109,8 +2107,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _plugins_vue_i18n__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../plugins/vue-i18n */ "./resources/js/plugins/vue-i18n.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -2155,7 +2152,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2166,16 +2162,8 @@ __webpack_require__.r(__webpack_exports__);
       drawer: false
     };
   },
-  methods: {
-    showPage: function showPage(path) {
-      console.log();
-      this.$router.push({
-        path: "/" + _plugins_vue_i18n__WEBPACK_IMPORTED_MODULE_0__.default.locale + "/" + path
-      });
-    }
-  },
   // Get sidebar menu content.
-  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)(["getMenu"])
+  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)(["getMenu"])
 });
 
 /***/ }),
@@ -44430,11 +44418,7 @@ var render = function() {
                     "v-list-item",
                     {
                       key: index,
-                      on: {
-                        click: function($event) {
-                          return _vm.showPage(item.path)
-                        }
-                      }
+                      attrs: { to: "/" + _vm.$i18n.locale + "/" + item.path }
                     },
                     [
                       _c(
