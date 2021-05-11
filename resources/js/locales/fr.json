@@ -49,6 +49,14 @@
         "events": {
             "title": "Bienvenue !",
             "description": "...",
+            "no_people": "aucun",
+            "no_people_title": "Aucune personne à afficher",
+            "no_venues": "aucun",
+            "no_venues_title": "Aucun lieu à afficher",
+            "no_taxonomies": "aucun",
+            "no_taxonomies_title": "Aucune étiquette à afficher",
+            "more_info": "plus d'infos",
+            "details": "détails",
             "From": "Du",
             "to": "au"
         },
@@ -73,6 +81,14 @@
                 "title": "Page non trouvée",
                 "description": "..."
             }
+        }
+    },
+    "taxonomy": {
+        "type": {
+            "music": "musique",
+            "conference": "conférence",
+            "exhibition": "exposition",
+            "theater": "théâtre"
         }
     }
 }

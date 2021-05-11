@@ -28,14 +28,15 @@
             ? $t('theme.switcher.light-title')
             : $t('theme.switcher.dark-title')
         "
-        :class="$vuetify.theme.dark ? 'secondary--text' : 'primary--text'"
         style="margin-top: 1.32rem"
       >
         <v-switch
           inset
           v-model="themeSwitch"
           :prepend-icon="
-            $vuetify.theme.dark ? 'mdi-weather-sunny' : 'mdi-weather-night'
+            $vuetify.theme.dark
+              ? 'mdi-white-balance-sunny'
+              : 'mdi-weather-night'
           "
           @click="themeSwitcher"
         ></v-switch>

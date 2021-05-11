@@ -49,6 +49,14 @@
         "events": {
             "title": "Welcome !",
             "description": "...",
+            "no_people": "none",
+            "no_people_title": "No person to display",
+            "no_venues": "none",
+            "no_venues_title": "No venue to display",
+            "no_taxonomies": "none",
+            "no_taxonomies_title": "No tag to display",
+            "more_info": "more info",
+            "details": "details",
             "From": "From",
             "to": "to"
         },
@@ -73,6 +81,14 @@
                 "title": "Page not found",
                 "description": "..."
             }
+        }
+    },
+    "taxonomy": {
+        "type": {
+            "music": "music",
+            "conference": "conference",
+            "exhibition": "exhibition",
+            "theater": "theater"
         }
     }
 }

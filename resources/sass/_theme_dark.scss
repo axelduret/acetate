@@ -14,6 +14,23 @@
 .theme--dark.v-navigation-drawer{
   background-color: $ac-black;
 }
+// Icons
+.theme--dark.v-icon{
+  color: $ac-dark-primary;
+}
+// Chevron left icon
+.theme--dark.mdi-chevron-left{
+  opacity: 60%;
+}
+// Chevron right icon
+.theme--dark.mdi-chevron-right{
+  color: $ac-dark-primary;
+  opacity: 60%;
+}
+// Prepend icons
+.v-input__prepend-outer .v-icon{
+  color: $ac-white;
+}
 // Cards
 .theme--dark.v-sheet.v-card{
 background-color: $ac-dark-cards-bg;
@@ -25,7 +42,7 @@ background-color: $ac-dark-cards-bg;
 :not(.v-list-item--disabled),
 .theme--dark
 .v-list-item__title{
-  color: $ac-dark-primary;
+  color: $ac-dark-info;
 }
 // Divider
 .theme--dark.v-divider{

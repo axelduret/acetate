@@ -2028,6 +2028,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2350,13 +2351,20 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.use((vuetify__WEBPACK_IMPORTED_MODULE_1
     themes: {
       light: {
         primary: "#455A64",
+        secondary: "#136c83",
+        info: "#2196F3",
+        greybg: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.teal.lighten5,
         accent: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.shades.white,
+        contrast: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.shades.black,
         error: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.red.accent3
       },
       dark: {
         primary: "#4db6ac",
         secondary: "#ECEFF1",
+        info: "#DBFE87",
+        greybg: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.cyan.darken4,
         accent: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.shades.black,
+        contrast: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.shades.white,
         error: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.red.accent3
       }
     }
@@ -44117,9 +44125,6 @@ var render = function() {
           _c(
             "div",
             {
-              class: _vm.$vuetify.theme.dark
-                ? "secondary--text"
-                : "primary--text",
               staticStyle: { "margin-top": "1.32rem" },
               attrs: {
                 title: _vm.$vuetify.theme.dark
@@ -44132,7 +44137,7 @@ var render = function() {
                 attrs: {
                   inset: "",
                   "prepend-icon": _vm.$vuetify.theme.dark
-                    ? "mdi-weather-sunny"
+                    ? "mdi-white-balance-sunny"
                     : "mdi-weather-night"
                 },
                 on: { click: _vm.themeSwitcher },
@@ -107146,7 +107151,7 @@ module.exports = webpackAsyncContext;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"lang":{"en":"English","fr":"French","switcher":{"title":"Language"}},"theme":{"switcher":{"light-title":"Light theme","dark-title":"Dark theme"}},"menu":{"home":{"title":"Home"},"events":{"title":"Events"},"people":{"title":"People"},"venues":{"title":"Venues"},"users":{"title":"Users"}},"account-menu":{"title":"Personal account","login":{"title":"Login"},"register":{"title":"Register"},"dashboard":{"title":"Dashboard"}},"page":{"home":{"title":"Welcome !","description":"..."},"events":{"title":"Welcome !","description":"...","From":"From","to":"to"},"people":{"title":"Welcome !","description":"..."},"venues":{"title":"Welcome !","description":"..."},"users":{"title":"Welcome !","description":"..."},"dashboard":{"title":"Dashboard","description":"..."},"error":{"notFound":{"title":"Page not found","description":"..."}}}}');
+module.exports = JSON.parse('{"lang":{"en":"English","fr":"French","switcher":{"title":"Language"}},"theme":{"switcher":{"light-title":"Light theme","dark-title":"Dark theme"}},"menu":{"home":{"title":"Home"},"events":{"title":"Events"},"people":{"title":"People"},"venues":{"title":"Venues"},"users":{"title":"Users"}},"account-menu":{"title":"Personal account","login":{"title":"Login"},"register":{"title":"Register"},"dashboard":{"title":"Dashboard"}},"page":{"home":{"title":"Welcome !","description":"..."},"events":{"title":"Welcome !","description":"...","no_people":"none","no_people_title":"No person to display","no_venues":"none","no_venues_title":"No venue to display","no_taxonomies":"none","no_taxonomies_title":"No tag to display","more_info":"more info","details":"details","From":"From","to":"to"},"people":{"title":"Welcome !","description":"..."},"venues":{"title":"Welcome !","description":"..."},"users":{"title":"Welcome !","description":"..."},"dashboard":{"title":"Dashboard","description":"..."},"error":{"notFound":{"title":"Page not found","description":"..."}}},"taxonomy":{"type":{"music":"music","conference":"conference","exhibition":"exhibition","theater":"theater"}}}');
 
 /***/ }),
 
@@ -107157,7 +107162,7 @@ module.exports = JSON.parse('{"lang":{"en":"English","fr":"French","switcher":{"
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"lang":{"en":"Anglais","fr":"Français","switcher":{"title":"Traduction"}},"theme":{"switcher":{"light-title":"Thème clair","dark-title":"Thème sombre"}},"menu":{"home":{"title":"Accueil"},"events":{"title":"Événements"},"people":{"title":"Personnes"},"venues":{"title":"Lieux"},"users":{"title":"Utilisateurs"}},"account-menu":{"title":"Compte personnel","login":{"title":"Connexion"},"register":{"title":"Inscription"},"dashboard":{"title":"Tableau de bord"}},"page":{"home":{"title":"Bienvenue !","description":"..."},"events":{"title":"Bienvenue !","description":"...","From":"Du","to":"au"},"people":{"title":"Bienvenue !","description":"..."},"venues":{"title":"Bienvenue !","description":"..."},"users":{"title":"Bienvenue !","description":"..."},"dashboard":{"title":"Mon compte","description":"..."},"error":{"notFound":{"title":"Page non trouvée","description":"..."}}}}');
+module.exports = JSON.parse('{"lang":{"en":"Anglais","fr":"Français","switcher":{"title":"Traduction"}},"theme":{"switcher":{"light-title":"Thème clair","dark-title":"Thème sombre"}},"menu":{"home":{"title":"Accueil"},"events":{"title":"Événements"},"people":{"title":"Personnes"},"venues":{"title":"Lieux"},"users":{"title":"Utilisateurs"}},"account-menu":{"title":"Compte personnel","login":{"title":"Connexion"},"register":{"title":"Inscription"},"dashboard":{"title":"Tableau de bord"}},"page":{"home":{"title":"Bienvenue !","description":"..."},"events":{"title":"Bienvenue !","description":"...","no_people":"aucun","no_people_title":"Aucune personne à afficher","no_venues":"aucun","no_venues_title":"Aucun lieu à afficher","no_taxonomies":"aucun","no_taxonomies_title":"Aucune étiquette à afficher","more_info":"plus d\'infos","details":"détails","From":"Du","to":"au"},"people":{"title":"Bienvenue !","description":"..."},"venues":{"title":"Bienvenue !","description":"..."},"users":{"title":"Bienvenue !","description":"..."},"dashboard":{"title":"Mon compte","description":"..."},"error":{"notFound":{"title":"Page non trouvée","description":"..."}}},"taxonomy":{"type":{"music":"musique","conference":"conférence","exhibition":"exposition","theater":"théâtre"}}}');
 
 /***/ }),
 
