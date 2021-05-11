@@ -17,9 +17,9 @@
             class="flaticon-music-disc-with-white-curve-details mr-0"
             :class="$vuetify.theme.dark ? 'secondary--text' : 'primary--text'"
             style="margin-bottom: 0.175rem"
-          ></v-icon>
-          {{ appName }}</v-toolbar-title
-        >
+          ></v-icon
+          ><span class="app_title"> {{ appName }}</span>
+        </v-toolbar-title>
       </div>
       <v-spacer></v-spacer>
       <div

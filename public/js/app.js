@@ -44117,7 +44117,9 @@ var render = function() {
                       : "primary--text",
                     staticStyle: { "margin-bottom": "0.175rem" }
                   }),
-                  _vm._v("\n        " + _vm._s(_vm.appName))
+                  _c("span", { staticClass: "app_title" }, [
+                    _vm._v(" " + _vm._s(_vm.appName))
+                  ])
                 ],
                 1
               )

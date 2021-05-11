@@ -36,6 +36,10 @@
   margin-left: 0.5rem;
 }
 
+/* .app_title {
+  font-family: LibreBarcode;
+  font-size: 2em;
+} */
 /*!
 * Custom Vuetify Light Theme
 * by Axel Duret
@@ -119,6 +123,27 @@
   opacity: 40%;
 }
 
+@font-face {
+  font-family: LibreBarcode;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/LibreBarcode39Text-Regular.ttf?987a1486b18cb90e5d9cb5852e8e209c) format("truetype");
+}
+@font-face {
+  font-family: Sail;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/Sail-Regular.ttf?815c6d72aaacd321e0dc22fed0d662d2) format("truetype");
+}
+@font-face {
+  font-family: TrainOne;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(/fonts/TrainOne-Regular.ttf?eb804fb991807a228024bb0ca54df1dc) format("truetype");
+}
 @font-face {
   font-family: "flaticon";
   src: url(/fonts/flaticon.ttf?4ea60ea9f13aede9dd320afc22c12bf1) format("truetype"), url(/fonts/flaticon.woff?ada09e379bff84de758fd294ac1116df) format("woff"), url(/fonts/flaticon.woff2?05bc835a2298cb5c078c5025cc9bac35) format("woff2"), url(/fonts/flaticon.eot?9f60c777657b74c67e59f89fd634b05b) format("embedded-opentype"), url(/fonts/flaticon.svg?1716980cb4f7e11095853900fe6d8869) format("svg");
