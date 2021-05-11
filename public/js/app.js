@@ -2157,6 +2157,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -44411,11 +44416,20 @@ var render = function() {
                         staticClass:
                           "flaticon-music-disc-with-white-curve-details mr-0",
                         class: _vm.$vuetify.theme.dark
-                          ? "secondary--text"
-                          : "primary--text",
+                          ? "primary--text"
+                          : "secondary--text",
                         staticStyle: { "margin-bottom": "0.175rem" }
                       }),
-                      _vm._v("\n          " + _vm._s(_vm.appName))
+                      _c(
+                        "span",
+                        {
+                          staticClass: "app_title",
+                          class: _vm.$vuetify.theme.dark
+                            ? "primary--text"
+                            : "secondary--text"
+                        },
+                        [_vm._v("\n            " + _vm._s(_vm.appName))]
+                      )
                     ],
                     1
                   )
