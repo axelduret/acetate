@@ -16,7 +16,8 @@ export default new Vuetify({
                 greybg: colors.teal.lighten5,
                 accent: colors.shades.white,
                 contrast: colors.shades.black,
-                error: colors.red.accent3
+                error: colors.red.accent3,
+                darkprimary: "#4db6ac"
             },
             dark: {
                 primary: "#4db6ac",
@@ -25,7 +26,8 @@ export default new Vuetify({
                 greybg: colors.cyan.darken4,
                 accent: colors.shades.black,
                 contrast: colors.shades.white,
-                error: colors.red.accent3
+                error: colors.red.accent3,
+                lightprimary: "#455A64"
             }
         }
     }

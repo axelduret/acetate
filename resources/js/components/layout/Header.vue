@@ -15,10 +15,15 @@
         >
           <v-icon
             class="flaticon-music-disc-with-white-curve-details mr-0"
-            :class="$vuetify.theme.dark ? 'secondary--text' : 'primary--text'"
+            :class="$vuetify.theme.dark ? 'primary--text' : 'secondary--text'"
             style="margin-bottom: 0.175rem"
           ></v-icon
-          ><span class="app_title"> {{ appName }}</span>
+          ><span
+            class="app_title"
+            :class="$vuetify.theme.dark ? 'primary--text' : 'secondary--text'"
+          >
+            {{ appName }}</span
+          >
         </v-toolbar-title>
       </div>
       <v-spacer></v-spacer>

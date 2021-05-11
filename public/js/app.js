@@ -2029,6 +2029,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -2356,7 +2361,8 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.use((vuetify__WEBPACK_IMPORTED_MODULE_1
         greybg: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.teal.lighten5,
         accent: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.shades.white,
         contrast: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.shades.black,
-        error: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.red.accent3
+        error: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.red.accent3,
+        darkprimary: "#4db6ac"
       },
       dark: {
         primary: "#4db6ac",
@@ -2365,7 +2371,8 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.use((vuetify__WEBPACK_IMPORTED_MODULE_1
         greybg: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.cyan.darken4,
         accent: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.shades.black,
         contrast: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.shades.white,
-        error: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.red.accent3
+        error: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.red.accent3,
+        lightprimary: "#455A64"
       }
     }
   }
@@ -44113,13 +44120,20 @@ var render = function() {
                     staticClass:
                       "flaticon-music-disc-with-white-curve-details mr-0",
                     class: _vm.$vuetify.theme.dark
-                      ? "secondary--text"
-                      : "primary--text",
+                      ? "primary--text"
+                      : "secondary--text",
                     staticStyle: { "margin-bottom": "0.175rem" }
                   }),
-                  _c("span", { staticClass: "app_title" }, [
-                    _vm._v(" " + _vm._s(_vm.appName))
-                  ])
+                  _c(
+                    "span",
+                    {
+                      staticClass: "app_title",
+                      class: _vm.$vuetify.theme.dark
+                        ? "primary--text"
+                        : "secondary--text"
+                    },
+                    [_vm._v("\n          " + _vm._s(_vm.appName))]
+                  )
                 ],
                 1
               )
