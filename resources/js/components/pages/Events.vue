@@ -424,12 +424,19 @@ export default {
       this.$data.events = null;
       this.overlay = true;
       if (item === "all") {
-        this.query = "/api/events?per_page=";
+        this.query = "events?per_page=";
       } else {
-        this.query = "/api/events?taxonomy_type=" + item + "&per_page=";
+        this.query = "events?taxonomy_type=" + item + "&per_page=";
       }
       axios
-        .get(this.query + this.perPage)
+        .request({
+          url: this.query + this.perPage,
+          method: "get",
+          baseURL: "/api/",
+          headers: {
+            Authorization: "Bearer " + this.apiToken,
+          },
+        })
         .then((response) => {
           this.events = response.data.events;
         })

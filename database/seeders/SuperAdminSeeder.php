@@ -27,13 +27,14 @@ class SuperAdminSeeder extends Seeder
       'email' => env('ADMIN_EMAIL'),
       'email_verified_at' => now(),
       'password'  => Hash::make(env('ADMIN_PASSWORD')),
-      'remember_token' => Str::random(10),
     ]);
-    $admin->assignRole('super-admin');
     $admin->save();
+    $admin->assignRole('super-admin');
     // Create a super-admin api-token and attach it to the super-admin.
-    $admin->createToken('api_token', ['role:super-admin']);
+    $admin->createToken('api_token', ['*']);
     // Create a global api-token and attach it to the super-admin.
-    $admin->createToken('api_token', ['role:anonymous']);
+    $app_token = $admin->createToken('api_token', ['role:anonymous']);
+    $admin->remember_token = $app_token->plainTextToken;
+    $admin->save();
   }
 }

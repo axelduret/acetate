@@ -411,7 +411,7 @@ __webpack_require__.r(__webpack_exports__);
       events: "",
       appURL: "http://127.0.0.1:8001",
       baseURL: "/",
-      apiToken: "",
+      apiToken: "2|qjUxaiyEIh49NzPoEpDsvsshY8q9pAy8VuPAxlZp",
       eventTab: null,
       eventTabs: [{
         name: "All",
@@ -450,12 +450,19 @@ __webpack_require__.r(__webpack_exports__);
       this.overlay = true;
 
       if (item === "all") {
-        this.query = "/api/events?per_page=";
+        this.query = "events?per_page=";
       } else {
-        this.query = "/api/events?taxonomy_type=" + item + "&per_page=";
+        this.query = "events?taxonomy_type=" + item + "&per_page=";
       }
 
-      axios.get(this.query + this.perPage).then(function (response) {
+      axios.request({
+        url: this.query + this.perPage,
+        method: "get",
+        baseURL: "/api/",
+        headers: {
+          Authorization: "Bearer " + this.apiToken
+        }
+      }).then(function (response) {
         _this2.events = response.data.events;
       })["catch"](function (error) {
         console.log(error);
