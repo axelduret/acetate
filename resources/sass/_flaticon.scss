@@ -2,14 +2,20 @@ $flaticon-font: "flaticon";
 
 @font-face {
     font-family: $flaticon-font;
-    src: url("../fonts/flaticon.ttf?665b79ed9741c593f81884a711aa9b8a") format("truetype"),
-url("../fonts/flaticon.woff?665b79ed9741c593f81884a711aa9b8a") format("woff"),
-url("../fonts/flaticon.woff2?665b79ed9741c593f81884a711aa9b8a") format("woff2"),
-url("../fonts/flaticon.eot?665b79ed9741c593f81884a711aa9b8a#iefix") format("embedded-opentype"),
-url("../fonts/flaticon.svg?665b79ed9741c593f81884a711aa9b8a#flaticon") format("svg");
+    src: url("../fonts/flaticon.ttf?665b79ed9741c593f81884a711aa9b8a")
+            format("truetype"),
+        url("../fonts/flaticon.woff?665b79ed9741c593f81884a711aa9b8a")
+            format("woff"),
+        url("../fonts/flaticon.woff2?665b79ed9741c593f81884a711aa9b8a")
+            format("woff2"),
+        url("../fonts/flaticon.eot?665b79ed9741c593f81884a711aa9b8a#iefix")
+            format("embedded-opentype"),
+        url("../fonts/flaticon.svg?665b79ed9741c593f81884a711aa9b8a#flaticon")
+            format("svg");
 }
 
-i[class^="flaticon-"]:before, i[class*=" flaticon-"]:before {
+i[class^="flaticon-"]:before,
+i[class*=" flaticon-"]:before {
     font-family: flaticon !important;
     font-style: normal;
     font-weight: normal !important;
@@ -29,14 +35,15 @@ $flaticon-map: (
     "music-spectacle-day-on-calendar-page": "\f106",
     "calendar": "\f107",
     "music-disc-with-white-details": "\f108",
-    "music-disc-with-white-curve-details": "\f109", // Acetate logo.
-    "vintage-music-disc-on-player": "\f10a",
+    "music-disc-with-white-curve-details": "\f109",
+    // Acetate logo.
+        "vintage-music-disc-on-player": "\f10a",
     "music-disc": "\f10b",
     "disc-jockey-digital-controllers": "\f10c",
     "music-album": "\f10d",
     "calendar-1": "\f10e",
     "add": "\f10f",
-    "calendar-2": "\f110",
+    "calendar-2": "\f110"
 );
 
 .flaticon-correct:before {

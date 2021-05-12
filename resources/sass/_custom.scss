@@ -6,18 +6,18 @@
 
 // Text selection (pseudo element)
 ::selection {
-  color: $ac-white;
-  background: $ac-dark-primary;
+    color: $ac-white;
+    background: $ac-dark-primary;
 }
 
 // Vuetify Theme prepend-icon
 .v-input__prepend-outer .v-icon {
-  margin-right: 0.5rem;
+    margin-right: 0.5rem;
 }
 
 // Vuetify Theme append-icon
 .v-input__append-outer .v-icon {
-  margin-left: 0.5rem;
+    margin-left: 0.5rem;
 }
 
 // App title
@@ -26,9 +26,9 @@
   font-size: 2em;
 } */
 
-.events_links{
-  text-decoration: none;
+.events_links {
+    text-decoration: none;
 }
-.events_links:hover{
+.events_links:hover {
     text-decoration: underline;
-  }
+}

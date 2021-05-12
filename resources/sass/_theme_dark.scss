@@ -11,46 +11,45 @@
 // Footer background
 .theme--dark.v-footer,
 // Navigation-drawer background
-.theme--dark.v-navigation-drawer{
-  background-color: $ac-black;
+.theme--dark.v-navigation-drawer {
+    background-color: $ac-black;
 }
 // Tabs Items
-.theme--dark.v-tabs-items{
-background-color: $ac-black;
+.theme--dark.v-tabs-items {
+    background-color: $ac-black;
 }
 // Icons
-.theme--dark.v-icon{
-  color: $ac-dark-primary;
+.theme--dark.v-icon {
+    color: $ac-dark-primary;
 }
 // Chevron left icon
-.theme--dark.mdi-chevron-left{
-  opacity: 60%;
+.theme--dark.mdi-chevron-left {
+    opacity: 60%;
 }
 // Chevron right icon
-.theme--dark.mdi-chevron-right{
-  color: $ac-dark-primary;
-  opacity: 60%;
+.theme--dark.mdi-chevron-right {
+    color: $ac-dark-primary;
+    opacity: 60%;
 }
 // Prepend icons
-.v-input__prepend-outer .v-icon{
-  color: $ac-white;
+.v-input__prepend-outer .v-icon {
+    color: $ac-white;
 }
 // Cards
-.theme--dark.v-sheet.v-card{
-background-color: $ac-dark-cards-bg;
+.theme--dark.v-sheet.v-card {
+    background-color: $ac-dark-cards-bg;
 }
 // Lists
 .theme--dark
-.v-list-item
-:not(.v-list-item--active)
-:not(.v-list-item--disabled),
-.theme--dark
-.v-list-item__title{
-  color: $ac-dark-primary
+    .v-list-item
+    :not(.v-list-item--active)
+    :not(.v-list-item--disabled),
+.theme--dark .v-list-item__title {
+    color: $ac-dark-primary;
 }
 // Divider
-.theme--dark.v-divider{
-  background-color: $ac-dark-contrast-bg;
-  color: $ac-dark-contrast-bg;
-  opacity: 40%;
+.theme--dark.v-divider {
+    background-color: $ac-dark-contrast-bg;
+    color: $ac-dark-contrast-bg;
+    opacity: 40%;
 }
