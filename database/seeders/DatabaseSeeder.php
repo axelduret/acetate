@@ -394,23 +394,50 @@ class DatabaseSeeder extends Seeder
     $taxonomies = Taxonomy::factory()
       ->count(100)
       ->create()
-      ->each(function ($taxonomy) use ($events, $people, $venues) {
+      ->each(function ($taxonomy) use ($people, $venues) {
         if ($taxonomy->type == 'venue') {
           // Attach some random venues to the taxonomy.
           $taxonomy->venues()->attach(
-            $venues->random(rand(1, 20))->pluck('id')->toArray()
+            $venues->random(rand(1, 10))->pluck('id')->toArray()
           );
         } elseif ($taxonomy->type == 'people') {
           // Attach some random people to the taxonomy.
           $taxonomy->people()->attach(
-            $people->random(rand(1, 20))->pluck('id')->toArray()
-          );
-        } else {
-          // Attach some random events to the taxonomy.
-          $taxonomy->events()->attach(
-            $events->random(rand(1, 20))->pluck('id')->toArray()
+            $people->random(rand(1, 10))->pluck('id')->toArray()
           );
         }
       });
+    // Attach taxonomies to the events.
+    foreach ($events as $event) {
+      $random = rand(1, 4);
+      if ($random == 1) {
+        // Attach conference taxonomy type to some random events.
+        $event->taxonomies()->attach(
+          $taxonomies->where('type', 'conference')
+            ->random(rand(1, 5))->pluck('id')->toArray()
+        );
+      }
+      if ($random == 2) {
+        // Attach exhibition taxonomy type to some random events.
+        $event->taxonomies()->attach(
+          $taxonomies->where('type', 'exhibition')
+            ->random(rand(1, 5))->pluck('id')->toArray()
+        );
+      }
+      if ($random == 3) {
+        // Attach music taxonomy type to some random events.
+        $event->taxonomies()->attach(
+          $taxonomies->where('type', 'music')
+            ->random(rand(1, 5))->pluck('id')->toArray()
+        );
+      }
+      if ($random == 4) {
+        // Attach theater taxonomy type to some random events.
+        $event->taxonomies()->attach(
+          $taxonomies->where('type', 'theater')
+            ->random(rand(1, 5))->pluck('id')->toArray()
+        );
+      }
+    }
   }
 }

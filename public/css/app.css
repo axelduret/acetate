@@ -60,6 +60,10 @@
   background-color: #ECEFF1;
 }
 
+.theme--light.v-tabs-items {
+  background-color: #ECEFF1;
+}
+
 .theme--light.v-icon {
   color: #455A64;
 }
@@ -96,6 +100,10 @@
 .theme--dark.v-app-bar.v-toolbar.v-sheet,
 .theme--dark.v-footer,
 .theme--dark.v-navigation-drawer {
+  background-color: #263238;
+}
+
+.theme--dark.v-tabs-items {
   background-color: #263238;
 }
 

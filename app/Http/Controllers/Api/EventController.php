@@ -50,6 +50,13 @@ class EventController extends Controller
   protected $warning = [];
 
   /**
+   * Warning messages.
+   *
+   * @var array
+   */
+  protected $taxonomyTypes = ['conference', 'exhibition', 'music', 'theater'];
+
+  /**
    * Attached relationships.
    *
    * @var array
@@ -85,6 +92,7 @@ class EventController extends Controller
    */
   public function index(Request $request)
   {
+    $this->request = $request;
     // Search dates.
     $searchField = in_array(
       $request->input('search_field'),
@@ -168,6 +176,25 @@ class EventController extends Controller
             ]);
         }
       ]);
+    // Search taxonomy type.
+    $query = $query->whereHas('event', function ($filter) {
+      $filter
+        ->whereHas('taxonomies', function ($filter) {
+          if ($this->request->input('taxonomy_type')) {
+            if (in_array(
+              $this->request->input('taxonomy_type'),
+              $this->taxonomyTypes
+            )) {
+              $filter->where('type', $this->request->input('taxonomy_type'));
+            }
+          } else {
+            $filter->where('type', 'conference');
+            $filter->orWhere('type', 'exhibition');
+            $filter->orWhere('type', 'music');
+            $filter->orWhere('type', 'theater');
+          }
+        });
+    });
     // Sort data.
     $sortField = in_array(
       $request->input('sort_by'),
@@ -195,6 +222,7 @@ class EventController extends Controller
     // Returns events data with success message.
     return $this->success($message, new EventCollection($events), 200);
      */
+
     // Returns events data's collection.
     return new EventCollection($events);
   }
