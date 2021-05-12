@@ -12,16 +12,11 @@
           v-for="(tab, index) in eventTabs"
           :key="index"
           @click="showTab(tab.method)"
-          >{{ tab.name }}</v-tab
+          >{{ $t("page.events.tabs." + tab.name) }}</v-tab
         >
       </v-tabs>
       <v-tabs-items v-model="eventTab">
-        <v-tab-item
-          v-for="(tab, index) in eventTabs"
-          :key="index"
-          :transition="false"
-          :reverse-transition="false"
-        >
+        <v-tab-item v-for="(tab, index) in eventTabs" :key="index">
           <v-container>
             <div>
               <v-row dense>
@@ -383,8 +378,12 @@
       :opacity="0.1"
       :value="overlay"
     >
-      <v-progress-circular indeterminate size="64">
-        Loading...
+      <v-progress-circular indeterminate size="90">
+        <span
+          class="caption"
+          :class="$vuetify.theme.dark ? 'primary--text' : 'secondary--text'"
+          >{{ $t("loading") }}</span
+        >
       </v-progress-circular>
     </v-overlay>
   </v-container>
@@ -402,11 +401,11 @@ export default {
       apiToken: process.env.MIX_APP_API_TOKEN,
       eventTab: null,
       eventTabs: [
-        { name: "All", method: "all" },
-        { name: "Conference", method: "conference" },
-        { name: "Exhibition", method: "exhibition" },
-        { name: "Music", method: "music" },
-        { name: "Theater", method: "theater" },
+        { name: "all", method: "all" },
+        { name: "conference", method: "conference" },
+        { name: "exhibition", method: "exhibition" },
+        { name: "music", method: "music" },
+        { name: "theater", method: "theater" },
       ],
       query: null,
     };
@@ -421,7 +420,7 @@ export default {
   },
   methods: {
     showTab: function (item) {
-      this.$data.events = null;
+      this.events = null;
       this.overlay = true;
       if (item === "all") {
         this.query = "events?per_page=";

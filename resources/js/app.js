@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuelidate from "vuelidate";
 import vuetify from "./plugins/vuetify";
 import i18n from "./plugins/vue-i18n";
+import { Service } from "./services/service";
 import router from "./router/routes";
 import store from "./store/vuex";
 import moment from "moment";
@@ -78,3 +79,4 @@ const app = new Vue({
     store,
     render: h => h(App)
 });
+Service.prototype.$vue = app;

@@ -12,6 +12,7 @@
             "dark-title": "Thème sombre"
         }
     },
+    "loading": "Chargement",
     "menu": {
         "home": {
             "title": "Accueil"
@@ -60,7 +61,14 @@
             "more_info": "plus d'infos",
             "details": "détails",
             "From": "Du",
-            "to": "au"
+            "to": "au",
+            "tabs": {
+                "all": "tous",
+                "conference": "conférence",
+                "exhibition": "exposition",
+                "music": "musique",
+                "theater": "théâtre"
+            }
         },
         "people": {
             "title": "Bienvenue !",
@@ -87,9 +95,9 @@
     },
     "taxonomy": {
         "type": {
-            "music": "musique",
             "conference": "conférence",
             "exhibition": "exposition",
+            "music": "musique",
             "theater": "théâtre"
         }
     },

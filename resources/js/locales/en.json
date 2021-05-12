@@ -12,6 +12,7 @@
             "dark-title": "Dark theme"
         }
     },
+    "loading": "Loading",
     "menu": {
         "home": {
             "title": "Home"
@@ -60,7 +61,14 @@
             "more_info": "more info",
             "details": "details",
             "From": "From",
-            "to": "to"
+            "to": "to",
+            "tabs": {
+                "all": "all",
+                "conference": "conference",
+                "exhibition": "exhibition",
+                "music": "music",
+                "theater": "theater"
+            }
         },
         "people": {
             "title": "Welcome !",
@@ -87,9 +95,9 @@
     },
     "taxonomy": {
         "type": {
-            "music": "music",
             "conference": "conference",
             "exhibition": "exhibition",
+            "music": "music",
             "theater": "theater"
         }
     },

@@ -2186,15 +2186,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
-/* harmony import */ var vuelidate__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuelidate */ "./node_modules/vuelidate/lib/index.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js");
+/* harmony import */ var vuelidate__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuelidate */ "./node_modules/vuelidate/lib/index.js");
 /* harmony import */ var _plugins_vuetify__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./plugins/vuetify */ "./resources/js/plugins/vuetify.js");
 /* harmony import */ var _plugins_vue_i18n__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./plugins/vue-i18n */ "./resources/js/plugins/vue-i18n.js");
-/* harmony import */ var _router_routes__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./router/routes */ "./resources/js/router/routes.js");
-/* harmony import */ var _store_vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./store/vuex */ "./resources/js/store/vuex.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
-/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue");
+/* harmony import */ var _services_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./services/service */ "./resources/js/services/service.js");
+/* harmony import */ var _router_routes__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./router/routes */ "./resources/js/router/routes.js");
+/* harmony import */ var _store_vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./store/vuex */ "./resources/js/store/vuex.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! moment */ "./node_modules/moment/moment.js");
+/* harmony import */ var moment__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(moment__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _App_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./App.vue */ "./resources/js/App.vue");
+
 
 
 
@@ -2223,44 +2225,45 @@ var subStringFilter = function subStringFilter(text, length) {
 
 var dateFilter = function dateFilter(value) {
   if (value) {
-    var formattedDay = moment__WEBPACK_IMPORTED_MODULE_4___default()(String(value)).locale(_plugins_vue_i18n__WEBPACK_IMPORTED_MODULE_1__.default.locale).format("dddd");
-    var formattedDate = moment__WEBPACK_IMPORTED_MODULE_4___default()(String(value)).locale(_plugins_vue_i18n__WEBPACK_IMPORTED_MODULE_1__.default.locale).format("LL");
+    var formattedDay = moment__WEBPACK_IMPORTED_MODULE_5___default()(String(value)).locale(_plugins_vue_i18n__WEBPACK_IMPORTED_MODULE_1__.default.locale).format("dddd");
+    var formattedDate = moment__WEBPACK_IMPORTED_MODULE_5___default()(String(value)).locale(_plugins_vue_i18n__WEBPACK_IMPORTED_MODULE_1__.default.locale).format("LL");
     return formattedDay.charAt(0).toUpperCase() + formattedDay.slice(1) + " " + formattedDate;
   }
 };
 
 var multipleDateFilter = function multipleDateFilter(value) {
   if (value) {
-    return moment__WEBPACK_IMPORTED_MODULE_4___default()(String(value)).locale(_plugins_vue_i18n__WEBPACK_IMPORTED_MODULE_1__.default.locale).format("LL");
+    return moment__WEBPACK_IMPORTED_MODULE_5___default()(String(value)).locale(_plugins_vue_i18n__WEBPACK_IMPORTED_MODULE_1__.default.locale).format("LL");
   }
 };
 
 var timeFilter = function timeFilter(value) {
   if (value) {
-    return moment__WEBPACK_IMPORTED_MODULE_4___default()(String(value), "hh:mm:ss").locale(_plugins_vue_i18n__WEBPACK_IMPORTED_MODULE_1__.default.locale).format("LT");
+    return moment__WEBPACK_IMPORTED_MODULE_5___default()(String(value), "hh:mm:ss").locale(_plugins_vue_i18n__WEBPACK_IMPORTED_MODULE_1__.default.locale).format("LT");
   }
 };
 
-vue__WEBPACK_IMPORTED_MODULE_6__.default.filter("truncate", truncateFilter);
-vue__WEBPACK_IMPORTED_MODULE_6__.default.filter("subStr", subStringFilter);
-vue__WEBPACK_IMPORTED_MODULE_6__.default.filter("formatDate", dateFilter);
-vue__WEBPACK_IMPORTED_MODULE_6__.default.filter("formatMultipleDates", multipleDateFilter);
-vue__WEBPACK_IMPORTED_MODULE_6__.default.filter("formatTime", timeFilter);
-vue__WEBPACK_IMPORTED_MODULE_6__.default.use(vuelidate__WEBPACK_IMPORTED_MODULE_7__.default);
-vue__WEBPACK_IMPORTED_MODULE_6__.default.config.productionTip = false; // document.title = process.env.MIX_APP_NAME;
+vue__WEBPACK_IMPORTED_MODULE_7__.default.filter("truncate", truncateFilter);
+vue__WEBPACK_IMPORTED_MODULE_7__.default.filter("subStr", subStringFilter);
+vue__WEBPACK_IMPORTED_MODULE_7__.default.filter("formatDate", dateFilter);
+vue__WEBPACK_IMPORTED_MODULE_7__.default.filter("formatMultipleDates", multipleDateFilter);
+vue__WEBPACK_IMPORTED_MODULE_7__.default.filter("formatTime", timeFilter);
+vue__WEBPACK_IMPORTED_MODULE_7__.default.use(vuelidate__WEBPACK_IMPORTED_MODULE_8__.default);
+vue__WEBPACK_IMPORTED_MODULE_7__.default.config.productionTip = false; // document.title = process.env.MIX_APP_NAME;
 // console.log(i18n.locale);
 // console.log(process.env.MIX_VUE_APP_I18N_SUPPORTED_LOCALE);
 
-var app = new vue__WEBPACK_IMPORTED_MODULE_6__.default({
+var app = new vue__WEBPACK_IMPORTED_MODULE_7__.default({
   el: "#app",
   vuetify: _plugins_vuetify__WEBPACK_IMPORTED_MODULE_0__.default,
-  router: _router_routes__WEBPACK_IMPORTED_MODULE_2__.default,
+  router: _router_routes__WEBPACK_IMPORTED_MODULE_3__.default,
   i18n: _plugins_vue_i18n__WEBPACK_IMPORTED_MODULE_1__.default,
-  store: _store_vuex__WEBPACK_IMPORTED_MODULE_3__.default,
+  store: _store_vuex__WEBPACK_IMPORTED_MODULE_4__.default,
   render: function render(h) {
-    return h(_App_vue__WEBPACK_IMPORTED_MODULE_5__.default);
+    return h(_App_vue__WEBPACK_IMPORTED_MODULE_6__.default);
   }
 });
+_services_service__WEBPACK_IMPORTED_MODULE_2__.Service.prototype.$vue = app;
 
 /***/ }),
 
@@ -2484,6 +2487,25 @@ var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__.default({
   routes: routes
 });
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (router);
+
+/***/ }),
+
+/***/ "./resources/js/services/service.js":
+/*!******************************************!*\
+  !*** ./resources/js/services/service.js ***!
+  \******************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "Service": () => (/* binding */ Service)
+/* harmony export */ });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Service = function Service() {
+  _classCallCheck(this, Service);
+};
 
 /***/ }),
 
@@ -107200,7 +107222,7 @@ module.exports = webpackAsyncContext;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"lang":{"en":"English","fr":"French","switcher":{"title":"Language"}},"theme":{"switcher":{"light-title":"Light theme","dark-title":"Dark theme"}},"menu":{"home":{"title":"Home"},"events":{"title":"Events"},"people":{"title":"People"},"venues":{"title":"Venues"},"users":{"title":"Users"}},"account-menu":{"title":"Personal account","login":{"title":"Login"},"register":{"title":"Register"},"dashboard":{"title":"Dashboard"}},"page":{"home":{"title":"Welcome !","description":"..."},"events":{"title":"Welcome !","description":"...","no_people":"none","no_people_title":"No person to display","no_venues":"none","no_venues_title":"No venue to display","no_taxonomies":"none","no_taxonomies_title":"No tag to display","no_prices":"none","no_prices_title":"No price to display","more_info":"more info","details":"details","From":"From","to":"to"},"people":{"title":"Welcome !","description":"..."},"venues":{"title":"Welcome !","description":"..."},"users":{"title":"Welcome !","description":"..."},"dashboard":{"title":"Dashboard","description":"..."},"error":{"notFound":{"title":"Page not found","description":"..."}}},"taxonomy":{"type":{"music":"music","conference":"conference","exhibition":"exhibition","theater":"theater"}},"price":{"free":"free entry"}}');
+module.exports = JSON.parse('{"lang":{"en":"English","fr":"French","switcher":{"title":"Language"}},"theme":{"switcher":{"light-title":"Light theme","dark-title":"Dark theme"}},"loading":"Loading","menu":{"home":{"title":"Home"},"events":{"title":"Events"},"people":{"title":"People"},"venues":{"title":"Venues"},"users":{"title":"Users"}},"account-menu":{"title":"Personal account","login":{"title":"Login"},"register":{"title":"Register"},"dashboard":{"title":"Dashboard"}},"page":{"home":{"title":"Welcome !","description":"..."},"events":{"title":"Welcome !","description":"...","no_people":"none","no_people_title":"No person to display","no_venues":"none","no_venues_title":"No venue to display","no_taxonomies":"none","no_taxonomies_title":"No tag to display","no_prices":"none","no_prices_title":"No price to display","more_info":"more info","details":"details","From":"From","to":"to","tabs":{"all":"all","conference":"conference","exhibition":"exhibition","music":"music","theater":"theater"}},"people":{"title":"Welcome !","description":"..."},"venues":{"title":"Welcome !","description":"..."},"users":{"title":"Welcome !","description":"..."},"dashboard":{"title":"Dashboard","description":"..."},"error":{"notFound":{"title":"Page not found","description":"..."}}},"taxonomy":{"type":{"conference":"conference","exhibition":"exhibition","music":"music","theater":"theater"}},"price":{"free":"free entry"}}');
 
 /***/ }),
 
@@ -107211,7 +107233,7 @@ module.exports = JSON.parse('{"lang":{"en":"English","fr":"French","switcher":{"
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"lang":{"en":"Anglais","fr":"Français","switcher":{"title":"Traduction"}},"theme":{"switcher":{"light-title":"Thème clair","dark-title":"Thème sombre"}},"menu":{"home":{"title":"Accueil"},"events":{"title":"Événements"},"people":{"title":"Personnes"},"venues":{"title":"Lieux"},"users":{"title":"Utilisateurs"}},"account-menu":{"title":"Compte personnel","login":{"title":"Connexion"},"register":{"title":"Inscription"},"dashboard":{"title":"Tableau de bord"}},"page":{"home":{"title":"Bienvenue !","description":"..."},"events":{"title":"Bienvenue !","description":"...","no_people":"aucun","no_people_title":"Aucune personne à afficher","no_venues":"aucun","no_venues_title":"Aucun lieu à afficher","no_taxonomies":"aucun","no_taxonomies_title":"Aucune étiquette à afficher","no_prices":"aucun","no_prices_title":"Aucun prix à afficher","more_info":"plus d\'infos","details":"détails","From":"Du","to":"au"},"people":{"title":"Bienvenue !","description":"..."},"venues":{"title":"Bienvenue !","description":"..."},"users":{"title":"Bienvenue !","description":"..."},"dashboard":{"title":"Mon compte","description":"..."},"error":{"notFound":{"title":"Page non trouvée","description":"..."}}},"taxonomy":{"type":{"music":"musique","conference":"conférence","exhibition":"exposition","theater":"théâtre"}},"price":{"free":"entrée libre"}}');
+module.exports = JSON.parse('{"lang":{"en":"Anglais","fr":"Français","switcher":{"title":"Traduction"}},"theme":{"switcher":{"light-title":"Thème clair","dark-title":"Thème sombre"}},"loading":"Chargement","menu":{"home":{"title":"Accueil"},"events":{"title":"Événements"},"people":{"title":"Personnes"},"venues":{"title":"Lieux"},"users":{"title":"Utilisateurs"}},"account-menu":{"title":"Compte personnel","login":{"title":"Connexion"},"register":{"title":"Inscription"},"dashboard":{"title":"Tableau de bord"}},"page":{"home":{"title":"Bienvenue !","description":"..."},"events":{"title":"Bienvenue !","description":"...","no_people":"aucun","no_people_title":"Aucune personne à afficher","no_venues":"aucun","no_venues_title":"Aucun lieu à afficher","no_taxonomies":"aucun","no_taxonomies_title":"Aucune étiquette à afficher","no_prices":"aucun","no_prices_title":"Aucun prix à afficher","more_info":"plus d\'infos","details":"détails","From":"Du","to":"au","tabs":{"all":"tous","conference":"conférence","exhibition":"exposition","music":"musique","theater":"théâtre"}},"people":{"title":"Bienvenue !","description":"..."},"venues":{"title":"Bienvenue !","description":"..."},"users":{"title":"Bienvenue !","description":"..."},"dashboard":{"title":"Mon compte","description":"..."},"error":{"notFound":{"title":"Page non trouvée","description":"..."}}},"taxonomy":{"type":{"conference":"conférence","exhibition":"exposition","music":"musique","theater":"théâtre"}},"price":{"free":"entrée libre"}}');
 
 /***/ }),
 

@@ -402,7 +402,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -414,19 +413,19 @@ __webpack_require__.r(__webpack_exports__);
       apiToken: "2|qjUxaiyEIh49NzPoEpDsvsshY8q9pAy8VuPAxlZp",
       eventTab: null,
       eventTabs: [{
-        name: "All",
+        name: "all",
         method: "all"
       }, {
-        name: "Conference",
+        name: "conference",
         method: "conference"
       }, {
-        name: "Exhibition",
+        name: "exhibition",
         method: "exhibition"
       }, {
-        name: "Music",
+        name: "music",
         method: "music"
       }, {
-        name: "Theater",
+        name: "theater",
         method: "theater"
       }],
       query: null
@@ -446,7 +445,7 @@ __webpack_require__.r(__webpack_exports__);
     showTab: function showTab(item) {
       var _this2 = this;
 
-      this.$data.events = null;
+      this.events = null;
       this.overlay = true;
 
       if (item === "all") {
@@ -606,7 +605,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v(_vm._s(tab.name))]
+                [_vm._v(_vm._s(_vm.$t("page.events.tabs." + tab.name)))]
               )
             }),
             1
@@ -626,10 +625,7 @@ var render = function() {
             _vm._l(_vm.eventTabs, function(tab, index) {
               return _c(
                 "v-tab-item",
-                {
-                  key: index,
-                  attrs: { transition: false, "reverse-transition": false }
-                },
+                { key: index },
                 [
                   _c("v-container", [
                     _c(
@@ -1924,8 +1920,19 @@ var render = function() {
         [
           _c(
             "v-progress-circular",
-            { attrs: { indeterminate: "", size: "64" } },
-            [_vm._v("\n      Loading...\n    ")]
+            { attrs: { indeterminate: "", size: "90" } },
+            [
+              _c(
+                "span",
+                {
+                  staticClass: "caption",
+                  class: _vm.$vuetify.theme.dark
+                    ? "primary--text"
+                    : "secondary--text"
+                },
+                [_vm._v(_vm._s(_vm.$t("loading")))]
+              )
+            ]
           )
         ],
         1
