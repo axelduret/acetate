@@ -416,7 +416,7 @@ __webpack_require__.r(__webpack_exports__);
       events: "",
       appURL: "http://127.0.0.1:8001",
       baseURL: "/",
-      apiToken: "2|qjUxaiyEIh49NzPoEpDsvsshY8q9pAy8VuPAxlZp",
+      apiToken: "2|YLCdY7IIc4UjuWPBGG83eacN2e7jJ89JuORDVBIE",
       eventTab: null,
       eventTabs: [{
         name: "all",

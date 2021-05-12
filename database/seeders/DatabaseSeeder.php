@@ -170,7 +170,7 @@ class DatabaseSeeder extends Seeder
 
     // Create comments.
     $comments = Comment::factory()
-      ->count(100)
+      ->count(500)
       ->make()->each(function ($comment) use ($users, $events, $people, $venues) {
         // Attach a random user_id to each comment.
         $comment->user_id = $users->random()->id;
@@ -193,7 +193,7 @@ class DatabaseSeeder extends Seeder
 
     // Create likes.
     $likes = Like::factory()
-      ->count(1000)
+      ->count(10000)
       ->make()->each(function ($like) use ($users, $events, $people, $venues, $comments) {
         // Attach a random user_id to each like.
         $like->user_id = $users->random()->id;
