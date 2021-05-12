@@ -3,6 +3,7 @@
     <div>
       <!-- tabs -->
       <v-tabs
+        show-arrows
         v-model="eventTab"
         background-color="appBackground"
         :color="$vuetify.theme.dark ? 'primary' : 'secondary'"
@@ -298,12 +299,18 @@
                               <v-chip-group
                                 show-arrows
                                 class="col-auto my-2 py-0"
-                                ><v-chip
+                                ><span
                                   v-for="(taxonomy, index) in event.taxonomies"
                                   :key="index"
-                                  class="greybg primary--text"
-                                  x-small
-                                  >{{ taxonomy.category }}</v-chip
+                                  ><v-chip
+                                    class="greybg primary--text"
+                                    x-small
+                                    >{{ taxonomy.category }}</v-chip
+                                  ><v-chip
+                                    class="greybg primary--text"
+                                    x-small
+                                    >{{ taxonomy.sub_category }}</v-chip
+                                  ></span
                                 >
                               </v-chip-group>
                             </span>
@@ -311,7 +318,6 @@
                         </v-row>
                         <v-divider class="mx-2"></v-divider>
                       </div>
-
                       <div v-if="event.taxonomies.length <= 0">
                         <v-row class="py-0">
                           <v-col class="my-auto col-auto">
@@ -425,7 +431,7 @@ export default {
       if (item === "all") {
         this.query = "events?per_page=";
       } else {
-        this.query = "events?taxonomy_type=" + item + "&per_page=";
+        this.query = "events?type=" + item + "&per_page=";
       }
       axios
         .request({

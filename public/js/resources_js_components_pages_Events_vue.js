@@ -402,6 +402,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -451,7 +457,7 @@ __webpack_require__.r(__webpack_exports__);
       if (item === "all") {
         this.query = "events?per_page=";
       } else {
-        this.query = "events?taxonomy_type=" + item + "&per_page=";
+        this.query = "events?type=" + item + "&per_page=";
       }
 
       axios.request({
@@ -582,6 +588,7 @@ var render = function() {
             "v-tabs",
             {
               attrs: {
+                "show-arrows": "",
                 "background-color": "appBackground",
                 color: _vm.$vuetify.theme.dark ? "primary" : "secondary",
                 grow: ""
@@ -1671,27 +1678,53 @@ var render = function() {
                                                                   index
                                                                 ) {
                                                                   return _c(
-                                                                    "v-chip",
+                                                                    "span",
                                                                     {
-                                                                      key: index,
-                                                                      staticClass:
-                                                                        "greybg primary--text",
-                                                                      attrs: {
-                                                                        "x-small":
-                                                                          ""
-                                                                      }
+                                                                      key: index
                                                                     },
                                                                     [
-                                                                      _vm._v(
-                                                                        _vm._s(
-                                                                          taxonomy.category
-                                                                        )
+                                                                      _c(
+                                                                        "v-chip",
+                                                                        {
+                                                                          staticClass:
+                                                                            "greybg primary--text",
+                                                                          attrs: {
+                                                                            "x-small":
+                                                                              ""
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _vm._v(
+                                                                            _vm._s(
+                                                                              taxonomy.category
+                                                                            )
+                                                                          )
+                                                                        ]
+                                                                      ),
+                                                                      _c(
+                                                                        "v-chip",
+                                                                        {
+                                                                          staticClass:
+                                                                            "greybg primary--text",
+                                                                          attrs: {
+                                                                            "x-small":
+                                                                              ""
+                                                                          }
+                                                                        },
+                                                                        [
+                                                                          _vm._v(
+                                                                            _vm._s(
+                                                                              taxonomy.sub_category
+                                                                            )
+                                                                          )
+                                                                        ]
                                                                       )
-                                                                    ]
+                                                                    ],
+                                                                    1
                                                                   )
                                                                 }
                                                               ),
-                                                              1
+                                                              0
                                                             )
                                                           ],
                                                           1

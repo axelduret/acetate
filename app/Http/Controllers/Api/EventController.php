@@ -50,13 +50,6 @@ class EventController extends Controller
   protected $warning = [];
 
   /**
-   * Warning messages.
-   *
-   * @var array
-   */
-  protected $taxonomyTypes = ['conference', 'exhibition', 'music', 'theater'];
-
-  /**
    * Attached relationships.
    *
    * @var array
@@ -83,6 +76,13 @@ class EventController extends Controller
    * @var array
    */
   protected $searchValues = ['>=', '=', '<='];
+
+  /**
+   * Taxonomy Types.
+   *
+   * @var array
+   */
+  protected $taxonomyTypes = ['conference', 'exhibition', 'music', 'theater'];
 
   /**
    * Display the list of all events.
@@ -119,22 +119,6 @@ class EventController extends Controller
             ->select('id', 'name', 'avatar')
             // Order event by name.
             ->orderBy('name')
-            // Returns the total number of likes.
-            // TODO show likes of the logged user.
-            ->withCount([
-              'likes as likes_count' => function ($filter) {
-                $filter
-                  ->where('is_dislike', 0);
-              },
-              // Returns the total number of dislikes.
-              // TODO show dislikes of the logged user.
-              'likes as dislikes_count' => function ($filter) {
-                $filter
-                  ->where('is_dislike', 1);
-              },
-              // Returns the total number of comments.
-              'comments as comments_count'
-            ])
             ->with([
               // Returns event's addresses.
               'addresses',
@@ -173,28 +157,57 @@ class EventController extends Controller
               // Returns favorites of the specified user.
               // TODO show favorites only if the user is logged in.
               'favorites'
+            ])
+            // Returns the total number of likes.
+            // TODO show likes of the logged user.
+            ->withCount([
+              'likes as likes_count' => function ($filter) {
+                $filter
+                  ->where('is_dislike', 0);
+              },
+              // Returns the total number of dislikes.
+              // TODO show dislikes of the logged user.
+              'likes as dislikes_count' => function ($filter) {
+                $filter
+                  ->where('is_dislike', 1);
+              },
+              // Returns the total number of comments.
+              'comments as comments_count'
             ]);
         }
-      ]);
-    // Search taxonomy type.
-    $query = $query->whereHas('event', function ($filter) {
-      $filter
-        ->whereHas('taxonomies', function ($filter) {
-          if ($this->request->input('taxonomy_type')) {
-            if (in_array(
-              $this->request->input('taxonomy_type'),
-              $this->taxonomyTypes
-            )) {
-              $filter->where('type', $this->request->input('taxonomy_type'));
+      ])
+      // Search in event's relationships.
+      ->whereHas('event', function ($filter) {
+        $filter
+          // Search taxonomy type.
+          ->whereHas('taxonomies', function ($filter) {
+            if ($this->request->input('type')) {
+              if (in_array(
+                $this->request->input('type'),
+                $this->taxonomyTypes
+              )) {
+                $filter->where('type', $this->request->input('type'));
+              }
+            } else {
+              $filter->where('type', 'conference');
+              $filter->orWhere('type', 'exhibition');
+              $filter->orWhere('type', 'music');
+              $filter->orWhere('type', 'theater');
             }
-          } else {
-            $filter->where('type', 'conference');
-            $filter->orWhere('type', 'exhibition');
-            $filter->orWhere('type', 'music');
-            $filter->orWhere('type', 'theater');
-          }
-        });
-    });
+          })
+          // Search taxonomy category.
+          ->whereHas('taxonomies', function ($filter) {
+            if ($this->request->input('category')) {
+              $filter->where('category', $this->request->input('category'));
+            }
+          })
+          // Search taxonomy sub_category.
+          ->whereHas('taxonomies', function ($filter) {
+            if ($this->request->input('sub_category')) {
+              $filter->where('sub_category', $this->request->input('sub_category'));
+            }
+          });
+      });
     // Sort data.
     $sortField = in_array(
       $request->input('sort_by'),
