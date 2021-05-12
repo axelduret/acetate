@@ -119,9 +119,9 @@ class EventController extends Controller
             ->select('id', 'name', 'avatar')
             // Order event by name.
             ->orderBy('name')
-            ->with([
+            ->with([/* 
               // Returns event's addresses.
-              'addresses',
+              'addresses', */
               // Returns people:id and people:nickname.
               'people' => function ($filter) {
                 $filter
@@ -132,9 +132,9 @@ class EventController extends Controller
               // Returns venues:id and venues:name.
               'venues' => function ($filter) {
                 $filter
-                  ->select('id', 'name')
+                  ->select('id', 'name')/* 
                   // Returns venues's addresses.
-                  ->with('addresses')
+                  ->with('addresses') */
                   // Order venues by name.
                   ->orderBy('name');
               },

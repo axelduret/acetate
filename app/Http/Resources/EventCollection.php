@@ -24,12 +24,12 @@ class EventCollection extends ResourceCollection
           'id' => $item->event->id,
           'name' => $item->event->name,
           'avatar' => $item->event->avatar,
-          'addresses' => $item->event->addresses->map(function ($item) {
+          /* 'addresses' => $item->event->addresses->map(function ($item) {
             return [
               'latitude' => $item['latitude'],
               'longitude' => $item['longitude']
             ];
-          }),
+          }), */
           'created_at' => date('Y-m-d H:i:s', strtotime($item['created_at'])),
           'updated_at' => date('Y-m-d H:i:s', strtotime($item['updated_at'])),
           'start_date' => $item->start_date,
@@ -38,7 +38,7 @@ class EventCollection extends ResourceCollection
           'end_time' => $item->end_time,
           'prices' => $item->event->prices,
           'people' => $item->event->people,
-          'venues' => $item->event->venues->map(function ($item) {
+          'venues' => $item->event->venues/* ->map(function ($item) {
             return [
               'id' => $item['id'],
               'name' => $item['name'],
@@ -49,7 +49,7 @@ class EventCollection extends ResourceCollection
                 ];
               }),
             ];
-          }),
+          }) */,
           'taxonomies' => $item->event->taxonomies,
           'likes_count' => $item->event->likes_count,
           'dislikes_count' => $item->event->dislikes_count,
