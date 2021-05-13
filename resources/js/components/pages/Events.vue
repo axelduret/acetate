@@ -39,6 +39,7 @@
                         :Avatar="event.avatar"
                         :Taxonomies="event.taxonomies"
                       />
+                      <!-- card content -->
                       <v-row class="pb-3">
                         <v-col class="mx-4 pt-5 col-auto mr-auto">
                           <!-- people -->

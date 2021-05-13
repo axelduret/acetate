@@ -22,7 +22,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       event: "",
-      apiToken: "2|YLCdY7IIc4UjuWPBGG83eacN2e7jJ89JuORDVBIE"
+      apiToken: "2|9jMlrBHreglVlkhObxnTTRaZECTIjg2QGc6aYStT"
     };
   },
   mounted: function mounted() {

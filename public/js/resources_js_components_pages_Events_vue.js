@@ -114,6 +114,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -139,7 +140,7 @@ __webpack_require__.r(__webpack_exports__);
       overlay: true,
       perPage: 50,
       events: "",
-      apiToken: "2|YLCdY7IIc4UjuWPBGG83eacN2e7jJ89JuORDVBIE",
+      apiToken: "2|9jMlrBHreglVlkhObxnTTRaZECTIjg2QGc6aYStT",
       eventTabs: [{
         name: "all"
       }, {

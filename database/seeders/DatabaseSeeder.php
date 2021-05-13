@@ -63,7 +63,7 @@ class DatabaseSeeder extends Seeder
 
     // Create events.
     $events = Event::factory()
-      ->count(200)
+      ->count(500)
       ->make()->each(function ($event) use ($users) {
         // Attach a random user_id to each event.
         $event->user_id = $users->random()->id;
@@ -137,7 +137,7 @@ class DatabaseSeeder extends Seeder
 
     // Create venues.
     $venues = Venue::factory()
-      ->count(150)
+      ->count(250)
       ->make()->each(function ($venue) use ($users, $events) {
         // Attach a random user_id to each venue.
         $venue->user_id = $users->random()->id;
@@ -150,7 +150,7 @@ class DatabaseSeeder extends Seeder
 
     // Create people.
     $people = Person::factory()
-      ->count(150)
+      ->count(250)
       ->make()->each(function ($person) use ($users, $events, $venues) {
         // Attach a random user_id to each person.
         $person->user_id = $users->random()->id;
@@ -170,7 +170,7 @@ class DatabaseSeeder extends Seeder
 
     // Create comments.
     $comments = Comment::factory()
-      ->count(500)
+      ->count(5000)
       ->make()->each(function ($comment) use ($users, $events, $people, $venues) {
         // Attach a random user_id to each comment.
         $comment->user_id = $users->random()->id;
@@ -220,7 +220,7 @@ class DatabaseSeeder extends Seeder
 
     // Create favorites.
     $favorites = Favorite::factory()
-      ->count(100)
+      ->count(1000)
       ->make()->each(function ($favorite) use ($users, $events, $people, $venues) {
         // Attach a random user_id to each favorite.
         $favorite->user_id = $users->random()->id;
@@ -243,7 +243,7 @@ class DatabaseSeeder extends Seeder
 
     // Create files.
     $files = File::factory()
-      ->count(20)
+      ->count(100)
       ->make()->each(function ($file) use ($users, $events, $people, $venues) {
         $random = rand(1, 4);
         if ($random == 1) {
@@ -278,7 +278,7 @@ class DatabaseSeeder extends Seeder
 
     // Create addresses.
     $addresses = Address::factory()
-      ->count(100)
+      ->count(1000)
       ->make()->each(function ($address) use ($users, $events, $people, $venues, $tickets) {
         if ($address->type == 'event') {
           // Attach a random event_id to the address.
@@ -305,7 +305,7 @@ class DatabaseSeeder extends Seeder
 
     // Create emails.
     $emails = Email::factory()
-      ->count(100)
+      ->count(1000)
       ->make()->each(function ($email) use ($users, $events, $people, $venues, $tickets) {
         $random = rand(1, 5);
         if ($random == 1) {
@@ -333,7 +333,7 @@ class DatabaseSeeder extends Seeder
 
     // Create phones.
     $phones = Phone::factory()
-      ->count(100)
+      ->count(1000)
       ->make()->each(function ($phone) use ($users, $events, $people, $venues, $tickets) {
         $random = rand(1, 5);
         if ($random == 1) {
@@ -361,7 +361,7 @@ class DatabaseSeeder extends Seeder
 
     // Create websites.
     $websites = Website::factory()
-      ->count(100)
+      ->count(1000)
       ->make()->each(function ($website) use ($users, $events, $people, $venues) {
         $random = rand(1, 4);
         if ($random == 1) {
