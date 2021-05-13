@@ -107202,6 +107202,46 @@ var map = {
 		"./resources/js/components/pages/Venues.vue",
 		"resources_js_components_pages_Venues_vue"
 	],
+	"./pages/event/CardFooter.vue": [
+		"./resources/js/components/pages/event/CardFooter.vue",
+		"resources_js_components_pages_event_CardFooter_vue"
+	],
+	"./pages/event/CardTitle.vue": [
+		"./resources/js/components/pages/event/CardTitle.vue",
+		"resources_js_components_pages_event_CardTitle_vue"
+	],
+	"./pages/event/Comments.vue": [
+		"./resources/js/components/pages/event/Comments.vue",
+		"resources_js_components_pages_event_Comments_vue"
+	],
+	"./pages/event/Dates.vue": [
+		"./resources/js/components/pages/event/Dates.vue",
+		"resources_js_components_pages_event_Dates_vue"
+	],
+	"./pages/event/Likes.vue": [
+		"./resources/js/components/pages/event/Likes.vue",
+		"resources_js_components_pages_event_Likes_vue"
+	],
+	"./pages/event/People.vue": [
+		"./resources/js/components/pages/event/People.vue",
+		"resources_js_components_pages_event_People_vue"
+	],
+	"./pages/event/Prices.vue": [
+		"./resources/js/components/pages/event/Prices.vue",
+		"resources_js_components_pages_event_Prices_vue"
+	],
+	"./pages/event/Taxonomies.vue": [
+		"./resources/js/components/pages/event/Taxonomies.vue",
+		"resources_js_components_pages_event_Taxonomies_vue"
+	],
+	"./pages/event/Time.vue": [
+		"./resources/js/components/pages/event/Time.vue",
+		"resources_js_components_pages_event_Time_vue"
+	],
+	"./pages/event/Venues.vue": [
+		"./resources/js/components/pages/event/Venues.vue",
+		"resources_js_components_pages_event_Venues_vue"
+	],
 	"./pages/events/CardFooter.vue": [
 		"./resources/js/components/pages/events/CardFooter.vue",
 		"resources_js_components_pages_events_CardFooter_vue"
@@ -107262,7 +107302,7 @@ module.exports = webpackAsyncContext;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"lang":{"en":"English","fr":"French","switcher":{"title":"Language"}},"theme":{"switcher":{"light-title":"Light theme","dark-title":"Dark theme"}},"loading":"Loading","menu":{"home":{"title":"Home"},"events":{"title":"Events"},"people":{"title":"People"},"venues":{"title":"Venues"},"users":{"title":"Users"}},"account-menu":{"title":"Personal account","login":{"title":"Login"},"register":{"title":"Register"},"dashboard":{"title":"Dashboard"}},"page":{"home":{"title":"Welcome !","description":"..."},"events":{"title":"Welcome !","description":"...","no_people":"none","no_people_title":"No person to display","no_venues":"none","no_venues_title":"No venue to display","no_taxonomies":"none","no_taxonomies_title":"No tag to display","no_prices":"none","no_prices_title":"No price to display","more_info":"more info","details":"details","From":"From","to":"to","tabs":{"all":"all","conference":"conference","exhibition":"exhibition","music":"music","theater":"theater"}},"people":{"title":"Welcome !","description":"..."},"venues":{"title":"Welcome !","description":"..."},"users":{"title":"Welcome !","description":"..."},"dashboard":{"title":"Dashboard","description":"..."},"error":{"notFound":{"title":"Page not found.","description":"..."},"unauthorized":{"title":"Unauthenticated.","description":"..."}}},"taxonomy":{"type":{"conference":"conference","exhibition":"exhibition","music":"music","theater":"theater"}},"price":{"free":"free entry"}}');
+module.exports = JSON.parse('{"lang":{"en":"English","fr":"French","switcher":{"title":"Language"}},"theme":{"switcher":{"light-title":"Light theme","dark-title":"Dark theme"}},"loading":"Loading","menu":{"home":{"title":"Home"},"events":{"title":"Events"},"people":{"title":"People"},"venues":{"title":"Venues"},"users":{"title":"Users"}},"account-menu":{"title":"Personal account","login":{"title":"Login"},"register":{"title":"Register"},"dashboard":{"title":"Dashboard"}},"page":{"home":{"title":"Welcome !","description":"..."},"events":{"title":"Welcome !","description":"...","no_people":"none","no_people_title":"No person to display","no_venues":"none","no_venues_title":"No venue to display","no_taxonomies":"none","no_taxonomies_title":"No tag to display","no_prices":"none","no_prices_title":"No price to display","more_info":"more info","details":"details","From":"From","to":"to","tabs":{"all":"all","conference":"conference","exhibition":"exhibition","music":"music","theater":"theater"}},"event":{"post_comment":"post a comment"},"people":{"title":"Welcome !","description":"..."},"venues":{"title":"Welcome !","description":"..."},"users":{"title":"Welcome !","description":"..."},"dashboard":{"title":"Dashboard","description":"..."},"error":{"notFound":{"title":"Page not found.","description":"..."},"unauthorized":{"title":"Unauthenticated.","description":"..."}}},"taxonomy":{"type":{"conference":"conference","exhibition":"exhibition","music":"music","theater":"theater"}},"price":{"free":"free entry"}}');
 
 /***/ }),
 
@@ -107273,7 +107313,7 @@ module.exports = JSON.parse('{"lang":{"en":"English","fr":"French","switcher":{"
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"lang":{"en":"Anglais","fr":"Français","switcher":{"title":"Traduction"}},"theme":{"switcher":{"light-title":"Thème clair","dark-title":"Thème sombre"}},"loading":"Chargement","menu":{"home":{"title":"Accueil"},"events":{"title":"Événements"},"people":{"title":"Personnes"},"venues":{"title":"Lieux"},"users":{"title":"Utilisateurs"}},"account-menu":{"title":"Compte personnel","login":{"title":"Connexion"},"register":{"title":"Inscription"},"dashboard":{"title":"Tableau de bord"}},"page":{"home":{"title":"Bienvenue !","description":"..."},"events":{"title":"Bienvenue !","description":"...","no_people":"aucun","no_people_title":"Aucune personne à afficher","no_venues":"aucun","no_venues_title":"Aucun lieu à afficher","no_taxonomies":"aucun","no_taxonomies_title":"Aucune étiquette à afficher","no_prices":"aucun","no_prices_title":"Aucun prix à afficher","more_info":"plus d\'infos","details":"détails","From":"Du","to":"au","tabs":{"all":"tous","conference":"conférence","exhibition":"exposition","music":"musique","theater":"théâtre"}},"people":{"title":"Bienvenue !","description":"..."},"venues":{"title":"Bienvenue !","description":"..."},"users":{"title":"Bienvenue !","description":"..."},"dashboard":{"title":"Mon compte","description":"..."},"error":{"notFound":{"title":"Page non trouvée.","description":"..."},"unauthorized":{"title":"Non authentifié.","description":"..."}}},"taxonomy":{"type":{"conference":"conférence","exhibition":"exposition","music":"musique","theater":"théâtre"}},"price":{"free":"entrée libre"}}');
+module.exports = JSON.parse('{"lang":{"en":"Anglais","fr":"Français","switcher":{"title":"Traduction"}},"theme":{"switcher":{"light-title":"Thème clair","dark-title":"Thème sombre"}},"loading":"Chargement","menu":{"home":{"title":"Accueil"},"events":{"title":"Événements"},"people":{"title":"Personnes"},"venues":{"title":"Lieux"},"users":{"title":"Utilisateurs"}},"account-menu":{"title":"Compte personnel","login":{"title":"Connexion"},"register":{"title":"Inscription"},"dashboard":{"title":"Tableau de bord"}},"page":{"home":{"title":"Bienvenue !","description":"..."},"events":{"title":"Bienvenue !","description":"...","no_people":"aucun","no_people_title":"Aucune personne à afficher","no_venues":"aucun","no_venues_title":"Aucun lieu à afficher","no_taxonomies":"aucun","no_taxonomies_title":"Aucune étiquette à afficher","no_prices":"aucun","no_prices_title":"Aucun prix à afficher","more_info":"plus d\'infos","details":"détails","From":"Du","to":"au","tabs":{"all":"tous","conference":"conférence","exhibition":"exposition","music":"musique","theater":"théâtre"}},"event":{"post_comment":"ajouter un commentaire"},"people":{"title":"Bienvenue !","description":"..."},"venues":{"title":"Bienvenue !","description":"..."},"users":{"title":"Bienvenue !","description":"..."},"dashboard":{"title":"Mon compte","description":"..."},"error":{"notFound":{"title":"Page non trouvée.","description":"..."},"unauthorized":{"title":"Non authentifié.","description":"..."}}},"taxonomy":{"type":{"conference":"conférence","exhibition":"exposition","music":"musique","theater":"théâtre"}},"price":{"free":"entrée libre"}}');
 
 /***/ }),
 
@@ -107416,7 +107456,7 @@ webpackContext.id = "./resources/js/locales sync recursive [A-Za-z0-9-_,\\s]+\\.
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_errors_401_vue":1,"resources_js_components_errors_404_vue":1,"resources_js_components_pages_Dashboard_vue":1,"resources_js_components_pages_Event_vue":1,"resources_js_components_pages_Events_vue":1,"resources_js_components_pages_Home_vue":1,"resources_js_components_pages_Login_vue":1,"resources_js_components_pages_People_vue":1,"resources_js_components_pages_Register_vue":1,"resources_js_components_pages_Users_vue":1,"resources_js_components_pages_Venues_vue":1,"resources_js_components_pages_events_CardFooter_vue":1,"resources_js_components_pages_events_CardTitle_vue":1,"resources_js_components_pages_events_Dates_vue":1,"resources_js_components_pages_events_People_vue":1,"resources_js_components_pages_events_Prices_vue":1,"resources_js_components_pages_events_Taxonomies_vue":1,"resources_js_components_pages_events_Time_vue":1,"resources_js_components_pages_events_Venues_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_errors_401_vue":1,"resources_js_components_errors_404_vue":1,"resources_js_components_pages_Dashboard_vue":1,"resources_js_components_pages_Event_vue":1,"resources_js_components_pages_Events_vue":1,"resources_js_components_pages_Home_vue":1,"resources_js_components_pages_Login_vue":1,"resources_js_components_pages_People_vue":1,"resources_js_components_pages_Register_vue":1,"resources_js_components_pages_Users_vue":1,"resources_js_components_pages_Venues_vue":1,"resources_js_components_pages_event_CardFooter_vue":1,"resources_js_components_pages_event_CardTitle_vue":1,"resources_js_components_pages_event_Comments_vue":1,"resources_js_components_pages_event_Dates_vue":1,"resources_js_components_pages_event_Likes_vue":1,"resources_js_components_pages_event_People_vue":1,"resources_js_components_pages_event_Prices_vue":1,"resources_js_components_pages_event_Taxonomies_vue":1,"resources_js_components_pages_event_Time_vue":1,"resources_js_components_pages_event_Venues_vue":1,"resources_js_components_pages_events_CardFooter_vue":1,"resources_js_components_pages_events_CardTitle_vue":1,"resources_js_components_pages_events_Dates_vue":1,"resources_js_components_pages_events_People_vue":1,"resources_js_components_pages_events_Prices_vue":1,"resources_js_components_pages_events_Taxonomies_vue":1,"resources_js_components_pages_events_Time_vue":1,"resources_js_components_pages_events_Venues_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

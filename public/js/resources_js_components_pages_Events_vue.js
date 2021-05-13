@@ -1746,7 +1746,6 @@ var render = function() {
                     }),
                     0
                   ),
-                  _c("v-spacer"),
                   _vm._v(" "),
                   _c(
                     "v-col",

@@ -48,6 +48,14 @@
   text-decoration: underline;
 }
 
+.comments_links {
+  text-decoration: underline;
+}
+
+.comments_links:hover {
+  text-decoration: underline;
+}
+
 /*!
 * Custom Vuetify Light Theme
 * by Axel Duret

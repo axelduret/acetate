@@ -47,6 +47,7 @@ class EventResource extends JsonResource
             // TODO show dislikes of the logged user.
             'dislikes_count' => $item->likes->where('is_dislike', 1)->count(),
             'user_name' => $item->user['username'],
+            'user_avatar' => $item->user['avatar'],
             'user_id' => $item['user_id'],
           ];
         }),
@@ -57,6 +58,7 @@ class EventResource extends JsonResource
         // TODO show favorites only if the user is logged in.
         'favorites' => $this->favorites,
         'user_name' => $this->user['username'],
+        'user_avatar' => $this->user['avatar'],
         'user_id' => $this->user_id,
       ],
       'credit' => $this->apiCredit()

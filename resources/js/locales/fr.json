@@ -70,6 +70,9 @@
                 "theater": "théâtre"
             }
         },
+        "event": {
+            "post_comment": "ajouter un commentaire"
+        },
         "people": {
             "title": "Bienvenue !",
             "description": "..."
