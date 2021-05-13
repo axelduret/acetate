@@ -84,6 +84,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Id: Number,
@@ -199,7 +201,7 @@ var render = function() {
       _c(
         "v-row",
         {
-          staticClass: "py-3 my-2 mx-4 overflow-y-auto",
+          staticClass: "pt-3 my-2 mx-4 overflow-y-auto",
           staticStyle: { "max-height": "300px" }
         },
         _vm._l(_vm.Comments, function(comment, index) {
@@ -259,13 +261,17 @@ var render = function() {
                               },
                               [_vm._v(_vm._s(comment.user_name))]
                             ),
-                            _vm._v(
-                              "\n              (" +
-                                _vm._s(
-                                  _vm._f("formatDate")(comment.created_at)
-                                ) +
-                                ") :\n              "
-                            ),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "caption grey--text" }, [
+                              _vm._v(
+                                "(" +
+                                  _vm._s(
+                                    _vm._f("formatDate")(comment.created_at)
+                                  ) +
+                                  ") :"
+                              )
+                            ]),
+                            _vm._v(" "),
                             _c("v-spacer", { staticClass: "mb-2" }),
                             _vm._v(" " + _vm._s(comment.text))
                           ],

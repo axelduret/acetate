@@ -1,24 +1,14 @@
-// Vuetify
-@import "~vuetify/dist/vuetify.min.css";
-//@import '~vuetify/src/styles/styles.sass';
+// Custom Flaticons
+@import "flaticon";
 
-// Material Design Icons
-@import "@mdi/font/css/materialdesignicons.min.css";
-
-// Variables
+// Custom Variables
 @import "variables";
 
 // Custom Style
 @import "custom";
 
-// Light theme
+// Custom Vuetify Light Theme
 @import "theme_light";
 
-// Dark theme
+// Custom Vuetify Dark Theme
 @import "theme_dark";
-
-// App fonts
-@import "fonts";
-
-// Flaticon fonts
-@import "flaticon";

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-row class="py-3 my-2 mx-4 overflow-y-auto" style="max-height: 300px"
+    <v-row class="pt-3 my-2 mx-4 overflow-y-auto" style="max-height: 300px"
       ><v-col
         cols="12"
         v-for="(comment, index) in Comments"
@@ -28,7 +28,9 @@
                   @click="showUser(comment.user_id)"
                   >{{ comment.user_name }}</a
                 >
-                ({{ comment.created_at | formatDate }}) :
+                <span class="caption grey--text"
+                  >({{ comment.created_at | formatDate }}) :</span
+                >
                 <v-spacer class="mb-2"></v-spacer> {{ comment.text }}</span
               >
               <div class="d-flex justify-end mt-4">

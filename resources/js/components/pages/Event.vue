@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <div>
-        <v-card max-width="800px" class="pb-4">
+        <v-card max-width="800px" class="pb-4 mx-auto">
           <div>
             <!-- card title -->
             <CardTitle
@@ -71,7 +71,9 @@ export default {
     Comments,
     CardFooter,
   },
-  props: ["id"],
+  props: {
+    id: Number,
+  },
   data() {
     return {
       overlay: true,

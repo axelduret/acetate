@@ -22,14 +22,6 @@
 .theme--light.v-icon {
     color: $ac-light-primary;
 }
-// Chevron left icon
-.theme--light.mdi-chevron-left {
-    opacity: 60%;
-}
-// Chevron right icon
-.theme--light.mdi-chevron-right {
-    opacity: 60%;
-}
 // Cards
 .theme--light.v-sheet.v-card {
     background-color: $ac-light-cards-bg;
@@ -46,5 +38,4 @@
 .theme--light.v-divider {
     background-color: $ac-light-contrast-bg;
     color: $ac-light-contrast-bg;
-    opacity: 60%;
 }

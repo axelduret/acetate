@@ -22,15 +22,6 @@
 .theme--dark.v-icon {
     color: $ac-dark-primary;
 }
-// Chevron left icon
-.theme--dark.mdi-chevron-left {
-    opacity: 60%;
-}
-// Chevron right icon
-.theme--dark.mdi-chevron-right {
-    color: $ac-dark-primary;
-    opacity: 60%;
-}
 // Prepend icons
 .v-input__prepend-outer .v-icon {
     color: $ac-white;
@@ -51,5 +42,4 @@
 .theme--dark.v-divider {
     background-color: $ac-dark-contrast-bg;
     color: $ac-dark-contrast-bg;
-    opacity: 40%;
 }

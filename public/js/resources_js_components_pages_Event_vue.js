@@ -93,7 +93,9 @@ __webpack_require__.r(__webpack_exports__);
     Comments: _event_Comments__WEBPACK_IMPORTED_MODULE_8__.default,
     CardFooter: _event_CardFooter__WEBPACK_IMPORTED_MODULE_9__.default
   },
-  props: ["id"],
+  props: {
+    id: Number
+  },
   data: function data() {
     return {
       overlay: true,
@@ -260,6 +262,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
 //
 //
 //
@@ -1514,7 +1518,7 @@ var render = function() {
           [
             _c(
               "v-card",
-              { staticClass: "pb-4", attrs: { "max-width": "800px" } },
+              { staticClass: "pb-4 mx-auto", attrs: { "max-width": "800px" } },
               [
                 _c(
                   "div",
@@ -1644,7 +1648,7 @@ var render = function() {
           _c(
             "v-btn",
             {
-              attrs: { outlined: "", color: "info accent-4" },
+              attrs: { text: "", color: "info accent-4" },
               on: {
                 click: function($event) {
                   return _vm.postComment(_vm.Id)
@@ -1869,7 +1873,7 @@ var render = function() {
       _c(
         "v-row",
         {
-          staticClass: "py-3 my-2 mx-4 overflow-y-auto",
+          staticClass: "pt-3 my-2 mx-4 overflow-y-auto",
           staticStyle: { "max-height": "300px" }
         },
         _vm._l(_vm.Comments, function(comment, index) {
@@ -1929,13 +1933,17 @@ var render = function() {
                               },
                               [_vm._v(_vm._s(comment.user_name))]
                             ),
-                            _vm._v(
-                              "\n              (" +
-                                _vm._s(
-                                  _vm._f("formatDate")(comment.created_at)
-                                ) +
-                                ") :\n              "
-                            ),
+                            _vm._v(" "),
+                            _c("span", { staticClass: "caption grey--text" }, [
+                              _vm._v(
+                                "(" +
+                                  _vm._s(
+                                    _vm._f("formatDate")(comment.created_at)
+                                  ) +
+                                  ") :"
+                              )
+                            ]),
+                            _vm._v(" "),
                             _c("v-spacer", { staticClass: "mb-2" }),
                             _vm._v(" " + _vm._s(comment.text))
                           ],
