@@ -88,7 +88,11 @@
         },
         "error": {
             "notFound": {
-                "title": "Page non trouvée",
+                "title": "Page non trouvée.",
+                "description": "..."
+            },
+            "unauthorized": {
+                "title": "Non authentifié.",
                 "description": "..."
             }
         }

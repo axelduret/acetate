@@ -34,7 +34,7 @@
           <v-list-item
             v-for="(item, index) in getMenu"
             :key="index"
-            :to="'/' + $i18n.locale + '/' + item.path"
+            :to="`/${$i18n.locale}/${item.path}`"
           >
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>

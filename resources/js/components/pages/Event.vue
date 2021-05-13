@@ -1,6 +1,6 @@
 <template>
   <div>
-    {{ event.name }}
+    <div>{{ event }}</div>
   </div>
 </template>
 
@@ -10,15 +10,29 @@ export default {
   data() {
     return {
       event: "",
-      appURL: process.env.MIX_APP_URL,
-      baseURL: process.env.MIX_BASE_URL,
+      apiToken: process.env.MIX_APP_API_TOKEN,
     };
   },
   mounted() {
-    axios.get("/api/events/" + this.id).then((response) => {
-      this.event = response.data.data.event;
-      return this.event;
-    });
+    axios
+      .request({
+        url: this.id,
+        method: "get",
+        baseURL: "/api/events/",
+        headers: {
+          Authorization: "Bearer " + this.apiToken,
+        },
+      })
+      .then((response) => {
+        this.event = response.data.data.event;
+      })
+      .catch((error) => {
+        const path = "error/404";
+        this.$router.push(`/${this.$i18n.locale}/${path}`);
+      })
+      .finally(() => {
+        return this.event;
+      });
   },
 };
 </script>

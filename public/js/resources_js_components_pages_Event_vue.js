@@ -22,15 +22,26 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       event: "",
-      appURL: "http://127.0.0.1:8001",
-      baseURL: "/"
+      apiToken: "2|YLCdY7IIc4UjuWPBGG83eacN2e7jJ89JuORDVBIE"
     };
   },
   mounted: function mounted() {
     var _this = this;
 
-    axios.get("/api/events/" + this.id).then(function (response) {
+    axios.request({
+      url: this.id,
+      method: "get",
+      baseURL: "/api/events/",
+      headers: {
+        Authorization: "Bearer " + this.apiToken
+      }
+    }).then(function (response) {
       _this.event = response.data.data.event;
+    })["catch"](function (error) {
+      var path = "error/404";
+
+      _this.$router.push("/".concat(_this.$i18n.locale, "/").concat(path));
+    })["finally"](function () {
       return _this.event;
     });
   }
@@ -126,7 +137,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [_vm._v("\n  " + _vm._s(_vm.event.name) + "\n")])
+  return _c("div", [_c("div", [_vm._v(_vm._s(_vm.event))])])
 }
 var staticRenderFns = []
 render._withStripped = true

@@ -11,6 +11,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var _events_CardTitle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./events/CardTitle */ "./resources/js/components/pages/events/CardTitle.vue");
+/* harmony import */ var _events_People__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./events/People */ "./resources/js/components/pages/events/People.vue");
+/* harmony import */ var _events_Venues__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./events/Venues */ "./resources/js/components/pages/events/Venues.vue");
+/* harmony import */ var _events_Dates__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./events/Dates */ "./resources/js/components/pages/events/Dates.vue");
+/* harmony import */ var _events_Time__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./events/Time */ "./resources/js/components/pages/events/Time.vue");
+/* harmony import */ var _events_Prices__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./events/Prices */ "./resources/js/components/pages/events/Prices.vue");
+/* harmony import */ var _events_Taxonomies__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./events/Taxonomies */ "./resources/js/components/pages/events/Taxonomies.vue");
+/* harmony import */ var _events_CardFooter__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./events/CardFooter */ "./resources/js/components/pages/events/CardFooter.vue");
 //
 //
 //
@@ -106,248 +114,158 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+
+
+
+
+
+
+
+
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {
+    CardTitle: _events_CardTitle__WEBPACK_IMPORTED_MODULE_0__.default,
+    People: _events_People__WEBPACK_IMPORTED_MODULE_1__.default,
+    Venues: _events_Venues__WEBPACK_IMPORTED_MODULE_2__.default,
+    Dates: _events_Dates__WEBPACK_IMPORTED_MODULE_3__.default,
+    Time: _events_Time__WEBPACK_IMPORTED_MODULE_4__.default,
+    Prices: _events_Prices__WEBPACK_IMPORTED_MODULE_5__.default,
+    Taxonomies: _events_Taxonomies__WEBPACK_IMPORTED_MODULE_6__.default,
+    CardFooter: _events_CardFooter__WEBPACK_IMPORTED_MODULE_7__.default
+  },
+  data: function data() {
+    return {
+      activeTab: "all",
+      overlay: true,
+      perPage: 50,
+      events: "",
+      apiToken: "2|YLCdY7IIc4UjuWPBGG83eacN2e7jJ89JuORDVBIE",
+      eventTabs: [{
+        name: "all"
+      }, {
+        name: "conference"
+      }, {
+        name: "exhibition"
+      }, {
+        name: "music"
+      }, {
+        name: "theater"
+      }],
+      query: null
+    };
+  },
+  mounted: function mounted() {
+    this.showTab(this.activeTab);
+  },
+  methods: {
+    showTab: function showTab(item) {
+      var _this = this;
+
+      this.overlay = true;
+      this.events = null;
+
+      if (item === "all") {
+        this.query = "events?per_page=";
+      } else {
+        this.query = "events?type=" + item + "&per_page=";
+      }
+
+      axios.request({
+        url: this.query + this.perPage,
+        method: "get",
+        baseURL: "/api/",
+        headers: {
+          Authorization: "Bearer " + this.apiToken
+        }
+      }).then(function (response) {
+        _this.events = response.data.events;
+      })["catch"](function (error) {
+        var path = "error/404";
+
+        _this.$router.push("/".concat(_this.$i18n.locale, "/").concat(path));
+      })["finally"](function () {
+        _this.overlay = false;
+        return _this.events;
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/CardFooter.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/CardFooter.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    Id: Number,
+    Comments: Number,
+    Likes: Number
+  },
+  methods: {
+    showEvent: function showEvent(id) {
+      var path = "events/" + id;
+      this.$router.push("/".concat(this.$i18n.locale, "/").concat(path));
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/CardTitle.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/CardTitle.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
 //
 //
 //
@@ -409,81 +327,316 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    Name: String,
+    Avatar: String,
+    Taxonomies: Array
+  },
   data: function data() {
     return {
-      overlay: true,
-      perPage: 50,
-      events: "",
       appURL: "http://127.0.0.1:8001",
-      baseURL: "/",
-      apiToken: "2|YLCdY7IIc4UjuWPBGG83eacN2e7jJ89JuORDVBIE",
-      eventTab: null,
-      eventTabs: [{
-        name: "all",
-        method: "all"
-      }, {
-        name: "conference",
-        method: "conference"
-      }, {
-        name: "exhibition",
-        method: "exhibition"
-      }, {
-        name: "music",
-        method: "music"
-      }, {
-        name: "theater",
-        method: "theater"
-      }],
-      query: null
+      baseURL: "/"
     };
-  },
-  mounted: function mounted() {
-    var _this = this;
+  }
+});
 
-    this.$nextTick(function () {
-      _this.showTab("all");
-    });
-  },
-  updated: function updated() {
-    this.$nextTick(function () {});
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Dates.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Dates.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    StartDate: String,
+    EndDate: String
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/People.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/People.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    People: Array
   },
   methods: {
-    showTab: function showTab(item) {
-      var _this2 = this;
-
-      this.events = null;
-      this.overlay = true;
-
-      if (item === "all") {
-        this.query = "events?per_page=";
-      } else {
-        this.query = "events?type=" + item + "&per_page=";
-      }
-
-      axios.request({
-        url: this.query + this.perPage,
-        method: "get",
-        baseURL: "/api/",
-        headers: {
-          Authorization: "Bearer " + this.apiToken
-        }
-      }).then(function (response) {
-        _this2.events = response.data.events;
-      })["catch"](function (error) {
-        console.log(error);
-      })["finally"](function () {
-        _this2.overlay = false;
-        return _this2.events;
-      });
-    },
-    showEvent: function showEvent(id) {
-      this.$router.push("events/" + id);
-    },
     showPerson: function showPerson(id) {
-      this.$router.push("people/" + id);
-    },
+      var path = "people/" + id;
+      this.$router.push("/".concat(this.$i18n.locale, "/").concat(path));
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Prices.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Prices.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    Prices: Array
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Taxonomies.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Taxonomies.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    Taxonomies: Array
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Time.vue?vue&type=script&lang=js&":
+/*!************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Time.vue?vue&type=script&lang=js& ***!
+  \************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    StartTime: String,
+    EndTime: String
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Venues.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Venues.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    Venues: Array
+  },
+  methods: {
     showVenue: function showVenue(id) {
-      this.$router.push("venues/" + id);
+      var path = "venues/" + id;
+      this.$router.push("/".concat(this.$i18n.locale, "/").concat(path));
     }
   }
 });
@@ -529,6 +682,318 @@ component.options.__file = "resources/js/components/pages/Events.vue"
 
 /***/ }),
 
+/***/ "./resources/js/components/pages/events/CardFooter.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/pages/events/CardFooter.vue ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _CardFooter_vue_vue_type_template_id_0aed7a9b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CardFooter.vue?vue&type=template&id=0aed7a9b& */ "./resources/js/components/pages/events/CardFooter.vue?vue&type=template&id=0aed7a9b&");
+/* harmony import */ var _CardFooter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CardFooter.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/events/CardFooter.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _CardFooter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _CardFooter_vue_vue_type_template_id_0aed7a9b___WEBPACK_IMPORTED_MODULE_0__.render,
+  _CardFooter_vue_vue_type_template_id_0aed7a9b___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/pages/events/CardFooter.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/CardTitle.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/pages/events/CardTitle.vue ***!
+  \************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _CardTitle_vue_vue_type_template_id_3c30f408___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./CardTitle.vue?vue&type=template&id=3c30f408& */ "./resources/js/components/pages/events/CardTitle.vue?vue&type=template&id=3c30f408&");
+/* harmony import */ var _CardTitle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./CardTitle.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/events/CardTitle.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _CardTitle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _CardTitle_vue_vue_type_template_id_3c30f408___WEBPACK_IMPORTED_MODULE_0__.render,
+  _CardTitle_vue_vue_type_template_id_3c30f408___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/pages/events/CardTitle.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/Dates.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/pages/events/Dates.vue ***!
+  \********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Dates_vue_vue_type_template_id_183446e5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Dates.vue?vue&type=template&id=183446e5& */ "./resources/js/components/pages/events/Dates.vue?vue&type=template&id=183446e5&");
+/* harmony import */ var _Dates_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Dates.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/events/Dates.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _Dates_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _Dates_vue_vue_type_template_id_183446e5___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Dates_vue_vue_type_template_id_183446e5___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/pages/events/Dates.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/People.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/pages/events/People.vue ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _People_vue_vue_type_template_id_2f6a9342___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./People.vue?vue&type=template&id=2f6a9342& */ "./resources/js/components/pages/events/People.vue?vue&type=template&id=2f6a9342&");
+/* harmony import */ var _People_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./People.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/events/People.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _People_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _People_vue_vue_type_template_id_2f6a9342___WEBPACK_IMPORTED_MODULE_0__.render,
+  _People_vue_vue_type_template_id_2f6a9342___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/pages/events/People.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/Prices.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/pages/events/Prices.vue ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Prices_vue_vue_type_template_id_459fa69a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Prices.vue?vue&type=template&id=459fa69a& */ "./resources/js/components/pages/events/Prices.vue?vue&type=template&id=459fa69a&");
+/* harmony import */ var _Prices_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Prices.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/events/Prices.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _Prices_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _Prices_vue_vue_type_template_id_459fa69a___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Prices_vue_vue_type_template_id_459fa69a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/pages/events/Prices.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/Taxonomies.vue":
+/*!*************************************************************!*\
+  !*** ./resources/js/components/pages/events/Taxonomies.vue ***!
+  \*************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Taxonomies_vue_vue_type_template_id_96f36902___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Taxonomies.vue?vue&type=template&id=96f36902& */ "./resources/js/components/pages/events/Taxonomies.vue?vue&type=template&id=96f36902&");
+/* harmony import */ var _Taxonomies_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Taxonomies.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/events/Taxonomies.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _Taxonomies_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _Taxonomies_vue_vue_type_template_id_96f36902___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Taxonomies_vue_vue_type_template_id_96f36902___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/pages/events/Taxonomies.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/Time.vue":
+/*!*******************************************************!*\
+  !*** ./resources/js/components/pages/events/Time.vue ***!
+  \*******************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Time_vue_vue_type_template_id_c3c554c6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Time.vue?vue&type=template&id=c3c554c6& */ "./resources/js/components/pages/events/Time.vue?vue&type=template&id=c3c554c6&");
+/* harmony import */ var _Time_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Time.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/events/Time.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _Time_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _Time_vue_vue_type_template_id_c3c554c6___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Time_vue_vue_type_template_id_c3c554c6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/pages/events/Time.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/Venues.vue":
+/*!*********************************************************!*\
+  !*** ./resources/js/components/pages/events/Venues.vue ***!
+  \*********************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _Venues_vue_vue_type_template_id_3774b534___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Venues.vue?vue&type=template&id=3774b534& */ "./resources/js/components/pages/events/Venues.vue?vue&type=template&id=3774b534&");
+/* harmony import */ var _Venues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Venues.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/events/Venues.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _Venues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _Venues_vue_vue_type_template_id_3774b534___WEBPACK_IMPORTED_MODULE_0__.render,
+  _Venues_vue_vue_type_template_id_3774b534___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/pages/events/Venues.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
+
+/***/ }),
+
 /***/ "./resources/js/components/pages/Events.vue?vue&type=script&lang=js&":
 /*!***************************************************************************!*\
   !*** ./resources/js/components/pages/Events.vue?vue&type=script&lang=js& ***!
@@ -545,6 +1010,134 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/pages/events/CardFooter.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/pages/events/CardFooter.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CardFooter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CardFooter.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/CardFooter.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CardFooter_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/CardTitle.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/pages/events/CardTitle.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CardTitle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CardTitle.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/CardTitle.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_CardTitle_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/Dates.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/pages/events/Dates.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Dates_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Dates.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Dates.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Dates_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/People.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/pages/events/People.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_People_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./People.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/People.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_People_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/Prices.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/pages/events/Prices.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Prices_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Prices.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Prices.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Prices_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/Taxonomies.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/pages/events/Taxonomies.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Taxonomies_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Taxonomies.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Taxonomies.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Taxonomies_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/Time.vue?vue&type=script&lang=js&":
+/*!********************************************************************************!*\
+  !*** ./resources/js/components/pages/events/Time.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Time_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Time.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Time.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Time_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/Venues.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./resources/js/components/pages/events/Venues.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Venues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Venues.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Venues.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Venues_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
+
+/***/ }),
+
 /***/ "./resources/js/components/pages/Events.vue?vue&type=template&id=5f8650a2&":
 /*!*********************************************************************************!*\
   !*** ./resources/js/components/pages/Events.vue?vue&type=template&id=5f8650a2& ***!
@@ -558,6 +1151,142 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Events_vue_vue_type_template_id_5f8650a2___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
 /* harmony export */ });
 /* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Events_vue_vue_type_template_id_5f8650a2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Events.vue?vue&type=template&id=5f8650a2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/Events.vue?vue&type=template&id=5f8650a2&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/CardFooter.vue?vue&type=template&id=0aed7a9b&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/pages/events/CardFooter.vue?vue&type=template&id=0aed7a9b& ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CardFooter_vue_vue_type_template_id_0aed7a9b___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CardFooter_vue_vue_type_template_id_0aed7a9b___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CardFooter_vue_vue_type_template_id_0aed7a9b___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CardFooter.vue?vue&type=template&id=0aed7a9b& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/CardFooter.vue?vue&type=template&id=0aed7a9b&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/CardTitle.vue?vue&type=template&id=3c30f408&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/pages/events/CardTitle.vue?vue&type=template&id=3c30f408& ***!
+  \*******************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CardTitle_vue_vue_type_template_id_3c30f408___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CardTitle_vue_vue_type_template_id_3c30f408___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_CardTitle_vue_vue_type_template_id_3c30f408___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./CardTitle.vue?vue&type=template&id=3c30f408& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/CardTitle.vue?vue&type=template&id=3c30f408&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/Dates.vue?vue&type=template&id=183446e5&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/pages/events/Dates.vue?vue&type=template&id=183446e5& ***!
+  \***************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dates_vue_vue_type_template_id_183446e5___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dates_vue_vue_type_template_id_183446e5___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Dates_vue_vue_type_template_id_183446e5___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Dates.vue?vue&type=template&id=183446e5& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Dates.vue?vue&type=template&id=183446e5&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/People.vue?vue&type=template&id=2f6a9342&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/pages/events/People.vue?vue&type=template&id=2f6a9342& ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_People_vue_vue_type_template_id_2f6a9342___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_People_vue_vue_type_template_id_2f6a9342___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_People_vue_vue_type_template_id_2f6a9342___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./People.vue?vue&type=template&id=2f6a9342& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/People.vue?vue&type=template&id=2f6a9342&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/Prices.vue?vue&type=template&id=459fa69a&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/pages/events/Prices.vue?vue&type=template&id=459fa69a& ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Prices_vue_vue_type_template_id_459fa69a___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Prices_vue_vue_type_template_id_459fa69a___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Prices_vue_vue_type_template_id_459fa69a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Prices.vue?vue&type=template&id=459fa69a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Prices.vue?vue&type=template&id=459fa69a&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/Taxonomies.vue?vue&type=template&id=96f36902&":
+/*!********************************************************************************************!*\
+  !*** ./resources/js/components/pages/events/Taxonomies.vue?vue&type=template&id=96f36902& ***!
+  \********************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Taxonomies_vue_vue_type_template_id_96f36902___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Taxonomies_vue_vue_type_template_id_96f36902___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Taxonomies_vue_vue_type_template_id_96f36902___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Taxonomies.vue?vue&type=template&id=96f36902& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Taxonomies.vue?vue&type=template&id=96f36902&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/Time.vue?vue&type=template&id=c3c554c6&":
+/*!**************************************************************************************!*\
+  !*** ./resources/js/components/pages/events/Time.vue?vue&type=template&id=c3c554c6& ***!
+  \**************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Time_vue_vue_type_template_id_c3c554c6___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Time_vue_vue_type_template_id_c3c554c6___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Time_vue_vue_type_template_id_c3c554c6___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Time.vue?vue&type=template&id=c3c554c6& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Time.vue?vue&type=template&id=c3c554c6&");
+
+
+/***/ }),
+
+/***/ "./resources/js/components/pages/events/Venues.vue?vue&type=template&id=3774b534&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/components/pages/events/Venues.vue?vue&type=template&id=3774b534& ***!
+  \****************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Venues_vue_vue_type_template_id_3774b534___WEBPACK_IMPORTED_MODULE_0__.render),
+/* harmony export */   "staticRenderFns": () => (/* reexport safe */ _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Venues_vue_vue_type_template_id_3774b534___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns)
+/* harmony export */ });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Venues_vue_vue_type_template_id_3774b534___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./Venues.vue?vue&type=template&id=3774b534& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Venues.vue?vue&type=template&id=3774b534&");
 
 
 /***/ }),
@@ -594,11 +1323,11 @@ var render = function() {
                 grow: ""
               },
               model: {
-                value: _vm.eventTab,
+                value: _vm.activeTab,
                 callback: function($$v) {
-                  _vm.eventTab = $$v
+                  _vm.activeTab = $$v
                 },
-                expression: "eventTab"
+                expression: "activeTab"
               }
             },
             _vm._l(_vm.eventTabs, function(tab, index) {
@@ -608,7 +1337,7 @@ var render = function() {
                   key: index,
                   on: {
                     click: function($event) {
-                      return _vm.showTab(tab.method)
+                      return _vm.showTab(tab.name)
                     }
                   }
                 },
@@ -622,11 +1351,11 @@ var render = function() {
             "v-tabs-items",
             {
               model: {
-                value: _vm.eventTab,
+                value: _vm.activeTab,
                 callback: function($$v) {
-                  _vm.eventTab = $$v
+                  _vm.activeTab = $$v
                 },
-                expression: "eventTab"
+                expression: "activeTab"
               }
             },
             _vm._l(_vm.eventTabs, function(tab, index) {
@@ -665,241 +1394,13 @@ var render = function() {
                                     _c(
                                       "div",
                                       [
-                                        _c(
-                                          "v-list-item",
-                                          {
-                                            staticClass: "greybg rounded-t",
-                                            attrs: { "three-line": "" }
-                                          },
-                                          [
-                                            _c(
-                                              "v-list-item-avatar",
-                                              {
-                                                staticClass: "rounded",
-                                                attrs: {
-                                                  tile: "",
-                                                  size: "80",
-                                                  color: _vm.$vuetify.theme.dark
-                                                    ? "primary"
-                                                    : "white"
-                                                }
-                                              },
-                                              [
-                                                _c("v-img", {
-                                                  attrs: {
-                                                    src:
-                                                      _vm.appURL +
-                                                      _vm.baseURL +
-                                                      event.avatar,
-                                                    title: event.name
-                                                  }
-                                                })
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-list-item-content",
-                                              [
-                                                _c(
-                                                  "div",
-                                                  {
-                                                    staticClass:
-                                                      "overline primary--text"
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "v-row",
-                                                      [
-                                                        _c(
-                                                          "v-col",
-                                                          {
-                                                            staticClass:
-                                                              "col-auto"
-                                                          },
-                                                          _vm._l(
-                                                            event.taxonomies,
-                                                            function(
-                                                              taxonomy,
-                                                              index
-                                                            ) {
-                                                              return _c(
-                                                                "span",
-                                                                { key: index },
-                                                                [
-                                                                  taxonomy.type
-                                                                    ? _c(
-                                                                        "span",
-                                                                        [
-                                                                          index ===
-                                                                          0
-                                                                            ? _c(
-                                                                                "span",
-                                                                                [
-                                                                                  taxonomy.type ===
-                                                                                  "music"
-                                                                                    ? _c(
-                                                                                        "span",
-                                                                                        {
-                                                                                          staticClass:
-                                                                                            "primary--text"
-                                                                                        },
-                                                                                        [
-                                                                                          _vm._v(
-                                                                                            _vm._s(
-                                                                                              _vm.$t(
-                                                                                                "taxonomy.type.music"
-                                                                                              )
-                                                                                            )
-                                                                                          )
-                                                                                        ]
-                                                                                      )
-                                                                                    : _vm._e(),
-                                                                                  _vm._v(
-                                                                                    " "
-                                                                                  ),
-                                                                                  taxonomy.type ===
-                                                                                  "conference"
-                                                                                    ? _c(
-                                                                                        "span",
-                                                                                        {
-                                                                                          staticClass:
-                                                                                            "primary--text"
-                                                                                        },
-                                                                                        [
-                                                                                          _vm._v(
-                                                                                            _vm._s(
-                                                                                              _vm.$t(
-                                                                                                "taxonomy.type.conference"
-                                                                                              )
-                                                                                            )
-                                                                                          )
-                                                                                        ]
-                                                                                      )
-                                                                                    : _vm._e(),
-                                                                                  _vm._v(
-                                                                                    " "
-                                                                                  ),
-                                                                                  taxonomy.type ===
-                                                                                  "exhibition"
-                                                                                    ? _c(
-                                                                                        "span",
-                                                                                        {
-                                                                                          staticClass:
-                                                                                            "primary--text"
-                                                                                        },
-                                                                                        [
-                                                                                          _vm._v(
-                                                                                            _vm._s(
-                                                                                              _vm.$t(
-                                                                                                "taxonomy.type.exhibition"
-                                                                                              )
-                                                                                            )
-                                                                                          )
-                                                                                        ]
-                                                                                      )
-                                                                                    : _vm._e(),
-                                                                                  _vm._v(
-                                                                                    " "
-                                                                                  ),
-                                                                                  taxonomy.type ===
-                                                                                  "theater"
-                                                                                    ? _c(
-                                                                                        "span",
-                                                                                        {
-                                                                                          staticClass:
-                                                                                            "primary--text"
-                                                                                        },
-                                                                                        [
-                                                                                          _vm._v(
-                                                                                            _vm._s(
-                                                                                              _vm.$t(
-                                                                                                "taxonomy.type.theater"
-                                                                                              )
-                                                                                            )
-                                                                                          )
-                                                                                        ]
-                                                                                      )
-                                                                                    : _vm._e()
-                                                                                ]
-                                                                              )
-                                                                            : _vm._e()
-                                                                        ]
-                                                                      )
-                                                                    : _vm._e()
-                                                                ]
-                                                              )
-                                                            }
-                                                          ),
-                                                          0
-                                                        ),
-                                                        _c("v-spacer"),
-                                                        _vm._v(" "),
-                                                        _c(
-                                                          "v-col",
-                                                          {
-                                                            staticClass:
-                                                              "col-auto ml-auto",
-                                                            staticStyle: {
-                                                              "margin-bottom":
-                                                                "1rem"
-                                                            }
-                                                          },
-                                                          [
-                                                            _c(
-                                                              "span",
-                                                              {
-                                                                staticClass:
-                                                                  "primary--text px-0"
-                                                              },
-                                                              [
-                                                                _c(
-                                                                  "v-icon",
-                                                                  {
-                                                                    staticClass:
-                                                                      "primary--text",
-                                                                    attrs: {
-                                                                      dark: "",
-                                                                      small: ""
-                                                                    }
-                                                                  },
-                                                                  [
-                                                                    _vm._v(
-                                                                      "\n                                  mdi-star-outline\n                                "
-                                                                    )
-                                                                  ]
-                                                                )
-                                                              ],
-                                                              1
-                                                            )
-                                                          ]
-                                                        )
-                                                      ],
-                                                      1
-                                                    )
-                                                  ],
-                                                  1
-                                                ),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "v-list-item-title",
-                                                  {
-                                                    staticClass:
-                                                      "title primary--text mb-1"
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      _vm._s(event.name) +
-                                                        "\n                        "
-                                                    )
-                                                  ]
-                                                )
-                                              ],
-                                              1
-                                            )
-                                          ],
-                                          1
-                                        ),
+                                        _c("CardTitle", {
+                                          attrs: {
+                                            Name: event.name,
+                                            Avatar: event.avatar,
+                                            Taxonomies: event.taxonomies
+                                          }
+                                        }),
                                         _vm._v(" "),
                                         _c(
                                           "v-row",
@@ -912,722 +1413,37 @@ var render = function() {
                                                   "mx-4 pt-5 col-auto mr-auto"
                                               },
                                               [
-                                                event.people.length > 0
-                                                  ? _c(
-                                                      "span",
-                                                      {
-                                                        staticClass:
-                                                          "caption primary--text"
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "span",
-                                                          [
-                                                            _c(
-                                                              "v-icon",
-                                                              {
-                                                                staticClass:
-                                                                  "mr-1 primary--text",
-                                                                staticStyle: {
-                                                                  "margin-bottom":
-                                                                    "0.08rem"
-                                                                },
-                                                                attrs: {
-                                                                  small: ""
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "mdi-account-group"
-                                                                )
-                                                              ]
-                                                            ),
-                                                            _vm._l(
-                                                              event.people,
-                                                              function(
-                                                                person,
-                                                                index
-                                                              ) {
-                                                                return _c(
-                                                                  "span",
-                                                                  {
-                                                                    key: index
-                                                                  },
-                                                                  [
-                                                                    event.people
-                                                                      .length <
-                                                                    4
-                                                                      ? _c(
-                                                                          "span",
-                                                                          [
-                                                                            _vm._v(
-                                                                              " "
-                                                                            ),
-                                                                            _c(
-                                                                              "a",
-                                                                              {
-                                                                                staticClass:
-                                                                                  "events_links",
-                                                                                attrs: {
-                                                                                  title:
-                                                                                    person.nickname
-                                                                                },
-                                                                                on: {
-                                                                                  click: function(
-                                                                                    $event
-                                                                                  ) {
-                                                                                    return _vm.showPerson(
-                                                                                      person.id
-                                                                                    )
-                                                                                  }
-                                                                                }
-                                                                              },
-                                                                              [
-                                                                                _vm._v(
-                                                                                  _vm._s(
-                                                                                    person.nickname
-                                                                                  )
-                                                                                )
-                                                                              ]
-                                                                            ),
-                                                                            _vm._v(
-                                                                              " "
-                                                                            ),
-                                                                            index <
-                                                                            event
-                                                                              .people
-                                                                              .length -
-                                                                              1
-                                                                              ? _c(
-                                                                                  "span",
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      ",\n                                "
-                                                                                    )
-                                                                                  ]
-                                                                                )
-                                                                              : _vm._e()
-                                                                          ]
-                                                                        )
-                                                                      : _vm._e(),
-                                                                    _vm._v(" "),
-                                                                    event.people
-                                                                      .length >=
-                                                                    4
-                                                                      ? _c(
-                                                                          "span",
-                                                                          [
-                                                                            index <
-                                                                            2
-                                                                              ? _c(
-                                                                                  "span",
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      " "
-                                                                                    ),
-                                                                                    _c(
-                                                                                      "a",
-                                                                                      {
-                                                                                        staticClass:
-                                                                                          "events_links",
-                                                                                        attrs: {
-                                                                                          title:
-                                                                                            person.nickname
-                                                                                        },
-                                                                                        on: {
-                                                                                          click: function(
-                                                                                            $event
-                                                                                          ) {
-                                                                                            return _vm.showPerson(
-                                                                                              person.id
-                                                                                            )
-                                                                                          }
-                                                                                        }
-                                                                                      },
-                                                                                      [
-                                                                                        _vm._v(
-                                                                                          _vm._s(
-                                                                                            person.nickname
-                                                                                          )
-                                                                                        )
-                                                                                      ]
-                                                                                    ),
-                                                                                    _vm._v(
-                                                                                      ",\n                                "
-                                                                                    )
-                                                                                  ]
-                                                                                )
-                                                                              : _vm._e(),
-                                                                            _vm._v(
-                                                                              " "
-                                                                            ),
-                                                                            index ===
-                                                                            2
-                                                                              ? _c(
-                                                                                  "span",
-                                                                                  [
-                                                                                    _vm._v(
-                                                                                      " "
-                                                                                    ),
-                                                                                    _c(
-                                                                                      "a",
-                                                                                      {
-                                                                                        staticClass:
-                                                                                          "events_links",
-                                                                                        attrs: {
-                                                                                          title:
-                                                                                            person.nickname
-                                                                                        },
-                                                                                        on: {
-                                                                                          click: function(
-                                                                                            $event
-                                                                                          ) {
-                                                                                            return _vm.showPerson(
-                                                                                              person.id
-                                                                                            )
-                                                                                          }
-                                                                                        }
-                                                                                      },
-                                                                                      [
-                                                                                        _vm._v(
-                                                                                          _vm._s(
-                                                                                            person.nickname
-                                                                                          )
-                                                                                        )
-                                                                                      ]
-                                                                                    ),
-                                                                                    _vm._v(
-                                                                                      ", ..."
-                                                                                    )
-                                                                                  ]
-                                                                                )
-                                                                              : _vm._e()
-                                                                          ]
-                                                                        )
-                                                                      : _vm._e()
-                                                                  ]
-                                                                )
-                                                              }
-                                                            ),
-                                                            _c("v-spacer")
-                                                          ],
-                                                          2
-                                                        )
-                                                      ]
-                                                    )
-                                                  : _vm._e(),
+                                                _c("People", {
+                                                  attrs: {
+                                                    People: event.people
+                                                  }
+                                                }),
                                                 _vm._v(" "),
-                                                event.people.length <= 0
-                                                  ? _c(
-                                                      "span",
-                                                      {
-                                                        staticClass:
-                                                          "caption primary--text"
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "span",
-                                                          [
-                                                            _c(
-                                                              "v-icon",
-                                                              {
-                                                                staticClass:
-                                                                  "mr-1 primary--text",
-                                                                staticStyle: {
-                                                                  "margin-bottom":
-                                                                    "0.08rem"
-                                                                },
-                                                                attrs: {
-                                                                  small: ""
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "mdi-account-group"
-                                                                )
-                                                              ]
-                                                            ),
-                                                            _c(
-                                                              "span",
-                                                              {
-                                                                attrs: {
-                                                                  title: _vm.$t(
-                                                                    "page.events.no_people_title"
-                                                                  )
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "\n                              " +
-                                                                    _vm._s(
-                                                                      _vm.$t(
-                                                                        "page.events.no_people"
-                                                                      )
-                                                                    )
-                                                                )
-                                                              ]
-                                                            )
-                                                          ],
-                                                          1
-                                                        ),
-                                                        _c("v-spacer")
-                                                      ],
-                                                      1
-                                                    )
-                                                  : _vm._e(),
+                                                _c("Venues", {
+                                                  attrs: {
+                                                    Venues: event.venues
+                                                  }
+                                                }),
                                                 _vm._v(" "),
-                                                event.venues.length > 0
-                                                  ? _c(
-                                                      "span",
-                                                      {
-                                                        staticClass:
-                                                          "caption primary--text"
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "span",
-                                                          [
-                                                            _c(
-                                                              "v-icon",
-                                                              {
-                                                                staticClass:
-                                                                  "mr-1 primary--text",
-                                                                staticStyle: {
-                                                                  "margin-bottom":
-                                                                    "0.08rem"
-                                                                },
-                                                                attrs: {
-                                                                  small: ""
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "mdi-office-building-marker"
-                                                                )
-                                                              ]
-                                                            ),
-                                                            _vm._v(" "),
-                                                            _c(
-                                                              "a",
-                                                              {
-                                                                staticClass:
-                                                                  "events_links",
-                                                                attrs: {
-                                                                  title:
-                                                                    event
-                                                                      .venues[0]
-                                                                      .name
-                                                                },
-                                                                on: {
-                                                                  click: function(
-                                                                    $event
-                                                                  ) {
-                                                                    return _vm.showVenue(
-                                                                      event
-                                                                        .venues[0]
-                                                                        .id
-                                                                    )
-                                                                  }
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  _vm._s(
-                                                                    event
-                                                                      .venues[0]
-                                                                      .name
-                                                                  )
-                                                                )
-                                                              ]
-                                                            ),
-                                                            _vm._v(" "),
-                                                            _c("v-spacer")
-                                                          ],
-                                                          1
-                                                        )
-                                                      ]
-                                                    )
-                                                  : _vm._e(),
+                                                _c("Dates", {
+                                                  attrs: {
+                                                    StartDate: event.start_date,
+                                                    EndDate: event.end_date
+                                                  }
+                                                }),
                                                 _vm._v(" "),
-                                                event.venues.length <= 0
-                                                  ? _c(
-                                                      "span",
-                                                      {
-                                                        staticClass:
-                                                          "caption primary--text"
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "span",
-                                                          [
-                                                            _c(
-                                                              "v-icon",
-                                                              {
-                                                                staticClass:
-                                                                  "mr-1 primary--text",
-                                                                staticStyle: {
-                                                                  "margin-bottom":
-                                                                    "0.08rem"
-                                                                },
-                                                                attrs: {
-                                                                  small: ""
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "mdi-office-building-marker"
-                                                                )
-                                                              ]
-                                                            ),
-                                                            _c(
-                                                              "span",
-                                                              {
-                                                                attrs: {
-                                                                  title: _vm.$t(
-                                                                    "page.events.no_venues_title"
-                                                                  )
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "\n                              " +
-                                                                    _vm._s(
-                                                                      _vm.$t(
-                                                                        "page.events.no_venues"
-                                                                      )
-                                                                    )
-                                                                )
-                                                              ]
-                                                            )
-                                                          ],
-                                                          1
-                                                        ),
-                                                        _c("v-spacer")
-                                                      ],
-                                                      1
-                                                    )
-                                                  : _vm._e(),
+                                                _c("Time", {
+                                                  attrs: {
+                                                    StartTime: event.start_time,
+                                                    EndTime: event.end_time
+                                                  }
+                                                }),
                                                 _vm._v(" "),
-                                                event.start_date ===
-                                                event.end_date
-                                                  ? _c(
-                                                      "span",
-                                                      {
-                                                        staticClass:
-                                                          "caption primary--text"
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "v-icon",
-                                                          {
-                                                            staticClass:
-                                                              "mr-1 primary--text",
-                                                            staticStyle: {
-                                                              "margin-bottom":
-                                                                "0.08rem"
-                                                            },
-                                                            attrs: { small: "" }
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "mdi-calendar-blank"
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(
-                                                          "\n                          " +
-                                                            _vm._s(
-                                                              _vm._f(
-                                                                "formatDate"
-                                                              )(
-                                                                event.start_date
-                                                              )
-                                                            ) +
-                                                            "\n                        "
-                                                        )
-                                                      ],
-                                                      1
-                                                    )
-                                                  : _vm._e(),
-                                                _vm._v(" "),
-                                                event.start_date !==
-                                                event.end_date
-                                                  ? _c(
-                                                      "span",
-                                                      {
-                                                        staticClass:
-                                                          "caption primary--text"
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "v-icon",
-                                                          {
-                                                            staticClass:
-                                                              "mr-1 primary--text",
-                                                            staticStyle: {
-                                                              "margin-bottom":
-                                                                "0.08rem"
-                                                            },
-                                                            attrs: { small: "" }
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "mdi-calendar-blank-multiple"
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(
-                                                          "\n                          " +
-                                                            _vm._s(
-                                                              _vm.$t(
-                                                                "page.events.From"
-                                                              )
-                                                            ) +
-                                                            "\n                          " +
-                                                            _vm._s(
-                                                              _vm._f(
-                                                                "formatMultipleDates"
-                                                              )(
-                                                                event.start_date
-                                                              )
-                                                            ) +
-                                                            "\n                          " +
-                                                            _vm._s(
-                                                              _vm.$t(
-                                                                "page.events.to"
-                                                              )
-                                                            ) +
-                                                            "\n                          " +
-                                                            _vm._s(
-                                                              _vm._f(
-                                                                "formatMultipleDates"
-                                                              )(event.end_date)
-                                                            )
-                                                        )
-                                                      ],
-                                                      1
-                                                    )
-                                                  : _vm._e(),
-                                                _vm._v(" "),
-                                                _c("v-spacer"),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "span",
-                                                  {
-                                                    staticClass:
-                                                      "caption primary--text"
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "v-icon",
-                                                      {
-                                                        staticClass:
-                                                          "mr-1 primary--text",
-                                                        staticStyle: {
-                                                          "margin-bottom":
-                                                            "0.08rem"
-                                                        },
-                                                        attrs: { small: "" }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "mdi-clock-time-four-outline"
-                                                        )
-                                                      ]
-                                                    ),
-                                                    _vm._v(
-                                                      "\n                          " +
-                                                        _vm._s(
-                                                          _vm._f("formatTime")(
-                                                            event.start_time
-                                                          )
-                                                        ) +
-                                                        " -\n                          " +
-                                                        _vm._s(
-                                                          _vm._f("formatTime")(
-                                                            event.end_time
-                                                          )
-                                                        )
-                                                    )
-                                                  ],
-                                                  1
-                                                ),
-                                                _vm._v(" "),
-                                                _c("v-spacer"),
-                                                _vm._v(" "),
-                                                event.prices.length > 0
-                                                  ? _c(
-                                                      "span",
-                                                      {
-                                                        staticClass:
-                                                          "caption primary--text"
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "v-icon",
-                                                          {
-                                                            staticClass:
-                                                              "mr-1 primary--text",
-                                                            staticStyle: {
-                                                              "margin-bottom":
-                                                                "0.08rem"
-                                                            },
-                                                            attrs: { small: "" }
-                                                          },
-                                                          [
-                                                            _vm._v(
-                                                              "mdi-cash-usd-outline"
-                                                            )
-                                                          ]
-                                                        ),
-                                                        _vm._v(" "),
-                                                        _vm._l(
-                                                          event.prices,
-                                                          function(
-                                                            price,
-                                                            index
-                                                          ) {
-                                                            return _c(
-                                                              "span",
-                                                              { key: index },
-                                                              [
-                                                                index <
-                                                                event.prices
-                                                                  .length -
-                                                                  1
-                                                                  ? _c("span", [
-                                                                      price.cost >
-                                                                      0
-                                                                        ? _c(
-                                                                            "span",
-                                                                            [
-                                                                              _vm._v(
-                                                                                "\n                                " +
-                                                                                  _vm._s(
-                                                                                    price.cost
-                                                                                  ) +
-                                                                                  " chf |"
-                                                                              )
-                                                                            ]
-                                                                          )
-                                                                        : _c(
-                                                                            "span",
-                                                                            [
-                                                                              _vm._v(
-                                                                                "\n                                " +
-                                                                                  _vm._s(
-                                                                                    _vm.$t(
-                                                                                      "price.free"
-                                                                                    )
-                                                                                  ) +
-                                                                                  " |"
-                                                                              )
-                                                                            ]
-                                                                          )
-                                                                    ])
-                                                                  : _vm._e(),
-                                                                index >=
-                                                                event.prices
-                                                                  .length -
-                                                                  1
-                                                                  ? _c("span", [
-                                                                      price.cost >
-                                                                      0
-                                                                        ? _c(
-                                                                            "span",
-                                                                            [
-                                                                              _vm._v(
-                                                                                "\n                                " +
-                                                                                  _vm._s(
-                                                                                    price.cost
-                                                                                  ) +
-                                                                                  " chf"
-                                                                              )
-                                                                            ]
-                                                                          )
-                                                                        : _c(
-                                                                            "span",
-                                                                            [
-                                                                              _vm._v(
-                                                                                "\n                                " +
-                                                                                  _vm._s(
-                                                                                    _vm.$t(
-                                                                                      "price.free"
-                                                                                    )
-                                                                                  )
-                                                                              )
-                                                                            ]
-                                                                          )
-                                                                    ])
-                                                                  : _vm._e()
-                                                              ]
-                                                            )
-                                                          }
-                                                        ),
-                                                        _c("v-spacer")
-                                                      ],
-                                                      2
-                                                    )
-                                                  : _vm._e(),
-                                                _vm._v(" "),
-                                                event.prices.length <= 0
-                                                  ? _c(
-                                                      "span",
-                                                      {
-                                                        staticClass:
-                                                          "caption primary--text"
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "span",
-                                                          [
-                                                            _c(
-                                                              "v-icon",
-                                                              {
-                                                                staticClass:
-                                                                  "mr-1 primary--text",
-                                                                staticStyle: {
-                                                                  "margin-bottom":
-                                                                    "0.08rem"
-                                                                },
-                                                                attrs: {
-                                                                  small: ""
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "mdi-cash-usd-outline"
-                                                                )
-                                                              ]
-                                                            ),
-                                                            _c(
-                                                              "span",
-                                                              {
-                                                                attrs: {
-                                                                  title: _vm.$t(
-                                                                    "page.events.no_prices_title"
-                                                                  )
-                                                                }
-                                                              },
-                                                              [
-                                                                _vm._v(
-                                                                  "\n                              " +
-                                                                    _vm._s(
-                                                                      _vm.$t(
-                                                                        "page.events.no_prices"
-                                                                      )
-                                                                    )
-                                                                )
-                                                              ]
-                                                            )
-                                                          ],
-                                                          1
-                                                        ),
-                                                        _c("v-spacer")
-                                                      ],
-                                                      1
-                                                    )
-                                                  : _vm._e()
+                                                _c("Prices", {
+                                                  attrs: {
+                                                    Prices: event.prices
+                                                  }
+                                                })
                                               ],
                                               1
                                             )
@@ -1635,290 +1451,19 @@ var render = function() {
                                           1
                                         ),
                                         _vm._v(" "),
-                                        _c("v-divider", {
-                                          staticClass: "mx-2"
+                                        _c("Taxonomies", {
+                                          attrs: {
+                                            Taxonomies: event.taxonomies
+                                          }
                                         }),
                                         _vm._v(" "),
-                                        event.taxonomies.length > 0
-                                          ? _c(
-                                              "div",
-                                              [
-                                                _c(
-                                                  "v-row",
-                                                  { staticClass: "py-0" },
-                                                  [
-                                                    _c(
-                                                      "v-col",
-                                                      {
-                                                        staticClass:
-                                                          "my-auto col-auto"
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "span",
-                                                          {
-                                                            staticClass:
-                                                              "primary--text"
-                                                          },
-                                                          [
-                                                            _c(
-                                                              "v-chip-group",
-                                                              {
-                                                                staticClass:
-                                                                  "col-auto my-2 py-0",
-                                                                attrs: {
-                                                                  "show-arrows":
-                                                                    ""
-                                                                }
-                                                              },
-                                                              _vm._l(
-                                                                event.taxonomies,
-                                                                function(
-                                                                  taxonomy,
-                                                                  index
-                                                                ) {
-                                                                  return _c(
-                                                                    "span",
-                                                                    {
-                                                                      key: index
-                                                                    },
-                                                                    [
-                                                                      _c(
-                                                                        "v-chip",
-                                                                        {
-                                                                          staticClass:
-                                                                            "greybg primary--text",
-                                                                          attrs: {
-                                                                            "x-small":
-                                                                              ""
-                                                                          }
-                                                                        },
-                                                                        [
-                                                                          _vm._v(
-                                                                            _vm._s(
-                                                                              taxonomy.category
-                                                                            )
-                                                                          )
-                                                                        ]
-                                                                      ),
-                                                                      _c(
-                                                                        "v-chip",
-                                                                        {
-                                                                          staticClass:
-                                                                            "greybg primary--text",
-                                                                          attrs: {
-                                                                            "x-small":
-                                                                              ""
-                                                                          }
-                                                                        },
-                                                                        [
-                                                                          _vm._v(
-                                                                            _vm._s(
-                                                                              taxonomy.sub_category
-                                                                            )
-                                                                          )
-                                                                        ]
-                                                                      )
-                                                                    ],
-                                                                    1
-                                                                  )
-                                                                }
-                                                              ),
-                                                              0
-                                                            )
-                                                          ],
-                                                          1
-                                                        )
-                                                      ]
-                                                    )
-                                                  ],
-                                                  1
-                                                ),
-                                                _vm._v(" "),
-                                                _c("v-divider", {
-                                                  staticClass: "mx-2"
-                                                })
-                                              ],
-                                              1
-                                            )
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        event.taxonomies.length <= 0
-                                          ? _c(
-                                              "div",
-                                              [
-                                                _c(
-                                                  "v-row",
-                                                  { staticClass: "py-0" },
-                                                  [
-                                                    _c(
-                                                      "v-col",
-                                                      {
-                                                        staticClass:
-                                                          "my-auto col-auto"
-                                                      },
-                                                      [
-                                                        _c("span", {
-                                                          staticClass:
-                                                            "mx-auto col-auto primary--text",
-                                                          staticStyle: {
-                                                            "line-height":
-                                                              "3rem"
-                                                          }
-                                                        })
-                                                      ]
-                                                    )
-                                                  ],
-                                                  1
-                                                ),
-                                                _vm._v(" "),
-                                                _c("v-divider", {
-                                                  staticClass: "mx-2"
-                                                })
-                                              ],
-                                              1
-                                            )
-                                          : _vm._e(),
-                                        _vm._v(" "),
-                                        _c(
-                                          "v-row",
-                                          { staticClass: "pt-3" },
-                                          [
-                                            _c(
-                                              "v-col",
-                                              {
-                                                staticClass:
-                                                  "ml-4 my-auto col-auto"
-                                              },
-                                              [
-                                                _c(
-                                                  "v-btn",
-                                                  {
-                                                    attrs: {
-                                                      text: "",
-                                                      color: "info accent-4"
-                                                    },
-                                                    on: {
-                                                      click: function($event) {
-                                                        return _vm.showEvent(
-                                                          event.id
-                                                        )
-                                                      }
-                                                    }
-                                                  },
-                                                  [
-                                                    _vm._v(
-                                                      _vm._s(
-                                                        _vm.$t(
-                                                          "page.events.more_info"
-                                                        )
-                                                      )
-                                                    )
-                                                  ]
-                                                )
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-col",
-                                              {
-                                                staticClass:
-                                                  "mx-4 my-auto col-auto ml-auto"
-                                              },
-                                              [
-                                                _c(
-                                                  "span",
-                                                  {
-                                                    staticClass:
-                                                      "orange--text mr-3"
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "v-icon",
-                                                      {
-                                                        staticClass:
-                                                          "orange--text mr-1",
-                                                        staticStyle: {
-                                                          "margin-bottom":
-                                                            "0.05rem"
-                                                        },
-                                                        attrs: {
-                                                          dark: "",
-                                                          small: ""
-                                                        }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                            mdi-comment "
-                                                        )
-                                                      ]
-                                                    ),
-                                                    _c(
-                                                      "span",
-                                                      {
-                                                        staticClass:
-                                                          "subtitle-2"
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            event.comments_count
-                                                          ) +
-                                                            "\n                          "
-                                                        )
-                                                      ]
-                                                    )
-                                                  ],
-                                                  1
-                                                ),
-                                                _vm._v(" "),
-                                                _c(
-                                                  "span",
-                                                  { staticClass: "pink--text" },
-                                                  [
-                                                    _c(
-                                                      "v-icon",
-                                                      {
-                                                        staticClass:
-                                                          "pink--text mr-1",
-                                                        staticStyle: {
-                                                          "margin-bottom":
-                                                            "0.05rem"
-                                                        },
-                                                        attrs: {
-                                                          dark: "",
-                                                          small: ""
-                                                        }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                            mdi-heart "
-                                                        )
-                                                      ]
-                                                    ),
-                                                    _c(
-                                                      "span",
-                                                      {
-                                                        staticClass:
-                                                          "subtitle-2"
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            event.likes_count
-                                                          )
-                                                        )
-                                                      ]
-                                                    )
-                                                  ],
-                                                  1
-                                                )
-                                              ]
-                                            )
-                                          ],
-                                          1
-                                        )
+                                        _c("CardFooter", {
+                                          attrs: {
+                                            Id: event.id,
+                                            Comments: event.comments_count,
+                                            Likes: event.likes_count
+                                          }
+                                        })
                                       ],
                                       1
                                     )
@@ -1973,6 +1518,883 @@ var render = function() {
     ],
     1
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/CardFooter.vue?vue&type=template&id=0aed7a9b&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/CardFooter.vue?vue&type=template&id=0aed7a9b& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-row",
+    { staticClass: "pt-3" },
+    [
+      _c(
+        "v-col",
+        { staticClass: "ml-4 my-auto col-auto" },
+        [
+          _c(
+            "v-btn",
+            {
+              attrs: { text: "", color: "info accent-4" },
+              on: {
+                click: function($event) {
+                  return _vm.showEvent(_vm.Id)
+                }
+              }
+            },
+            [_vm._v(_vm._s(_vm.$t("page.events.more_info")))]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-col", { staticClass: "mx-4 my-auto col-auto ml-auto" }, [
+        _c(
+          "span",
+          { staticClass: "orange--text mr-3" },
+          [
+            _c(
+              "v-icon",
+              {
+                staticClass: "orange--text mr-1",
+                staticStyle: { "margin-bottom": "0.05rem" },
+                attrs: { dark: "", small: "" }
+              },
+              [_vm._v("\n        mdi-comment ")]
+            ),
+            _c("span", { staticClass: "subtitle-2" }, [
+              _vm._v(_vm._s(_vm.Comments) + " ")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c(
+          "span",
+          { staticClass: "pink--text" },
+          [
+            _c(
+              "v-icon",
+              {
+                staticClass: "pink--text mr-1",
+                staticStyle: { "margin-bottom": "0.05rem" },
+                attrs: { dark: "", small: "" }
+              },
+              [_vm._v("\n        mdi-heart ")]
+            ),
+            _c("span", { staticClass: "subtitle-2" }, [
+              _vm._v(_vm._s(_vm.Likes))
+            ])
+          ],
+          1
+        )
+      ])
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/CardTitle.vue?vue&type=template&id=3c30f408&":
+/*!**********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/CardTitle.vue?vue&type=template&id=3c30f408& ***!
+  \**********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "v-list-item",
+    { staticClass: "greybg rounded-t", attrs: { "three-line": "" } },
+    [
+      _c(
+        "v-list-item-avatar",
+        {
+          staticClass: "rounded",
+          attrs: {
+            tile: "",
+            size: "80",
+            color: _vm.$vuetify.theme.dark ? "primary" : "white"
+          }
+        },
+        [
+          _c("v-img", {
+            attrs: {
+              src: _vm.appURL + _vm.baseURL + _vm.Avatar,
+              title: _vm.Name
+            }
+          })
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-list-item-content",
+        [
+          _c(
+            "div",
+            { staticClass: "overline primary--text" },
+            [
+              _c(
+                "v-row",
+                [
+                  _c(
+                    "v-col",
+                    { staticClass: "col-auto" },
+                    _vm._l(_vm.Taxonomies, function(taxonomy, index) {
+                      return _c("span", { key: index }, [
+                        taxonomy.type
+                          ? _c("span", [
+                              index === 0
+                                ? _c("span", [
+                                    taxonomy.type === "music"
+                                      ? _c(
+                                          "span",
+                                          { staticClass: "primary--text" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.$t("taxonomy.type.music")
+                                              )
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    taxonomy.type === "conference"
+                                      ? _c(
+                                          "span",
+                                          { staticClass: "primary--text" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.$t(
+                                                  "taxonomy.type.conference"
+                                                )
+                                              )
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    taxonomy.type === "exhibition"
+                                      ? _c(
+                                          "span",
+                                          { staticClass: "primary--text" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.$t(
+                                                  "taxonomy.type.exhibition"
+                                                )
+                                              )
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    taxonomy.type === "theater"
+                                      ? _c(
+                                          "span",
+                                          { staticClass: "primary--text" },
+                                          [
+                                            _vm._v(
+                                              _vm._s(
+                                                _vm.$t("taxonomy.type.theater")
+                                              )
+                                            )
+                                          ]
+                                        )
+                                      : _vm._e()
+                                  ])
+                                : _vm._e()
+                            ])
+                          : _vm._e()
+                      ])
+                    }),
+                    0
+                  ),
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-col",
+                    {
+                      staticClass: "col-auto ml-auto",
+                      staticStyle: { "margin-bottom": "1rem" }
+                    },
+                    [
+                      _c(
+                        "span",
+                        { staticClass: "primary--text px-0" },
+                        [
+                          _c(
+                            "v-icon",
+                            {
+                              staticClass: "primary--text",
+                              attrs: { dark: "", small: "" }
+                            },
+                            [
+                              _vm._v(
+                                "\n              mdi-star-outline\n            "
+                              )
+                            ]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c("v-list-item-title", { staticClass: "title primary--text mb-1" }, [
+            _vm._v(_vm._s(_vm.Name) + "\n    ")
+          ])
+        ],
+        1
+      )
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Dates.vue?vue&type=template&id=183446e5&":
+/*!******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Dates.vue?vue&type=template&id=183446e5& ***!
+  \******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _vm.StartDate === _vm.EndDate
+        ? _c(
+            "span",
+            { staticClass: "caption primary--text" },
+            [
+              _c(
+                "v-icon",
+                {
+                  staticClass: "mr-1 primary--text",
+                  staticStyle: { "margin-bottom": "0.08rem" },
+                  attrs: { small: "" }
+                },
+                [_vm._v("mdi-calendar-blank")]
+              ),
+              _vm._v(
+                "\n    " + _vm._s(_vm._f("formatDate")(_vm.StartDate)) + "\n  "
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.StartDate !== _vm.EndDate
+        ? _c(
+            "span",
+            { staticClass: "caption primary--text" },
+            [
+              _c(
+                "v-icon",
+                {
+                  staticClass: "mr-1 primary--text",
+                  staticStyle: { "margin-bottom": "0.08rem" },
+                  attrs: { small: "" }
+                },
+                [_vm._v("mdi-calendar-blank-multiple")]
+              ),
+              _vm._v(
+                "\n    " +
+                  _vm._s(_vm.$t("page.events.From")) +
+                  "\n    " +
+                  _vm._s(_vm._f("formatMultipleDates")(_vm.StartDate)) +
+                  "\n    " +
+                  _vm._s(_vm.$t("page.events.to")) +
+                  "\n    " +
+                  _vm._s(_vm._f("formatMultipleDates")(_vm.EndDate))
+              )
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _c("v-spacer")
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/People.vue?vue&type=template&id=2f6a9342&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/People.vue?vue&type=template&id=2f6a9342& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.People.length > 0
+      ? _c("span", { staticClass: "caption primary--text" }, [
+          _c(
+            "span",
+            [
+              _c(
+                "v-icon",
+                {
+                  staticClass: "mr-1 primary--text",
+                  staticStyle: { "margin-bottom": "0.08rem" },
+                  attrs: { small: "" }
+                },
+                [_vm._v("mdi-account-group")]
+              ),
+              _vm._l(_vm.People, function(person, index) {
+                return _c("span", { key: index }, [
+                  _vm.People.length < 4
+                    ? _c("span", [
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "events_links",
+                            attrs: { title: person.nickname },
+                            on: {
+                              click: function($event) {
+                                return _vm.showPerson(person.id)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(person.nickname))]
+                        ),
+                        _vm._v(" "),
+                        index < _vm.People.length - 1
+                          ? _c("span", [_vm._v(", ")])
+                          : _vm._e()
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.People.length >= 4
+                    ? _c("span", [
+                        index < 2
+                          ? _c("span", [
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "events_links",
+                                  attrs: { title: person.nickname },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showPerson(person.id)
+                                    }
+                                  }
+                                },
+                                [_vm._v(_vm._s(person.nickname))]
+                              ),
+                              _vm._v(",\n          ")
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        index === 2
+                          ? _c("span", [
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "events_links",
+                                  attrs: { title: person.nickname },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showPerson(person.id)
+                                    }
+                                  }
+                                },
+                                [_vm._v(_vm._s(person.nickname))]
+                              ),
+                              _vm._v(", ...")
+                            ])
+                          : _vm._e()
+                      ])
+                    : _vm._e()
+                ])
+              }),
+              _c("v-spacer")
+            ],
+            2
+          )
+        ])
+      : _vm._e(),
+    _vm.People.length <= 0
+      ? _c(
+          "span",
+          { staticClass: "caption primary--text" },
+          [
+            _c(
+              "span",
+              [
+                _c(
+                  "v-icon",
+                  {
+                    staticClass: "mr-1 primary--text",
+                    staticStyle: { "margin-bottom": "0.08rem" },
+                    attrs: { small: "" }
+                  },
+                  [_vm._v("mdi-account-group")]
+                ),
+                _c(
+                  "span",
+                  { attrs: { title: _vm.$t("page.events.no_people_title") } },
+                  [
+                    _vm._v(
+                      "\n        " + _vm._s(_vm.$t("page.events.no_people"))
+                    )
+                  ]
+                )
+              ],
+              1
+            ),
+            _c("v-spacer")
+          ],
+          1
+        )
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Prices.vue?vue&type=template&id=459fa69a&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Prices.vue?vue&type=template&id=459fa69a& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.Prices.length > 0
+      ? _c(
+          "span",
+          { staticClass: "caption primary--text" },
+          [
+            _c(
+              "v-icon",
+              {
+                staticClass: "mr-1 primary--text",
+                staticStyle: { "margin-bottom": "0.08rem" },
+                attrs: { small: "" }
+              },
+              [_vm._v("mdi-cash-usd-outline")]
+            ),
+            _vm._v(" "),
+            _vm._l(_vm.Prices, function(price, index) {
+              return _c("span", { key: index }, [
+                index < _vm.Prices.length - 1
+                  ? _c("span", [
+                      price.cost > 0
+                        ? _c("span", [
+                            _vm._v(" " + _vm._s(price.cost) + " chf |")
+                          ])
+                        : _c("span", [
+                            _vm._v(" " + _vm._s(_vm.$t("price.free")) + " |")
+                          ])
+                    ])
+                  : _vm._e(),
+                index >= _vm.Prices.length - 1
+                  ? _c("span", [
+                      price.cost > 0
+                        ? _c("span", [
+                            _vm._v(" " + _vm._s(price.cost) + " chf")
+                          ])
+                        : _c("span", [
+                            _vm._v(" " + _vm._s(_vm.$t("price.free")))
+                          ])
+                    ])
+                  : _vm._e()
+              ])
+            }),
+            _c("v-spacer")
+          ],
+          2
+        )
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.Prices.length <= 0
+      ? _c(
+          "span",
+          { staticClass: "caption primary--text" },
+          [
+            _c(
+              "span",
+              [
+                _c(
+                  "v-icon",
+                  {
+                    staticClass: "mr-1 primary--text",
+                    staticStyle: { "margin-bottom": "0.08rem" },
+                    attrs: { small: "" }
+                  },
+                  [_vm._v("mdi-cash-usd-outline")]
+                ),
+                _c(
+                  "span",
+                  { attrs: { title: _vm.$t("page.events.no_prices_title") } },
+                  [
+                    _vm._v(
+                      "\n        " + _vm._s(_vm.$t("page.events.no_prices"))
+                    )
+                  ]
+                )
+              ],
+              1
+            ),
+            _c("v-spacer")
+          ],
+          1
+        )
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Taxonomies.vue?vue&type=template&id=96f36902&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Taxonomies.vue?vue&type=template&id=96f36902& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("v-divider", { staticClass: "mx-2" }),
+      _vm._v(" "),
+      _vm.Taxonomies.length > 0
+        ? _c(
+            "div",
+            [
+              _c(
+                "v-row",
+                { staticClass: "py-0" },
+                [
+                  _c("v-col", { staticClass: "my-auto col-auto" }, [
+                    _c(
+                      "span",
+                      { staticClass: "primary--text" },
+                      [
+                        _c(
+                          "v-chip-group",
+                          {
+                            staticClass: "col-auto my-2 py-0",
+                            attrs: { "show-arrows": "" }
+                          },
+                          _vm._l(_vm.Taxonomies, function(taxonomy, index) {
+                            return _c(
+                              "span",
+                              { key: index },
+                              [
+                                _c(
+                                  "v-chip",
+                                  {
+                                    staticClass: "greybg primary--text",
+                                    attrs: { "x-small": "" }
+                                  },
+                                  [_vm._v(_vm._s(taxonomy.category))]
+                                ),
+                                _c(
+                                  "v-chip",
+                                  {
+                                    staticClass: "greybg primary--text",
+                                    attrs: { "x-small": "" }
+                                  },
+                                  [_vm._v(_vm._s(taxonomy.sub_category))]
+                                )
+                              ],
+                              1
+                            )
+                          }),
+                          0
+                        )
+                      ],
+                      1
+                    )
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-divider", { staticClass: "mx-2" })
+            ],
+            1
+          )
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.Taxonomies.length <= 0
+        ? _c(
+            "div",
+            [
+              _c(
+                "v-row",
+                { staticClass: "py-0" },
+                [
+                  _c("v-col", { staticClass: "my-auto col-auto" }, [
+                    _c("span", {
+                      staticClass: "mx-auto col-auto primary--text",
+                      staticStyle: { "line-height": "3rem" }
+                    })
+                  ])
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c("v-divider", { staticClass: "mx-2" })
+            ],
+            1
+          )
+        : _vm._e()
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Time.vue?vue&type=template&id=c3c554c6&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Time.vue?vue&type=template&id=c3c554c6& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c(
+        "span",
+        { staticClass: "caption primary--text" },
+        [
+          _c(
+            "v-icon",
+            {
+              staticClass: "mr-1 primary--text",
+              staticStyle: { "margin-bottom": "0.08rem" },
+              attrs: { small: "" }
+            },
+            [_vm._v("mdi-clock-time-four-outline")]
+          ),
+          _vm._v(
+            "\n    " +
+              _vm._s(_vm._f("formatTime")(_vm.StartTime)) +
+              " - " +
+              _vm._s(_vm._f("formatTime")(_vm.EndTime))
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("v-spacer")
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Venues.vue?vue&type=template&id=3774b534&":
+/*!*******************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/Venues.vue?vue&type=template&id=3774b534& ***!
+  \*******************************************************************************************************************************************************************************************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.Venues.length > 0
+      ? _c("span", { staticClass: "caption primary--text" }, [
+          _c(
+            "span",
+            [
+              _c(
+                "v-icon",
+                {
+                  staticClass: "mr-1 primary--text",
+                  staticStyle: { "margin-bottom": "0.08rem" },
+                  attrs: { small: "" }
+                },
+                [_vm._v("mdi-office-building-marker")]
+              ),
+              _vm._v(" "),
+              _c(
+                "a",
+                {
+                  staticClass: "events_links",
+                  attrs: { title: _vm.Venues[0].name },
+                  on: {
+                    click: function($event) {
+                      return _vm.showVenue(_vm.Venues[0].id)
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.Venues[0].name))]
+              ),
+              _vm._v(" "),
+              _c("v-spacer")
+            ],
+            1
+          )
+        ])
+      : _vm._e(),
+    _vm._v(" "),
+    _vm.Venues.length <= 0
+      ? _c(
+          "span",
+          { staticClass: "caption primary--text" },
+          [
+            _c(
+              "span",
+              [
+                _c(
+                  "v-icon",
+                  {
+                    staticClass: "mr-1 primary--text",
+                    staticStyle: { "margin-bottom": "0.08rem" },
+                    attrs: { small: "" }
+                  },
+                  [_vm._v("mdi-office-building-marker")]
+                ),
+                _c(
+                  "span",
+                  { attrs: { title: _vm.$t("page.events.no_venues_title") } },
+                  [
+                    _vm._v(
+                      "\n        " + _vm._s(_vm.$t("page.events.no_venues"))
+                    )
+                  ]
+                )
+              ],
+              1
+            ),
+            _c("v-spacer")
+          ],
+          1
+        )
+      : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true

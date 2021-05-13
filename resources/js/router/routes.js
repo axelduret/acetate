@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import i18n from "../plugins/vue-i18n";
 
-function loadPage(component) {
+function loadComponent(component) {
     return () => import(`../components/${component}.vue`);
 }
 
@@ -32,7 +32,7 @@ const routes = [
             {
                 path: "home",
                 name: "Home",
-                component: loadPage("pages/Home"),
+                component: loadComponent("pages/Home"),
                 meta: {
                     title: "main.title"
                 }
@@ -40,47 +40,52 @@ const routes = [
             {
                 path: "events",
                 name: "Events",
-                component: loadPage("pages/Events")
+                component: loadComponent("pages/Events")
             },
             {
                 path: "events/:id",
                 name: "Event",
                 props: true,
-                component: loadPage("pages/Event")
+                component: loadComponent("pages/Event")
             },
             {
                 path: "people",
                 name: "People",
-                component: loadPage("pages/People")
+                component: loadComponent("pages/People")
             },
             {
                 path: "venues",
                 name: "Venues",
-                component: loadPage("pages/Venues")
+                component: loadComponent("pages/Venues")
             },
             {
                 path: "users",
                 name: "Users",
-                component: loadPage("pages/Users")
+                component: loadComponent("pages/Users")
             },
             {
                 path: "register",
                 name: "Register",
-                component: loadPage("pages/Register")
+                component: loadComponent("pages/Register")
             },
             {
                 path: "login",
                 name: "Login",
-                component: loadPage("pages/Login")
+                component: loadComponent("pages/Login")
             },
             {
                 path: "dashboard",
                 name: "Dashboard",
-                component: loadPage("pages/Dashboard")
+                component: loadComponent("pages/Dashboard")
+            },
+            {
+                path: "error/401",
+                name: "401",
+                component: loadComponent("errors/401")
             },
             {
                 path: "*",
-                component: loadPage("errors/NotFound")
+                component: loadComponent("errors/404")
             }
         ]
     },
