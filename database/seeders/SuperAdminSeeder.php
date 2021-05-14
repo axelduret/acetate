@@ -3,7 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Support\Str;
+use Faker\Factory;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,13 +16,15 @@ class SuperAdminSeeder extends Seeder
    */
   public function run()
   {
+    $faker = Factory::create(config('app.faker_locale'));
+    $dir = 'storage/app/avatar/user';
     $admin = new User([
       'username' => env('ADMIN_USERNAME'),
       'firstname' => env('ADMIN_FIRSTNAME'),
       'lastname' => env('ADMIN_LASTNAME'),
       'language' => env('ADMIN_LANG'),
       'theme' => env('ADMIN_THEME'),
-      'avatar' => '',
+      'avatar' => $faker->image($dir),
       'company' => env('ADMIN_COMPANY'),
       'email' => env('ADMIN_EMAIL'),
       'email_verified_at' => now(),

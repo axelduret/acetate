@@ -38,6 +38,9 @@
         "register": {
             "title": "Inscription"
         },
+        "logout": {
+            "title": "Déconnexion"
+        },
         "dashboard": {
             "title": "Tableau de bord"
         }
@@ -110,5 +113,16 @@
     },
     "price": {
         "free": "entrée libre"
+    },
+    "form": {
+        "label": {
+            "email": "Email",
+            "password": "Mot de passe"
+        }
+    },
+    "errors": {
+        "login": {
+            "message": "Email ou mot de passe invalide."
+        }
     }
 }

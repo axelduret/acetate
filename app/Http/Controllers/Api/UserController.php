@@ -100,7 +100,7 @@ class UserController extends Controller
     if (!$user || !Hash::check($request->password, $user->password)) {
       return $this->failure('Wrong email or password.', 403);
     }
-    // Revoke current user's token.
+    // Revoke current user's tokens.
     $user->tokens()->where('abilities', '!=', '["role:anonymous"]')->delete();
 
     // Retrieve user's role.
@@ -114,11 +114,22 @@ class UserController extends Controller
     }
     // Create a new token and attach it to the current user.
     $token = $user->createToken('api_token', $abilities);
+
+
     // Data response.
     $data = [
       'user' => collect([
         'id' => $user->id,
-        'api_token' => $token->plainTextToken
+        'username' => $user->username,
+        'firstname' => $user->firstname,
+        'lastname' => $user->lastname,
+        'email' => $user->email,
+        'language' => $user->language,
+        'theme' => $user->theme,
+        'avatar' => $user->avatar,
+        'api_token' => $token->plainTextToken,
+        'role' => $user->roles,
+        'abilities' => $abilities
       ]),
       'credit' => $this->apiCredit()
     ];
@@ -129,12 +140,18 @@ class UserController extends Controller
   /**
    * User logout.
    *
-   * @param  int  $id
+   * @param int $id
    * @return Response
    */
   public function logout($id) // TODO Logout
   {
-    //
+    // Check if the user exists.
+    $user = User::find($id);
+    if (!$user) {
+      return $this->failure('User ' . $id . ' not found.', 404);
+    }
+    $user->tokens()->where('abilities', '!=', '["role:anonymous"]')->delete();
+    return response()->json(['msg' => 'Successfully logged out.']);
   }
 
   /**

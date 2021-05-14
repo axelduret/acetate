@@ -10,6 +10,38 @@ import App from "./App.vue";
 
 require("./bootstrap");
 
+function loggedIn() {
+    return localStorage.getItem("user_api_token");
+}
+
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.auth)) {
+        if (!loggedIn()) {
+            next({
+                path:
+                    "/" +
+                    process.env.MIX_VUE_APP_I18N_DEFAULT_LOCALE +
+                    "/login",
+                query: { redirect: to.fullPath }
+            });
+        } else {
+            next();
+        }
+    } else if (to.matched.some(record => record.meta.guest)) {
+        if (loggedIn()) {
+            next({
+                path:
+                    "/" + process.env.MIX_VUE_APP_I18N_DEFAULT_LOCALE + "/home",
+                query: { redirect: to.fullPath }
+            });
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
+});
+
 var truncateFilter = function(text, length, clamp) {
     clamp = clamp || "...";
     var node = document.createElement("div");

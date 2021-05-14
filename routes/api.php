@@ -28,6 +28,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
   // Users API endpoints
   Route::apiResource('users', UserController::class);
+  Route::get('dashboard', [UserController::class, 'dashboard']);
   Route::get('users/{user}/{content}', [UserController::class, 'show']);
   Route::post('users/{user}/avatar', [UserController::class, 'updateAvatar']);
   Route::post('users/{user}/comments', [UserController::class, 'storeComment']);
@@ -66,3 +67,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
 // Public routes
 Route::post('login', [UserController::class, 'login']);
+Route::post('register', [UserController::class, 'register']);
+Route::post('logout/{user}', [UserController::class, 'logout']);

@@ -38,6 +38,9 @@
         "register": {
             "title": "Register"
         },
+        "logout": {
+            "title": "Logout"
+        },
         "dashboard": {
             "title": "Dashboard"
         }
@@ -110,5 +113,16 @@
     },
     "price": {
         "free": "free entry"
+    },
+    "form": {
+        "label": {
+            "email": "Email",
+            "password": "Password"
+        }
+    },
+    "errors": {
+        "login": {
+            "message": "Wrong email or password."
+        }
     }
 }

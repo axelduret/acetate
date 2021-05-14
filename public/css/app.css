@@ -3,91 +3,83 @@
 * Flaticon library.
 */
 @font-face {
-    font-family: "flaticon";
-    src: url(/fonts/flaticon.ttf?4ea60ea9f13aede9dd320afc22c12bf1)
-            format("truetype"),
-        url(/fonts/flaticon.woff?ada09e379bff84de758fd294ac1116df)
-            format("woff"),
-        url(/fonts/flaticon.woff2?05bc835a2298cb5c078c5025cc9bac35)
-            format("woff2"),
-        url(/fonts/flaticon.eot?9f60c777657b74c67e59f89fd634b05b)
-            format("embedded-opentype"),
-        url(/fonts/flaticon.svg?1716980cb4f7e11095853900fe6d8869) format("svg");
+  font-family: "flaticon";
+  src: url(/fonts/flaticon.ttf?4ea60ea9f13aede9dd320afc22c12bf1) format("truetype"), url(/fonts/flaticon.woff?ada09e379bff84de758fd294ac1116df) format("woff"), url(/fonts/flaticon.woff2?05bc835a2298cb5c078c5025cc9bac35) format("woff2"), url(/fonts/flaticon.eot?9f60c777657b74c67e59f89fd634b05b) format("embedded-opentype"), url(/fonts/flaticon.svg?1716980cb4f7e11095853900fe6d8869) format("svg");
 }
-i[class^="flaticon-"]:before,
+i[class^=flaticon-]:before,
 i[class*=" flaticon-"]:before {
-    font-family: flaticon !important;
-    font-style: normal;
-    font-weight: normal !important;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  font-family: flaticon !important;
+  font-style: normal;
+  font-weight: normal !important;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .flaticon-correct:before {
-    content: "";
+  content: "";
 }
 
 .flaticon-romantic-date:before {
-    content: "";
+  content: "";
 }
 
 .flaticon-valentines-day-on-daily-calendar:before {
-    content: "";
+  content: "";
 }
 
 .flaticon-love-calendar:before {
-    content: "";
+  content: "";
 }
 
 .flaticon-star-on-daily-calendar-page:before {
-    content: "";
+  content: "";
 }
 
 .flaticon-music-spectacle-day-on-calendar-page:before {
-    content: "";
+  content: "";
 }
 
 .flaticon-calendar:before {
-    content: "";
+  content: "";
 }
 
 .flaticon-music-disc-with-white-details:before {
-    content: "";
+  content: "";
 }
 
 .flaticon-music-disc-with-white-curve-details:before {
-    content: "";
+  content: "";
 }
 
 .flaticon-vintage-music-disc-on-player:before {
-    content: "";
+  content: "";
 }
 
 .flaticon-music-disc:before {
-    content: "";
+  content: "";
 }
 
 .flaticon-disc-jockey-digital-controllers:before {
-    content: "";
+  content: "";
 }
 
 .flaticon-music-album:before {
-    content: "";
+  content: "";
 }
 
 .flaticon-calendar-1:before {
-    content: "";
+  content: "";
 }
 
 .flaticon-add:before {
-    content: "";
+  content: "";
 }
 
 .flaticon-calendar-2:before {
-    content: "";
+  content: "";
 }
 
 /*!
@@ -96,36 +88,36 @@ i[class*=" flaticon-"]:before {
 * Released under the MIT License.
 */
 ::-moz-selection {
-    color: #eceff1;
-    background: #4db6ac;
+  color: #eceff1;
+  background: #4db6ac;
 }
 ::selection {
-    color: #eceff1;
-    background: #4db6ac;
+  color: #eceff1;
+  background: #4db6ac;
 }
 
 .v-input__prepend-outer .v-icon {
-    margin-right: 0.5rem;
+  margin-right: 0.5rem;
 }
 
 .v-input__append-outer .v-icon {
-    margin-left: 0.5rem;
+  margin-left: 0.5rem;
 }
 
 .events_links {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .events_links:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .comments_links {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .comments_links:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 /*!
@@ -137,32 +129,29 @@ i[class*=" flaticon-"]:before {
 .theme--light.v-app-bar.v-toolbar.v-sheet,
 .theme--light.v-footer,
 .theme--light.v-navigation-drawer {
-    background-color: #eceff1;
+  background-color: #eceff1;
 }
 
 .theme--light.v-tabs-items {
-    background-color: #eceff1;
+  background-color: #eceff1;
 }
 
 .theme--light.v-icon {
-    color: #455a64;
+  color: #455a64;
 }
 
 .theme--light.v-sheet.v-card {
-    background-color: #fff;
+  background-color: #fff;
 }
 
-.theme--light
-    .v-list-item
-    :not(.v-list-item--active)
-    :not(.v-list-item--disabled),
+.theme--light .v-list-item :not(.v-list-item--active) :not(.v-list-item--disabled),
 .theme--light .v-list-item__title {
-    color: #136c83;
+  color: #136c83;
 }
 
 .theme--light.v-divider {
-    background-color: #e0f2f1;
-    color: #e0f2f1;
+  background-color: #e0f2f1;
+  color: #e0f2f1;
 }
 
 /*!
@@ -174,34 +163,31 @@ i[class*=" flaticon-"]:before {
 .theme--dark.v-app-bar.v-toolbar.v-sheet,
 .theme--dark.v-footer,
 .theme--dark.v-navigation-drawer {
-    background-color: #263238;
+  background-color: #263238;
 }
 
 .theme--dark.v-tabs-items {
-    background-color: #263238;
+  background-color: #263238;
 }
 
 .theme--dark.v-icon {
-    color: #4db6ac;
+  color: #4db6ac;
 }
 
 .v-input__prepend-outer .v-icon {
-    color: #eceff1;
+  color: #eceff1;
 }
 
 .theme--dark.v-sheet.v-card {
-    background-color: rgba(19, 109, 131, 0.25);
+  background-color: rgba(19, 109, 131, 0.25);
 }
 
-.theme--dark
-    .v-list-item
-    :not(.v-list-item--active)
-    :not(.v-list-item--disabled),
+.theme--dark .v-list-item :not(.v-list-item--active) :not(.v-list-item--disabled),
 .theme--dark .v-list-item__title {
-    color: #4db6ac;
+  color: #4db6ac;
 }
 
 .theme--dark.v-divider {
-    background-color: #006064;
-    color: #006064;
+  background-color: #006064;
+  color: #006064;
 }

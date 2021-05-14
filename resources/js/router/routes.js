@@ -30,12 +30,27 @@ const routes = [
         },
         children: [
             {
+                path: "login",
+                name: "Login",
+                component: loadComponent("auth/Login"),
+                meta: { guest: true }
+            },
+            {
+                path: "register",
+                name: "Register",
+                component: loadComponent("auth/Register"),
+                meta: { guest: true }
+            },
+            {
+                path: "logout",
+                name: "Logout",
+                component: loadComponent("auth/Logout"),
+                meta: { auth: true }
+            },
+            {
                 path: "home",
                 name: "Home",
-                component: loadComponent("pages/Home"),
-                meta: {
-                    title: "main.title"
-                }
+                component: loadComponent("pages/Home")
             },
             {
                 path: "events",
@@ -64,19 +79,10 @@ const routes = [
                 component: loadComponent("pages/Users")
             },
             {
-                path: "register",
-                name: "Register",
-                component: loadComponent("pages/Register")
-            },
-            {
-                path: "login",
-                name: "Login",
-                component: loadComponent("pages/Login")
-            },
-            {
                 path: "dashboard",
                 name: "Dashboard",
-                component: loadComponent("pages/Dashboard")
+                component: loadComponent("pages/Dashboard"),
+                meta: { auth: true }
             },
             {
                 path: "error/401",

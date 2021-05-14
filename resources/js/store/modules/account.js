@@ -9,6 +9,10 @@ const state = {
             path: "register"
         },
         {
+            title: "account-menu.logout.title",
+            path: "logout"
+        },
+        {
             title: "account-menu.dashboard.title",
             path: "dashboard"
         }
