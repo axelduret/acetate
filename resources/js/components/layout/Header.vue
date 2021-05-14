@@ -83,7 +83,13 @@
               v-bind="attrs"
               v-on="on"
             >
-              <v-icon>mdi-account-circle</v-icon>
+              <v-avatar size="30">
+                <img
+                  v-if="getUserFields.avatar != null"
+                  alt="Avatar"
+                  :src="appURL + baseURL + getUserFields.avatar"
+                /><v-icon v-else>mdi-account-circle</v-icon>
+              </v-avatar>
             </v-btn>
           </template>
           <v-list>
@@ -102,37 +108,41 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 export default {
   data: () => ({
     // App name.
     appName: process.env.MIX_APP_NAME,
+    // App url.
+    appURL: process.env.MIX_APP_URL,
+    // Base url.
+    baseURL: process.env.MIX_BASE_URL,
     // Sidebar.
     drawer: false,
-    // Theme switch active.
-    themeSwitch: true,
     // Locale switch title.
     localeSwitcherTitle: "lang.switcher.title",
     // Available locales.
     locales: process.env.MIX_VUE_APP_I18N_SUPPORTED_LOCALE.split(","),
     // Account menu title.
     accountMenuTitle: "account-menu.title",
+    language: null,
+    theme: null,
+    themeSwitch: true,
+    avatar: null,
   }),
   // Get locale and account menu contents.
-  computed: mapGetters(["getLang", "getAccountMenu"]),
+  computed: mapGetters({
+    getLang: "getLang",
+    getAccountMenu: "getAccountMenu",
+    getUserFields: "user/getUserFields",
+  }),
   methods: {
-    // Set default theme.
-    defaultTheme: function () {
-      const defaultTheme = process.env.MIX_VUE_DEFAULT_THEME;
-      if (defaultTheme === "light") {
-        this.$vuetify.theme.light = true;
-        this.themeSwitch = true;
-      }
-      if (defaultTheme === "dark") {
-        this.$vuetify.theme.dark = true;
-        this.themeSwitch = false;
-      }
-    },
+    ...mapActions({
+      setLanguage: "user/setLanguage",
+      setTheme: "user/setTheme",
+      setThemeSwitch: "user/setThemeSwitch",
+      setAvatar: "user/setAvatar",
+    }),
     // Theme switch.
     themeSwitcher: function () {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
@@ -152,9 +162,26 @@ export default {
     // Set html lang attribute.
     document.querySelector("html").setAttribute("lang", this.$i18n.locale);
   },
-  created() {
-    // Set default theme.
-    this.defaultTheme();
+  created() {},
+  mounted() {
+    this.language = localStorage.getItem("user_language");
+    !!this.language ? this.setLanguage(this.language) : null;
+
+    if (localStorage.getItem("user_theme") === null) {
+      this.theme = process.env.MIX_VUE_DEFAULT_THEME;
+    } else {
+      this.theme = localStorage.getItem("user_theme");
+    }
+    if (this.theme === "light") {
+      this.$vuetify.theme.light = true;
+      this.themeSwitch = true;
+    } else if (this.theme === "dark") {
+      this.$vuetify.theme.dark = true;
+      this.themeSwitch = false;
+    }
+
+    this.avatar = localStorage.getItem("user_avatar");
+    !!this.avatar ? this.setAvatar(this.avatar) : null;
   },
 };
 </script>

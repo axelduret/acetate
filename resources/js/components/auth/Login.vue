@@ -65,6 +65,7 @@
 </template>
 
 <script>
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -78,12 +79,26 @@ export default {
     };
   },
   methods: {
+    ...mapActions({
+      setId: "user/setId",
+      setUsername: "user/setUsername",
+      setFirstname: "user/setFirstname",
+      setLastname: "user/setLastname",
+      setEmail: "user/setEmail",
+      setLanguage: "user/setLanguage",
+      setTheme: "user/setTheme",
+      setThemeSwitch: "user/setThemeSwitch",
+      setAvatar: "user/setAvatar",
+      setApiToken: "user/setApiToken",
+      setRole: "user/setRole",
+      setAbilities: "user/setAbilities",
+    }),
     login() {
       axios
         .post("/api/login", this.formData)
         .then((response) => {
           this.errors = false;
-          this.userId = response.data.data.user.userId;
+          this.userId = response.data.data.user.id;
           this.username = response.data.data.user.username;
           this.firstname = response.data.data.user.firstname;
           this.lastname = response.data.data.user.lastname;
@@ -94,6 +109,17 @@ export default {
           this.token = response.data.data.user.api_token;
           this.role = response.data.data.user.role[0].name;
           this.abilities = response.data.data.user.abilities;
+        })
+        .catch((errors) => {
+          this.errors = true; // errors.response.data
+        })
+        .finally(() => {
+          if (this.theme === "light") {
+            this.$vuetify.theme.light = true;
+          }
+          if (this.theme === "dark") {
+            this.$vuetify.theme.dark = true;
+          }
           localStorage.setItem("user_id", this.userId);
           localStorage.setItem("user_username", this.username);
           localStorage.setItem("user_firstname", this.firstname);
@@ -105,12 +131,20 @@ export default {
           localStorage.setItem("user_api_token", this.token);
           localStorage.setItem("user_role", this.role);
           localStorage.setItem("user_abilities", this.abilities);
+          this.setId(this.userId);
+          this.setUsername(this.username);
+          this.setFirstname(this.firstname);
+          this.setLastname(this.lastname);
+          this.setEmail(this.email);
+          this.setLanguage(this.language);
+          this.setTheme(this.theme);
+          this.setTheme(this.themeSwitch);
+          this.setAvatar(this.avatar);
+          this.setApiToken(this.token);
+          this.setRole(this.role);
+          this.setAbilities(this.abilities);
           this.$router.push(`/${this.$i18n.locale}/dashboard`);
-        })
-        .catch((errors) => {
-          this.errors = true; // errors.response.data
-        })
-        .finally(() => {});
+        });
     },
   },
 };
