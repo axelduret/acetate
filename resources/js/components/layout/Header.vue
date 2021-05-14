@@ -127,7 +127,8 @@ export default {
     // Account menu title.
     accountMenuTitle: "account-menu.title",
     language: null,
-    theme: null,
+    defaultTheme: process.env.MIX_VUE_DEFAULT_THEME,
+    userTheme: null,
     themeSwitch: true,
     avatar: null,
   }),
@@ -141,12 +142,13 @@ export default {
     ...mapActions({
       setLanguage: "user/setLanguage",
       setTheme: "user/setTheme",
-      setThemeSwitch: "user/setThemeSwitch",
       setAvatar: "user/setAvatar",
     }),
     // Theme switch.
     themeSwitcher: function () {
       this.$vuetify.theme.dark = !this.$vuetify.theme.dark;
+      this.setTheme(this.$vuetify.theme);
+      console.log("themeSwitcher", this.getUserFields.theme);
     },
     // Locale switch.
     localeSwitcher: function (locale) {
@@ -165,10 +167,12 @@ export default {
         if (newLocale === oldLocale) {
           return;
         }
+        console.log("new lang");
         setHtmlLang(newLocale);
       },
       { immediate: true }
     );
+
     // Set Avatar path in store.
     this.avatar = localStorage.getItem("user_avatar");
     !!this.avatar ? this.setAvatar(this.avatar) : null;
@@ -178,6 +182,13 @@ export default {
     !!this.language ? this.setLanguage(this.language) : null;
 
     // TODO Set theme in store.
+    if (this.getUserFields.theme !== null) {
+      this.$vuetify.theme = this.getUserFields.theme;
+    }
+
+    //this.setTheme(this.theme);
+
+    /*   
     if (localStorage.getItem("user_theme") === null) {
       this.theme = process.env.MIX_VUE_DEFAULT_THEME;
     } else {
@@ -189,7 +200,7 @@ export default {
     } else if (this.theme === "dark") {
       this.$vuetify.theme.dark = true;
       this.themeSwitch = false;
-    }
+    } */
   },
 };
 </script>

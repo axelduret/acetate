@@ -28,6 +28,40 @@ Vue.filter("formatDate", dateFilter);
 Vue.filter("formatMultipleDates", multipleDateFilter);
 Vue.filter("formatTime", timeFilter);
 
+// Get logged user's API Token.
+function loggedIn() {
+    return localStorage.getItem("user_api_token");
+}
+
+// Vue Router Auth middleware.
+router.beforeEach((to, from, next) => {
+    if (to.matched.some(record => record.meta.auth)) {
+        if (!loggedIn()) {
+            next({
+                path:
+                    "/" +
+                    process.env.MIX_VUE_APP_I18N_DEFAULT_LOCALE +
+                    "/login",
+                query: { redirect: to.fullPath }
+            });
+        } else {
+            next();
+        }
+    } else if (to.matched.some(record => record.meta.guest)) {
+        if (loggedIn()) {
+            next({
+                path:
+                    "/" + process.env.MIX_VUE_APP_I18N_DEFAULT_LOCALE + "/home",
+                query: { redirect: to.fullPath }
+            });
+        } else {
+            next();
+        }
+    } else {
+        next();
+    }
+});
+
 // VueJs rendering.
 const app = new Vue({
     el: "#app",

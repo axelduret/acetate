@@ -8,10 +8,6 @@ function loadComponent(component) {
     return () => import(`../components/${component}.vue`);
 }
 
-function loggedIn() {
-    return localStorage.getItem("user_api_token");
-}
-
 const routes = [
     {
         path: "/:locale",
@@ -31,35 +27,6 @@ const routes = [
                 i18n.locale = locale;
             }
             return next();
-        },
-        beforeEach: (to, from, next) => {
-            if (to.matched.some(record => record.meta.auth)) {
-                if (!loggedIn()) {
-                    next({
-                        path:
-                            "/" +
-                            process.env.MIX_VUE_APP_I18N_DEFAULT_LOCALE +
-                            "/login",
-                        query: { redirect: to.fullPath }
-                    });
-                } else {
-                    next();
-                }
-            } else if (to.matched.some(record => record.meta.guest)) {
-                if (loggedIn()) {
-                    next({
-                        path:
-                            "/" +
-                            process.env.MIX_VUE_APP_I18N_DEFAULT_LOCALE +
-                            "/home",
-                        query: { redirect: to.fullPath }
-                    });
-                } else {
-                    next();
-                }
-            } else {
-                next();
-            }
         },
         children: [
             {
