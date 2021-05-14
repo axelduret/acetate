@@ -109,6 +109,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import { setHtmlLang } from "../../utils/html-i18n";
 export default {
   data: () => ({
     // App name.
@@ -154,19 +155,29 @@ export default {
         const to = this.$router.resolve({ params: { locale } });
         this.$router.push(to.location);
       }
-      // Set html lang attribute.
-      document.querySelector("html").setAttribute("lang", locale);
     },
   },
-  beforeCreate() {
-    // Set html lang attribute.
-    document.querySelector("html").setAttribute("lang", this.$i18n.locale);
-  },
-  created() {},
   mounted() {
+    // Set Html lang attribute in DOM.
+    this.$watch(
+      "$i18n.locale",
+      (newLocale, oldLocale) => {
+        if (newLocale === oldLocale) {
+          return;
+        }
+        setHtmlLang(newLocale);
+      },
+      { immediate: true }
+    );
+    // Set Avatar path in store.
+    this.avatar = localStorage.getItem("user_avatar");
+    !!this.avatar ? this.setAvatar(this.avatar) : null;
+
+    // TODO Set locale in store.
     this.language = localStorage.getItem("user_language");
     !!this.language ? this.setLanguage(this.language) : null;
 
+    // TODO Set theme in store.
     if (localStorage.getItem("user_theme") === null) {
       this.theme = process.env.MIX_VUE_DEFAULT_THEME;
     } else {
@@ -179,9 +190,6 @@ export default {
       this.$vuetify.theme.dark = true;
       this.themeSwitch = false;
     }
-
-    this.avatar = localStorage.getItem("user_avatar");
-    !!this.avatar ? this.setAvatar(this.avatar) : null;
   },
 };
 </script>

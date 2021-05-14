@@ -2,11 +2,15 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import i18n from "../plugins/vue-i18n";
 
+Vue.use(VueRouter);
+
 function loadComponent(component) {
     return () => import(`../components/${component}.vue`);
 }
 
-Vue.use(VueRouter);
+function loggedIn() {
+    return localStorage.getItem("user_api_token");
+}
 
 const routes = [
     {
@@ -27,6 +31,35 @@ const routes = [
                 i18n.locale = locale;
             }
             return next();
+        },
+        beforeEach: (to, from, next) => {
+            if (to.matched.some(record => record.meta.auth)) {
+                if (!loggedIn()) {
+                    next({
+                        path:
+                            "/" +
+                            process.env.MIX_VUE_APP_I18N_DEFAULT_LOCALE +
+                            "/login",
+                        query: { redirect: to.fullPath }
+                    });
+                } else {
+                    next();
+                }
+            } else if (to.matched.some(record => record.meta.guest)) {
+                if (loggedIn()) {
+                    next({
+                        path:
+                            "/" +
+                            process.env.MIX_VUE_APP_I18N_DEFAULT_LOCALE +
+                            "/home",
+                        query: { redirect: to.fullPath }
+                    });
+                } else {
+                    next();
+                }
+            } else {
+                next();
+            }
         },
         children: [
             {
