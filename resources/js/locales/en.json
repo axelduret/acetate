@@ -123,6 +123,10 @@
     "errors": {
         "login": {
             "message": "Wrong email or password."
+        },
+        "logout": {
+            "wrong": "Wrong user id.",
+            "null": "User id cannot be null."
         }
     }
 }

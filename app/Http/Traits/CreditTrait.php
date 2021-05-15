@@ -18,7 +18,7 @@ trait CreditTrait
         'APP name' => env('MIX_APP_NAME'),
         'APP url' => env('APP_URL'),
         'APP timezone' => env('TIME_ZONE'),
-        'developped by' => env('APP_CREDIT'),
+        'developed by' => env('APP_CREDIT'),
         'licence' => env('APP_LICENCE'),
       ]
     );

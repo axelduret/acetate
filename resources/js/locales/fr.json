@@ -123,6 +123,10 @@
     "errors": {
         "login": {
             "message": "Email ou mot de passe invalide."
+        },
+        "logout": {
+            "wrong": "Identifiant de l'utilisateur non valide.",
+            "null": "Identifiant de l'utilisateur non valide."
         }
     }
 }

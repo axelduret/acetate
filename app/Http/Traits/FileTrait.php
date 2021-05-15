@@ -31,7 +31,7 @@ trait FileTrait
       $current = Carbon::now()->format('Ymd-His_');
       // Format the file's name.
       $clean_filename = preg_replace("/[^A-Za-z0-9\_\-\.]/", '_', $upload->getClientOriginalName());
-      // Add the current datetime to the avatar's formatted filename.
+      // Add the current datetime to formatted filename.
       $file_name =  $current . $clean_filename;
       // Create a new file.
       $file = new File([
