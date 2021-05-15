@@ -109,7 +109,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import { setHtmlLang } from "../../utils/html-i18n";
+import { setHtmlDirectionPerLocale, setHtmlLang } from "../../utils/html-i18n";
 export default {
   data: () => ({
     // App name.
@@ -168,6 +168,7 @@ export default {
           return;
         }
         console.log("new lang");
+        setHtmlDirectionPerLocale(newLocale);
         setHtmlLang(newLocale);
       },
       { immediate: true }

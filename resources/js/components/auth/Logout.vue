@@ -27,12 +27,7 @@ export default {
   mounted() {
     axios
       .post("/api/logout/" + localStorage.getItem("user_id"))
-      .then(() => {})
-      .catch((errors) => {
-        // Log errors.
-        console.log(errors);
-      })
-      .finally(() => {
+      .then(() => {
         // Set default theme.
         this.theme = process.env.MIX_VUE_DEFAULT_THEME;
         if (this.theme === "light") {
@@ -67,7 +62,12 @@ export default {
         console.log("logout", this.getUserFields.theme);
         // Redirect to home route.
         this.$router.push(`/${this.$i18n.locale}/home`);
-      });
+      })
+      .catch((errors) => {
+        // Log errors.
+        console.log(errors);
+      })
+      .finally(() => {});
   },
 };
 </script>

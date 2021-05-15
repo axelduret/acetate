@@ -72,7 +72,7 @@ export default {
     CardFooter,
   },
   props: {
-    id: Number,
+    id: String,
   },
   data() {
     return {

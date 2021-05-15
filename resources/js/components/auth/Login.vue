@@ -86,7 +86,6 @@ export default {
         .post("/api/login", this.formData)
         .then((response) => {
           // Fetch API response.
-          this.errors = false;
           this.userId = response.data.data.user.id;
           this.username = response.data.data.user.username;
           this.firstname = response.data.data.user.firstname;
@@ -98,12 +97,7 @@ export default {
           this.token = response.data.data.user.api_token;
           this.role = response.data.data.user.role[0].name;
           this.abilities = response.data.data.user.abilities;
-        })
-        .catch((errors) => {
-          // Returns errors.
-          this.errors = true; // errors.response.data
-        })
-        .finally(() => {
+          this.errors = false;
           // Set logged user's theme.
           if (this.theme === "light") {
             this.$vuetify.theme.dark = false;
@@ -137,7 +131,12 @@ export default {
           console.log("login", this.getUserFields.theme);
           // Redirect to dashboard route.
           this.$router.push(`/${this.$i18n.locale}/dashboard`);
-        });
+        })
+        .catch((errors) => {
+          // Returns errors.
+          this.errors = true; // errors.response.data
+        })
+        .finally(() => {});
     },
   },
 };
