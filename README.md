@@ -1,5 +1,9 @@
 # Acetate
 
-## EER Diagram
+## EER Diagram (Complete Schema)
 
-![Image](EERDiagram.png)
+![Image](EERDiagramAll.png)
+
+## EER Diagram (Events Schema)
+
+![Image](EERDiagramEvents.png)
