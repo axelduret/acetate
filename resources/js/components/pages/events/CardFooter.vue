@@ -40,10 +40,18 @@ export default {
     Comments: Number,
     Likes: Number,
   },
+  data() {
+    return {
+      // App url.
+      appURL: process.env.MIX_APP_URL,
+      // Base url.
+      baseURL: process.env.MIX_BASE_URL,
+    };
+  },
   methods: {
     showEvent: function (id) {
       const path = "events/" + id;
-      this.$router.push(`/${this.$i18n.locale}/${path}`);
+      this.$router.push(`${this.baseURL}${this.$i18n.locale}/${path}`);
     },
   },
 };

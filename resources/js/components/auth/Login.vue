@@ -59,6 +59,10 @@ export default {
       passwordConfirm: "",
       showPw: false,
       errors: false,
+      // App url.
+      appURL: process.env.MIX_APP_URL,
+      // Base url.
+      baseURL: process.env.MIX_BASE_URL,
     };
   },
   computed: mapGetters({
@@ -129,7 +133,7 @@ export default {
           this.setRole(this.role);
           this.setAbilities(this.abilities);
           // Redirect to dashboard route.
-          this.$router.push(`/${this.$i18n.locale}/dashboard`);
+          this.$router.push(`${this.baseURL}${this.$i18n.locale}/dashboard`);
         })
         .catch((errors) => {
           // Returns errors.

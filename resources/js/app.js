@@ -39,7 +39,7 @@ router.beforeEach((to, from, next) => {
         if (!loggedIn()) {
             next({
                 path:
-                    "/" +
+                    process.env.MIX_BASE_URL +
                     process.env.MIX_VUE_APP_I18N_DEFAULT_LOCALE +
                     "/login",
                 query: { redirect: to.fullPath }
@@ -51,7 +51,9 @@ router.beforeEach((to, from, next) => {
         if (loggedIn()) {
             next({
                 path:
-                    "/" + process.env.MIX_VUE_APP_I18N_DEFAULT_LOCALE + "/home",
+                    process.env.MIX_BASE_URL +
+                    process.env.MIX_VUE_APP_I18N_DEFAULT_LOCALE +
+                    "/home",
                 query: { redirect: to.fullPath }
             });
         } else {

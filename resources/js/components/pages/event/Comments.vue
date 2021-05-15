@@ -88,7 +88,7 @@ export default {
   methods: {
     showUser: function (id) {
       const path = "users/" + id;
-      this.$router.push(`/${this.$i18n.locale}/${path}`);
+      this.$router.push(`${this.baseURL}${this.$i18n.locale}/${path}`);
     },
   },
 };

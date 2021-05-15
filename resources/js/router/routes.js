@@ -10,7 +10,7 @@ function loadComponent(component) {
 
 const routes = [
     {
-        path: "/:locale",
+        path: process.env.MIX_BASE_URL + ":locale",
         component: {
             template: "<router-view></router-view>"
         },

@@ -51,10 +51,18 @@ export default {
   props: {
     People: Array,
   },
+  data() {
+    return {
+      // App url.
+      appURL: process.env.MIX_APP_URL,
+      // Base url.
+      baseURL: process.env.MIX_BASE_URL,
+    };
+  },
   methods: {
     showPerson: function (id) {
       const path = "people/" + id;
-      this.$router.push(`/${this.$i18n.locale}/${path}`);
+      this.$router.push(`${this.baseURL}${this.$i18n.locale}/${path}`);
     },
   },
 };

@@ -34,7 +34,7 @@
           <v-list-item
             v-for="(item, index) in getMenu"
             :key="index"
-            :to="`/${$i18n.locale}/${item.path}`"
+            :to="baseURL + `${$i18n.locale}/${item.path}`"
           >
             <v-list-item-icon>
               <v-icon>{{ item.icon }}</v-icon>
@@ -53,6 +53,10 @@ export default {
   data: () => ({
     // App name.
     appName: process.env.MIX_APP_NAME,
+    // App url.
+    appURL: process.env.MIX_APP_URL,
+    // Base url.
+    baseURL: process.env.MIX_BASE_URL,
     // Sidebar.
     drawer: false,
   }),

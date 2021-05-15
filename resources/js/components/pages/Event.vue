@@ -78,6 +78,10 @@ export default {
     return {
       overlay: true,
       event: "",
+      // App url.
+      appURL: process.env.MIX_APP_URL,
+      // Base url.
+      baseURL: process.env.MIX_BASE_URL,
       apiToken: process.env.MIX_APP_API_TOKEN,
     };
   },
@@ -86,7 +90,7 @@ export default {
       .request({
         url: this.id,
         method: "get",
-        baseURL: "/api/events/",
+        baseURL: this.baseURL + "api/events/",
         headers: {
           Authorization: "Bearer " + this.apiToken,
         },
@@ -96,7 +100,7 @@ export default {
       })
       .catch((error) => {
         const path = "error/404";
-        this.$router.push(`/${this.$i18n.locale}/${path}`);
+        this.$router.push(this.baseURL + `${this.$i18n.locale}/${path}`);
       })
       .finally(() => {
         this.overlay = false;

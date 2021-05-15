@@ -4,6 +4,14 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
+  data() {
+    return {
+      // App url.
+      appURL: process.env.MIX_APP_URL,
+      // Base url.
+      baseURL: process.env.MIX_BASE_URL,
+    };
+  },
   methods: {
     // Vuex setters.
     ...mapActions({
@@ -26,7 +34,7 @@ export default {
   // Logout request.
   mounted() {
     axios
-      .post("/api/logout/" + localStorage.getItem("user_id"))
+      .post(this.baseURL + "api/logout/" + localStorage.getItem("user_id"))
       .then(() => {
         // Clear localStorage.
         localStorage.removeItem("user_id");
@@ -51,7 +59,7 @@ export default {
         this.setRole(null);
         this.setAbilities(null);
         // Redirect to home route.
-        this.$router.push(`/${this.$i18n.locale}/home`);
+        this.$router.push(`${this.baseURL}${this.$i18n.locale}/home`);
       })
       .catch((errors) => {
         // Log errors.

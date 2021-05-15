@@ -109,7 +109,7 @@
             <v-list-item
               v-for="(item, index) in getAccountMenu"
               :key="index"
-              :to="'/' + $i18n.locale + '/' + item.path"
+              :to="baseURL + $i18n.locale + '/' + item.path"
             >
               <!-- account menu titile -->
               <v-list-item-title>{{ $t(item.title) }}</v-list-item-title>
@@ -140,8 +140,8 @@ export default {
     locales: process.env.MIX_VUE_APP_I18N_SUPPORTED_LOCALE.split(","),
     // Account menu title.
     accountMenuTitle: "account-menu.title",
-    language: null,
     themeSwitch: true,
+    language: null,
     avatar: null,
   }),
   computed:

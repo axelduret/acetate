@@ -121,6 +121,10 @@ export default {
       overlay: true,
       perPage: 50,
       events: "",
+      // App url.
+      appURL: process.env.MIX_APP_URL,
+      // Base url.
+      baseURL: process.env.MIX_BASE_URL,
       apiToken: process.env.MIX_APP_API_TOKEN,
       eventTabs: [
         { name: "all" },
@@ -148,7 +152,7 @@ export default {
         .request({
           url: this.query + this.perPage,
           method: "get",
-          baseURL: "/api/",
+          baseURL: this.baseURL + "api/",
           headers: {
             Authorization: "Bearer " + this.apiToken,
           },
@@ -158,7 +162,7 @@ export default {
         })
         .catch((error) => {
           const path = "error/404";
-          this.$router.push(`/${this.$i18n.locale}/${path}`);
+          this.$router.push(`${this.baseURL}${this.$i18n.locale}/${path}`);
         })
         .finally(() => {
           this.overlay = false;
