@@ -128,7 +128,6 @@ export default {
           this.setApiToken(this.token);
           this.setRole(this.role);
           this.setAbilities(this.abilities);
-          console.log("login", this.getUserFields.theme);
           // Redirect to dashboard route.
           this.$router.push(`/${this.$i18n.locale}/dashboard`);
         })
