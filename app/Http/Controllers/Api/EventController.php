@@ -119,9 +119,7 @@ class EventController extends Controller
             ->select('id', 'name', 'avatar')
             // Order event by name.
             ->orderBy('name')
-            ->with([/* 
-              // Returns event's addresses.
-              'addresses', */
+            ->with([
               // Returns people:id and people:nickname.
               'people' => function ($filter) {
                 $filter
@@ -132,9 +130,7 @@ class EventController extends Controller
               // Returns venues:id and venues:name.
               'venues' => function ($filter) {
                 $filter
-                  ->select('id', 'name')/* 
-                  // Returns venues's addresses.
-                  ->with('addresses') */
+                  ->select('id', 'name')
                   // Order venues by name.
                   ->orderBy('name');
               },
@@ -155,18 +151,15 @@ class EventController extends Controller
                   ->orderBy('sub_category');
               },
               // Returns favorites of the specified user.
-              // TODO show favorites only if the user is logged in.
               'favorites'
             ])
             // Returns the total number of likes.
-            // TODO show likes of the logged user.
             ->withCount([
               'likes as likes_count' => function ($filter) {
                 $filter
                   ->where('is_dislike', 0);
               },
               // Returns the total number of dislikes.
-              // TODO show dislikes of the logged user.
               'likes as dislikes_count' => function ($filter) {
                 $filter
                   ->where('is_dislike', 1);
@@ -229,13 +222,6 @@ class EventController extends Controller
     if ($events->isEmpty()) {
       return $this->failure('No events found.', 404);
     }
-    /* TODO add pagination to response.
-    // Success message.
-    $message = 'OK';
-    // Returns events data with success message.
-    return $this->success($message, new EventCollection($events), 200);
-     */
-
     // Returns events data's collection.
     return new EventCollection($events);
   }
@@ -264,7 +250,6 @@ class EventController extends Controller
     $event = new Event([
       'name' => $request->input('name'),
       'description' => $request->input('description'),
-      // TODO create a default event's avatar if not submitted.
       'avatar' => $request->file('upload') ? 'avatar/event/' . $this->file_name : null,
       'user_id' => $request->input('user_id')
     ]);
@@ -286,7 +271,6 @@ class EventController extends Controller
     $this->storeEntity($event, 'phones', 'App\Models\Phone', $request);
     // Attach files to the event.
     $this->attachEntity($event, 'files', 'File', 'App\Models\File', $request);
-    // TODO Check if new taxonomies's types are valid.
     // Attach submitted taxonomies to the event.
     $this->attachEntity($event, 'taxonomies', 'Taxonomy', 'App\Models\Taxonomy', $request);
     // Create and attach websites to the event.
@@ -388,7 +372,6 @@ class EventController extends Controller
     $this->attachEntity($event, 'files', 'File', 'App\Models\File', $request);
     // Detach current taxonomies from the event.
     $event->taxonomies()->detach();
-    // TODO Check if new taxonomies's types are valid.
     // Attach submitted taxonomies to the event.
     $this->attachEntity($event, 'taxonomies', 'Taxonomy', 'App\Models\Taxonomy', $request);
     // Detach current websites from the event.

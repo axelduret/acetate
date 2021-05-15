@@ -10,7 +10,6 @@ use App\Http\Controllers\Api\PersonController;
 use App\Http\Controllers\Api\TicketController;
 use App\Http\Controllers\Api\CommentController;
 use App\Http\Controllers\Api\TaxonomyController;
-use App\Http\Controllers\Api\UserAuthController;
 
 /*
 |--------------------------------------------------------------------------

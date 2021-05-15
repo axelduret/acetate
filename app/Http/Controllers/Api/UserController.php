@@ -94,7 +94,6 @@ class UserController extends Controller
    */
   public function login(Request $request)
   {
-    // TODO Store token into local storage.
     // Check if the submitted user's login is valid.
     $user = User::where('email', $request->email)->first();
     if (!$user || !Hash::check($request->password, $user->password)) {
@@ -102,7 +101,6 @@ class UserController extends Controller
     }
     // Revoke current user's tokens.
     $user->tokens()->where('abilities', '!=', '["role:anonymous"]')->delete();
-
     // Retrieve user's role.
     $abilities = [];
     if ($user->hasRole('super-admin')) {
@@ -114,8 +112,6 @@ class UserController extends Controller
     }
     // Create a new token and attach it to the current user.
     $token = $user->createToken('api_token', $abilities);
-
-
     // Data response.
     $data = [
       'user' => collect([
@@ -143,15 +139,21 @@ class UserController extends Controller
    * @param int $id
    * @return Response
    */
-  public function logout($id) // TODO Logout
+  public function logout($id)
   {
     // Check if the user exists.
     $user = User::find($id);
     if (!$user) {
       return $this->failure('User ' . $id . ' not found.', 404);
     }
+    // Revoke current user's tokens.
     $user->tokens()->where('abilities', '!=', '["role:anonymous"]')->delete();
-    return response()->json(['msg' => 'Successfully logged out.']);
+    // Data response.
+    $data = [
+      'credit' => $this->apiCredit()
+    ];
+    // Returns success message.
+    return $this->success('Successfully logged out.', $data, 200);
   }
 
   /**
@@ -282,22 +284,6 @@ class UserController extends Controller
           File::where('user_id', $id)->paginate((int)$perPage)
         );
         break;
-        // TODO Tickets.
-        /* 
-      case 'tickets':
-        $tickets = $user->tickets;
-        // Check if user's tickets exist.
-        if ($tickets->isEmpty()) {
-          return $this->failure('No tickets found for this user.', 404);
-        }
-        // Pagination.
-        $perPage = $request->input('per_page') ?? self::PER_PAGE;
-        // Return all tickets attached to the user.
-        return new UserTicketsCollection(
-          Ticket::where('user_id', $id)->paginate((int)$perPage)
-        );
-        break;
-         */
       default:
         // By default, returns the user data.
         return new UserResource($user);
