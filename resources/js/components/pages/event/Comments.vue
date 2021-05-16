@@ -76,7 +76,6 @@
 <script>
 export default {
   props: {
-    Id: Number,
     Comments: Array,
   },
   data() {

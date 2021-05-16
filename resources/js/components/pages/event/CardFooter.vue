@@ -13,7 +13,6 @@
 export default {
   props: {
     Id: Number,
-    Comments: Number,
   },
   methods: {
     postComment: function (id) {
