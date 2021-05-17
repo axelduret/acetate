@@ -74,6 +74,22 @@
             }
         },
         "event": {
+            "description_none": "Aucune description à afficher pour cet événement.",
+            "title": {
+                "description": "Description",
+                "dates": "Horaires",
+                "start_date": "Date de Début",
+                "end_date": "Date de Fin",
+                "start_time": "Heure de Début",
+                "end_time": "Heure de Fin",
+                "attendance": "Intervenants",
+                "locations": "Localisation",
+                "emails": "Email",
+                "phones": "Téléphone",
+                "websites": "Site internet",
+                "google_map": "Visualiser sur Google map.",
+                "email": "Envoyer un email."
+            },
             "post_comment": "ajouter un commentaire"
         },
         "people": {

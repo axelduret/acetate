@@ -74,6 +74,22 @@
             }
         },
         "event": {
+            "description_none": "No description found for this event.",
+            "title": {
+                "description": "Description",
+                "dates": "Schedule",
+                "start_date": "Start Date",
+                "end_date": "End Date",
+                "start_time": "Start Time",
+                "end_time": "End Time",
+                "attendance": "Attendance",
+                "locations": "Location",
+                "emails": "Email",
+                "phones": "Phone",
+                "websites": "Website",
+                "google_map": "View on Google map.",
+                "email": "Send an email."
+            },
             "post_comment": "post a comment"
         },
         "people": {

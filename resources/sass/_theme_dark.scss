@@ -34,6 +34,14 @@
 .theme--dark .v-list-item__title {
     color: $ac-dark-primary;
 }
+// Expansion panels
+.theme--dark.v-expansion-panels .v-expansion-panel {
+    color: $ac-dark-primary;
+    background-color: $ac-dark-cards-bg;
+}
+.theme--dark.v-expansion-panels .v-expansion-panel::before {
+    box-shadow: none;
+}
 // Divider
 .theme--dark.v-divider {
     background-color: $ac-dark-contrast-bg;

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-col class="col-auto ml-auto" style="text-align: right">
+    <v-col class="col-auto ml-auto mr-2" style="text-align: right">
       <!-- likes count -->
       <span class="pink--text">
         <v-icon

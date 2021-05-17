@@ -1,9 +1,8 @@
 <template>
   <div>
-    <v-divider class="mx-2"></v-divider>
-    <div v-if="Taxonomies.length > 0">
+    <div v-if="Taxonomies !== null && Taxonomies.length > 0">
       <v-row class="py-0">
-        <v-col class="my-auto col-auto">
+        <v-col class="my-auto col-auto mx-2">
           <span class="primary--text">
             <v-chip-group show-arrows class="col-auto my-2 py-0"
               ><span v-for="(taxonomy, index) in Taxonomies" :key="index"
@@ -18,19 +17,6 @@
           </span>
         </v-col>
       </v-row>
-      <v-divider class="mx-2"></v-divider>
-    </div>
-    <div v-if="Taxonomies.length <= 0">
-      <v-row class="py-0">
-        <v-col class="my-auto col-auto">
-          <span
-            class="mx-auto col-auto primary--text"
-            style="line-height: 3rem"
-          >
-          </span>
-        </v-col>
-      </v-row>
-      <v-divider class="mx-2"></v-divider>
     </div>
   </div>
 </template>

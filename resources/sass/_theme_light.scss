@@ -34,6 +34,14 @@
 .theme--light .v-list-item__title {
     color: $ac-light-secondary;
 }
+// Expansion panels
+.theme--light.v-expansion-panels .v-expansion-panel {
+    color: $ac-light-primary;
+    background-color: $ac-light-cards-bg;
+}
+.theme--light.v-expansion-panels .v-expansion-panel::before {
+    box-shadow: none;
+}
 // Divider
 .theme--light.v-divider {
     background-color: $ac-light-contrast-bg;
