@@ -48,3 +48,11 @@ export function timeFilter(value) {
             .format("LT");
     }
 }
+
+export function stringTimeFilter(value) {
+    if (value) {
+        return moment(String(value))
+            .locale(i18n.locale)
+            .format("LT");
+    }
+}

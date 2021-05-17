@@ -9,30 +9,40 @@
             :Taxonomies="event.taxonomies ? event.taxonomies : null"
             :Name="event.name ? event.name : null"
           />
+          <!-- carousel -->
+          <div v-if="event.files">
+            <div v-if="event.files !== null && event.files.length > 0">
+              <v-carousel
+                cycle
+                interval="5000"
+                hide-delimiters
+                show-arrows-on-hover
+              >
+                <v-carousel-item
+                  v-for="(file, index) in event.files"
+                  :key="index"
+                  :src="appURL + baseURL + file.path"
+                  :title="file.name"
+                ></v-carousel-item>
+              </v-carousel>
+            </div>
+          </div>
+          <!-- likes -->
+          <Likes :Likes="event.likes_count ? event.likes_count : null" />
+          <v-divider></v-divider>
           <!-- event details -->
           <EventDetails
-            :Description="event.description ? event.description : null"
             v-if="event.dates"
+            :Description="event.description ? event.description : null"
             :Dates="event.dates ? event.dates : null"
             :People="event.people ? event.people : null"
             :Venues="event.venues ? event.venues : null"
             :Addresses="event.addresses ? event.addresses : null"
+            :Prices="event.prices ? event.prices : null"
             :Emails="event.emails ? event.emails : null"
             :Phones="event.phones ? event.phones : null"
             :Websites="event.websites ? event.websites : null"
           />
-          <v-divider></v-divider>
-          <!-- card content -->
-          <v-row class="pb-3">
-            <v-col class="mx-4 pt-5">
-              <v-row class="my-0 py-0 justify-space-between">
-                <!-- prices -->
-                <Prices :Prices="event.prices ? event.prices : null" />
-                <!-- likes -->
-                <Likes :Likes="event.likes_count ? event.likes_count : null"
-              /></v-row>
-            </v-col>
-          </v-row>
           <v-divider></v-divider>
           <!-- taxonomies -->
           <Taxonomies
@@ -67,8 +77,6 @@
 <script>
 import CardTitle from "./event/CardTitle";
 import EventDetails from "./event/EventDetails";
-import Dates from "./event/Dates";
-import Prices from "./event/Prices";
 import Likes from "./event/Likes";
 import Taxonomies from "./event/Taxonomies";
 import Comments from "./event/Comments";
@@ -80,8 +88,6 @@ export default {
   components: {
     CardTitle,
     EventDetails,
-    Dates,
-    Prices,
     Likes,
     Taxonomies,
     Comments,
@@ -96,6 +102,11 @@ export default {
       baseURL: process.env.MIX_BASE_URL,
       apiToken: process.env.MIX_APP_API_TOKEN,
     };
+  },
+  methods: {
+    logThis: function (file) {
+      console.log(this.appURL + this.baseURL + file.path);
+    },
   },
   mounted() {
     axios

@@ -42,6 +42,10 @@
 .theme--dark.v-expansion-panels .v-expansion-panel::before {
     box-shadow: none;
 }
+// Data tables
+.theme--dark.v-data-table {
+    background-color: transparent;
+}
 // Divider
 .theme--dark.v-divider {
     background-color: $ac-dark-contrast-bg;

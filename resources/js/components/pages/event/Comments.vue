@@ -40,7 +40,8 @@
                     >{{ comment.user_name }}</a
                   >
                   <span class="caption grey--text"
-                    >({{ comment.created_at | formatDate }}) :</span
+                    >({{ comment.created_at | formatDate }} |
+                    {{ comment.created_at | formatStringToTime }}) :</span
                   >
                   <v-spacer class="mb-2"></v-spacer> {{ comment.text }}</span
                 >
@@ -110,9 +111,7 @@ export default {
       const path = "users/" + id;
       this.$router.push(`${this.baseURL}${this.$i18n.locale}/${path}`);
     },
-    postComment: function (id) {
-      console.log(id);
-    },
+    postComment: function (id) {},
   },
 };
 </script>

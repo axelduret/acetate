@@ -243,7 +243,7 @@ class DatabaseSeeder extends Seeder
 
     // Create files.
     $files = File::factory()
-      ->count(100)
+      ->count(2000)
       ->make()->each(function ($file) use ($users, $events, $people, $venues) {
         $random = rand(1, 4);
         if ($random == 1) {

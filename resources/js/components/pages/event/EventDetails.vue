@@ -13,7 +13,7 @@
           <span
             v-if="Description !== null && Description.length > 0"
             class="subtitle-2"
-            :class="$vuetify.theme.dark ? 'primary--text' : 'primary--text'"
+            :class="$vuetify.theme.dark ? 'grey--text' : 'primary--text'"
             >{{ Description }}</span
           ><span v-else>
             {{ $t("page.event.description_none") }}</span
@@ -150,9 +150,9 @@
                     :title="$t('page.event.title.google_map')"
                     target="_blank"
                   >
-                    {{ address.street1 }}, {{ address.street2 }},
-                    {{ address.canton }}, {{ address.region }},
-                    {{ address.zip }} {{ address.city }},
+                    {{ address.street1 }}, 
+                    {{ address.zip }} {{ address.city }}, 
+                    {{ address.canton }},
                     {{ address.country }}
                   </v-btn>
                   <span
@@ -184,9 +184,9 @@
                 :title="$t('page.event.title.google_map')"
                 target="_blank"
               >
-                {{ address.street1 }}, {{ address.street2 }},
-                {{ address.canton }}, {{ address.region }}, {{ address.zip }}
+                {{ address.street1 }},  {{ address.zip }}
                 {{ address.city }},
+                {{ address.canton }}, 
                 {{ address.country }}
               </v-btn>
               <v-divider class="my-2 greybg"></v-divider></span
@@ -233,6 +233,37 @@
             ></span>
           </span>
         </v-expansion-panel-content>
+      </v-expansion-panel>
+      <!-- Prices -->
+      <v-expansion-panel v-if="Prices !== null && Prices.length > 0"  class="caption primary--text">
+        <v-expansion-panel-header
+          >{{ $t("page.event.title.prices") }}
+          <template v-slot:actions>
+            <v-icon color="primary"> $expand </v-icon>
+          </template></v-expansion-panel-header
+        >
+        <v-expansion-panel-content >
+          <span class="subtitle-2"
+            ><span
+              class="caption"
+              :class="$vuetify.theme.dark ? 'grey--text' : 'primary--text'"
+            >
+              <span v-for="(price, index) in Prices" :key="index">
+                <v-icon
+                    class="mr-1"
+                    :class="
+                      $vuetify.theme.dark ? 'grey--text' : 'primary--text'
+                    "
+                    style="margin-bottom: 0.08rem"
+                    small
+                    >mdi-cash-usd-outline</v-icon
+                  >
+                  {{ price.cost }} chf ({{ price.type }})<v-spacer></v-spacer
+                >
+              </span></span
+            >
+          </span><v-spacer></v-spacer> </span
+        ></v-expansion-panel-content>
       </v-expansion-panel>
       <!-- Phones -->
       <v-expansion-panel
@@ -334,9 +365,6 @@
   </div>
 </template>
 
-
-    
-
 <script>
 export default {
   props: {
@@ -345,6 +373,7 @@ export default {
     People: Array,
     Venues: Array,
     Addresses: Array,
+    Prices: Array,
     Emails: Array,
     Phones: Array,
     Websites: Array,

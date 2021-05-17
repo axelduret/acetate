@@ -162,6 +162,10 @@ i[class*=" flaticon-"]:before {
   box-shadow: none;
 }
 
+.theme--light.v-data-table {
+  background-color: transparent;
+}
+
 .theme--light.v-divider {
   background-color: #e0f2f1;
   color: #e0f2f1;
@@ -203,6 +207,10 @@ i[class*=" flaticon-"]:before {
 
 .theme--dark.v-expansion-panels .v-expansion-panel::before {
   box-shadow: none;
+}
+
+.theme--dark.v-data-table {
+  background-color: transparent;
 }
 
 .theme--dark.v-divider {

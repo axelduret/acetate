@@ -10,7 +10,8 @@ import {
     subStringFilter,
     dateFilter,
     multipleDateFilter,
-    timeFilter
+    timeFilter,
+    stringTimeFilter
 } from "./utils/filters";
 
 // Laravel required.
@@ -27,6 +28,7 @@ Vue.filter("subStr", subStringFilter);
 Vue.filter("formatDate", dateFilter);
 Vue.filter("formatMultipleDates", multipleDateFilter);
 Vue.filter("formatTime", timeFilter);
+Vue.filter("formatStringToTime", stringTimeFilter);
 
 // Get logged user's API Token.
 function loggedIn() {
