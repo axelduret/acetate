@@ -2504,6 +2504,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.use((vuetify__WEBPACK_IMPORTED_MODULE_1
         contrast: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.shades.black,
         error: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.red.accent3,
         darkprimary: "#4db6ac",
+        darksecondary: "#ECEFF1",
         appBackground: "#ECEFF1"
       },
       dark: {
@@ -2515,6 +2516,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__.default.use((vuetify__WEBPACK_IMPORTED_MODULE_1
         contrast: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.shades.white,
         error: vuetify_lib_util_colors__WEBPACK_IMPORTED_MODULE_2__.default.red.accent3,
         lightprimary: "#455A64",
+        lightsecondary: "#136c83",
         appBackground: "#263238"
       }
     }

@@ -18,6 +18,7 @@ export default new Vuetify({
                 contrast: colors.shades.black,
                 error: colors.red.accent3,
                 darkprimary: "#4db6ac",
+                darksecondary: "#ECEFF1",
                 appBackground: "#ECEFF1"
             },
             dark: {
@@ -29,6 +30,7 @@ export default new Vuetify({
                 contrast: colors.shades.white,
                 error: colors.red.accent3,
                 lightprimary: "#455A64",
+                lightsecondary: "#136c83",
                 appBackground: "#263238"
             }
         }

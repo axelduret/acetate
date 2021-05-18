@@ -69,6 +69,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     id: String
@@ -87,7 +93,8 @@ __webpack_require__.r(__webpack_exports__);
       appURL: "http://127.0.0.1:8001",
       // Base url.
       baseURL: "/",
-      apiToken: localStorage.getItem("user_api_token")
+      apiToken: localStorage.getItem("user_api_token"),
+      errors: false
     };
   },
   methods: {
@@ -112,33 +119,40 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     handleFileUpload: function handleFileUpload() {
-      this.file = this.$refs.file.files[0];
+      if (this.$refs.file.files[0]["type"] !== "image/jpeg" && this.$refs.file.files[0]["type"] !== "image/gif" && this.$refs.file.files[0]["type"] !== "image/png") {
+        this.errors = "Invalid file type ( gif, jpg or png ).";
+      } else {
+        this.errors = false;
+        this.file = this.$refs.file.files[0];
+      }
     },
     submit: function submit() {
-      /* 
-      const id = document.getElementById("formId").value;
-      const user_id = document.getElementById("formUserId").value;
-      const name = document.getElementById("formName").value;
-      const description = document.getElementById("formText").value; */
-      var formData = new FormData();
-      /* 
-      formData.append("id", id);
-      formData.append("user_id", user_id);
-      formData.append("name", name);
-      formData.append("description", description); */
+      if (!this.errors) {
+        /* 
+        const id = document.getElementById("formId").value;
+        const user_id = document.getElementById("formUserId").value;
+        const name = document.getElementById("formName").value;
+        const description = document.getElementById("formText").value; */
+        var formData = new FormData();
+        /* 
+        formData.append("id", id);
+        formData.append("user_id", user_id);
+        formData.append("name", name);
+        formData.append("description", description); */
 
-      formData.append("upload", this.file);
-      var config = {
-        headers: {
-          "Content-Type": "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2),
-          Authorization: "Bearer " + this.apiToken
-        }
-      };
-      axios.post(this.baseURL + "api/events/" + this.id + "/avatar", formData, config).then(function () {
-        console.log("SUCCESS!!");
-      })["catch"](function () {
-        console.log("FAILURE!!");
-      });
+        formData.append("upload", this.file);
+        var config = {
+          headers: {
+            "Content-Type": "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2),
+            Authorization: "Bearer " + this.apiToken
+          }
+        };
+        axios.post(this.baseURL + "api/events/" + this.id + "/avatar", formData, config).then(function () {
+          console.log("SUCCESS!!");
+        })["catch"](function () {
+          console.log("FAILURE!!");
+        });
+      }
     }
   },
   mounted: function mounted() {
@@ -335,29 +349,57 @@ var render = function() {
                   expression: "form.description"
                 }
               }),
-              _c("img", {
-                staticClass: "mx-4 mb-4 primary--text",
-                attrs: {
-                  width: "200",
-                  src:
-                    _vm.appURL +
-                    _vm.baseURL +
-                    "storage/avatar/event/" +
-                    _vm.event.avatar
-                }
-              }),
-              _vm._v(" "),
-              _c("v-spacer"),
-              _c("input", {
-                ref: "file",
-                staticClass: "mx-4 my-4",
-                attrs: { type: "file", id: "file" },
-                on: {
-                  change: function($event) {
-                    return _vm.handleFileUpload()
-                  }
-                }
-              })
+              _c(
+                "v-card",
+                {
+                  staticClass: "  col-auto mx-auto my-auto",
+                  class: _vm.$vuetify.theme.dark ? "greybg" : "darkprimary",
+                  attrs: { elevation: "-1", width: "300" }
+                },
+                [
+                  _vm.errors
+                    ? _c(
+                        "div",
+                        {
+                          staticClass:
+                            "error mb-2 px-4 white--text py-2 rounded"
+                        },
+                        [_vm._v("\n        " + _vm._s(_vm.errors) + "\n      ")]
+                      )
+                    : _vm._e(),
+                  _c(
+                    "v-card-text",
+                    { staticClass: "white" },
+                    [
+                      _c("img", {
+                        staticClass: "mx-4 mb-4   primary--text",
+                        attrs: {
+                          width: "200",
+                          src:
+                            _vm.appURL +
+                            _vm.baseURL +
+                            "storage/avatar/event/" +
+                            _vm.event.avatar
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("v-spacer"),
+                      _c("input", {
+                        ref: "file",
+                        staticClass: "mx-4 my-4 primary--text",
+                        attrs: { type: "file", id: "file" },
+                        on: {
+                          change: function($event) {
+                            return _vm.handleFileUpload()
+                          }
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
             ],
             1
           ),
