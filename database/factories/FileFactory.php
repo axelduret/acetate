@@ -21,14 +21,14 @@ class FileFactory extends Factory
    */
   public function definition()
   {
-    $upload = $this->faker->image();
+    $upload = $this->faker->image('public/storage/file', null, false);
     return [
       'path' => $upload,
       'type' => $this->faker->randomElement(['image', 'audio', 'video']),
       'mimetype' => $this->faker->mimeType,
       'encoding' => '8bit',
       'name' => $this->faker->word,
-      'size' => fileSize($upload),
+      'size' => filesize($upload),
     ];
   }
 }

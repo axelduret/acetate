@@ -144,7 +144,7 @@ __webpack_require__.r(__webpack_exports__);
       appURL: "http://127.0.0.1:8001",
       // Base url.
       baseURL: "/",
-      apiToken: "2|BfmQXI0HGy29fa7iVxFFUim2dV3whV33fth0bTJx",
+      apiToken: "2|B1XXPtIUQrH11NG0j9CiPaBboVWuG2UL5pl6Ocec",
       eventTabs: [{
         name: "all"
       }, {
