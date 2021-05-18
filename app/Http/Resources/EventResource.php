@@ -51,9 +51,10 @@ class EventResource extends JsonResource
             'user_avatar' => $item->user['avatar'],
             'user_id' => $item['user_id'],
           ];
-        }),
+        })->sortByDesc('created_at')->all(),
         'likes_count' => $this->likes->where('is_dislike', 0)->count(),
         'dislikes_count' => $this->likes->where('is_dislike', 1)->count(),
+        'likes' => $this->likes,
         'favorites' => $this->favorites,
         'user_name' => $this->user['username'],
         'user_avatar' => $this->user['avatar'],

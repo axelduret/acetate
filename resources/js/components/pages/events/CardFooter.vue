@@ -8,25 +8,30 @@
     </v-col>
     <v-col class="mx-4 my-auto col-auto ml-auto">
       <!-- comments count -->
-      <span class="orange--text mr-3">
+      <span
+        :class="$vuetify.theme.dark ? 'primary--text' : 'secondary--text'"
+        class="mr-3"
+      >
         <v-icon
-          class="orange--text mr-1"
+          class="mr-1"
+          :class="$vuetify.theme.dark ? 'primary--text' : 'secondary--text'"
           dark
           small
           style="margin-bottom: 0.05rem"
         >
-          mdi-comment </v-icon
+          mdi-comment-outline </v-icon
         ><span class="subtitle-2">{{ Comments }} </span>
       </span>
       <!-- likes count -->
-      <span class="pink--text">
+      <span :class="$vuetify.theme.dark ? 'primary--text' : 'secondary--text'">
         <v-icon
-          class="pink--text mr-1"
+          class="mr-1"
+          :class="$vuetify.theme.dark ? 'primary--text' : 'secondary--text'"
           dark
           small
           style="margin-bottom: 0.05rem"
         >
-          mdi-heart </v-icon
+          mdi-heart-outline </v-icon
         ><span class="subtitle-2">{{ Likes }}</span>
       </span>
     </v-col>

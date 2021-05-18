@@ -1,7 +1,7 @@
 <template>
   <v-container>
     <div>
-      <v-card max-width="800px" class="pb-4 mx-auto">
+      <v-card v-if="overlay === false" max-width="800px" class="pb-4 mx-auto">
         <div>
           <!-- card title -->
           <CardTitle
@@ -28,7 +28,12 @@
             </div>
           </div>
           <!-- likes -->
-          <Likes :Likes="event.likes_count" />
+          <Likes
+            v-if="event.likes"
+            :LikesCount="event.likes_count"
+            :Likes="event.likes"
+            :Id="event.id"
+          />
           <v-divider></v-divider>
           <!-- event details -->
           <EventDetails
@@ -47,13 +52,29 @@
           <v-divider></v-divider>
           <!-- taxonomies -->
           <Taxonomies
+            v-if="event.taxonomies"
             :Taxonomies="event.taxonomies ? event.taxonomies : null"
           />
           <v-divider></v-divider>
           <!-- comments -->
           <Comments
-            :Id="event.id"
+            ref="CommentsContent"
+            v-if="renderComponent"
             :Comments="event.comments ? event.comments : null"
+            @comment-dialog="$refs.CommentDialog.dialog = true"
+          />
+          <div class="d-flex justify-center" v-else>
+            <v-progress-linear
+              indeterminate
+              :color="$vuetify.theme.dark ? 'info' : 'info'"
+              opacity="0.1"
+            ></v-progress-linear>
+          </div>
+          <!-- comment dialog -->
+          <CommentDialog
+            ref="CommentDialog"
+            @refreshComments="forceRerender"
+            :Id="event.id"
           />
         </div>
       </v-card>
@@ -61,7 +82,7 @@
     <!-- loading -->
     <v-overlay
       :class="$vuetify.theme.dark ? 'primary--text' : 'secondary--text'"
-      :opacity="0.1"
+      opacity="0.1"
       :value="overlay"
     >
       <v-progress-circular indeterminate size="90">
@@ -81,6 +102,7 @@ import EventDetails from "./event/EventDetails";
 import Likes from "./event/Likes";
 import Taxonomies from "./event/Taxonomies";
 import Comments from "./event/Comments";
+import CommentDialog from "./event/CommentDialog";
 
 export default {
   props: {
@@ -92,6 +114,7 @@ export default {
     Likes,
     Taxonomies,
     Comments,
+    CommentDialog,
   },
   data() {
     return {
@@ -102,34 +125,48 @@ export default {
       // Base url.
       baseURL: process.env.MIX_BASE_URL,
       apiToken: process.env.MIX_APP_API_TOKEN,
+      renderComponent: false,
     };
   },
   methods: {
     logThis: function (file) {
       console.log(this.appURL + this.baseURL + file.path);
     },
+    fetchAPI() {
+      axios
+        .request({
+          url: this.id,
+          method: "get",
+          baseURL: this.baseURL + "api/events/",
+          headers: {
+            Authorization: "Bearer " + this.apiToken,
+          },
+        })
+        .then((response) => {
+          this.event = response.data.data.event;
+        })
+        .catch((error) => {
+          const path = "error/404";
+          this.$router.push(`${this.baseURL}${this.$i18n.locale}/${path}`);
+        })
+        .finally(() => {
+          this.overlay = false;
+          this.renderComponent = true;
+          return this.event;
+        });
+    },
+    forceRerender() {
+      // Remove my-component from the DOM
+      this.renderComponent = false;
+
+      this.$nextTick(() => {
+        // Add the component back in
+        this.fetchAPI();
+      });
+    },
   },
   mounted() {
-    axios
-      .request({
-        url: this.id,
-        method: "get",
-        baseURL: this.baseURL + "api/events/",
-        headers: {
-          Authorization: "Bearer " + this.apiToken,
-        },
-      })
-      .then((response) => {
-        this.event = response.data.data.event;
-      })
-      .catch((error) => {
-        const path = "error/404";
-        this.$router.push(`${this.baseURL}${this.$i18n.locale}/${path}`);
-      })
-      .finally(() => {
-        this.overlay = false;
-        return this.event;
-      });
+    this.fetchAPI();
   },
 };
 </script>

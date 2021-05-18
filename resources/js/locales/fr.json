@@ -93,7 +93,9 @@
                 "google_map": "Visualiser sur Google map.",
                 "email": "Envoyer un email."
             },
-            "post_comment": "ajouter un commentaire"
+            "comment": {
+                "post": "ajouter un commentaire"
+            }
         },
         "people": {
             "title": "Bienvenue !",
@@ -146,6 +148,10 @@
         "logout": {
             "wrong": "Identifiant de l'utilisateur non valide.",
             "null": "Identifiant de l'utilisateur non valide."
+        },
+        "comment": {
+            "message": "Le texte doit comprendre 10 caractères au minimum."
         }
-    }
+    },
+    "not_logged_in": "Connexion requise."
 }

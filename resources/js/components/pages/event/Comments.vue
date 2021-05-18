@@ -43,7 +43,8 @@
                     >({{ comment.created_at | formatDate }} |
                     {{ comment.created_at | formatStringToTime }}) :</span
                   >
-                  <v-spacer class="mb-2"></v-spacer> {{ comment.text }}</span
+                  <v-spacer class="mb-2"></v-spacer>
+                  {{ comment.text }}</span
                 >
                 <div class="d-flex justify-end mt-4">
                   <!-- likes count -->
@@ -83,12 +84,30 @@
       ></v-row>
       <v-divider class="mx-2"></v-divider>
     </div>
-    <v-row class="pt-3">
+    <v-row v-if="!showUserToken()" class="pt-3">
       <!-- post a comment -->
       <v-col class="my-auto mx-auto col-auto">
-        <v-btn text color="info accent-4" @click="postComment(Id)">{{
-          $t("page.event.post_comment")
-        }}</v-btn>
+        <v-tooltip bottom>
+          <template v-slot:activator="{ on }">
+            <div v-on="on">
+              <v-btn text disabled outlined color="info accent-4">{{
+                $t("page.event.comment.post")
+              }}</v-btn>
+            </div>
+          </template>
+          <span>{{ $t("not_logged_in") }}</span>
+        </v-tooltip></v-col
+      >
+    </v-row>
+    <v-row v-else class="pt-3">
+      <!-- post a comment -->
+      <v-col class="my-auto mx-auto col-auto">
+        <v-btn
+          @click.stop="$emit('comment-dialog')"
+          text
+          color="info accent-4"
+          >{{ $t("page.event.comment.post") }}</v-btn
+        >
       </v-col>
     </v-row>
   </div>
@@ -97,12 +116,13 @@
 <script>
 export default {
   props: {
-    Id: Number,
     Comments: Array,
   },
   data() {
     return {
+      // App url.
       appURL: process.env.MIX_APP_URL,
+      // Base url.
       baseURL: process.env.MIX_BASE_URL,
     };
   },
@@ -111,8 +131,11 @@ export default {
       const path = "users/" + id;
       this.$router.push(`${this.baseURL}${this.$i18n.locale}/${path}`);
     },
-    postComment: function (id) {},
+    showUserToken: function () {
+      return localStorage.getItem("user_api_token");
+    },
   },
+  mounted() {},
 };
 </script>
 

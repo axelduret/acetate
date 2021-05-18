@@ -93,7 +93,9 @@
                 "google_map": "View on Google map.",
                 "email": "Send an email."
             },
-            "post_comment": "post a comment"
+            "comment": {
+                "post": "post a comment"
+            }
         },
         "people": {
             "title": "Welcome !",
@@ -146,6 +148,10 @@
         "logout": {
             "wrong": "Wrong user id.",
             "null": "User id cannot be null."
+        },
+        "comment": {
+            "message": "Text must contain at least 10 characters."
         }
-    }
+    },
+    "not_logged_in": "Connection required."
 }

@@ -36,6 +36,7 @@ class EventCollection extends ResourceCollection
           'taxonomies' => $item->event->taxonomies,
           'likes_count' => $item->event->likes_count,
           'dislikes_count' => $item->event->dislikes_count,
+          'likes' => $item->likes,
           'comments_count' => $item->event->comments_count,
           'favorites' => $item->event->favorites,
         ]);
