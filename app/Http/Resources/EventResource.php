@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Illuminate\Support\Carbon;
 use App\Http\Traits\CreditTrait;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -27,6 +28,8 @@ class EventResource extends JsonResource
         'description' => $this->description,
         'avatar' => $this->avatar,
         'dates' => $this->dates,
+        'current_dates' => $this->dates->where('start_date', '>=', Carbon::now()->toDateString())->all(),
+        'old_dates' => $this->dates->where('start_date', '<', Carbon::now()->toDateString())->all(),
         'prices' => $this->prices,
         'venues' => $this->venues->load('addresses')->load('emails')->load('phones')->load('websites')->load('websites.socialNetwork'),
         'people' => $this->people,

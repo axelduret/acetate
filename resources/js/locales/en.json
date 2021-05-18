@@ -78,6 +78,8 @@
             "title": {
                 "description": "Description",
                 "dates": "Schedule",
+                "current_dates": "Current Dates",
+                "old_dates": "Past Dates",
                 "start_date": "Start Date",
                 "end_date": "End Date",
                 "start_time": "Start Time",

@@ -295,7 +295,11 @@ class EventController extends Controller
     $event = Event::find($id);
     if (!$event) {
       return $this->failure('Event ' . $id . ' not found.', 404);
-    }
+    }/* 
+    $event->whereHas('dates', function ($filter) {
+      $filter
+        ->where('start_date', '>=', Carbon::now()->toDateString());
+    }); */
     // Success message.
     $message = 'OK';
     // Returns the event data with success message.

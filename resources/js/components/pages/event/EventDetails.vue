@@ -29,20 +29,39 @@
           </template></v-expansion-panel-header
         >
         <v-expansion-panel-content>
+          
           <span
-            v-if="Dates !== null && Dates.length > 0"
+            v-if="CurrentDates !== null && CurrentDates.length > 0"
             class="subtitle-2"
             :class="$vuetify.theme.dark ? 'primary--text' : 'primary--text'"
-          >
+          ><pre ><v-icon class="mr-1 primary--text" style="margin-bottom: 0.08rem" small
+        >mdi-calendar-blank-multiple</v-icon
+      > {{ $t("page.event.title.current_dates") }}</pre>
             <v-data-table
               :headers="headers"
-              :items="Dates"
+              :items="CurrentDates"
               :sort-by.sync="sortBy"
               class="primary--text"
               disable-pagination
               hide-default-footer
             ></v-data-table></span
-        ></v-expansion-panel-content>
+        ><v-divider :class="$vuetify.theme.dark ? 'primary--text' : 'primary--text'" class="mb-2"></v-divider>
+          <span
+            v-if="OldDates !== null && OldDates.length > 0"
+            class="subtitle-2"
+            :class="$vuetify.theme.dark ? 'primary--text' : 'primary--text'"
+          ><pre><v-icon class="mr-1 primary--text" style="margin-bottom: 0.08rem" small
+        >mdi-calendar-blank-multiple</v-icon
+      > {{ $t("page.event.title.old_dates") }}</pre>
+            <v-data-table
+              :headers="headers"
+              :items="OldDates"
+              :sort-by.sync="sortBy"
+              class="primary--text"
+              disable-pagination
+              hide-default-footer
+            ></v-data-table></span
+        ><v-divider :class="$vuetify.theme.dark ? 'primary--text' : 'primary--text'" class="mb-2"></v-divider></v-expansion-panel-content>
       </v-expansion-panel>
       <!-- People -->
       <v-expansion-panel
@@ -369,7 +388,8 @@
 export default {
   props: {
     Description: String,
-    Dates: Array,
+    CurrentDates: Array,
+    OldDates: Array,
     People: Array,
     Venues: Array,
     Addresses: Array,

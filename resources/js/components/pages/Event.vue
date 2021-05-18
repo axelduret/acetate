@@ -28,13 +28,14 @@
             </div>
           </div>
           <!-- likes -->
-          <Likes :Likes="event.likes_count ? event.likes_count : null" />
+          <Likes :Likes="event.likes_count" />
           <v-divider></v-divider>
           <!-- event details -->
           <EventDetails
             v-if="event.dates"
             :Description="event.description ? event.description : null"
-            :Dates="event.dates ? event.dates : null"
+            :CurrentDates="event.current_dates ? event.current_dates : null"
+            :OldDates="event.old_dates ? event.old_dates : null"
             :People="event.people ? event.people : null"
             :Venues="event.venues ? event.venues : null"
             :Addresses="event.addresses ? event.addresses : null"

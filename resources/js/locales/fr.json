@@ -78,6 +78,8 @@
             "title": {
                 "description": "Description",
                 "dates": "Horaires",
+                "current_dates": "Prochaines Dates",
+                "old_dates": "Anciennes Dates",
                 "start_date": "Date de Début",
                 "end_date": "Date de Fin",
                 "start_time": "Heure de Début",
