@@ -21,7 +21,7 @@
         <!-- 
         <v-divider></v-divider> -->
         <v-card-actions>
-          <v-btn class="primary--text" text @click="dialog = false"
+          <v-btn class="primary--text" text @click="closeDialog()"
             >cancel</v-btn
           >
           <v-spacer></v-spacer>
@@ -65,6 +65,8 @@ export default {
         .then(
           function (response) {
             this.$emit("refreshComments");
+            this.formData.text = "";
+            this.errors = false;
             this.dialog = false;
           }.bind(this)
         )
@@ -72,6 +74,11 @@ export default {
           // Returns errors.
           this.errors = true; // errors.response.data
         });
+    },
+    closeDialog() {
+      this.formData.text = "";
+      this.errors = false;
+      this.dialog = false;
     },
   },
 };
