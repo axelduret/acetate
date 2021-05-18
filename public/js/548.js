@@ -1,1 +1,0 @@
-(self.webpackChunk=self.webpackChunk||[]).push([[548],{3548:(e,t,n)=>{"use strict";n.r(t),n.d(t,{default:()=>u});const l={data:function(){return{}}};const u=(0,n(1900).Z)(l,(function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("div",[n("v-row",[n("v-col",[n("p",[e._v(e._s(e.$t("welcome")))])])],1)],1)}),[],!1,null,null,null).exports}}]);

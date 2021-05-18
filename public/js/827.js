@@ -1,2 +1,1 @@
 (self.webpackChunk=self.webpackChunk||[]).push([[827],{827:(t,e,r)=>{"use strict";r.r(e),r.d(e,{default:()=>l});const n={data:function(){return{}}};const l=(0,r(1900).Z)(n,(function(){var t=this,e=t.$createElement,r=t._self._c||e;return r("div",[r("v-row",[r("v-col",[r("p",{staticClass:"primary--text"},[t._v(t._s(t.$t("page.error.unauthorized.title")))])])],1)],1)}),[],!1,null,null,null).exports}}]);
-//# sourceMappingURL=827.js.map

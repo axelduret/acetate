@@ -19,7 +19,12 @@
                     comment.user_avatar !== null &&
                     comment.user_avatar.length > 0
                   "
-                  :src="appURL + baseURL + comment.user_avatar"
+                  :src="
+                    appURL +
+                    baseURL +
+                    'storage/avatar/user/' +
+                    comment.user_avatar
+                  "
                   alt="Avatar"
                   :title="comment.user_name"
                   @click="showUser(comment.user_id)"

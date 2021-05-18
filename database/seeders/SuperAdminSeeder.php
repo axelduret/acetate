@@ -17,14 +17,14 @@ class SuperAdminSeeder extends Seeder
   public function run()
   {
     $faker = Factory::create(config('app.faker_locale'));
-    $dir = 'storage/app/avatar/user';
+    $dir = 'storage/app/public/avatar/user';
     $admin = new User([
       'username' => env('ADMIN_USERNAME'),
       'firstname' => env('ADMIN_FIRSTNAME'),
       'lastname' => env('ADMIN_LASTNAME'),
       'language' => env('ADMIN_LANG'),
       'theme' => env('ADMIN_THEME'),
-      'avatar' => $faker->image($dir),
+      'avatar' => $faker->image('public/storage/avatar/user', 640, 480, null, false),
       'company' => env('ADMIN_COMPANY'),
       'email' => env('ADMIN_EMAIL'),
       'email_verified_at' => now(),

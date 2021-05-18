@@ -6,7 +6,6 @@
         <v-card-title class="title greybg primary--text">
           New Comment
         </v-card-title>
-
         <div
           v-if="errors"
           class="error mx-4 mt-4 px-4 white--text py-2 rounded"

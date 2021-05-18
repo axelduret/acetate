@@ -13,13 +13,9 @@ const mix = require("laravel-mix");
 
 mix.js("resources/js/app.js", "public/js")
     // Vuetify Styles and Material Design Icons
-    .sass("resources/sass/styles.scss", "public/css", [
-        //
-    ])
+    .sass("resources/sass/styles.scss", "public/css", [])
     // Custom Styles and Flaticons
-    .sass("resources/sass/app.scss", "public/css", [
-        //
-    ])
-    .sourceMaps()
+    .sass("resources/sass/app.scss", "public/css", [])
+    //.sourceMaps()
     .vue()
     .disableNotifications();

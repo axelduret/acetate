@@ -21,8 +21,7 @@ class FileFactory extends Factory
    */
   public function definition()
   {
-    $dir = 'storage/app/file';
-    $upload = $this->faker->image($dir);
+    $upload = $this->faker->image('public/storage/file');
     return [
       'path' => $upload,
       'type' => $this->faker->randomElement(['image', 'audio', 'video']),

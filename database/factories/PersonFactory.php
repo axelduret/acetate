@@ -21,13 +21,12 @@ class PersonFactory extends Factory
    */
   public function definition()
   {
-    $dir = 'storage/app/avatar/person';
     return [
       'nickname' => $this->faker->unique()->userName,
       'firstname' => $this->faker->firstName,
       'lastname' => $this->faker->lastName,
       'description' => $this->faker->text,
-      'avatar' => $this->faker->image($dir),
+      'avatar' => $this->faker->image('public/storage/avatar/person', 640, 480, null, false),
       'company' => $this->faker->company,
     ];
   }

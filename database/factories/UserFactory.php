@@ -23,14 +23,13 @@ class UserFactory extends Factory
    */
   public function definition()
   {
-    $dir = 'storage/app/avatar/user';
     return [
       'username' => $this->faker->unique()->userName,
       'firstname' => $this->faker->firstName,
       'lastname' => $this->faker->lastName,
       'language' => $this->faker->randomElement(['en', 'fr']),
       'theme' => $this->faker->randomElement(['dark', 'light']),
-      'avatar' => $this->faker->image($dir),
+      'avatar' => $this->faker->image('public/storage/avatar/user', 640, 480, null, false),
       'company' => $this->faker->company,
       'email' => $this->faker->unique()->safeEmail,
       'email_verified_at' => now(),

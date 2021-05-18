@@ -1,5 +1,20 @@
 <template>
   <v-container>
+    <div class="d-flex justify-center mb-4"><v-btn
+          @click="editThis(event.id)"
+          text
+          class="mx-2"
+          outlined
+          color="info accent-4"
+          >{{ $t("admin.edit.title") }}</v-btn
+        ></v-btn><v-btn
+          @click="deleteThis(event.id)"
+          text
+          class="mx-2"
+          outlined
+          color="info accent-4"
+          >{{ $t("admin.delete.title") }}</v-btn
+        ></v-btn></div>
     <div>
       <v-card v-if="overlay === false" max-width="800px" class="pb-4 mx-auto">
         <div>
@@ -126,9 +141,33 @@ export default {
       baseURL: process.env.MIX_BASE_URL,
       apiToken: process.env.MIX_APP_API_TOKEN,
       renderComponent: false,
+      adminButtons: [
+        {
+          name: "edit",
+          title: "menu.edit_events.title",
+          path: "admin/events/edit",
+          icon: "mdi-calendar-range",
+        },
+        {
+          name: "delete",
+          title: "menu.delete_events.title",
+          path: "admin/events/delete",
+          icon: "mdi-calendar-remove",
+        },
+      ],
     };
   },
   methods: {
+    editThis: function (id) {
+      this.$router.push(
+        `${this.baseURL}${this.$i18n.locale}/admin/events/${id}/edit`
+      );
+    },
+    deleteThis: function (id) {
+      this.$router.push(
+        `${this.baseURL}${this.$i18n.locale}/admin/events/${id}/delete`
+      );
+    },
     logThis: function (file) {
       console.log(this.appURL + this.baseURL + file.path);
     },

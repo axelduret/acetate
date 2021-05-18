@@ -4,6 +4,9 @@
       <v-col sm="7">
         <form @submit.prevent>
           <v-card>
+            <v-card-title class="title greybg primary--text">
+              Login
+            </v-card-title>
             <v-card-text>
               <v-text-field
                 v-model.trim="formData.email"
@@ -133,7 +136,8 @@ export default {
           this.setRole(this.role);
           this.setAbilities(this.abilities);
           // Redirect to dashboard route.
-          this.$router.push(`${this.baseURL}${this.$i18n.locale}/dashboard`);
+          //this.$router.push(`${this.baseURL}${this.$i18n.locale}/dashboard`);
+          this.$router.go(-1);
         })
         .catch((errors) => {
           // Returns errors.

@@ -38,16 +38,16 @@ trait FileTrait
         'name' => $request->input('name'),
         'encoding' => mb_detect_encoding($upload, mb_list_encodings(), true),
         'mimetype' => $upload->getClientMimeType(),
-        'path' => 'file/' . $entity . '/' . $file_name,
+        'path' => $file_name,
         'size' => $upload->getSize(),
         'user_id' => $request->input('user_id')
       ]);
       // Create file/$controller folder if doesn't exist
-      if (!Storage::directories('file/' . $entity)) {
-        Storage::makeDirectory('file/' . $entity);
+      if (!Storage::directories('public/file/' . $entity)) {
+        Storage::makeDirectory('public/file/' . $entity);
       }
       // Store the file into storage file/$controller folder.
-      $upload->storeAs('file/' . $entity, $file_name);
+      $upload->storeAs('public/file/', $file_name);
       // Attach $entities to the $controller.
       $file->$entity()->associate($controller);
       // Save the new file.

@@ -82,7 +82,7 @@
                   v-if="person.avatar !== null && person.avatar.length > 0"
                   alt="Avatar"
                   @click="showPerson(person.id)"
-                  :src="appURL + baseURL + person.avatar"
+                  :src="appURL + baseURL+ 'storage/avatar/person/' + person.avatar"
                   :title="person.nickname"
                 /><v-icon
                   v-else

@@ -179,7 +179,7 @@ class PersonController extends Controller
       'description' => $request->input('description'),
       'company' => $request->input('company'),
       // TODO create a default person's avatar if not submitted.
-      'avatar' => $request->file('upload') ? 'avatar/person/' . $this->file_name : null,
+      'avatar' => $request->file('upload') ? $this->file_name : null,
       'user_id' => $request->input('user_id')
     ]);
     // Save the person.
@@ -334,7 +334,7 @@ class PersonController extends Controller
     // Store the new person's avatar.
     $this->storeAvatar('person', $request);
     // Update the person's avatar field.
-    $person->avatar = $request->file('upload') ? 'avatar/person/' . $this->file_name : null;
+    $person->avatar = $request->file('upload') ? $this->file_name : null;
     $person->save();
     // Add warning messages to the response.
     if ($this->warning != null) {

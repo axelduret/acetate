@@ -20,6 +20,9 @@
         "events": {
             "title": "Events"
         },
+        "post_events": {
+            "title": "Post an event"
+        },
         "people": {
             "title": "People"
         },
@@ -153,5 +156,13 @@
             "message": "Text must contain at least 10 characters."
         }
     },
-    "not_logged_in": "Connection required."
+    "not_logged_in": "Connection required.",
+    "admin": {
+        "edit": {
+            "title": "Edit"
+        },
+        "delete": {
+            "title": "Delete"
+        }
+    }
 }

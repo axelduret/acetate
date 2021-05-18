@@ -28,11 +28,11 @@ trait AvatarTrait
       // Add the current datetime to the avatar's formatted filename.
       $this->file_name =  $current . $clean_filename;
       // Create avatar/$controller folder if doesn't exist.
-      if (!Storage::directories('avatar/' . $controller)) {
-        Storage::makeDirectory('avatar/' . $controller);
+      if (!Storage::directories('public/avatar/' . $controller)) {
+        Storage::makeDirectory('public/avatar/' . $controller);
       }
       // Store the avatar's file into storage avatar/$controller folder.
-      $upload->storeAs('avatar/' . $controller, $this->file_name);
+      $upload->storeAs('public/avatar/' . $controller, $this->file_name);
     }
   }
 

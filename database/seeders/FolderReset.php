@@ -15,51 +15,51 @@ class FolderReset extends Seeder
    */
   public function run()
   {
-    // Create 'storage/app/avatar/user' directory if doesn't exist.
-    $userdir = 'app/avatar/user';
-    if (!Storage::directories('avatar/user')) {
-      Storage::makeDirectory('avatar/user');
+    // Create 'public/avatar/user' directory if doesn't exist.
+    $userdir = 'public/avatar/user';
+    if (!Storage::directories('public/avatar/user')) {
+      Storage::makeDirectory('public/avatar/user');
     }
 
-    // Create 'storage/app/avatar/event' directory if doesn't exist.
-    $eventdir = 'app/avatar/event';
-    if (!Storage::directories('avatar/event')) {
-      Storage::makeDirectory('avatar/event');
+    // Create 'public/avatar/event' directory if doesn't exist.
+    $eventdir = 'public/avatar/event';
+    if (!Storage::directories('public/avatar/event')) {
+      Storage::makeDirectory('public/avatar/event');
     }
 
-    // Create 'storage/app/avatar/person' directory if doesn't exist.
-    $persondir = 'app/avatar/person';
-    if (!Storage::directories('avatar/person')) {
-      Storage::makeDirectory('avatar/person');
+    // Create 'public/avatar/person' directory if doesn't exist.
+    $persondir = 'public/avatar/person';
+    if (!Storage::directories('public/avatar/person')) {
+      Storage::makeDirectory('public/avatar/person');
     }
 
-    // Create 'storage/app/avatar/venue' directory if doesn't exist.
-    $venuedir = 'app/avatar/venue';
-    if (!Storage::directories('avatar/venue')) {
-      Storage::makeDirectory('avatar/venue');
+    // Create 'public/avatar/venue' directory if doesn't exist.
+    $venuedir = 'public/avatar/venue';
+    if (!Storage::directories('public/avatar/venue')) {
+      Storage::makeDirectory('public/avatar/venue');
     }
 
-    // Create 'storage/app/file' directory if doesn't exist.
-    $filedir = 'app/file';
-    if (!Storage::directories('file')) {
-      Storage::makeDirectory('file');
+    // Create 'public/file' directory if doesn't exist.
+    $filedir = 'public/file';
+    if (!Storage::directories('public/file')) {
+      Storage::makeDirectory('public/file');
     }
 
     $file = new Filesystem;
 
-    // Clean 'storage/app/avatar/user' directory before seeding files.
+    // Clean '/public/avatar/user' directory before seeding files.
     $file->cleanDirectory(storage_path($userdir));
 
-    // Clean 'storage/app/avatar/person' directory before seeding files.
+    // Clean '/public/avatar/person' directory before seeding files.
     $file->cleanDirectory(storage_path($persondir));
 
-    // Clean 'storage/app/avatar/event' directory before seeding files.
+    // Clean '/public/avatar/event' directory before seeding files.
     $file->cleanDirectory(storage_path($eventdir));
 
-    // Clean 'storage/app/avatar/venue' directory before seeding files.
+    // Clean '/public/avatar/venue' directory before seeding files.
     $file->cleanDirectory(storage_path($venuedir));
 
-    // Clean 'storage/app/file' directory before seeding files.
+    // Clean '/public/file' directory before seeding files.
     $file->cleanDirectory(storage_path($filedir));
   }
 }

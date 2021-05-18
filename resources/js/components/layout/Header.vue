@@ -99,7 +99,12 @@
                 <img
                   v-if="getUserFields.avatar != null"
                   alt="Avatar"
-                  :src="appURL + baseURL + getUserFields.avatar"
+                  :src="
+                    appURL +
+                    baseURL +
+                    'storage/avatar/user/' +
+                    getUserFields.avatar
+                  "
                 /><v-icon v-else>mdi-account-circle</v-icon>
               </v-avatar>
             </v-btn>

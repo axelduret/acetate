@@ -82,7 +82,8 @@ export default {
           this.setRole(null);
           this.setAbilities(null);
           // Redirect to home route.
-          this.$router.push(`${this.baseURL}${this.$i18n.locale}/home`);
+          //this.$router.push(`${this.baseURL}${this.$i18n.locale}/home`);
+          this.$router.go(-1);
         })
         .catch((errors) => {
           // Returns errors.

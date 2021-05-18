@@ -66,11 +66,11 @@ return [
     */
 
   'links' => [
-    public_path('storage/app/avatar/event') => storage_path('app/avatar/event'),
-    public_path('storage/app/avatar/person') => storage_path('app/avatar/person'),
-    public_path('storage/app/avatar/user') => storage_path('app/avatar/user'),
-    public_path('storage/app/avatar/venue') => storage_path('app/avatar/venue'),
-    public_path('storage/app/file') => storage_path('app/file'),
+    public_path('storage') => storage_path('app/public'),/* 
+    public_path('storage/app/avatar/person') => storage_path('app/public/avatar/person'),
+    public_path('storage/app/avatar/user') => storage_path('app/public/avatar/user'),
+    public_path('storage/app/avatar/venue') => storage_path('app/public/avatar/venue'),
+    public_path('storage/app/file') => storage_path('app/public/file'), */
   ],
 
 ];

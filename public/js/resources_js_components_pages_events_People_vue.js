@@ -1,11 +1,3 @@
-/*
- * ATTENTION: An "eval-source-map" devtool has been used.
- * This devtool is neither made for production nor for readable output files.
- * It uses "eval()" calls to create a separate source file with attached SourceMaps in the browser devtools.
- * If you are trying to read the output file, select a different devtool (https://webpack.js.org/configuration/devtool/)
- * or disable the default devtool with "devtool: false".
- * If you are looking for production-ready output files, see mode: "production" (https://webpack.js.org/configuration/mode/).
- */
 (self["webpackChunk"] = self["webpackChunk"] || []).push([["resources_js_components_pages_events_People_vue"],{
 
 /***/ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/People.vue?vue&type=script&lang=js&":
@@ -15,7 +7,77 @@
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n//\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({\n  props: {\n    People: Array\n  },\n  data: function data() {\n    return {\n      // App url.\n      appURL: \"http://127.0.0.1:8001\",\n      // Base url.\n      baseURL: \"/\"\n    };\n  },\n  methods: {\n    showPerson: function showPerson(id) {\n      var path = \"people/\" + id;\n      this.$router.push(\"\".concat(this.baseURL).concat(this.$i18n.locale, \"/\").concat(path));\n    }\n  }\n});//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vcmVzb3VyY2VzL2pzL2NvbXBvbmVudHMvcGFnZXMvZXZlbnRzL1Blb3BsZS52dWU/NDBiMiJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0FBaURBO0FBQ0E7QUFDQTtBQURBLEdBREE7QUFJQSxNQUpBLGtCQUlBO0FBQ0E7QUFDQTtBQUNBLHFDQUZBO0FBR0E7QUFDQTtBQUpBO0FBTUEsR0FYQTtBQVlBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFKQTtBQVpBIiwiZmlsZSI6Ii4vbm9kZV9tb2R1bGVzL2JhYmVsLWxvYWRlci9saWIvaW5kZXguanM/P2Nsb25lZFJ1bGVTZXQtNVswXS5ydWxlc1swXS51c2VbMF0hLi9ub2RlX21vZHVsZXMvdnVlLWxvYWRlci9saWIvaW5kZXguanM/P3Z1ZS1sb2FkZXItb3B0aW9ucyEuL3Jlc291cmNlcy9qcy9jb21wb25lbnRzL3BhZ2VzL2V2ZW50cy9QZW9wbGUudnVlP3Z1ZSZ0eXBlPXNjcmlwdCZsYW5nPWpzJi5qcyIsInNvdXJjZXNDb250ZW50IjpbIjx0ZW1wbGF0ZT5cclxuICA8ZGl2PlxyXG4gICAgPHNwYW4gdi1pZj1cIlBlb3BsZS5sZW5ndGggPiAwXCIgY2xhc3M9XCJjYXB0aW9uIHByaW1hcnktLXRleHRcIj5cclxuICAgICAgPHNwYW4+XHJcbiAgICAgICAgPHYtaWNvbiBjbGFzcz1cIm1yLTEgcHJpbWFyeS0tdGV4dFwiIHN0eWxlPVwibWFyZ2luLWJvdHRvbTogMC4wOHJlbVwiIHNtYWxsXHJcbiAgICAgICAgICA+bWRpLWFjY291bnQtZ3JvdXA8L3YtaWNvblxyXG4gICAgICAgID48c3BhbiB2LWZvcj1cIihwZXJzb24sIGluZGV4KSBpbiBQZW9wbGVcIiA6a2V5PVwiaW5kZXhcIj5cclxuICAgICAgICAgIDxzcGFuIHYtaWY9XCJQZW9wbGUubGVuZ3RoIDwgNFwiXHJcbiAgICAgICAgICAgID4mbmJzcDs8YVxyXG4gICAgICAgICAgICAgIGNsYXNzPVwiZXZlbnRzX2xpbmtzXCJcclxuICAgICAgICAgICAgICA6dGl0bGU9XCJwZXJzb24ubmlja25hbWVcIlxyXG4gICAgICAgICAgICAgIEBjbGljaz1cInNob3dQZXJzb24ocGVyc29uLmlkKVwiXHJcbiAgICAgICAgICAgICAgPnt7IHBlcnNvbi5uaWNrbmFtZSB9fTwvYVxyXG4gICAgICAgICAgICA+XHJcbiAgICAgICAgICAgIDxzcGFuIHYtaWY9XCJpbmRleCA8IFBlb3BsZS5sZW5ndGggLSAxXCI+LCA8L3NwYW4+XHJcbiAgICAgICAgICA8L3NwYW4+XHJcbiAgICAgICAgICA8c3BhbiB2LWlmPVwiUGVvcGxlLmxlbmd0aCA+PSA0XCI+XHJcbiAgICAgICAgICAgIDxzcGFuIHYtaWY9XCJpbmRleCA8IDJcIlxyXG4gICAgICAgICAgICAgID4mbmJzcDs8YVxyXG4gICAgICAgICAgICAgICAgY2xhc3M9XCJldmVudHNfbGlua3NcIlxyXG4gICAgICAgICAgICAgICAgOnRpdGxlPVwicGVyc29uLm5pY2tuYW1lXCJcclxuICAgICAgICAgICAgICAgIEBjbGljaz1cInNob3dQZXJzb24ocGVyc29uLmlkKVwiXHJcbiAgICAgICAgICAgICAgICA+e3sgcGVyc29uLm5pY2tuYW1lIH19PC9hXHJcbiAgICAgICAgICAgICAgPixcclxuICAgICAgICAgICAgPC9zcGFuPlxyXG4gICAgICAgICAgICA8c3BhbiB2LWlmPVwiaW5kZXggPT09IDJcIlxyXG4gICAgICAgICAgICAgID4mbmJzcDs8YVxyXG4gICAgICAgICAgICAgICAgY2xhc3M9XCJldmVudHNfbGlua3NcIlxyXG4gICAgICAgICAgICAgICAgOnRpdGxlPVwicGVyc29uLm5pY2tuYW1lXCJcclxuICAgICAgICAgICAgICAgIEBjbGljaz1cInNob3dQZXJzb24ocGVyc29uLmlkKVwiXHJcbiAgICAgICAgICAgICAgICA+e3sgcGVyc29uLm5pY2tuYW1lIH19PC9hXHJcbiAgICAgICAgICAgICAgPiwgLi4uPC9zcGFuXHJcbiAgICAgICAgICAgID5cclxuICAgICAgICAgIDwvc3Bhbj4gPC9zcGFuXHJcbiAgICAgICAgPjx2LXNwYWNlcj48L3Ytc3BhY2VyXHJcbiAgICAgID48L3NwYW4+IDwvc3BhblxyXG4gICAgPjxzcGFuIHYtaWY9XCJQZW9wbGUubGVuZ3RoIDw9IDBcIiBjbGFzcz1cImNhcHRpb24gcHJpbWFyeS0tdGV4dFwiXHJcbiAgICAgID48c3BhblxyXG4gICAgICAgID48di1pY29uIGNsYXNzPVwibXItMSBwcmltYXJ5LS10ZXh0XCIgc3R5bGU9XCJtYXJnaW4tYm90dG9tOiAwLjA4cmVtXCIgc21hbGxcclxuICAgICAgICAgID5tZGktYWNjb3VudC1ncm91cDwvdi1pY29uXHJcbiAgICAgICAgPjxzcGFuIDp0aXRsZT1cIiR0KCdwYWdlLmV2ZW50cy5ub19wZW9wbGVfdGl0bGUnKVwiPlxyXG4gICAgICAgICAge3sgJHQoXCJwYWdlLmV2ZW50cy5ub19wZW9wbGVcIikgfX08L3NwYW5cclxuICAgICAgICA+PC9zcGFuXHJcbiAgICAgID48di1zcGFjZXI+PC92LXNwYWNlcj5cclxuICAgIDwvc3Bhbj5cclxuICA8L2Rpdj5cclxuPC90ZW1wbGF0ZT5cclxuXHJcbjxzY3JpcHQ+XHJcbmV4cG9ydCBkZWZhdWx0IHtcclxuICBwcm9wczoge1xyXG4gICAgUGVvcGxlOiBBcnJheSxcclxuICB9LFxyXG4gIGRhdGEoKSB7XHJcbiAgICByZXR1cm4ge1xyXG4gICAgICAvLyBBcHAgdXJsLlxyXG4gICAgICBhcHBVUkw6IHByb2Nlc3MuZW52Lk1JWF9BUFBfVVJMLFxyXG4gICAgICAvLyBCYXNlIHVybC5cclxuICAgICAgYmFzZVVSTDogcHJvY2Vzcy5lbnYuTUlYX0JBU0VfVVJMLFxyXG4gICAgfTtcclxuICB9LFxyXG4gIG1ldGhvZHM6IHtcclxuICAgIHNob3dQZXJzb246IGZ1bmN0aW9uIChpZCkge1xyXG4gICAgICBjb25zdCBwYXRoID0gXCJwZW9wbGUvXCIgKyBpZDtcclxuICAgICAgdGhpcy4kcm91dGVyLnB1c2goYCR7dGhpcy5iYXNlVVJMfSR7dGhpcy4kaTE4bi5sb2NhbGV9LyR7cGF0aH1gKTtcclxuICAgIH0sXHJcbiAgfSxcclxufTtcclxuPC9zY3JpcHQ+XHJcblxyXG48c3R5bGU+XHJcbjwvc3R5bGU+Il0sInNvdXJjZVJvb3QiOiIifQ==\n//# sourceURL=webpack-internal:///./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/People.vue?vue&type=script&lang=js&\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  props: {
+    People: Array
+  },
+  data: function data() {
+    return {
+      // App url.
+      appURL: "http://127.0.0.1:8001",
+      // Base url.
+      baseURL: "/"
+    };
+  },
+  methods: {
+    showPerson: function showPerson(id) {
+      var path = "people/" + id;
+      this.$router.push("".concat(this.baseURL).concat(this.$i18n.locale, "/").concat(path));
+    }
+  }
+});
 
 /***/ }),
 
@@ -26,7 +88,35 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _People_vue_vue_type_template_id_2f6a9342___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./People.vue?vue&type=template&id=2f6a9342& */ \"./resources/js/components/pages/events/People.vue?vue&type=template&id=2f6a9342&\");\n/* harmony import */ var _People_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./People.vue?vue&type=script&lang=js& */ \"./resources/js/components/pages/events/People.vue?vue&type=script&lang=js&\");\n/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ \"./node_modules/vue-loader/lib/runtime/componentNormalizer.js\");\n\n\n\n\n\n/* normalize component */\n;\nvar component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(\n  _People_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,\n  _People_vue_vue_type_template_id_2f6a9342___WEBPACK_IMPORTED_MODULE_0__.render,\n  _People_vue_vue_type_template_id_2f6a9342___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,\n  false,\n  null,\n  null,\n  null\n  \n)\n\n/* hot reload */\nif (false) { var api; }\ncomponent.options.__file = \"resources/js/components/pages/events/People.vue\"\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvY29tcG9uZW50cy9wYWdlcy9ldmVudHMvUGVvcGxlLnZ1ZT9hYzEyIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFBcUY7QUFDM0I7QUFDTDs7O0FBR3JEO0FBQ0EsQ0FBbUc7QUFDbkcsZ0JBQWdCLG9HQUFVO0FBQzFCLEVBQUUseUVBQU07QUFDUixFQUFFLDhFQUFNO0FBQ1IsRUFBRSx1RkFBZTtBQUNqQjtBQUNBO0FBQ0E7QUFDQTs7QUFFQTs7QUFFQTtBQUNBLElBQUksS0FBVSxFQUFFLFlBaUJmO0FBQ0Q7QUFDQSxpRUFBZSxpQiIsImZpbGUiOiIuL3Jlc291cmNlcy9qcy9jb21wb25lbnRzL3BhZ2VzL2V2ZW50cy9QZW9wbGUudnVlLmpzIiwic291cmNlc0NvbnRlbnQiOlsiaW1wb3J0IHsgcmVuZGVyLCBzdGF0aWNSZW5kZXJGbnMgfSBmcm9tIFwiLi9QZW9wbGUudnVlP3Z1ZSZ0eXBlPXRlbXBsYXRlJmlkPTJmNmE5MzQyJlwiXG5pbXBvcnQgc2NyaXB0IGZyb20gXCIuL1Blb3BsZS52dWU/dnVlJnR5cGU9c2NyaXB0Jmxhbmc9anMmXCJcbmV4cG9ydCAqIGZyb20gXCIuL1Blb3BsZS52dWU/dnVlJnR5cGU9c2NyaXB0Jmxhbmc9anMmXCJcblxuXG4vKiBub3JtYWxpemUgY29tcG9uZW50ICovXG5pbXBvcnQgbm9ybWFsaXplciBmcm9tIFwiIS4uLy4uLy4uLy4uLy4uL25vZGVfbW9kdWxlcy92dWUtbG9hZGVyL2xpYi9ydW50aW1lL2NvbXBvbmVudE5vcm1hbGl6ZXIuanNcIlxudmFyIGNvbXBvbmVudCA9IG5vcm1hbGl6ZXIoXG4gIHNjcmlwdCxcbiAgcmVuZGVyLFxuICBzdGF0aWNSZW5kZXJGbnMsXG4gIGZhbHNlLFxuICBudWxsLFxuICBudWxsLFxuICBudWxsXG4gIFxuKVxuXG4vKiBob3QgcmVsb2FkICovXG5pZiAobW9kdWxlLmhvdCkge1xuICB2YXIgYXBpID0gcmVxdWlyZShcIkQ6XFxcXFdlYkRldlxcXFxQcm9qZWN0c1xcXFxsaWYtdGF0dG9vXFxcXG5vZGVfbW9kdWxlc1xcXFx2dWUtaG90LXJlbG9hZC1hcGlcXFxcZGlzdFxcXFxpbmRleC5qc1wiKVxuICBhcGkuaW5zdGFsbChyZXF1aXJlKCd2dWUnKSlcbiAgaWYgKGFwaS5jb21wYXRpYmxlKSB7XG4gICAgbW9kdWxlLmhvdC5hY2NlcHQoKVxuICAgIGlmICghYXBpLmlzUmVjb3JkZWQoJzJmNmE5MzQyJykpIHtcbiAgICAgIGFwaS5jcmVhdGVSZWNvcmQoJzJmNmE5MzQyJywgY29tcG9uZW50Lm9wdGlvbnMpXG4gICAgfSBlbHNlIHtcbiAgICAgIGFwaS5yZWxvYWQoJzJmNmE5MzQyJywgY29tcG9uZW50Lm9wdGlvbnMpXG4gICAgfVxuICAgIG1vZHVsZS5ob3QuYWNjZXB0KFwiLi9QZW9wbGUudnVlP3Z1ZSZ0eXBlPXRlbXBsYXRlJmlkPTJmNmE5MzQyJlwiLCBmdW5jdGlvbiAoKSB7XG4gICAgICBhcGkucmVyZW5kZXIoJzJmNmE5MzQyJywge1xuICAgICAgICByZW5kZXI6IHJlbmRlcixcbiAgICAgICAgc3RhdGljUmVuZGVyRm5zOiBzdGF0aWNSZW5kZXJGbnNcbiAgICAgIH0pXG4gICAgfSlcbiAgfVxufVxuY29tcG9uZW50Lm9wdGlvbnMuX19maWxlID0gXCJyZXNvdXJjZXMvanMvY29tcG9uZW50cy9wYWdlcy9ldmVudHMvUGVvcGxlLnZ1ZVwiXG5leHBvcnQgZGVmYXVsdCBjb21wb25lbnQuZXhwb3J0cyJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./resources/js/components/pages/events/People.vue\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _People_vue_vue_type_template_id_2f6a9342___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./People.vue?vue&type=template&id=2f6a9342& */ "./resources/js/components/pages/events/People.vue?vue&type=template&id=2f6a9342&");
+/* harmony import */ var _People_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./People.vue?vue&type=script&lang=js& */ "./resources/js/components/pages/events/People.vue?vue&type=script&lang=js&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! !../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+;
+var component = (0,_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__.default)(
+  _People_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__.default,
+  _People_vue_vue_type_template_id_2f6a9342___WEBPACK_IMPORTED_MODULE_0__.render,
+  _People_vue_vue_type_template_id_2f6a9342___WEBPACK_IMPORTED_MODULE_0__.staticRenderFns,
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/pages/events/People.vue"
+/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (component.exports);
 
 /***/ }),
 
@@ -37,7 +127,12 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_People_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./People.vue?vue&type=script&lang=js& */ \"./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/People.vue?vue&type=script&lang=js&\");\n /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_People_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); //# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvY29tcG9uZW50cy9wYWdlcy9ldmVudHMvUGVvcGxlLnZ1ZT82NmRkIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQTROLENBQUMsaUVBQWUsd01BQUcsRUFBQyIsImZpbGUiOiIuL3Jlc291cmNlcy9qcy9jb21wb25lbnRzL3BhZ2VzL2V2ZW50cy9QZW9wbGUudnVlP3Z1ZSZ0eXBlPXNjcmlwdCZsYW5nPWpzJi5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBtb2QgZnJvbSBcIi0hLi4vLi4vLi4vLi4vLi4vbm9kZV9tb2R1bGVzL2JhYmVsLWxvYWRlci9saWIvaW5kZXguanM/P2Nsb25lZFJ1bGVTZXQtNVswXS5ydWxlc1swXS51c2VbMF0hLi4vLi4vLi4vLi4vLi4vbm9kZV9tb2R1bGVzL3Z1ZS1sb2FkZXIvbGliL2luZGV4LmpzPz92dWUtbG9hZGVyLW9wdGlvbnMhLi9QZW9wbGUudnVlP3Z1ZSZ0eXBlPXNjcmlwdCZsYW5nPWpzJlwiOyBleHBvcnQgZGVmYXVsdCBtb2Q7IGV4cG9ydCAqIGZyb20gXCItIS4uLy4uLy4uLy4uLy4uL25vZGVfbW9kdWxlcy9iYWJlbC1sb2FkZXIvbGliL2luZGV4LmpzPz9jbG9uZWRSdWxlU2V0LTVbMF0ucnVsZXNbMF0udXNlWzBdIS4uLy4uLy4uLy4uLy4uL25vZGVfbW9kdWxlcy92dWUtbG9hZGVyL2xpYi9pbmRleC5qcz8/dnVlLWxvYWRlci1vcHRpb25zIS4vUGVvcGxlLnZ1ZT92dWUmdHlwZT1zY3JpcHQmbGFuZz1qcyZcIiJdLCJzb3VyY2VSb290IjoiIn0=\n//# sourceURL=webpack-internal:///./resources/js/components/pages/events/People.vue?vue&type=script&lang=js&\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
+/* harmony export */ });
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_People_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!../../../../../node_modules/vue-loader/lib/index.js??vue-loader-options!./People.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js??clonedRuleSet-5[0].rules[0].use[0]!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/People.vue?vue&type=script&lang=js&");
+ /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (_node_modules_babel_loader_lib_index_js_clonedRuleSet_5_0_rules_0_use_0_node_modules_vue_loader_lib_index_js_vue_loader_options_People_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__.default); 
 
 /***/ }),
 
@@ -65,7 +160,146 @@ __webpack_require__.r(__webpack_exports__);
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"render\": () => (/* binding */ render),\n/* harmony export */   \"staticRenderFns\": () => (/* binding */ staticRenderFns)\n/* harmony export */ });\nvar render = function() {\n  var _vm = this\n  var _h = _vm.$createElement\n  var _c = _vm._self._c || _h\n  return _c(\"div\", [\n    _vm.People.length > 0\n      ? _c(\"span\", { staticClass: \"caption primary--text\" }, [\n          _c(\n            \"span\",\n            [\n              _c(\n                \"v-icon\",\n                {\n                  staticClass: \"mr-1 primary--text\",\n                  staticStyle: { \"margin-bottom\": \"0.08rem\" },\n                  attrs: { small: \"\" }\n                },\n                [_vm._v(\"mdi-account-group\")]\n              ),\n              _vm._l(_vm.People, function(person, index) {\n                return _c(\"span\", { key: index }, [\n                  _vm.People.length < 4\n                    ? _c(\"span\", [\n                        _vm._v(\" \"),\n                        _c(\n                          \"a\",\n                          {\n                            staticClass: \"events_links\",\n                            attrs: { title: person.nickname },\n                            on: {\n                              click: function($event) {\n                                return _vm.showPerson(person.id)\n                              }\n                            }\n                          },\n                          [_vm._v(_vm._s(person.nickname))]\n                        ),\n                        _vm._v(\" \"),\n                        index < _vm.People.length - 1\n                          ? _c(\"span\", [_vm._v(\", \")])\n                          : _vm._e()\n                      ])\n                    : _vm._e(),\n                  _vm._v(\" \"),\n                  _vm.People.length >= 4\n                    ? _c(\"span\", [\n                        index < 2\n                          ? _c(\"span\", [\n                              _vm._v(\" \"),\n                              _c(\n                                \"a\",\n                                {\n                                  staticClass: \"events_links\",\n                                  attrs: { title: person.nickname },\n                                  on: {\n                                    click: function($event) {\n                                      return _vm.showPerson(person.id)\n                                    }\n                                  }\n                                },\n                                [_vm._v(_vm._s(person.nickname))]\n                              ),\n                              _vm._v(\",\\n          \")\n                            ])\n                          : _vm._e(),\n                        _vm._v(\" \"),\n                        index === 2\n                          ? _c(\"span\", [\n                              _vm._v(\" \"),\n                              _c(\n                                \"a\",\n                                {\n                                  staticClass: \"events_links\",\n                                  attrs: { title: person.nickname },\n                                  on: {\n                                    click: function($event) {\n                                      return _vm.showPerson(person.id)\n                                    }\n                                  }\n                                },\n                                [_vm._v(_vm._s(person.nickname))]\n                              ),\n                              _vm._v(\", ...\")\n                            ])\n                          : _vm._e()\n                      ])\n                    : _vm._e()\n                ])\n              }),\n              _c(\"v-spacer\")\n            ],\n            2\n          )\n        ])\n      : _vm._e(),\n    _vm.People.length <= 0\n      ? _c(\n          \"span\",\n          { staticClass: \"caption primary--text\" },\n          [\n            _c(\n              \"span\",\n              [\n                _c(\n                  \"v-icon\",\n                  {\n                    staticClass: \"mr-1 primary--text\",\n                    staticStyle: { \"margin-bottom\": \"0.08rem\" },\n                    attrs: { small: \"\" }\n                  },\n                  [_vm._v(\"mdi-account-group\")]\n                ),\n                _c(\n                  \"span\",\n                  { attrs: { title: _vm.$t(\"page.events.no_people_title\") } },\n                  [\n                    _vm._v(\n                      \"\\n        \" + _vm._s(_vm.$t(\"page.events.no_people\"))\n                    )\n                  ]\n                )\n              ],\n              1\n            ),\n            _c(\"v-spacer\")\n          ],\n          1\n        )\n      : _vm._e()\n  ])\n}\nvar staticRenderFns = []\nrender._withStripped = true\n\n//# sourceURL=[module]\n//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIndlYnBhY2s6Ly8vLi9yZXNvdXJjZXMvanMvY29tcG9uZW50cy9wYWdlcy9ldmVudHMvUGVvcGxlLnZ1ZT80N2RkIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7O0FBQUE7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0Esb0JBQW9CLHVDQUF1QztBQUMzRDtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLGdDQUFnQyw2QkFBNkI7QUFDN0QsMEJBQTBCO0FBQzFCLGlCQUFpQjtBQUNqQjtBQUNBO0FBQ0E7QUFDQSxtQ0FBbUMsYUFBYTtBQUNoRDtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLG9DQUFvQyx5QkFBeUI7QUFDN0Q7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLDJCQUEyQjtBQUMzQjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSwwQ0FBMEMseUJBQXlCO0FBQ25FO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxpQ0FBaUM7QUFDakM7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSwwQ0FBMEMseUJBQXlCO0FBQ25FO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxpQ0FBaUM7QUFDakM7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBLGVBQWU7QUFDZjtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQSxXQUFXLHVDQUF1QztBQUNsRDtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0Esa0NBQWtDLDZCQUE2QjtBQUMvRCw0QkFBNEI7QUFDNUIsbUJBQW1CO0FBQ25CO0FBQ0E7QUFDQTtBQUNBO0FBQ0EsbUJBQW1CLFNBQVMsK0NBQStDLEVBQUU7QUFDN0U7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBO0FBQ0E7QUFDQTtBQUNBIiwiZmlsZSI6Ii4vbm9kZV9tb2R1bGVzL3Z1ZS1sb2FkZXIvbGliL2xvYWRlcnMvdGVtcGxhdGVMb2FkZXIuanM/P3Z1ZS1sb2FkZXItb3B0aW9ucyEuL25vZGVfbW9kdWxlcy92dWUtbG9hZGVyL2xpYi9pbmRleC5qcz8/dnVlLWxvYWRlci1vcHRpb25zIS4vcmVzb3VyY2VzL2pzL2NvbXBvbmVudHMvcGFnZXMvZXZlbnRzL1Blb3BsZS52dWU/dnVlJnR5cGU9dGVtcGxhdGUmaWQ9MmY2YTkzNDImLmpzIiwic291cmNlc0NvbnRlbnQiOlsidmFyIHJlbmRlciA9IGZ1bmN0aW9uKCkge1xuICB2YXIgX3ZtID0gdGhpc1xuICB2YXIgX2ggPSBfdm0uJGNyZWF0ZUVsZW1lbnRcbiAgdmFyIF9jID0gX3ZtLl9zZWxmLl9jIHx8IF9oXG4gIHJldHVybiBfYyhcImRpdlwiLCBbXG4gICAgX3ZtLlBlb3BsZS5sZW5ndGggPiAwXG4gICAgICA/IF9jKFwic3BhblwiLCB7IHN0YXRpY0NsYXNzOiBcImNhcHRpb24gcHJpbWFyeS0tdGV4dFwiIH0sIFtcbiAgICAgICAgICBfYyhcbiAgICAgICAgICAgIFwic3BhblwiLFxuICAgICAgICAgICAgW1xuICAgICAgICAgICAgICBfYyhcbiAgICAgICAgICAgICAgICBcInYtaWNvblwiLFxuICAgICAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICAgIHN0YXRpY0NsYXNzOiBcIm1yLTEgcHJpbWFyeS0tdGV4dFwiLFxuICAgICAgICAgICAgICAgICAgc3RhdGljU3R5bGU6IHsgXCJtYXJnaW4tYm90dG9tXCI6IFwiMC4wOHJlbVwiIH0sXG4gICAgICAgICAgICAgICAgICBhdHRyczogeyBzbWFsbDogXCJcIiB9XG4gICAgICAgICAgICAgICAgfSxcbiAgICAgICAgICAgICAgICBbX3ZtLl92KFwibWRpLWFjY291bnQtZ3JvdXBcIildXG4gICAgICAgICAgICAgICksXG4gICAgICAgICAgICAgIF92bS5fbChfdm0uUGVvcGxlLCBmdW5jdGlvbihwZXJzb24sIGluZGV4KSB7XG4gICAgICAgICAgICAgICAgcmV0dXJuIF9jKFwic3BhblwiLCB7IGtleTogaW5kZXggfSwgW1xuICAgICAgICAgICAgICAgICAgX3ZtLlBlb3BsZS5sZW5ndGggPCA0XG4gICAgICAgICAgICAgICAgICAgID8gX2MoXCJzcGFuXCIsIFtcbiAgICAgICAgICAgICAgICAgICAgICAgIF92bS5fdihcIsKgXCIpLFxuICAgICAgICAgICAgICAgICAgICAgICAgX2MoXG4gICAgICAgICAgICAgICAgICAgICAgICAgIFwiYVwiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgc3RhdGljQ2xhc3M6IFwiZXZlbnRzX2xpbmtzXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgYXR0cnM6IHsgdGl0bGU6IHBlcnNvbi5uaWNrbmFtZSB9LFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgIG9uOiB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICBjbGljazogZnVuY3Rpb24oJGV2ZW50KSB7XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHJldHVybiBfdm0uc2hvd1BlcnNvbihwZXJzb24uaWQpXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgICAgICB9LFxuICAgICAgICAgICAgICAgICAgICAgICAgICBbX3ZtLl92KF92bS5fcyhwZXJzb24ubmlja25hbWUpKV1cbiAgICAgICAgICAgICAgICAgICAgICAgICksXG4gICAgICAgICAgICAgICAgICAgICAgICBfdm0uX3YoXCIgXCIpLFxuICAgICAgICAgICAgICAgICAgICAgICAgaW5kZXggPCBfdm0uUGVvcGxlLmxlbmd0aCAtIDFcbiAgICAgICAgICAgICAgICAgICAgICAgICAgPyBfYyhcInNwYW5cIiwgW192bS5fdihcIiwgXCIpXSlcbiAgICAgICAgICAgICAgICAgICAgICAgICAgOiBfdm0uX2UoKVxuICAgICAgICAgICAgICAgICAgICAgIF0pXG4gICAgICAgICAgICAgICAgICAgIDogX3ZtLl9lKCksXG4gICAgICAgICAgICAgICAgICBfdm0uX3YoXCIgXCIpLFxuICAgICAgICAgICAgICAgICAgX3ZtLlBlb3BsZS5sZW5ndGggPj0gNFxuICAgICAgICAgICAgICAgICAgICA/IF9jKFwic3BhblwiLCBbXG4gICAgICAgICAgICAgICAgICAgICAgICBpbmRleCA8IDJcbiAgICAgICAgICAgICAgICAgICAgICAgICAgPyBfYyhcInNwYW5cIiwgW1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgX3ZtLl92KFwiwqBcIiksXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICBfYyhcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgXCJhXCIsXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBzdGF0aWNDbGFzczogXCJldmVudHNfbGlua3NcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBhdHRyczogeyB0aXRsZTogcGVyc29uLm5pY2tuYW1lIH0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgb246IHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGNsaWNrOiBmdW5jdGlvbigkZXZlbnQpIHtcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgcmV0dXJuIF92bS5zaG93UGVyc29uKHBlcnNvbi5pZClcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICB9XG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH0sXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIFtfdm0uX3YoX3ZtLl9zKHBlcnNvbi5uaWNrbmFtZSkpXVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgKSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF92bS5fdihcIixcXG4gICAgICAgICAgXCIpXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgXSlcbiAgICAgICAgICAgICAgICAgICAgICAgICAgOiBfdm0uX2UoKSxcbiAgICAgICAgICAgICAgICAgICAgICAgIF92bS5fdihcIiBcIiksXG4gICAgICAgICAgICAgICAgICAgICAgICBpbmRleCA9PT0gMlxuICAgICAgICAgICAgICAgICAgICAgICAgICA/IF9jKFwic3BhblwiLCBbXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICBfdm0uX3YoXCLCoFwiKSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIF9jKFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBcImFcIixcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIHN0YXRpY0NsYXNzOiBcImV2ZW50c19saW5rc1wiLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIGF0dHJzOiB7IHRpdGxlOiBwZXJzb24ubmlja25hbWUgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICBvbjoge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgY2xpY2s6IGZ1bmN0aW9uKCRldmVudCkge1xuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICByZXR1cm4gX3ZtLnNob3dQZXJzb24ocGVyc29uLmlkKVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfVxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIH1cbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgfSxcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgW192bS5fdihfdm0uX3MocGVyc29uLm5pY2tuYW1lKSldXG4gICAgICAgICAgICAgICAgICAgICAgICAgICAgICApLFxuICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgX3ZtLl92KFwiLCAuLi5cIilcbiAgICAgICAgICAgICAgICAgICAgICAgICAgICBdKVxuICAgICAgICAgICAgICAgICAgICAgICAgICA6IF92bS5fZSgpXG4gICAgICAgICAgICAgICAgICAgICAgXSlcbiAgICAgICAgICAgICAgICAgICAgOiBfdm0uX2UoKVxuICAgICAgICAgICAgICAgIF0pXG4gICAgICAgICAgICAgIH0pLFxuICAgICAgICAgICAgICBfYyhcInYtc3BhY2VyXCIpXG4gICAgICAgICAgICBdLFxuICAgICAgICAgICAgMlxuICAgICAgICAgIClcbiAgICAgICAgXSlcbiAgICAgIDogX3ZtLl9lKCksXG4gICAgX3ZtLlBlb3BsZS5sZW5ndGggPD0gMFxuICAgICAgPyBfYyhcbiAgICAgICAgICBcInNwYW5cIixcbiAgICAgICAgICB7IHN0YXRpY0NsYXNzOiBcImNhcHRpb24gcHJpbWFyeS0tdGV4dFwiIH0sXG4gICAgICAgICAgW1xuICAgICAgICAgICAgX2MoXG4gICAgICAgICAgICAgIFwic3BhblwiLFxuICAgICAgICAgICAgICBbXG4gICAgICAgICAgICAgICAgX2MoXG4gICAgICAgICAgICAgICAgICBcInYtaWNvblwiLFxuICAgICAgICAgICAgICAgICAge1xuICAgICAgICAgICAgICAgICAgICBzdGF0aWNDbGFzczogXCJtci0xIHByaW1hcnktLXRleHRcIixcbiAgICAgICAgICAgICAgICAgICAgc3RhdGljU3R5bGU6IHsgXCJtYXJnaW4tYm90dG9tXCI6IFwiMC4wOHJlbVwiIH0sXG4gICAgICAgICAgICAgICAgICAgIGF0dHJzOiB7IHNtYWxsOiBcIlwiIH1cbiAgICAgICAgICAgICAgICAgIH0sXG4gICAgICAgICAgICAgICAgICBbX3ZtLl92KFwibWRpLWFjY291bnQtZ3JvdXBcIildXG4gICAgICAgICAgICAgICAgKSxcbiAgICAgICAgICAgICAgICBfYyhcbiAgICAgICAgICAgICAgICAgIFwic3BhblwiLFxuICAgICAgICAgICAgICAgICAgeyBhdHRyczogeyB0aXRsZTogX3ZtLiR0KFwicGFnZS5ldmVudHMubm9fcGVvcGxlX3RpdGxlXCIpIH0gfSxcbiAgICAgICAgICAgICAgICAgIFtcbiAgICAgICAgICAgICAgICAgICAgX3ZtLl92KFxuICAgICAgICAgICAgICAgICAgICAgIFwiXFxuICAgICAgICBcIiArIF92bS5fcyhfdm0uJHQoXCJwYWdlLmV2ZW50cy5ub19wZW9wbGVcIikpXG4gICAgICAgICAgICAgICAgICAgIClcbiAgICAgICAgICAgICAgICAgIF1cbiAgICAgICAgICAgICAgICApXG4gICAgICAgICAgICAgIF0sXG4gICAgICAgICAgICAgIDFcbiAgICAgICAgICAgICksXG4gICAgICAgICAgICBfYyhcInYtc3BhY2VyXCIpXG4gICAgICAgICAgXSxcbiAgICAgICAgICAxXG4gICAgICAgIClcbiAgICAgIDogX3ZtLl9lKClcbiAgXSlcbn1cbnZhciBzdGF0aWNSZW5kZXJGbnMgPSBbXVxucmVuZGVyLl93aXRoU3RyaXBwZWQgPSB0cnVlXG5cbmV4cG9ydCB7IHJlbmRlciwgc3RhdGljUmVuZGVyRm5zIH0iXSwic291cmNlUm9vdCI6IiJ9\n//# sourceURL=webpack-internal:///./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib/index.js??vue-loader-options!./resources/js/components/pages/events/People.vue?vue&type=template&id=2f6a9342&\n");
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   "render": () => (/* binding */ render),
+/* harmony export */   "staticRenderFns": () => (/* binding */ staticRenderFns)
+/* harmony export */ });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm.People.length > 0
+      ? _c("span", { staticClass: "caption primary--text" }, [
+          _c(
+            "span",
+            [
+              _c(
+                "v-icon",
+                {
+                  staticClass: "mr-1 primary--text",
+                  staticStyle: { "margin-bottom": "0.08rem" },
+                  attrs: { small: "" }
+                },
+                [_vm._v("mdi-account-group")]
+              ),
+              _vm._l(_vm.People, function(person, index) {
+                return _c("span", { key: index }, [
+                  _vm.People.length < 4
+                    ? _c("span", [
+                        _vm._v(" "),
+                        _c(
+                          "a",
+                          {
+                            staticClass: "events_links",
+                            attrs: { title: person.nickname },
+                            on: {
+                              click: function($event) {
+                                return _vm.showPerson(person.id)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(person.nickname))]
+                        ),
+                        _vm._v(" "),
+                        index < _vm.People.length - 1
+                          ? _c("span", [_vm._v(", ")])
+                          : _vm._e()
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.People.length >= 4
+                    ? _c("span", [
+                        index < 2
+                          ? _c("span", [
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "events_links",
+                                  attrs: { title: person.nickname },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showPerson(person.id)
+                                    }
+                                  }
+                                },
+                                [_vm._v(_vm._s(person.nickname))]
+                              ),
+                              _vm._v(",\n          ")
+                            ])
+                          : _vm._e(),
+                        _vm._v(" "),
+                        index === 2
+                          ? _c("span", [
+                              _vm._v(" "),
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "events_links",
+                                  attrs: { title: person.nickname },
+                                  on: {
+                                    click: function($event) {
+                                      return _vm.showPerson(person.id)
+                                    }
+                                  }
+                                },
+                                [_vm._v(_vm._s(person.nickname))]
+                              ),
+                              _vm._v(", ...")
+                            ])
+                          : _vm._e()
+                      ])
+                    : _vm._e()
+                ])
+              }),
+              _c("v-spacer")
+            ],
+            2
+          )
+        ])
+      : _vm._e(),
+    _vm.People.length <= 0
+      ? _c(
+          "span",
+          { staticClass: "caption primary--text" },
+          [
+            _c(
+              "span",
+              [
+                _c(
+                  "v-icon",
+                  {
+                    staticClass: "mr-1 primary--text",
+                    staticStyle: { "margin-bottom": "0.08rem" },
+                    attrs: { small: "" }
+                  },
+                  [_vm._v("mdi-account-group")]
+                ),
+                _c(
+                  "span",
+                  { attrs: { title: _vm.$t("page.events.no_people_title") } },
+                  [
+                    _vm._v(
+                      "\n        " + _vm._s(_vm.$t("page.events.no_people"))
+                    )
+                  ]
+                )
+              ],
+              1
+            ),
+            _c("v-spacer")
+          ],
+          1
+        )
+      : _vm._e()
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
 
 /***/ })
 

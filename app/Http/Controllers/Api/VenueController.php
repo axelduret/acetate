@@ -178,7 +178,7 @@ class VenueController extends Controller
       'name' => $request->input('name'),
       'description' => $request->input('description'),
       // TODO create a default venue's avatar if not submitted.
-      'avatar' => $request->file('upload') ? 'avatar/venue/' . $this->file_name : null,
+      'avatar' => $request->file('upload') ? $this->file_name : null,
       'user_id' => $request->input('user_id')
     ]);
     // Save the venue.
@@ -330,7 +330,7 @@ class VenueController extends Controller
     // Store the new venue's avatar.
     $this->storeAvatar('venue', $request);
     // Update the venue's avatar field.
-    $venue->avatar = $request->file('upload') ? 'avatar/venue/' . $this->file_name : null;
+    $venue->avatar = $request->file('upload') ? $this->file_name : null;
     $venue->save();
     // Add warning messages to the response.
     if ($this->warning != null) {

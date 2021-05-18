@@ -250,7 +250,7 @@ class EventController extends Controller
     $event = new Event([
       'name' => $request->input('name'),
       'description' => $request->input('description'),
-      'avatar' => $request->file('upload') ? 'avatar/event/' . $this->file_name : null,
+      'avatar' => $request->file('upload') ? $this->file_name : null,
       'user_id' => $request->input('user_id')
     ]);
     // Save the event.
@@ -412,7 +412,7 @@ class EventController extends Controller
     // Store the new event's avatar.
     $this->storeAvatar('event', $request);
     // Update the event's avatar field.
-    $event->avatar = $request->file('upload') ? 'avatar/event/' . $this->file_name : null;
+    $event->avatar = $request->file('upload') ? $this->file_name : null;
     $event->save();
     // Add warning messages to the response.
     if ($this->warning != null) {

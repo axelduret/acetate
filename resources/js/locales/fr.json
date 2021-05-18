@@ -20,6 +20,9 @@
         "events": {
             "title": "Événements"
         },
+        "post_events": {
+            "title": "Ajouter un événement"
+        },
         "people": {
             "title": "Personnes"
         },
@@ -153,5 +156,13 @@
             "message": "Le texte doit comprendre 10 caractères au minimum."
         }
     },
-    "not_logged_in": "Connexion requise."
+    "not_logged_in": "Connexion requise.",
+    "admin": {
+        "edit": {
+            "title": "Edition"
+        },
+        "delete": {
+            "title": "Suppression"
+        }
+    }
 }

@@ -58,6 +58,26 @@ const routes = [
                 component: loadComponent("pages/Events")
             },
             {
+                path: "admin/events/post",
+                name: "PostEvent",
+                component: loadComponent("admin/events/Post"),
+                meta: { auth: true }
+            },
+            {
+                path: "admin/events/:id/edit",
+                name: "EditEvent",
+                component: loadComponent("admin/events/Edit"),
+                props: true,
+                meta: { auth: true }
+            },
+            {
+                path: "admin/events/:id/delete",
+                name: "DeleteEvent",
+                component: loadComponent("admin/events/Delete"),
+                props: true,
+                meta: { auth: true }
+            },
+            {
                 path: "events/:id",
                 name: "Event",
                 props: true,

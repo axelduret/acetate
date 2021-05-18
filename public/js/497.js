@@ -1,2 +1,1 @@
 (self.webpackChunk=self.webpackChunk||[]).push([[497],{4497:(t,e,n)=>{"use strict";n.r(e),n.d(e,{default:()=>l});const s={data:function(){return{}}};const l=(0,n(1900).Z)(s,(function(){var t=this,e=t.$createElement,n=t._self._c||e;return n("div",[n("v-row",[n("v-col",[n("code",{staticClass:"primary--text"},[t._v("\n        "+t._s(t.$t("page.users.title"))+"\n      ")])])],1)],1)}),[],!1,null,null,null).exports}}]);
-//# sourceMappingURL=497.js.map

@@ -7,7 +7,10 @@
         size="80"
         class="rounded"
         :color="$vuetify.theme.dark ? 'primary' : 'white'"
-        ><v-img :src="appURL + baseURL + Avatar" :title="Name"></v-img>
+        ><v-img
+          :src="appURL + baseURL + 'storage/avatar/event/' + Avatar"
+          :title="Name"
+        ></v-img>
       </v-list-item-avatar>
       <v-list-item-content>
         <div class="overline primary--text">
