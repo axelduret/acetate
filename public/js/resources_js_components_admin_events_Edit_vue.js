@@ -75,6 +75,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     id: String
@@ -98,26 +107,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    fetchAPI: function fetchAPI() {
-      var _this = this;
-
-      axios.request({
-        url: this.id,
-        method: "get",
-        baseURL: this.baseURL + "api/events/",
-        headers: {
-          Authorization: "Bearer " + this.apiToken
-        }
-      }).then(function (response) {
-        _this.event = response.data.data.event;
-        _this.form.name = _this.event.name;
-        _this.form.description = _this.event.description;
-      })["catch"](function (error) {
-        console.log(error);
-      })["finally"](function () {
-        _this.overlay = false;
-      });
-    },
+    // Validate file type.
     handleFileUpload: function handleFileUpload() {
       if (this.$refs.file.files[0]["type"] !== "image/jpeg" && this.$refs.file.files[0]["type"] !== "image/gif" && this.$refs.file.files[0]["type"] !== "image/png") {
         this.errors = "Invalid file type ( gif, jpg or png ).";
@@ -126,6 +116,7 @@ __webpack_require__.r(__webpack_exports__);
         this.file = this.$refs.file.files[0];
       }
     },
+    // POST
     submit: function submit() {
       if (!this.errors) {
         /* 
@@ -147,12 +138,31 @@ __webpack_require__.r(__webpack_exports__);
             Authorization: "Bearer " + this.apiToken
           }
         };
-        axios.post(this.baseURL + "api/events/" + this.id + "/avatar", formData, config).then(function () {
-          console.log("SUCCESS!!");
-        })["catch"](function () {
-          console.log("FAILURE!!");
+        axios.post(this.baseURL + "api/events/" + this.id + "/avatar", formData, config).then(function () {})["catch"](function (error) {
+          console.log(error);
         });
       }
+    },
+    // GET
+    fetchAPI: function fetchAPI() {
+      var _this = this;
+
+      axios.request({
+        url: this.id,
+        method: "get",
+        baseURL: this.baseURL + "api/events/",
+        headers: {
+          Authorization: "Bearer " + this.apiToken
+        }
+      }).then(function (response) {
+        _this.event = response.data.data.event;
+        _this.form.name = _this.event.name;
+        _this.form.description = _this.event.description;
+      })["catch"](function (error) {
+        console.log(error);
+      })["finally"](function () {
+        _this.overlay = false;
+      });
     }
   },
   mounted: function mounted() {
@@ -272,88 +282,11 @@ var render = function() {
           _c(
             "v-card-text",
             [
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.id,
-                    expression: "form.id"
-                  }
-                ],
-                attrs: { type: "hidden", id: "formId" },
-                domProps: { value: _vm.form.id },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.form, "id", $event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model",
-                    value: _vm.form.user_id,
-                    expression: "form.user_id"
-                  }
-                ],
-                attrs: { type: "hidden", id: "formUserId" },
-                domProps: { value: _vm.form.user_id },
-                on: {
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.$set(_vm.form, "user_id", $event.target.value)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _c("v-text-field", {
-                staticClass: "mx-4 my-4 primary--text",
-                attrs: {
-                  type: "text",
-                  id: "formName",
-                  clearable: "",
-                  required: "",
-                  counter: "100",
-                  label: "Name"
-                },
-                model: {
-                  value: _vm.form.name,
-                  callback: function($$v) {
-                    _vm.$set(_vm.form, "name", $$v)
-                  },
-                  expression: "form.name"
-                }
-              }),
-              _vm._v(" "),
-              _c("v-textarea", {
-                staticClass: "mx-4 my-4 primary--text",
-                attrs: {
-                  outlined: "",
-                  id: "formText",
-                  height: "400",
-                  clearable: ""
-                },
-                model: {
-                  value: _vm.form.description,
-                  callback: function($$v) {
-                    _vm.$set(_vm.form, "description", $$v)
-                  },
-                  expression: "form.description"
-                }
-              }),
               _c(
                 "v-card",
                 {
-                  staticClass: "  col-auto mx-auto my-auto",
-                  class: _vm.$vuetify.theme.dark ? "greybg" : "darkprimary",
+                  staticClass: "mt-4 col-auto mx-auto my-auto",
+                  class: _vm.$vuetify.theme.dark ? "greybg" : "greybg",
                   attrs: { elevation: "-1", width: "300" }
                 },
                 [
@@ -364,17 +297,23 @@ var render = function() {
                           staticClass:
                             "error mb-2 px-4 white--text py-2 rounded"
                         },
-                        [_vm._v("\n        " + _vm._s(_vm.errors) + "\n      ")]
+                        [
+                          _vm._v(
+                            "\n          " + _vm._s(_vm.errors) + "\n        "
+                          )
+                        ]
                       )
                     : _vm._e(),
+                  _vm._v(" "),
                   _c(
                     "v-card-text",
                     { staticClass: "white" },
                     [
                       _c("img", {
-                        staticClass: "mx-4 mb-4   primary--text",
+                        staticClass:
+                          "mx-4 my-3 primary--text col-auto mx-auto my-auto",
                         attrs: {
-                          width: "200",
+                          width: "213",
                           src:
                             _vm.appURL +
                             _vm.baseURL +

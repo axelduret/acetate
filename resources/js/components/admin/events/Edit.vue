@@ -5,10 +5,11 @@
         <div>{{ $t("admin.edit.title") }}</div>
       </v-card-title>
       <v-card-text>
+        <!-- 
         <input type="hidden" id="formId" v-model="form.id" />
         <input type="hidden" id="formUserId" v-model="form.user_id" />
-        <v-text-field
-          class="mx-4 my-4 primary--text"
+         <v-text-field
+          class="mx-4 px-2 my-4 primary--text"
           type="text"
           id="formName"
           v-model="form.name"
@@ -23,27 +24,35 @@
           id="formText"
           height="400"
           clearable
+          auto-grow
           v-model="form.description"
-        ></v-textarea
-        ><v-card elevation="-1" width="300" :class="$vuetify.theme.dark ? 'greybg'  : 'darkprimary'" class="  col-auto mx-auto my-auto">
+        ></v-textarea> 
+        -->
+        <v-card
+          elevation="-1"
+          width="300"
+          :class="$vuetify.theme.dark ? 'greybg' : 'greybg'"
+          class="mt-4 col-auto mx-auto my-auto"
+        >
           <div v-if="errors" class="error mb-2 px-4 white--text py-2 rounded">
-          {{ errors }}
-        </div><v-card-text  class="white"><img
-          class="mx-4 mb-4   primary--text"
-          width="200"
-          :src="appURL + baseURL + 'storage/avatar/event/' + event.avatar"
-        />
-        <v-spacer></v-spacer
-        ><input
-          class="mx-4 my-4 primary--text"
-          type="file"
-          id="file"
-          ref="file"
-          v-on:change="handleFileUpload()"
-        ></input
-        ></v-card-text>
+            {{ errors }}
+          </div>
+          <v-card-text class="white"
+            ><img
+              class="mx-4 my-3 primary--text col-auto mx-auto my-auto"
+              width="213"
+              :src="
+                appURL + baseURL + 'storage/avatar/event/' + event.avatar
+              " />
+            <v-spacer></v-spacer
+            ><input
+              class="mx-4 my-4 primary--text"
+              type="file"
+              id="file"
+              ref="file"
+              v-on:change="handleFileUpload()"
+          /></v-card-text>
         </v-card>
-        
       </v-card-text>
       <v-divider class="mt-2"></v-divider>
       <v-card-actions>
@@ -84,6 +93,55 @@ export default {
     };
   },
   methods: {
+    // Validate file type.
+    handleFileUpload() {
+      if (
+        this.$refs.file.files[0]["type"] !== "image/jpeg" &&
+        this.$refs.file.files[0]["type"] !== "image/gif" &&
+        this.$refs.file.files[0]["type"] !== "image/png"
+      ) {
+        this.errors = "Invalid file type ( gif, jpg or png ).";
+      } else {
+        this.errors = false;
+        this.file = this.$refs.file.files[0];
+      }
+    },
+    // POST
+    submit() {
+      if (!this.errors) {
+        /* 
+      const id = document.getElementById("formId").value;
+      const user_id = document.getElementById("formUserId").value;
+      const name = document.getElementById("formName").value;
+      const description = document.getElementById("formText").value; */
+
+        const formData = new FormData(); /* 
+      formData.append("id", id);
+      formData.append("user_id", user_id);
+      formData.append("name", name);
+      formData.append("description", description); */
+        formData.append("upload", this.file);
+        const config = {
+          headers: {
+            "Content-Type":
+              "multipart/form-data; charset=utf-8; boundary=" +
+              Math.random().toString().substr(2),
+            Authorization: "Bearer " + this.apiToken,
+          },
+        };
+        axios
+          .post(
+            this.baseURL + "api/events/" + this.id + "/avatar",
+            formData,
+            config
+          )
+          .then(function () {})
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    },
+    // GET
     fetchAPI() {
       axios
         .request({
@@ -105,55 +163,6 @@ export default {
         .finally(() => {
           this.overlay = false;
         });
-    },
-    handleFileUpload() {
-      if (
-        this.$refs.file.files[0]["type"] !== "image/jpeg" &&
-        this.$refs.file.files[0]["type"] !== "image/gif" &&
-        this.$refs.file.files[0]["type"] !== "image/png"
-      ) {
-        this.errors = "Invalid file type ( gif, jpg or png ).";
-      } else {
-        this.errors = false;
-        this.file = this.$refs.file.files[0];
-      }
-    },
-    submit() {
-      if (!this.errors) {
-        /* 
-      const id = document.getElementById("formId").value;
-      const user_id = document.getElementById("formUserId").value;
-      const name = document.getElementById("formName").value;
-      const description = document.getElementById("formText").value; */
-
-        const formData = new FormData(); /* 
-      formData.append("id", id);
-      formData.append("user_id", user_id);
-      formData.append("name", name);
-      formData.append("description", description); */
-        formData.append("upload", this.file);
-
-        const config = {
-          headers: {
-            "Content-Type":
-              "multipart/form-data; charset=utf-8; boundary=" +
-              Math.random().toString().substr(2),
-            Authorization: "Bearer " + this.apiToken,
-          },
-        };
-        axios
-          .post(
-            this.baseURL + "api/events/" + this.id + "/avatar",
-            formData,
-            config
-          )
-          .then(function () {
-            console.log("SUCCESS!!");
-          })
-          .catch(function () {
-            console.log("FAILURE!!");
-          });
-      }
     },
   },
   mounted() {
