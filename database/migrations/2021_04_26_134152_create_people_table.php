@@ -14,7 +14,7 @@ class CreatePeopleTable extends Migration
   public function up()
   {
     Schema::create('people', function (Blueprint $table) {
-      $table->id();
+      $table->uuid('id')->primary();
       $table->timestamps();
       $table->string('nickname', 30)->unique();
       $table->string('firstname', 30)->nullable();
@@ -23,7 +23,7 @@ class CreatePeopleTable extends Migration
       $table->string('company', 100)->nullable();
       $table->string('avatar', 100)->nullable();
 
-      $table->unsignedBigInteger('user_id');
+      $table->uuid('user_id');
       $table->foreign('user_id')
         ->references('id')
         ->on('users')

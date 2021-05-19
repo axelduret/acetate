@@ -15,14 +15,14 @@ class CreateTaxonomyVenueTable extends Migration
   {
     Schema::create('taxonomy_venue', function (Blueprint $table) {
 
-      $table->unsignedBigInteger('taxonomy_id')->index();
+      $table->uuid('taxonomy_id')->index();
       $table->foreign('taxonomy_id')
         ->references('id')
         ->on('taxonomies')
         ->onDelete('restrict')
         ->onUpdate('restrict');
 
-      $table->unsignedBigInteger('venue_id')->index();
+      $table->uuid('venue_id')->index();
       $table->foreign('venue_id')
         ->references('id')
         ->on('venues')

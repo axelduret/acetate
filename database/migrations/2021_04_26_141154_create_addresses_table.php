@@ -14,7 +14,7 @@ class CreateAddressesTable extends Migration
   public function up()
   {
     Schema::create('addresses', function (Blueprint $table) {
-      $table->id();
+      $table->uuid('id')->primary();
       $table->timestamps();
       $table->enum('type', ['main', 'secondary', 'tertiary', 'company', 'user', 'event', 'venue', 'person', 'ticket'])->default('main');
       $table->string('street1', 100);
@@ -33,35 +33,35 @@ class CreateAddressesTable extends Migration
       $table->string('latitude', 30)->nullable();
       $table->string('company', 100)->nullable();
 
-      $table->unsignedBigInteger('user_id')->nullable();
+      $table->uuid('user_id')->nullable();
       $table->foreign('user_id')
         ->references('id')
         ->on('users')
         ->onDelete('cascade')
         ->onUpdate('cascade');
 
-      $table->unsignedBigInteger('event_id')->nullable();
+      $table->uuid('event_id')->nullable();
       $table->foreign('event_id')
         ->references('id')
         ->on('events')
         ->onDelete('cascade')
         ->onUpdate('cascade');
 
-      $table->unsignedBigInteger('person_id')->nullable();
+      $table->uuid('person_id')->nullable();
       $table->foreign('person_id')
         ->references('id')
         ->on('people')
         ->onDelete('cascade')
         ->onUpdate('cascade');
 
-      $table->unsignedBigInteger('venue_id')->nullable();
+      $table->uuid('venue_id')->nullable();
       $table->foreign('venue_id')
         ->references('id')
         ->on('venues')
         ->onDelete('cascade')
         ->onUpdate('cascade');
 
-      $table->unsignedBigInteger('ticket_id')->nullable();
+      $table->uuid('ticket_id')->nullable();
       $table->foreign('ticket_id')
         ->references('id')
         ->on('tickets')

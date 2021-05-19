@@ -14,7 +14,7 @@ class CreateTaxonomiesTable extends Migration
   public function up()
   {
     Schema::create('taxonomies', function (Blueprint $table) {
-      $table->id();
+      $table->uuid('id')->primary();
       $table->timestamps();
       $table->enum('type', ['conference', 'exhibition', 'music', 'theater', 'people', 'venue']);
       $table->string('category', 30)->unique();
