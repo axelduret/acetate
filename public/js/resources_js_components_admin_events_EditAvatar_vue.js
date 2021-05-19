@@ -64,12 +64,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Id: Number,
@@ -78,6 +72,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       avatarDialog: false,
+      currentAvatar: null,
       event: "",
       file: "",
       // App url.
@@ -88,7 +83,9 @@ __webpack_require__.r(__webpack_exports__);
       errors: false
     };
   },
-  mounted: function mounted() {// this.fetchAPI();
+  mounted: function mounted() {
+    // Load event.avatar
+    this.currentAvatar = this.appURL + this.baseURL + "storage/avatar/event/" + this.Avatar;
   },
   methods: {
     // Validate file type.
@@ -98,13 +95,21 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.errors = false;
         this.file = this.$refs.file.files[0];
+        this.filePreview = this.$refs.file.files[0];
+        this.currentAvatar = URL.createObjectURL(this.filePreview);
       }
     },
     // POST
     submit: function submit() {
       if (!this.errors) {
         var formData = new FormData();
-        formData.append("upload", this.file);
+        var blob = this.file.slice(0, this.file.size, this.file.type);
+        var filename = this.file.name.substr(0, 30);
+        var newFile = new File([blob], filename, {
+          type: this.file.type
+        }); //this.file.name = this.file.name.trim();
+
+        formData.append("upload", newFile);
         var config = {
           headers: {
             "Content-Type": "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2),
@@ -112,7 +117,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         };
         axios.post(this.baseURL + "api/events/" + this.Id + "/avatar", formData, config).then(function (response) {
-          this.$emit("refreshAvatar");
+          this.refreshAll();
           this.closeDialog();
         }.bind(this))["catch"](function (error) {
           console.log(error);
@@ -137,9 +142,14 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       })["finally"](function () {});
     },
+    refreshAll: function refreshAll() {
+      this.$emit("refreshAvatar");
+      this.$emit("refreshToolbox");
+    },
     closeDialog: function closeDialog() {
       this.errors = false;
       this.avatarDialog = false;
+      this.$emit("refreshToolbox");
     }
   }
 });
@@ -310,14 +320,7 @@ var render = function() {
                               _c("img", {
                                 staticClass:
                                   "mx-4 my-3 primary--text col-auto mx-auto my-auto",
-                                attrs: {
-                                  width: "213",
-                                  src:
-                                    _vm.appURL +
-                                    _vm.baseURL +
-                                    "storage/avatar/event/" +
-                                    _vm.Avatar
-                                }
+                                attrs: { width: "213", src: _vm.currentAvatar }
                               }),
                               _vm._v(" "),
                               _c("v-spacer"),
@@ -365,7 +368,6 @@ var render = function() {
                       _c(
                         "v-btn",
                         {
-                          staticClass: "mr-4",
                           attrs: { text: "", color: "info", type: "submit" },
                           on: {
                             click: function($event) {

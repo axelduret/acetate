@@ -1,21 +1,19 @@
 <template>
   <v-container>
     <div v-if="event !== null" class="d-flex justify-center mb-4">
-      <v-btn-toggle class="greybg">
+      <v-btn-toggle v-if="renderToolbox" class="greybg">
         <span
-          ><v-btn @click="gotoEvents()" text tile outlined small color="primary"
-            >back to events</v-btn
-          ></span
-        >
-        <span v-if="editable()"
           ><v-btn
-            @click="editThis(event.id)"
+            @click="gotoEvents()"
             text
             tile
             outlined
             small
-            color="info"
-            >{{ $t("admin.edit.title") }}</v-btn
+            color="secondary"
+            >back to events</v-btn
+          ></span
+        >
+        <span v-if="editable()"
           ><v-btn
             @click="$refs.AvatarDialog.avatarDialog = true"
             text
@@ -25,12 +23,20 @@
             color="info"
             >{{ $t("admin.edit_avatar.title") }}</v-btn
           ><v-btn
+            @click="editThis(event.id)"
+            text
+            tile
+            outlined
+            small
+            color="info"
+            >{{ $t("admin.edit.title") }}</v-btn
+          ><v-btn
             @click="deleteThis(event.id)"
             text
             tile
             outlined
             small
-            color="secondary"
+            color="info"
             >{{ $t("admin.delete.title") }}</v-btn
           ></span
         ></v-btn-toggle
@@ -118,6 +124,7 @@
           :Id="event.id"
           :Avatar="event.avatar ? event.avatar : null"
           @refreshAvatar="rerenderCardTitle"
+          @refreshToolbox="rerenderToolbox"
         />
       </v-card>
     </div>
@@ -172,6 +179,7 @@ export default {
       apiToken: process.env.MIX_APP_API_TOKEN,
       renderComponent: false,
       renderCardTitle: false,
+      renderToolbox: false,
       adminButtons: [
         {
           name: "edit",
@@ -186,6 +194,7 @@ export default {
           icon: "mdi-calendar-remove",
         },
       ],
+      toggle_none: null,
     };
   },
   methods: {
@@ -242,6 +251,7 @@ export default {
         })
         .finally(() => {
           this.overlay = false;
+          this.renderToolbox = true;
           this.renderCardTitle = true;
           this.renderComponent = true;
           return this.event;
@@ -259,6 +269,15 @@ export default {
     rerenderCardTitle() {
       // Remove my-component from the DOM
       this.renderCardTitle = false;
+
+      this.$nextTick(() => {
+        // Add the component back in
+        this.fetchAPI();
+      });
+    },
+    rerenderToolbox() {
+      // Remove my-component from the DOM
+      this.renderToolbox = false;
 
       this.$nextTick(() => {
         // Add the component back in

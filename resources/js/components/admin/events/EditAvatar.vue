@@ -24,7 +24,7 @@
                 ><img
                   class="mx-4 my-3 primary--text col-auto mx-auto my-auto"
                   width="213"
-                  :src="appURL + baseURL + 'storage/avatar/event/' + Avatar" />
+                  :src="currentAvatar" />
                 <v-spacer></v-spacer
                 ><input
                   class="mx-4 my-4 primary--text"
@@ -41,13 +41,7 @@
               >cancel</v-btn
             >
             <v-spacer></v-spacer>
-            <v-btn
-              @click="submit()"
-              text
-              color="info"
-              class="mr-4"
-              type="submit"
-            >
+            <v-btn @click="submit()" text color="info" type="submit">
               submit
             </v-btn>
           </v-card-actions>
@@ -63,6 +57,7 @@ export default {
   data() {
     return {
       avatarDialog: false,
+      currentAvatar: null,
       event: "",
       file: "",
       // App url.
@@ -74,7 +69,9 @@ export default {
     };
   },
   mounted() {
-    // this.fetchAPI();
+    // Load event.avatar
+    this.currentAvatar =
+      this.appURL + this.baseURL + "storage/avatar/event/" + this.Avatar;
   },
   methods: {
     // Validate file type.
@@ -88,13 +85,21 @@ export default {
       } else {
         this.errors = false;
         this.file = this.$refs.file.files[0];
+        this.filePreview = this.$refs.file.files[0];
+        this.currentAvatar = URL.createObjectURL(this.filePreview);
       }
     },
     // POST
     submit() {
       if (!this.errors) {
         const formData = new FormData();
-        formData.append("upload", this.file);
+        const blob = this.file.slice(0, this.file.size, this.file.type);
+        const filename = this.file.name.substr(0, 30);
+        const newFile = new File([blob], filename, {
+          type: this.file.type,
+        });
+        //this.file.name = this.file.name.trim();
+        formData.append("upload", newFile);
         const config = {
           headers: {
             "Content-Type":
@@ -111,7 +116,7 @@ export default {
           )
           .then(
             function (response) {
-              this.$emit("refreshAvatar");
+              this.refreshAll();
               this.closeDialog();
             }.bind(this)
           )
@@ -140,9 +145,14 @@ export default {
         })
         .finally(() => {});
     },
+    refreshAll() {
+      this.$emit("refreshAvatar");
+      this.$emit("refreshToolbox");
+    },
     closeDialog() {
       this.errors = false;
       this.avatarDialog = false;
+      this.$emit("refreshToolbox");
     },
   },
 };

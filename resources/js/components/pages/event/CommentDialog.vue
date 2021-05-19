@@ -4,21 +4,25 @@
     <v-dialog v-model="dialog" width="500">
       <v-card>
         <v-card-title class="title greybg primary--text">
-          New Comment
-        </v-card-title>
-        <div
-          v-if="errors"
-          class="error mx-4 mt-4 px-4 white--text py-2 rounded"
-        >
-          {{ $t("errors.comment.message") }}
-        </div>
-        <v-textarea
-          class="mx-4 my-4 primary--text"
-          outlined
-          v-model.trim="formData.text"
-        ></v-textarea>
-        <!-- 
-        <v-divider></v-divider> -->
+          New Comment </v-card-title
+        ><v-card-text>
+          <div
+            v-if="errors"
+            class="error mx-4 mt-4 px-4 white--text py-2 rounded"
+          >
+            {{ $t("errors.comment.message") }}
+          </div>
+          <v-textarea
+            class="mx-4 mt-4 primary--text"
+            outlined
+            no-resize
+            rows="1"
+            row-height="15"
+            height="200"
+            v-model.trim="formData.text"
+          ></v-textarea
+        ></v-card-text>
+        <v-divider></v-divider>
         <v-card-actions>
           <v-btn class="primary--text" text @click="closeDialog()"
             >cancel</v-btn

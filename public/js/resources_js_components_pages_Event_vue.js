@@ -64,12 +64,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Id: Number,
@@ -78,6 +72,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       avatarDialog: false,
+      currentAvatar: null,
       event: "",
       file: "",
       // App url.
@@ -88,7 +83,9 @@ __webpack_require__.r(__webpack_exports__);
       errors: false
     };
   },
-  mounted: function mounted() {// this.fetchAPI();
+  mounted: function mounted() {
+    // Load event.avatar
+    this.currentAvatar = this.appURL + this.baseURL + "storage/avatar/event/" + this.Avatar;
   },
   methods: {
     // Validate file type.
@@ -98,13 +95,21 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         this.errors = false;
         this.file = this.$refs.file.files[0];
+        this.filePreview = this.$refs.file.files[0];
+        this.currentAvatar = URL.createObjectURL(this.filePreview);
       }
     },
     // POST
     submit: function submit() {
       if (!this.errors) {
         var formData = new FormData();
-        formData.append("upload", this.file);
+        var blob = this.file.slice(0, this.file.size, this.file.type);
+        var filename = this.file.name.substr(0, 30);
+        var newFile = new File([blob], filename, {
+          type: this.file.type
+        }); //this.file.name = this.file.name.trim();
+
+        formData.append("upload", newFile);
         var config = {
           headers: {
             "Content-Type": "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2),
@@ -112,7 +117,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         };
         axios.post(this.baseURL + "api/events/" + this.Id + "/avatar", formData, config).then(function (response) {
-          this.$emit("refreshAvatar");
+          this.refreshAll();
           this.closeDialog();
         }.bind(this))["catch"](function (error) {
           console.log(error);
@@ -137,9 +142,14 @@ __webpack_require__.r(__webpack_exports__);
         console.log(error);
       })["finally"](function () {});
     },
+    refreshAll: function refreshAll() {
+      this.$emit("refreshAvatar");
+      this.$emit("refreshToolbox");
+    },
     closeDialog: function closeDialog() {
       this.errors = false;
       this.avatarDialog = false;
+      this.$emit("refreshToolbox");
     }
   }
 });
@@ -164,6 +174,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _event_Comments__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./event/Comments */ "./resources/js/components/pages/event/Comments.vue");
 /* harmony import */ var _event_CommentDialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./event/CommentDialog */ "./resources/js/components/pages/event/CommentDialog.vue");
 /* harmony import */ var _admin_events_EditAvatar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../admin/events/EditAvatar */ "./resources/js/components/admin/events/EditAvatar.vue");
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -336,6 +353,7 @@ __webpack_require__.r(__webpack_exports__);
       apiToken: "2|5RtanF7m7Rs2JgoSWdMhUOhD0tLBOnKV6xsrMcCi",
       renderComponent: false,
       renderCardTitle: false,
+      renderToolbox: false,
       adminButtons: [{
         name: "edit",
         title: "menu.edit_events.title",
@@ -346,7 +364,8 @@ __webpack_require__.r(__webpack_exports__);
         title: "menu.delete_events.title",
         path: "admin/events/delete",
         icon: "mdi-calendar-remove"
-      }]
+      }],
+      toggle_none: null
     };
   },
   methods: {
@@ -398,6 +417,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.$router.push("".concat(_this.baseURL).concat(_this.$i18n.locale, "/").concat(path));
       })["finally"](function () {
         _this.overlay = false;
+        _this.renderToolbox = true;
         _this.renderCardTitle = true;
         _this.renderComponent = true;
         return _this.event;
@@ -421,6 +441,16 @@ __webpack_require__.r(__webpack_exports__);
       this.$nextTick(function () {
         // Add the component back in
         _this3.fetchAPI();
+      });
+    },
+    rerenderToolbox: function rerenderToolbox() {
+      var _this4 = this;
+
+      // Remove my-component from the DOM
+      this.renderToolbox = false;
+      this.$nextTick(function () {
+        // Add the component back in
+        _this4.fetchAPI();
       });
     }
   },
@@ -534,6 +564,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
 //
 //
 //
@@ -2053,14 +2087,7 @@ var render = function() {
                               _c("img", {
                                 staticClass:
                                   "mx-4 my-3 primary--text col-auto mx-auto my-auto",
-                                attrs: {
-                                  width: "213",
-                                  src:
-                                    _vm.appURL +
-                                    _vm.baseURL +
-                                    "storage/avatar/event/" +
-                                    _vm.Avatar
-                                }
+                                attrs: { width: "213", src: _vm.currentAvatar }
                               }),
                               _vm._v(" "),
                               _c("v-spacer"),
@@ -2108,7 +2135,6 @@ var render = function() {
                       _c(
                         "v-btn",
                         {
-                          staticClass: "mr-4",
                           attrs: { text: "", color: "info", type: "submit" },
                           on: {
                             click: function($event) {
@@ -2164,72 +2190,11 @@ var render = function() {
             "div",
             { staticClass: "d-flex justify-center mb-4" },
             [
-              _c("v-btn-toggle", { staticClass: "greybg" }, [
-                _c(
-                  "span",
-                  [
+              _vm.renderToolbox
+                ? _c("v-btn-toggle", { staticClass: "greybg" }, [
                     _c(
-                      "v-btn",
-                      {
-                        attrs: {
-                          text: "",
-                          tile: "",
-                          outlined: "",
-                          small: "",
-                          color: "primary"
-                        },
-                        on: {
-                          click: function($event) {
-                            return _vm.gotoEvents()
-                          }
-                        }
-                      },
-                      [_vm._v("back to events")]
-                    )
-                  ],
-                  1
-                ),
-                _vm._v(" "),
-                _vm.editable()
-                  ? _c(
                       "span",
                       [
-                        _c(
-                          "v-btn",
-                          {
-                            attrs: {
-                              text: "",
-                              tile: "",
-                              outlined: "",
-                              small: "",
-                              color: "info"
-                            },
-                            on: {
-                              click: function($event) {
-                                return _vm.editThis(_vm.event.id)
-                              }
-                            }
-                          },
-                          [_vm._v(_vm._s(_vm.$t("admin.edit.title")))]
-                        ),
-                        _c(
-                          "v-btn",
-                          {
-                            attrs: {
-                              text: "",
-                              tile: "",
-                              outlined: "",
-                              small: "",
-                              color: "info"
-                            },
-                            on: {
-                              click: function($event) {
-                                _vm.$refs.AvatarDialog.avatarDialog = true
-                              }
-                            }
-                          },
-                          [_vm._v(_vm._s(_vm.$t("admin.edit_avatar.title")))]
-                        ),
                         _c(
                           "v-btn",
                           {
@@ -2242,17 +2207,84 @@ var render = function() {
                             },
                             on: {
                               click: function($event) {
-                                return _vm.deleteThis(_vm.event.id)
+                                return _vm.gotoEvents()
                               }
                             }
                           },
-                          [_vm._v(_vm._s(_vm.$t("admin.delete.title")))]
+                          [_vm._v("back to events")]
                         )
                       ],
                       1
-                    )
-                  : _vm._e()
-              ])
+                    ),
+                    _vm._v(" "),
+                    _vm.editable()
+                      ? _c(
+                          "span",
+                          [
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: {
+                                  text: "",
+                                  tile: "",
+                                  outlined: "",
+                                  small: "",
+                                  color: "info"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    _vm.$refs.AvatarDialog.avatarDialog = true
+                                  }
+                                }
+                              },
+                              [
+                                _vm._v(
+                                  _vm._s(_vm.$t("admin.edit_avatar.title"))
+                                )
+                              ]
+                            ),
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: {
+                                  text: "",
+                                  tile: "",
+                                  outlined: "",
+                                  small: "",
+                                  color: "info"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.editThis(_vm.event.id)
+                                  }
+                                }
+                              },
+                              [_vm._v(_vm._s(_vm.$t("admin.edit.title")))]
+                            ),
+                            _c(
+                              "v-btn",
+                              {
+                                attrs: {
+                                  text: "",
+                                  tile: "",
+                                  outlined: "",
+                                  small: "",
+                                  color: "info"
+                                },
+                                on: {
+                                  click: function($event) {
+                                    return _vm.deleteThis(_vm.event.id)
+                                  }
+                                }
+                              },
+                              [_vm._v(_vm._s(_vm.$t("admin.delete.title")))]
+                            )
+                          ],
+                          1
+                        )
+                      : _vm._e()
+                  ])
+                : _vm._e()
             ],
             1
           )
@@ -2416,7 +2448,10 @@ var render = function() {
                       Id: _vm.event.id,
                       Avatar: _vm.event.avatar ? _vm.event.avatar : null
                     },
-                    on: { refreshAvatar: _vm.rerenderCardTitle }
+                    on: {
+                      refreshAvatar: _vm.rerenderCardTitle,
+                      refreshToolbox: _vm.rerenderToolbox
+                    }
                   })
                 ],
                 1
@@ -2698,41 +2733,54 @@ var render = function() {
               _c(
                 "v-card-title",
                 { staticClass: "title greybg primary--text" },
-                [_vm._v("\n        New Comment\n      ")]
+                [_vm._v("\n        New Comment ")]
+              ),
+              _c(
+                "v-card-text",
+                [
+                  _vm.errors
+                    ? _c(
+                        "div",
+                        {
+                          staticClass:
+                            "error mx-4 mt-4 px-4 white--text py-2 rounded"
+                        },
+                        [
+                          _vm._v(
+                            "\n          " +
+                              _vm._s(_vm.$t("errors.comment.message")) +
+                              "\n        "
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("v-textarea", {
+                    staticClass: "mx-4 mt-4 primary--text",
+                    attrs: {
+                      outlined: "",
+                      "no-resize": "",
+                      rows: "1",
+                      "row-height": "15",
+                      height: "200"
+                    },
+                    model: {
+                      value: _vm.formData.text,
+                      callback: function($$v) {
+                        _vm.$set(
+                          _vm.formData,
+                          "text",
+                          typeof $$v === "string" ? $$v.trim() : $$v
+                        )
+                      },
+                      expression: "formData.text"
+                    }
+                  })
+                ],
+                1
               ),
               _vm._v(" "),
-              _vm.errors
-                ? _c(
-                    "div",
-                    {
-                      staticClass:
-                        "error mx-4 mt-4 px-4 white--text py-2 rounded"
-                    },
-                    [
-                      _vm._v(
-                        "\n        " +
-                          _vm._s(_vm.$t("errors.comment.message")) +
-                          "\n      "
-                      )
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _c("v-textarea", {
-                staticClass: "mx-4 my-4 primary--text",
-                attrs: { outlined: "" },
-                model: {
-                  value: _vm.formData.text,
-                  callback: function($$v) {
-                    _vm.$set(
-                      _vm.formData,
-                      "text",
-                      typeof $$v === "string" ? $$v.trim() : $$v
-                    )
-                  },
-                  expression: "formData.text"
-                }
-              }),
+              _c("v-divider"),
               _vm._v(" "),
               _c(
                 "v-card-actions",

@@ -19,11 +19,13 @@
         ></v-text-field>
         <v-textarea
           class="mx-4 my-4 primary--text"
-          outlined
           id="formText"
           height="400"
           clearable
-          auto-grow
+          no-resize
+          outlined
+          rows="1"
+          row-height="25"
           v-model="form.description"
         ></v-textarea>
       </v-card-text>
@@ -108,7 +110,9 @@ export default {
         .finally(() => {});
     },
     historyBack() {
-      this.$router.go(-1);
+      this.$router.push(
+        `${this.baseURL}${this.$i18n.locale}/events/${this.id}`
+      );
     },
   },
   mounted() {

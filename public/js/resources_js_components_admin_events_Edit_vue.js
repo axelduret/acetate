@@ -58,6 +58,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     id: String
@@ -115,7 +117,7 @@ __webpack_require__.r(__webpack_exports__);
       })["finally"](function () {});
     },
     historyBack: function historyBack() {
-      this.$router.go(-1);
+      this.$router.push("".concat(this.baseURL).concat(this.$i18n.locale, "/events/").concat(this.id));
     }
   },
   mounted: function mounted() {
@@ -300,11 +302,13 @@ var render = function() {
               _c("v-textarea", {
                 staticClass: "mx-4 my-4 primary--text",
                 attrs: {
-                  outlined: "",
                   id: "formText",
                   height: "400",
                   clearable: "",
-                  "auto-grow": ""
+                  "no-resize": "",
+                  outlined: "",
+                  rows: "1",
+                  "row-height": "25"
                 },
                 model: {
                   value: _vm.form.description,

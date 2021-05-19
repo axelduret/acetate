@@ -44,6 +44,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Id: Number
@@ -199,41 +203,54 @@ var render = function() {
               _c(
                 "v-card-title",
                 { staticClass: "title greybg primary--text" },
-                [_vm._v("\n        New Comment\n      ")]
+                [_vm._v("\n        New Comment ")]
+              ),
+              _c(
+                "v-card-text",
+                [
+                  _vm.errors
+                    ? _c(
+                        "div",
+                        {
+                          staticClass:
+                            "error mx-4 mt-4 px-4 white--text py-2 rounded"
+                        },
+                        [
+                          _vm._v(
+                            "\n          " +
+                              _vm._s(_vm.$t("errors.comment.message")) +
+                              "\n        "
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("v-textarea", {
+                    staticClass: "mx-4 mt-4 primary--text",
+                    attrs: {
+                      outlined: "",
+                      "no-resize": "",
+                      rows: "1",
+                      "row-height": "15",
+                      height: "200"
+                    },
+                    model: {
+                      value: _vm.formData.text,
+                      callback: function($$v) {
+                        _vm.$set(
+                          _vm.formData,
+                          "text",
+                          typeof $$v === "string" ? $$v.trim() : $$v
+                        )
+                      },
+                      expression: "formData.text"
+                    }
+                  })
+                ],
+                1
               ),
               _vm._v(" "),
-              _vm.errors
-                ? _c(
-                    "div",
-                    {
-                      staticClass:
-                        "error mx-4 mt-4 px-4 white--text py-2 rounded"
-                    },
-                    [
-                      _vm._v(
-                        "\n        " +
-                          _vm._s(_vm.$t("errors.comment.message")) +
-                          "\n      "
-                      )
-                    ]
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _c("v-textarea", {
-                staticClass: "mx-4 my-4 primary--text",
-                attrs: { outlined: "" },
-                model: {
-                  value: _vm.formData.text,
-                  callback: function($$v) {
-                    _vm.$set(
-                      _vm.formData,
-                      "text",
-                      typeof $$v === "string" ? $$v.trim() : $$v
-                    )
-                  },
-                  expression: "formData.text"
-                }
-              }),
+              _c("v-divider"),
               _vm._v(" "),
               _c(
                 "v-card-actions",
