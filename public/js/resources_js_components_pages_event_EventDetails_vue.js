@@ -1124,6 +1124,93 @@ var render = function() {
               )
             : _vm._e(),
           _vm._v(" "),
+          _vm.Prices !== null && _vm.Prices.length > 0
+            ? _c(
+                "v-expansion-panel",
+                { staticClass: "caption primary--text" },
+                [
+                  _c(
+                    "v-expansion-panel-header",
+                    {
+                      scopedSlots: _vm._u(
+                        [
+                          {
+                            key: "actions",
+                            fn: function() {
+                              return [
+                                _c("v-icon", { attrs: { color: "primary" } }, [
+                                  _vm._v(" $expand ")
+                                ])
+                              ]
+                            },
+                            proxy: true
+                          }
+                        ],
+                        null,
+                        false,
+                        431335688
+                      )
+                    },
+                    [
+                      _vm._v(
+                        _vm._s(_vm.$t("page.event.title.prices")) + "\n        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "v-expansion-panel-content",
+                    [
+                      _c("span", { staticClass: "subtitle-2" }, [
+                        _c(
+                          "span",
+                          {
+                            staticClass: "caption",
+                            class: _vm.$vuetify.theme.dark
+                              ? "grey--text"
+                              : "primary--text"
+                          },
+                          _vm._l(_vm.Prices, function(price, index) {
+                            return _c(
+                              "span",
+                              { key: index },
+                              [
+                                _c(
+                                  "v-icon",
+                                  {
+                                    staticClass: "mr-1",
+                                    class: _vm.$vuetify.theme.dark
+                                      ? "grey--text"
+                                      : "primary--text",
+                                    staticStyle: { "margin-bottom": "0.08rem" },
+                                    attrs: { small: "" }
+                                  },
+                                  [_vm._v("mdi-cash-usd-outline")]
+                                ),
+                                _vm._v(
+                                  "\n                " +
+                                    _vm._s(price.cost) +
+                                    " chf (" +
+                                    _vm._s(price.type) +
+                                    ")"
+                                ),
+                                _c("v-spacer")
+                              ],
+                              1
+                            )
+                          }),
+                          0
+                        )
+                      ]),
+                      _c("v-spacer")
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            : _vm._e(),
+          _vm._v(" "),
           _vm.Emails !== null && _vm.Emails.length > 0
             ? _c(
                 "v-expansion-panel",
@@ -1222,93 +1309,6 @@ var render = function() {
                       0
                     )
                   ])
-                ],
-                1
-              )
-            : _vm._e(),
-          _vm._v(" "),
-          _vm.Prices !== null && _vm.Prices.length > 0
-            ? _c(
-                "v-expansion-panel",
-                { staticClass: "caption primary--text" },
-                [
-                  _c(
-                    "v-expansion-panel-header",
-                    {
-                      scopedSlots: _vm._u(
-                        [
-                          {
-                            key: "actions",
-                            fn: function() {
-                              return [
-                                _c("v-icon", { attrs: { color: "primary" } }, [
-                                  _vm._v(" $expand ")
-                                ])
-                              ]
-                            },
-                            proxy: true
-                          }
-                        ],
-                        null,
-                        false,
-                        431335688
-                      )
-                    },
-                    [
-                      _vm._v(
-                        _vm._s(_vm.$t("page.event.title.prices")) + "\n        "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "v-expansion-panel-content",
-                    [
-                      _c("span", { staticClass: "subtitle-2" }, [
-                        _c(
-                          "span",
-                          {
-                            staticClass: "caption",
-                            class: _vm.$vuetify.theme.dark
-                              ? "grey--text"
-                              : "primary--text"
-                          },
-                          _vm._l(_vm.Prices, function(price, index) {
-                            return _c(
-                              "span",
-                              { key: index },
-                              [
-                                _c(
-                                  "v-icon",
-                                  {
-                                    staticClass: "mr-1",
-                                    class: _vm.$vuetify.theme.dark
-                                      ? "grey--text"
-                                      : "primary--text",
-                                    staticStyle: { "margin-bottom": "0.08rem" },
-                                    attrs: { small: "" }
-                                  },
-                                  [_vm._v("mdi-cash-usd-outline")]
-                                ),
-                                _vm._v(
-                                  "\n                " +
-                                    _vm._s(price.cost) +
-                                    " chf (" +
-                                    _vm._s(price.type) +
-                                    ")"
-                                ),
-                                _c("v-spacer")
-                              ],
-                              1
-                            )
-                          }),
-                          0
-                        )
-                      ]),
-                      _c("v-spacer")
-                    ],
-                    1
-                  )
                 ],
                 1
               )

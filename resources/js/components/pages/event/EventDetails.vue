@@ -212,6 +212,37 @@
           ></span>
         </v-expansion-panel-content>
       </v-expansion-panel>
+      <!-- Prices -->
+      <v-expansion-panel v-if="Prices !== null && Prices.length > 0"  class="caption primary--text">
+        <v-expansion-panel-header
+          >{{ $t("page.event.title.prices") }}
+          <template v-slot:actions>
+            <v-icon color="primary"> $expand </v-icon>
+          </template></v-expansion-panel-header
+        >
+        <v-expansion-panel-content >
+          <span class="subtitle-2"
+            ><span
+              class="caption"
+              :class="$vuetify.theme.dark ? 'grey--text' : 'primary--text'"
+            >
+              <span v-for="(price, index) in Prices" :key="index">
+                <v-icon
+                    class="mr-1"
+                    :class="
+                      $vuetify.theme.dark ? 'grey--text' : 'primary--text'
+                    "
+                    style="margin-bottom: 0.08rem"
+                    small
+                    >mdi-cash-usd-outline</v-icon
+                  >
+                  {{ price.cost }} chf ({{ price.type }})<v-spacer></v-spacer
+                >
+              </span></span
+            >
+          </span><v-spacer></v-spacer> </span
+        ></v-expansion-panel-content>
+      </v-expansion-panel>
       <!-- Emails -->
       <v-expansion-panel
         v-if="Emails !== null && Emails.length > 0"
@@ -252,38 +283,7 @@
             ></span>
           </span>
         </v-expansion-panel-content>
-      </v-expansion-panel>
-      <!-- Prices -->
-      <v-expansion-panel v-if="Prices !== null && Prices.length > 0"  class="caption primary--text">
-        <v-expansion-panel-header
-          >{{ $t("page.event.title.prices") }}
-          <template v-slot:actions>
-            <v-icon color="primary"> $expand </v-icon>
-          </template></v-expansion-panel-header
-        >
-        <v-expansion-panel-content >
-          <span class="subtitle-2"
-            ><span
-              class="caption"
-              :class="$vuetify.theme.dark ? 'grey--text' : 'primary--text'"
-            >
-              <span v-for="(price, index) in Prices" :key="index">
-                <v-icon
-                    class="mr-1"
-                    :class="
-                      $vuetify.theme.dark ? 'grey--text' : 'primary--text'
-                    "
-                    style="margin-bottom: 0.08rem"
-                    small
-                    >mdi-cash-usd-outline</v-icon
-                  >
-                  {{ price.cost }} chf ({{ price.type }})<v-spacer></v-spacer
-                >
-              </span></span
-            >
-          </span><v-spacer></v-spacer> </span
-        ></v-expansion-panel-content>
-      </v-expansion-panel>
+      </v-expansion-panel>  
       <!-- Phones -->
       <v-expansion-panel
         v-if="Phones !== null && Phones.length > 0"

@@ -1,25 +1,33 @@
 <template>
-  <v-container>
-    <div class="d-flex justify-center mb-4"><v-btn
+  <v-container><div v-if="event  !== null">
+    <div v-if="editable()" class="d-flex justify-center mb-4"><v-btn
           @click="editThis(event.id)"
           text
           class="mx-2"
           outlined
-          color="info accent-4"
+          color="info"
           >{{ $t("admin.edit.title") }}</v-btn
+        ></v-btn><v-btn
+        @click="$refs.AvatarDialog.avatarDialog = true"
+          text
+          class="mx-2"
+          outlined
+          color="info"
+          >{{ $t("admin.edit_avatar.title") }}</v-btn
         ></v-btn><v-btn
           @click="deleteThis(event.id)"
           text
           class="mx-2"
           outlined
-          color="info accent-4"
+          color="info"
           >{{ $t("admin.delete.title") }}</v-btn
         ></v-btn></div>
-    <div>
+    <div></div>
       <v-card v-if="overlay === false" max-width="800px" class="pb-4 mx-auto">
         <div>
           <!-- card title -->
           <CardTitle
+          v-if="renderCardTitle"
             :Avatar="event.avatar ? event.avatar : null"
             :Taxonomies="event.taxonomies ? event.taxonomies : null"
             :Name="event.name ? event.name : null"
@@ -91,6 +99,13 @@
             @refreshComments="forceRerender"
             :Id="event.id"
           />
+          <!-- comment dialog -->
+          <EditAvatar
+          ref="AvatarDialog"
+            :Id="event.id"
+            :Avatar="event.avatar ? event.avatar : null"
+            @refreshAvatar="rerenderCardTitle"
+          />
         </div>
       </v-card>
     </div>
@@ -118,6 +133,7 @@ import Likes from "./event/Likes";
 import Taxonomies from "./event/Taxonomies";
 import Comments from "./event/Comments";
 import CommentDialog from "./event/CommentDialog";
+import EditAvatar from "../admin/events/EditAvatar";
 
 export default {
   props: {
@@ -130,17 +146,20 @@ export default {
     Taxonomies,
     Comments,
     CommentDialog,
+    EditAvatar,
   },
   data() {
     return {
       overlay: true,
-      event: "",
+      avatarDialog: false,
+      event: null,
       // App url.
       appURL: process.env.MIX_APP_URL,
       // Base url.
       baseURL: process.env.MIX_BASE_URL,
       apiToken: process.env.MIX_APP_API_TOKEN,
       renderComponent: false,
+      renderCardTitle: false,
       adminButtons: [
         {
           name: "edit",
@@ -158,6 +177,24 @@ export default {
     };
   },
   methods: {
+    logged: function () {
+      return localStorage.getItem("user_api_token");
+    },
+    author: function () {
+      if (this.event.user_id == localStorage.getItem("user_id")) {
+        return true;
+      }
+    },
+    admin: function () {
+      if (localStorage.getItem("user_role") === "super-admin") {
+        return true;
+      }
+    },
+    editable() {
+      if (this.logged() && (this.author() || this.admin())) {
+        return true;
+      }
+    },
     editThis: function (id) {
       this.$router.push(
         `${this.baseURL}${this.$i18n.locale}/admin/events/${id}/edit`
@@ -190,6 +227,7 @@ export default {
         })
         .finally(() => {
           this.overlay = false;
+          this.renderCardTitle = true;
           this.renderComponent = true;
           return this.event;
         });
@@ -197,6 +235,15 @@ export default {
     forceRerender() {
       // Remove my-component from the DOM
       this.renderComponent = false;
+
+      this.$nextTick(() => {
+        // Add the component back in
+        this.fetchAPI();
+      });
+    },
+    rerenderCardTitle() {
+      // Remove my-component from the DOM
+      this.renderCardTitle = false;
 
       this.$nextTick(() => {
         // Add the component back in

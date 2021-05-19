@@ -22,49 +22,59 @@ use App\Http\Controllers\Api\TaxonomyController;
 |
 */
 
-// protected routes
+// Protected routes.
 Route::group(['middleware' => 'auth:sanctum'], function () {
+
+  // Dashboard API endpoints.
+  Route::get('dashboard', [UserController::class, 'dashboard']);
 
   // Users API endpoints
   Route::apiResource('users', UserController::class);
-  Route::get('dashboard', [UserController::class, 'dashboard']);
-  Route::get('users/{user}/{content}', [UserController::class, 'show']);
-  Route::post('users/{user}/avatar', [UserController::class, 'updateAvatar']);
-  Route::post('users/{user}/comments', [UserController::class, 'storeComment']);
-  Route::post('users/{user}/files', [UserController::class, 'storeFile']);
+  Route::prefix('users')->group(function () {
+    Route::get('{user}/{content}', [UserController::class, 'show']);
+    Route::post('{user}/avatar', [UserController::class, 'updateAvatar']);
+    Route::post('{user}/comments', [UserController::class, 'storeComment']);
+    Route::post('{user}/files', [UserController::class, 'storeFile']);
+  });
 
-  // Events API endpoints
+  // Events API endpoints.
   Route::apiResource('events', EventController::class);
-  Route::post('events/{event}/avatar', [EventController::class, 'updateAvatar']);
-  Route::post('events/{event}/comments', [EventController::class, 'storeComment']);
-  Route::post('events/{event}/files', [EventController::class, 'storeFile']);
+  Route::prefix('events')->group(function () {
+    Route::post('{event}/avatar', [EventController::class, 'updateAvatar']);
+    Route::post('{event}/comments', [EventController::class, 'storeComment']);
+    Route::post('{event}/files', [EventController::class, 'storeFile']);
+  });
 
-  // People API endpoints
+  // People API endpoints.
   Route::apiResource('people', PersonController::class);
-  Route::post('people/{person}/avatar', [PersonController::class, 'updateAvatar']);
-  Route::post('people/{person}/comments', [PersonController::class, 'storeComment']);
-  Route::post('people/{person}/files', [PersonController::class, 'storeFile']);
+  Route::prefix('people')->group(function () {
+    Route::post('{person}/avatar', [PersonController::class, 'updateAvatar']);
+    Route::post('{person}/comments', [PersonController::class, 'storeComment']);
+    Route::post('{person}/files', [PersonController::class, 'storeFile']);
+  });
 
-  // Venues API endpoints
+  // Venues API endpoints.
   Route::apiResource('venues', VenueController::class);
-  Route::post('venues/{venue}/avatar', [VenueController::class, 'updateAvatar']);
-  Route::post('venues/{venue}/comments', [VenueController::class, 'storeComment']);
-  Route::post('venues/{venue}/files', [VenueController::class, 'storeFile']);
+  Route::prefix('venues')->group(function () {
+    Route::post('{venue}/avatar', [VenueController::class, 'updateAvatar']);
+    Route::post('{venue}/comments', [VenueController::class, 'storeComment']);
+    Route::post('{venue}/files', [VenueController::class, 'storeFile']);
+  });
 
-  // Comments API endpoints
+  // Comments API endpoints.
   Route::apiResource('comments', CommentController::class);
 
-  // Files API endpoints
+  // Files API endpoints.
   Route::apiResource('files', FileController::class);
 
-  // Taxonomies API endpoints
+  // Taxonomies API endpoints.
   Route::apiResource('taxonomies', TaxonomyController::class);
 
-  // Tickets API endpoints
+  // Tickets API endpoints.
   Route::apiResource('tickets', TicketController::class);
 });
 
-// Public routes
+// Public routes.
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
 Route::post('logout/{user}', [UserController::class, 'logout']);

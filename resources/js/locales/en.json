@@ -161,6 +161,9 @@
         "edit": {
             "title": "Edit"
         },
+        "edit_avatar": {
+            "title": "Upload new avatar"
+        },
         "delete": {
             "title": "Delete"
         }

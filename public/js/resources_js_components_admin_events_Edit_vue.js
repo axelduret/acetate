@@ -58,32 +58,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     id: String
@@ -97,7 +71,6 @@ __webpack_require__.r(__webpack_exports__);
         description: "",
         user_id: localStorage.getItem("user_id")
       },
-      file: "",
       // App url.
       appURL: "http://127.0.0.1:8001",
       // Base url.
@@ -107,38 +80,17 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    // Validate file type.
-    handleFileUpload: function handleFileUpload() {
-      if (this.$refs.file.files[0]["type"] !== "image/jpeg" && this.$refs.file.files[0]["type"] !== "image/gif" && this.$refs.file.files[0]["type"] !== "image/png") {
-        this.errors = "Invalid file type ( gif, jpg or png ).";
-      } else {
-        this.errors = false;
-        this.file = this.$refs.file.files[0];
-      }
-    },
-    // POST
+    // PATCH
     submit: function submit() {
       if (!this.errors) {
-        /* 
-        const id = document.getElementById("formId").value;
-        const user_id = document.getElementById("formUserId").value;
-        const name = document.getElementById("formName").value;
-        const description = document.getElementById("formText").value; */
-        var formData = new FormData();
-        /* 
-        formData.append("id", id);
-        formData.append("user_id", user_id);
-        formData.append("name", name);
-        formData.append("description", description); */
-
-        formData.append("upload", this.file);
         var config = {
           headers: {
-            "Content-Type": "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2),
             Authorization: "Bearer " + this.apiToken
           }
         };
-        axios.post(this.baseURL + "api/events/" + this.id + "/avatar", formData, config).then(function () {})["catch"](function (error) {
+        axios.patch(this.baseURL + "api/events/" + this.id, this.form, config).then(function () {
+          this.historyBack();
+        }.bind(this))["catch"](function (error) {
           console.log(error);
         });
       }
@@ -160,9 +112,10 @@ __webpack_require__.r(__webpack_exports__);
         _this.form.description = _this.event.description;
       })["catch"](function (error) {
         console.log(error);
-      })["finally"](function () {
-        _this.overlay = false;
-      });
+      })["finally"](function () {});
+    },
+    historyBack: function historyBack() {
+      this.$router.go(-1);
     }
   },
   mounted: function mounted() {
@@ -263,6 +216,7 @@ var render = function() {
   return _c(
     "form",
     {
+      staticClass: "mt-4",
       attrs: { id: "myForm" },
       on: {
         submit: function($event) {
@@ -282,63 +236,84 @@ var render = function() {
           _c(
             "v-card-text",
             [
-              _c(
-                "v-card",
-                {
-                  staticClass: "mt-4 col-auto mx-auto my-auto",
-                  class: _vm.$vuetify.theme.dark ? "greybg" : "greybg",
-                  attrs: { elevation: "-1", width: "300" }
-                },
-                [
-                  _vm.errors
-                    ? _c(
-                        "div",
-                        {
-                          staticClass:
-                            "error mb-2 px-4 white--text py-2 rounded"
-                        },
-                        [
-                          _vm._v(
-                            "\n          " + _vm._s(_vm.errors) + "\n        "
-                          )
-                        ]
-                      )
-                    : _vm._e(),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-text",
-                    { staticClass: "white" },
-                    [
-                      _c("img", {
-                        staticClass:
-                          "mx-4 my-3 primary--text col-auto mx-auto my-auto",
-                        attrs: {
-                          width: "213",
-                          src:
-                            _vm.appURL +
-                            _vm.baseURL +
-                            "storage/avatar/event/" +
-                            _vm.event.avatar
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("v-spacer"),
-                      _c("input", {
-                        ref: "file",
-                        staticClass: "mx-4 my-4 primary--text",
-                        attrs: { type: "file", id: "file" },
-                        on: {
-                          change: function($event) {
-                            return _vm.handleFileUpload()
-                          }
-                        }
-                      })
-                    ],
-                    1
-                  )
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.id,
+                    expression: "form.id"
+                  }
                 ],
-                1
-              )
+                attrs: { type: "hidden", id: "formId" },
+                domProps: { value: _vm.form.id },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "id", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("input", {
+                directives: [
+                  {
+                    name: "model",
+                    rawName: "v-model",
+                    value: _vm.form.user_id,
+                    expression: "form.user_id"
+                  }
+                ],
+                attrs: { type: "hidden", id: "formUserId" },
+                domProps: { value: _vm.form.user_id },
+                on: {
+                  input: function($event) {
+                    if ($event.target.composing) {
+                      return
+                    }
+                    _vm.$set(_vm.form, "user_id", $event.target.value)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c("v-text-field", {
+                staticClass: "mx-4 px-2 my-4 primary--text",
+                attrs: {
+                  type: "text",
+                  id: "formName",
+                  clearable: "",
+                  required: "",
+                  counter: "100",
+                  label: "Name"
+                },
+                model: {
+                  value: _vm.form.name,
+                  callback: function($$v) {
+                    _vm.$set(_vm.form, "name", $$v)
+                  },
+                  expression: "form.name"
+                }
+              }),
+              _vm._v(" "),
+              _c("v-textarea", {
+                staticClass: "mx-4 my-4 primary--text",
+                attrs: {
+                  outlined: "",
+                  id: "formText",
+                  height: "400",
+                  clearable: "",
+                  "auto-grow": ""
+                },
+                model: {
+                  value: _vm.form.description,
+                  callback: function($$v) {
+                    _vm.$set(_vm.form, "description", $$v)
+                  },
+                  expression: "form.description"
+                }
+              })
             ],
             1
           ),
@@ -348,6 +323,20 @@ var render = function() {
           _c(
             "v-card-actions",
             [
+              _c(
+                "v-btn",
+                {
+                  staticClass: "primary--text",
+                  attrs: { text: "" },
+                  on: {
+                    click: function($event) {
+                      return _vm.historyBack()
+                    }
+                  }
+                },
+                [_vm._v("cancel")]
+              ),
+              _vm._v(" "),
               _c("v-spacer"),
               _vm._v(" "),
               _c(

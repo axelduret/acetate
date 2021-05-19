@@ -161,6 +161,9 @@
         "edit": {
             "title": "Edition"
         },
+        "edit_avatar": {
+            "title": "Modifier l'avatar"
+        },
         "delete": {
             "title": "Suppression"
         }
