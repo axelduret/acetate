@@ -69,7 +69,7 @@ class FileController extends Controller
     // Validator rules for all submitted fields.
     $validatorRules = [
       'text' => 'required|string|min:10|max:255',
-      'user_id' => 'required|integer|digits_between:1,20',
+      'user_id' => 'required|string|max:36',
     ];
     return $validatorRules;
   }

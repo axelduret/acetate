@@ -490,12 +490,12 @@ class PersonController extends Controller
         'upload' => 'required|file',
         'name' => 'required|string|min:10|max:30',
         'type' => 'required|in:audio,video,image',
-        'user_id' => 'required|integer|digits_between:1,20',
+        'user_id' => 'required|string|max:36',
       ];
     }
     // Validate id when update method is requested.
     if ($update) {
-      $validatorRules['id'] = 'required|integer|digits_between:1,20';
+      $validatorRules['id'] = 'required|string|max:36';
     }
     return $validatorRules;
   }

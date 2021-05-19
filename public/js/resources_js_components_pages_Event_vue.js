@@ -350,7 +350,7 @@ __webpack_require__.r(__webpack_exports__);
       appURL: "http://127.0.0.1:8001",
       // Base url.
       baseURL: "/",
-      apiToken: "2|5RtanF7m7Rs2JgoSWdMhUOhD0tLBOnKV6xsrMcCi",
+      apiToken: "2|zqFKmgUsF1f5aJ8H9jZo4JkcDQDItgmdftJ2SXLh",
       renderComponent: false,
       renderCardTitle: false,
       renderToolbox: false,
@@ -1333,7 +1333,7 @@ __webpack_require__.r(__webpack_exports__);
       appURL: "http://127.0.0.1:8001",
       // Base url.
       baseURL: "/",
-      apiToken: "2|5RtanF7m7Rs2JgoSWdMhUOhD0tLBOnKV6xsrMcCi",
+      apiToken: "2|zqFKmgUsF1f5aJ8H9jZo4JkcDQDItgmdftJ2SXLh",
       query: null
     };
   },
