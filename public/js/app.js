@@ -2627,7 +2627,7 @@ var routes = [{
       auth: true
     }
   }, {
-    path: "admin/events/:id/edit",
+    path: "admin/events/edit/:id",
     name: "EditEvent",
     component: loadComponent("admin/events/Edit"),
     props: true,
@@ -2635,7 +2635,7 @@ var routes = [{
       auth: true
     }
   }, {
-    path: "admin/events/:id/delete",
+    path: "admin/events/delete/:id",
     name: "DeleteEvent",
     component: loadComponent("admin/events/Delete"),
     props: true,

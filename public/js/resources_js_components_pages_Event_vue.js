@@ -388,10 +388,10 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     editThis: function editThis(id) {
-      this.$router.push("".concat(this.baseURL).concat(this.$i18n.locale, "/admin/events/").concat(id, "/edit"));
+      this.$router.push("".concat(this.baseURL).concat(this.$i18n.locale, "/admin/events/edit/").concat(id));
     },
     deleteThis: function deleteThis(id) {
-      this.$router.push("".concat(this.baseURL).concat(this.$i18n.locale, "/admin/events/").concat(id, "/delete"));
+      this.$router.push("".concat(this.baseURL).concat(this.$i18n.locale, "/admin/events/delete/").concat(id));
     },
     logThis: function logThis(file) {
       console.log(this.appURL + this.baseURL + file.path);
