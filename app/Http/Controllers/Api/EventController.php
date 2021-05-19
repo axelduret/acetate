@@ -286,10 +286,10 @@ class EventController extends Controller
   /**
    * Display the specified event.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @return Response
    */
-  public function show(int $id)
+  public function show($id)
   {
     // Check if the event exists.
     $event = Event::find($id);
@@ -305,11 +305,11 @@ class EventController extends Controller
   /**
    * Update the specified event.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @param  Request  $request
    * @return Response
    */
-  public function update(int $id, Request $request)
+  public function update($id, Request $request)
   {
     // Validation.
     $validatorRules = $this->validators(true);
@@ -393,11 +393,11 @@ class EventController extends Controller
   /**
    * Update the specified avatar.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @param  Request  $request
    * @return Response
    */
-  public function updateAvatar(int $id, Request $request)
+  public function updateAvatar($id, Request $request)
   {
     // Load the event.
     $event = Event::find($id);
@@ -425,11 +425,11 @@ class EventController extends Controller
   /**
    * Create a new file.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @param  Request  $request
    * @return Response
    */
-  public function storeFile(int $id, Request $request)
+  public function storeFile($id, Request $request)
   {
     // Validation.
     $validatorRules = $this->validators(false, false, true);
@@ -460,11 +460,11 @@ class EventController extends Controller
   /**
    * Create a new comment.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @param  Request  $request
    * @return Response
    */
-  public function storeComment(int $id, Request $request)
+  public function storeComment($id, Request $request)
   {
     // Validation.
     $validatorRules = $this->validators(false, true);
@@ -495,10 +495,10 @@ class EventController extends Controller
   /**
    * Remove the specified event.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @return Response
    */
-  public function destroy(int $id)
+  public function destroy($id)
   {
     // Load the event.
     $event = Event::find($id);

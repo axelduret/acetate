@@ -28,10 +28,10 @@ class FileController extends Controller
   /**
    * Display the specified file.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @return Response
    */
-  public function show(int $id)
+  public function show($id)
   {
     // TODO
   }
@@ -39,10 +39,10 @@ class FileController extends Controller
   /**
    * Remove the specified file.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @return Response
    */
-  public function destroy(int $id)
+  public function destroy($id)
   {
     $file = File::find($id);
     // Check if the file exists.

@@ -65,7 +65,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     LikesCount: Number,
     Likes: Array,
-    Id: Number
+    Id: String
   },
   data: function data() {
     return {

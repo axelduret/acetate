@@ -136,7 +136,7 @@ class UserController extends Controller
   /**
    * User logout.
    *
-   * @param int $id
+   * @param string $id
    * @return Response
    */
   public function logout($id)
@@ -170,12 +170,12 @@ class UserController extends Controller
   /**
    * Display the specified user account.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @param  string  $content
    * @param  Request  $request
    * @return Response
    */
-  public function show(int $id, $content = null, Request $request)
+  public function show($id, $content = null, Request $request)
   {
     // Available types of user's contents.
     $contentField = in_array($content, $this->contents) ? $content : null;

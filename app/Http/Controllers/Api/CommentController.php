@@ -114,10 +114,10 @@ class CommentController extends Controller
   /**
    * Display the specified comment.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @return Response
    */
-  public function show(int $id)
+  public function show($id)
   {
     // Check if the comment exists.
     $comment = Comment::find($id);
@@ -133,11 +133,11 @@ class CommentController extends Controller
   /**
    * Update the specified comment.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @param  Request  $request
    * @return Response
    */
-  public function update(int $id, Request $request)
+  public function update($id, Request $request)
   {
     // Validation.
     $validatorRules = $this->validators();
@@ -170,10 +170,10 @@ class CommentController extends Controller
   /**
    * Remove the specified comment.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @return Response
    */
-  public function destroy(int $id)
+  public function destroy($id)
   {
     $comment = Comment::find($id);
     // Check if the comment exists.

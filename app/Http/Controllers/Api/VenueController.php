@@ -211,10 +211,10 @@ class VenueController extends Controller
   /**
    * Display the specified venue.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @return Response
    */
-  public function show(int $id)
+  public function show($id)
   {
     // Check if the venue exists.
     $venue = Venue::find($id);
@@ -230,11 +230,11 @@ class VenueController extends Controller
   /**
    * Update the specified venue.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @param  Request  $request
    * @return Response
    */
-  public function update(int $id, Request $request)
+  public function update($id, Request $request)
   {
     // Validation.
     $validatorRules = $this->validators(true);
@@ -311,11 +311,11 @@ class VenueController extends Controller
   /**
    * Update the specified avatar.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @param  Request  $request
    * @return Response
    */
-  public function updateAvatar(int $id, Request $request)
+  public function updateAvatar($id, Request $request)
   {
     // Load the venue.
     $venue = Venue::find($id);
@@ -343,11 +343,11 @@ class VenueController extends Controller
   /**
    * Create a new file.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @param  Request  $request
    * @return Response
    */
-  public function storeFile(int $id, Request $request)
+  public function storeFile($id, Request $request)
   {
     // Validation.
     $validatorRules = $this->validators(false, false, true);
@@ -378,11 +378,11 @@ class VenueController extends Controller
   /**
    * Create a new comment.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @param  Request  $request
    * @return Response
    */
-  public function storeComment(int $id, Request $request)
+  public function storeComment($id, Request $request)
   {
     // Validation.
     $validatorRules = $this->validators(false, true);
@@ -413,10 +413,10 @@ class VenueController extends Controller
   /**
    * Remove the specified venue.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @return Response
    */
-  public function destroy(int $id)
+  public function destroy($id)
   {
     // Load the venue.
     $venue = Venue::find($id);
