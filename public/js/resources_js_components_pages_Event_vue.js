@@ -292,6 +292,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -364,6 +376,9 @@ __webpack_require__.r(__webpack_exports__);
     },
     logThis: function logThis(file) {
       console.log(this.appURL + this.baseURL + file.path);
+    },
+    gotoEvents: function gotoEvents() {
+      this.$router.push("".concat(this.baseURL).concat(this.$i18n.locale, "/events"));
     },
     fetchAPI: function fetchAPI() {
       var _this = this;
@@ -1222,6 +1237,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
 //
 //
 //
@@ -2146,243 +2162,269 @@ var render = function() {
       _vm.event !== null
         ? _c(
             "div",
+            { staticClass: "d-flex justify-center mb-4" },
             [
-              _vm.editable()
-                ? _c(
-                    "div",
-                    { staticClass: "d-flex justify-center mb-4" },
-                    [
-                      _c(
-                        "v-btn",
-                        {
-                          staticClass: "mx-2",
-                          attrs: { text: "", outlined: "", color: "info" },
-                          on: {
-                            click: function($event) {
-                              return _vm.editThis(_vm.event.id)
-                            }
-                          }
+              _c("v-btn-toggle", { staticClass: "greybg" }, [
+                _c(
+                  "span",
+                  [
+                    _c(
+                      "v-btn",
+                      {
+                        attrs: {
+                          text: "",
+                          tile: "",
+                          outlined: "",
+                          small: "",
+                          color: "primary"
                         },
-                        [_vm._v(_vm._s(_vm.$t("admin.edit.title")))]
-                      ),
-                      _c(
-                        "v-btn",
-                        {
-                          staticClass: "mx-2",
-                          attrs: { text: "", outlined: "", color: "info" },
-                          on: {
-                            click: function($event) {
-                              _vm.$refs.AvatarDialog.avatarDialog = true
-                            }
+                        on: {
+                          click: function($event) {
+                            return _vm.gotoEvents()
                           }
-                        },
-                        [_vm._v(_vm._s(_vm.$t("admin.edit_avatar.title")))]
-                      ),
-                      _c(
-                        "v-btn",
-                        {
-                          staticClass: "mx-2",
-                          attrs: { text: "", outlined: "", color: "info" },
-                          on: {
-                            click: function($event) {
-                              return _vm.deleteThis(_vm.event.id)
-                            }
-                          }
-                        },
-                        [_vm._v(_vm._s(_vm.$t("admin.delete.title")))]
-                      )
-                    ],
-                    1
-                  )
-                : _vm._e(),
-              _vm._v(" "),
-              _c("div"),
-              _vm._v(" "),
-              _vm.overlay === false
-                ? _c(
-                    "v-card",
-                    {
-                      staticClass: "pb-4 mx-auto",
-                      attrs: { "max-width": "800px" }
-                    },
-                    [
-                      _c(
-                        "div",
-                        [
-                          _vm.renderCardTitle
-                            ? _c("CardTitle", {
-                                attrs: {
-                                  Avatar: _vm.event.avatar
-                                    ? _vm.event.avatar
-                                    : null,
-                                  Taxonomies: _vm.event.taxonomies
-                                    ? _vm.event.taxonomies
-                                    : null,
-                                  Name: _vm.event.name ? _vm.event.name : null
-                                }
-                              })
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.event.files
-                            ? _c("div", [
-                                _vm.event.files !== null &&
-                                _vm.event.files.length > 0
-                                  ? _c(
-                                      "div",
-                                      [
-                                        _c(
-                                          "v-carousel",
-                                          {
-                                            attrs: {
-                                              cycle: "",
-                                              interval: "5000",
-                                              "hide-delimiters": "",
-                                              "show-arrows-on-hover": ""
-                                            }
-                                          },
-                                          _vm._l(_vm.event.files, function(
-                                            file,
-                                            index
-                                          ) {
-                                            return _c("v-carousel-item", {
-                                              key: index,
-                                              attrs: {
-                                                src:
-                                                  _vm.appURL +
-                                                  _vm.baseURL +
-                                                  "storage/file/" +
-                                                  file.path,
-                                                title: file.name
-                                              }
-                                            })
-                                          }),
-                                          1
-                                        )
-                                      ],
-                                      1
-                                    )
-                                  : _vm._e()
-                              ])
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _vm.event.likes
-                            ? _c("Likes", {
-                                attrs: {
-                                  LikesCount: _vm.event.likes_count,
-                                  Likes: _vm.event.likes,
-                                  Id: _vm.event.id
-                                }
-                              })
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("v-divider"),
-                          _vm._v(" "),
-                          _vm.event.dates
-                            ? _c("EventDetails", {
-                                attrs: {
-                                  Description: _vm.event.description
-                                    ? _vm.event.description
-                                    : null,
-                                  CurrentDates: _vm.event.current_dates
-                                    ? _vm.event.current_dates
-                                    : null,
-                                  OldDates: _vm.event.old_dates
-                                    ? _vm.event.old_dates
-                                    : null,
-                                  People: _vm.event.people
-                                    ? _vm.event.people
-                                    : null,
-                                  Venues: _vm.event.venues
-                                    ? _vm.event.venues
-                                    : null,
-                                  Addresses: _vm.event.addresses
-                                    ? _vm.event.addresses
-                                    : null,
-                                  Prices: _vm.event.prices
-                                    ? _vm.event.prices
-                                    : null,
-                                  Emails: _vm.event.emails
-                                    ? _vm.event.emails
-                                    : null,
-                                  Phones: _vm.event.phones
-                                    ? _vm.event.phones
-                                    : null,
-                                  Websites: _vm.event.websites
-                                    ? _vm.event.websites
-                                    : null
-                                }
-                              })
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("v-divider"),
-                          _vm._v(" "),
-                          _vm.event.taxonomies
-                            ? _c("Taxonomies", {
-                                attrs: {
-                                  Taxonomies: _vm.event.taxonomies
-                                    ? _vm.event.taxonomies
-                                    : null
-                                }
-                              })
-                            : _vm._e(),
-                          _vm._v(" "),
-                          _c("v-divider"),
-                          _vm._v(" "),
-                          _vm.renderComponent
-                            ? _c("Comments", {
-                                ref: "CommentsContent",
-                                attrs: {
-                                  Comments: _vm.event.comments
-                                    ? _vm.event.comments
-                                    : null
-                                },
-                                on: {
-                                  "comment-dialog": function($event) {
-                                    _vm.$refs.CommentDialog.dialog = true
-                                  }
-                                }
-                              })
-                            : _c(
-                                "div",
-                                { staticClass: "d-flex justify-center" },
-                                [
-                                  _c("v-progress-linear", {
-                                    attrs: {
-                                      indeterminate: "",
-                                      color: _vm.$vuetify.theme.dark
-                                        ? "info"
-                                        : "info",
-                                      opacity: "0.1"
-                                    }
-                                  })
-                                ],
-                                1
-                              ),
-                          _vm._v(" "),
-                          _c("CommentDialog", {
-                            ref: "CommentDialog",
-                            attrs: { Id: _vm.event.id },
-                            on: { refreshComments: _vm.forceRerender }
-                          }),
-                          _vm._v(" "),
-                          _c("EditAvatar", {
-                            ref: "AvatarDialog",
+                        }
+                      },
+                      [_vm._v("back to events")]
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _vm.editable()
+                  ? _c(
+                      "span",
+                      [
+                        _c(
+                          "v-btn",
+                          {
                             attrs: {
-                              Id: _vm.event.id,
-                              Avatar: _vm.event.avatar ? _vm.event.avatar : null
+                              text: "",
+                              tile: "",
+                              outlined: "",
+                              small: "",
+                              color: "info"
                             },
-                            on: { refreshAvatar: _vm.rerenderCardTitle }
-                          })
-                        ],
-                        1
-                      )
-                    ]
-                  )
-                : _vm._e()
+                            on: {
+                              click: function($event) {
+                                return _vm.editThis(_vm.event.id)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(_vm.$t("admin.edit.title")))]
+                        ),
+                        _c(
+                          "v-btn",
+                          {
+                            attrs: {
+                              text: "",
+                              tile: "",
+                              outlined: "",
+                              small: "",
+                              color: "info"
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.$refs.AvatarDialog.avatarDialog = true
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(_vm.$t("admin.edit_avatar.title")))]
+                        ),
+                        _c(
+                          "v-btn",
+                          {
+                            attrs: {
+                              text: "",
+                              tile: "",
+                              outlined: "",
+                              small: "",
+                              color: "secondary"
+                            },
+                            on: {
+                              click: function($event) {
+                                return _vm.deleteThis(_vm.event.id)
+                              }
+                            }
+                          },
+                          [_vm._v(_vm._s(_vm.$t("admin.delete.title")))]
+                        )
+                      ],
+                      1
+                    )
+                  : _vm._e()
+              ])
             ],
             1
           )
         : _vm._e(),
+      _vm._v(" "),
+      _c(
+        "div",
+        [
+          _vm.overlay === false
+            ? _c(
+                "v-card",
+                {
+                  staticClass: "pb-4 mx-auto",
+                  attrs: { "max-width": "800px" }
+                },
+                [
+                  _vm.renderCardTitle
+                    ? _c("CardTitle", {
+                        attrs: {
+                          Avatar: _vm.event.avatar ? _vm.event.avatar : null,
+                          Taxonomies: _vm.event.taxonomies
+                            ? _vm.event.taxonomies
+                            : null,
+                          Name: _vm.event.name ? _vm.event.name : null
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.event.files
+                    ? _c("div", [
+                        _vm.event.files !== null && _vm.event.files.length > 0
+                          ? _c(
+                              "div",
+                              [
+                                _c(
+                                  "v-carousel",
+                                  {
+                                    attrs: {
+                                      cycle: "",
+                                      interval: "5000",
+                                      "hide-delimiters": "",
+                                      "show-arrows-on-hover": ""
+                                    }
+                                  },
+                                  _vm._l(_vm.event.files, function(
+                                    file,
+                                    index
+                                  ) {
+                                    return _c("v-carousel-item", {
+                                      key: index,
+                                      attrs: {
+                                        src:
+                                          _vm.appURL +
+                                          _vm.baseURL +
+                                          "storage/file/" +
+                                          file.path,
+                                        title: file.name
+                                      }
+                                    })
+                                  }),
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          : _vm._e()
+                      ])
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _vm.event.likes
+                    ? _c("Likes", {
+                        attrs: {
+                          LikesCount: _vm.event.likes_count,
+                          Likes: _vm.event.likes,
+                          Id: _vm.event.id
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("v-divider"),
+                  _vm._v(" "),
+                  _vm.event.dates
+                    ? _c("EventDetails", {
+                        attrs: {
+                          Description: _vm.event.description
+                            ? _vm.event.description
+                            : null,
+                          CurrentDates: _vm.event.current_dates
+                            ? _vm.event.current_dates
+                            : null,
+                          OldDates: _vm.event.old_dates
+                            ? _vm.event.old_dates
+                            : null,
+                          People: _vm.event.people ? _vm.event.people : null,
+                          Venues: _vm.event.venues ? _vm.event.venues : null,
+                          Addresses: _vm.event.addresses
+                            ? _vm.event.addresses
+                            : null,
+                          Prices: _vm.event.prices ? _vm.event.prices : null,
+                          Emails: _vm.event.emails ? _vm.event.emails : null,
+                          Phones: _vm.event.phones ? _vm.event.phones : null,
+                          Websites: _vm.event.websites
+                            ? _vm.event.websites
+                            : null
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("v-divider"),
+                  _vm._v(" "),
+                  _vm.event.taxonomies
+                    ? _c("Taxonomies", {
+                        attrs: {
+                          Taxonomies: _vm.event.taxonomies
+                            ? _vm.event.taxonomies
+                            : null
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("v-divider"),
+                  _vm._v(" "),
+                  _vm.renderComponent
+                    ? _c("Comments", {
+                        ref: "CommentsContent",
+                        attrs: {
+                          Comments: _vm.event.comments
+                            ? _vm.event.comments
+                            : null
+                        },
+                        on: {
+                          "comment-dialog": function($event) {
+                            _vm.$refs.CommentDialog.dialog = true
+                          }
+                        }
+                      })
+                    : _c(
+                        "div",
+                        { staticClass: "d-flex justify-center" },
+                        [
+                          _c("v-progress-linear", {
+                            attrs: {
+                              indeterminate: "",
+                              color: _vm.$vuetify.theme.dark ? "info" : "info",
+                              opacity: "0.1"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                  _vm._v(" "),
+                  _c("CommentDialog", {
+                    ref: "CommentDialog",
+                    attrs: { Id: _vm.event.id },
+                    on: { refreshComments: _vm.forceRerender }
+                  }),
+                  _vm._v(" "),
+                  _c("EditAvatar", {
+                    ref: "AvatarDialog",
+                    attrs: {
+                      Id: _vm.event.id,
+                      Avatar: _vm.event.avatar ? _vm.event.avatar : null
+                    },
+                    on: { refreshAvatar: _vm.rerenderCardTitle }
+                  })
+                ],
+                1
+              )
+            : _vm._e()
+        ],
+        1
+      ),
       _vm._v(" "),
       _c(
         "v-overlay",
@@ -4179,7 +4221,7 @@ var render = function() {
                   class: _vm.$vuetify.theme.dark
                     ? "primary--text"
                     : "secondary--text",
-                  attrs: { text: "" }
+                  attrs: { text: "", small: "" }
                 },
                 [
                   !_vm.likked()

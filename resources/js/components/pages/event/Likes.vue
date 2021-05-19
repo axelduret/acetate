@@ -18,6 +18,7 @@
       </span>
       <v-btn
         text
+        small
         v-else
         :class="$vuetify.theme.dark ? 'primary--text' : 'secondary--text'"
         ><span v-if="!likked()" @click="likeThis()"
