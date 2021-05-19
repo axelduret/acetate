@@ -15,7 +15,20 @@
             : appURL + baseURL + 'img/background_mountain.jpg'
         "
       > -->
-      <v-container fluid>
+      <v-container fluid
+        ><v-btn
+          v-scroll="onScroll"
+          v-show="fab"
+          fab
+          dark
+          fixed
+          bottom
+          right
+          :color="$vuetify.theme.dark ? 'primary' : 'secondary'"
+          @click="toTop"
+        >
+          <v-icon>mdi-arrow-up-thick</v-icon>
+        </v-btn>
         <router-view></router-view>
       </v-container>
       <!-- </v-img> -->
@@ -35,7 +48,18 @@ export default {
     appURL: process.env.MIX_APP_URL,
     // Base url.
     baseURL: process.env.MIX_BASE_URL,
+    fab: false,
   }),
+  methods: {
+    onScroll(e) {
+      if (typeof window === "undefined") return;
+      const top = window.pageYOffset || e.target.scrollTop || 0;
+      this.fab = top > 20;
+    },
+    toTop() {
+      this.$vuetify.goTo(0);
+    },
+  },
 };
 </script>
 

@@ -156,7 +156,7 @@ __webpack_require__.r(__webpack_exports__);
       appURL: "http://127.0.0.1:8001",
       // Base url.
       baseURL: "/",
-      apiToken: "2|PIruM8qmO9eYBfskdKv6AT9K76mLMLfd4qjqbaSk",
+      apiToken: "2|5RtanF7m7Rs2JgoSWdMhUOhD0tLBOnKV6xsrMcCi",
       renderComponent: false,
       adminButtons: [{
         name: "edit",
@@ -1088,7 +1088,7 @@ __webpack_require__.r(__webpack_exports__);
       appURL: "http://127.0.0.1:8001",
       // Base url.
       baseURL: "/",
-      apiToken: "2|PIruM8qmO9eYBfskdKv6AT9K76mLMLfd4qjqbaSk",
+      apiToken: "2|5RtanF7m7Rs2JgoSWdMhUOhD0tLBOnKV6xsrMcCi",
       query: null
     };
   },
@@ -1782,6 +1782,7 @@ var render = function() {
                                             src:
                                               _vm.appURL +
                                               _vm.baseURL +
+                                              "storage/file/" +
                                               file.path,
                                             title: file.name
                                           }

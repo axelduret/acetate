@@ -1874,6 +1874,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1888,8 +1901,19 @@ __webpack_require__.r(__webpack_exports__);
       // App url.
       appURL: "http://127.0.0.1:8001",
       // Base url.
-      baseURL: "/"
+      baseURL: "/",
+      fab: false
     };
+  },
+  methods: {
+    onScroll: function onScroll(e) {
+      if (typeof window === "undefined") return;
+      var top = window.pageYOffset || e.target.scrollTop || 0;
+      this.fab = top > 20;
+    },
+    toTop: function toTop() {
+      this.$vuetify.goTo(0);
+    }
   }
 });
 
@@ -44452,7 +44476,47 @@ var render = function() {
       _vm._v(" "),
       _c(
         "v-main",
-        [_c("v-container", { attrs: { fluid: "" } }, [_c("router-view")], 1)],
+        [
+          _c(
+            "v-container",
+            { attrs: { fluid: "" } },
+            [
+              _c(
+                "v-btn",
+                {
+                  directives: [
+                    {
+                      name: "scroll",
+                      rawName: "v-scroll",
+                      value: _vm.onScroll,
+                      expression: "onScroll"
+                    },
+                    {
+                      name: "show",
+                      rawName: "v-show",
+                      value: _vm.fab,
+                      expression: "fab"
+                    }
+                  ],
+                  attrs: {
+                    fab: "",
+                    dark: "",
+                    fixed: "",
+                    bottom: "",
+                    right: "",
+                    color: _vm.$vuetify.theme.dark ? "primary" : "secondary"
+                  },
+                  on: { click: _vm.toTop }
+                },
+                [_c("v-icon", [_vm._v("mdi-arrow-up-thick")])],
+                1
+              ),
+              _vm._v(" "),
+              _c("router-view")
+            ],
+            1
+          )
+        ],
         1
       ),
       _vm._v(" "),
