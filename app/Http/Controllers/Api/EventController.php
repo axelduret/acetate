@@ -286,10 +286,10 @@ class EventController extends Controller
   /**
    * Display the specified event.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @return Response
    */
-  public function show(int $id)
+  public function show($id)
   {
     // Check if the event exists.
     $event = Event::find($id);
@@ -305,11 +305,11 @@ class EventController extends Controller
   /**
    * Update the specified event.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @param  Request  $request
    * @return Response
    */
-  public function update(int $id, Request $request)
+  public function update($id, Request $request)
   {
     // Validation.
     $validatorRules = $this->validators(true);
@@ -393,11 +393,11 @@ class EventController extends Controller
   /**
    * Update the specified avatar.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @param  Request  $request
    * @return Response
    */
-  public function updateAvatar(int $id, Request $request)
+  public function updateAvatar($id, Request $request)
   {
     // Load the event.
     $event = Event::find($id);
@@ -425,11 +425,11 @@ class EventController extends Controller
   /**
    * Create a new file.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @param  Request  $request
    * @return Response
    */
-  public function storeFile(int $id, Request $request)
+  public function storeFile($id, Request $request)
   {
     // Validation.
     $validatorRules = $this->validators(false, false, true);
@@ -460,11 +460,11 @@ class EventController extends Controller
   /**
    * Create a new comment.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @param  Request  $request
    * @return Response
    */
-  public function storeComment(int $id, Request $request)
+  public function storeComment($id, Request $request)
   {
     // Validation.
     $validatorRules = $this->validators(false, true);
@@ -495,10 +495,10 @@ class EventController extends Controller
   /**
    * Remove the specified event.
    *
-   * @param  int  $id
+   * @param  string  $id
    * @return Response
    */
-  public function destroy(int $id)
+  public function destroy($id)
   {
     // Load the event.
     $event = Event::find($id);
@@ -561,15 +561,15 @@ class EventController extends Controller
       'name' => 'required|string|max:100',
       'description' => 'string|nullable',
       'upload' => 'file|nullable',
-      'user_id' => 'required|integer|digits_between:1,20',
+      'user_id' => 'required|string|max:36',
       'dates.*.start_date' => 'required|date',
       'dates.*.end_date' => 'required|date|after_or_equal:dates.*.start_date',
       'dates.*.start_time' => 'required|date_format:H:i:s',
       'dates.*.end_time' => 'required|date_format:H:i:s',
       'prices.*.type' => 'required|in:adult,child,family,group,primary,secondary',
       'prices.*.cost' => 'required|regex:/^\d*(\.\d{1,2})?$/|max:10',
-      'venues.*.id' => 'required|integer|digits_between:1,20',
-      'people.*.id' => 'required|integer|digits_between:1,20',
+      'venues.*.id' => 'required|string|max:36',
+      'people.*.id' => 'required|string|max:36',
       'addresses.*.type' => 'required|in:event',
       'addresses.*.street1' => 'required|string|max:100',
       'addresses.*.street2' => 'string|max:100|nullable',
@@ -593,14 +593,14 @@ class EventController extends Controller
       'websites.*.type' => 'required|in:website,social network',
       'websites.*.url' => 'required|string|max:255',
       'websites.*.name' => 'required|string|max:30',
-      'files.*.id' => 'required|integer|digits_between:1,20',
-      'taxonomies.*.id' => 'required|integer|digits_between:1,20',
+      'files.*.id' => 'required|string|max:36',
+      'taxonomies.*.id' => 'required|string|max:36',
     ];
     // Validator rules for comments.
     if ($comment) {
       $validatorRules = [
         'text' => 'required|string|min:10|max:255',
-        'user_id' => 'required|integer|digits_between:1,20',
+        'user_id' => 'required|string|max:36',
       ];
     }
     // Validator rules for files.
@@ -609,12 +609,12 @@ class EventController extends Controller
         'upload' => 'required|file',
         'name' => 'required|string|min:10|max:30',
         'type' => 'required|in:audio,video,image',
-        'user_id' => 'required|integer|digits_between:1,20',
+        'user_id' => 'required|string|max:36',
       ];
     }
     // Validate id when update method is requested.
     if ($update) {
-      $validatorRules['id'] = 'required|integer|digits_between:1,20';
+      $validatorRules['id'] = 'required|string|max:36';
     }
     return $validatorRules;
   }

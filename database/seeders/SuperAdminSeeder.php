@@ -17,7 +17,6 @@ class SuperAdminSeeder extends Seeder
   public function run()
   {
     $faker = Factory::create(config('app.faker_locale'));
-    $dir = 'storage/app/public/avatar/user';
     $admin = new User([
       'username' => env('ADMIN_USERNAME'),
       'firstname' => env('ADMIN_FIRSTNAME'),

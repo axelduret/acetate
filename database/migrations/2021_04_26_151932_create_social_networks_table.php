@@ -14,11 +14,11 @@ class CreateSocialNetworksTable extends Migration
   public function up()
   {
     Schema::create('social_networks', function (Blueprint $table) {
-      $table->id();
+      $table->uuid('id')->primary();
       $table->timestamps();
       $table->enum('type', ['twitter', 'facebook', 'instagram', 'linkedin', 'youtube', 'twitch', 'snapchat', 'reddit', 'tiktok']);
 
-      $table->unsignedBigInteger('website_id');
+      $table->uuid('website_id');
       $table->foreign('website_id')
         ->references('id')
         ->on('websites')

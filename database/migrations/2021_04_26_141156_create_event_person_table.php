@@ -15,14 +15,14 @@ class CreateEventPersonTable extends Migration
   {
     Schema::create('event_person', function (Blueprint $table) {
 
-      $table->unsignedBigInteger('event_id')->index();
+      $table->uuid('event_id')->index();
       $table->foreign('event_id')
         ->references('id')
         ->on('events')
         ->onDelete('restrict')
         ->onUpdate('restrict');
 
-      $table->unsignedBigInteger('person_id')->index();
+      $table->uuid('person_id')->index();
       $table->foreign('person_id')
         ->references('id')
         ->on('people')

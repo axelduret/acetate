@@ -14,39 +14,39 @@ class CreateLikesTable extends Migration
   public function up()
   {
     Schema::create('likes', function (Blueprint $table) {
-      $table->id();
+      $table->uuid('id')->primary();
       $table->timestamps();
       $table->boolean('is_dislike');
 
-      $table->unsignedBigInteger('user_id');
+      $table->uuid('user_id');
       $table->foreign('user_id')
         ->references('id')
         ->on('users')
         ->onDelete('cascade')
         ->onUpdate('cascade');
 
-      $table->unsignedBigInteger('event_id')->nullable();
+      $table->uuid('event_id')->nullable();
       $table->foreign('event_id')
         ->references('id')
         ->on('events')
         ->onDelete('cascade')
         ->onUpdate('cascade');
 
-      $table->unsignedBigInteger('person_id')->nullable();
+      $table->uuid('person_id')->nullable();
       $table->foreign('person_id')
         ->references('id')
         ->on('people')
         ->onDelete('cascade')
         ->onUpdate('cascade');
 
-      $table->unsignedBigInteger('venue_id')->nullable();
+      $table->uuid('venue_id')->nullable();
       $table->foreign('venue_id')
         ->references('id')
         ->on('venues')
         ->onDelete('cascade')
         ->onUpdate('cascade');
 
-      $table->unsignedBigInteger('comment_id')->nullable();
+      $table->uuid('comment_id')->nullable();
       $table->foreign('comment_id')
         ->references('id')
         ->on('comments')

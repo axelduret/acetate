@@ -53,7 +53,7 @@
 
 <script>
 export default {
-  props: { Id: Number, Avatar: String },
+  props: { Id: String, Avatar: String },
   data() {
     return {
       avatarDialog: false,

@@ -218,12 +218,12 @@ export default {
     },
     editThis: function (id) {
       this.$router.push(
-        `${this.baseURL}${this.$i18n.locale}/admin/events/${id}/edit`
+        `${this.baseURL}${this.$i18n.locale}/admin/events/edit/${id}`
       );
     },
     deleteThis: function (id) {
       this.$router.push(
-        `${this.baseURL}${this.$i18n.locale}/admin/events/${id}/delete`
+        `${this.baseURL}${this.$i18n.locale}/admin/events/delete/${id}`
       );
     },
     logThis: function (file) {

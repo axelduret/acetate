@@ -4,7 +4,7 @@
 
 <script>
 export default {
-  props: { id: Number },
+  props: { id: String },
 };
 </script>
 
