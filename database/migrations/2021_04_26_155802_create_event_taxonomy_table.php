@@ -15,14 +15,14 @@ class CreateEventTaxonomyTable extends Migration
   {
     Schema::create('event_taxonomy', function (Blueprint $table) {
 
-      $table->unsignedBigInteger('event_id')->index();
+      $table->uuid('event_id')->index();
       $table->foreign('event_id')
         ->references('id')
         ->on('events')
         ->onDelete('restrict')
         ->onUpdate('restrict');
 
-      $table->unsignedBigInteger('taxonomy_id')->index();
+      $table->uuid('taxonomy_id')->index();
       $table->foreign('taxonomy_id')
         ->references('id')
         ->on('taxonomies')

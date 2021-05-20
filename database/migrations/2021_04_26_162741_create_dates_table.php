@@ -14,14 +14,14 @@ class CreateDatesTable extends Migration
   public function up()
   {
     Schema::create('dates', function (Blueprint $table) {
-      $table->id();
+      $table->uuid('id')->primary();
       $table->timestamps();
       $table->date('start_date');
       $table->date('end_date');
       $table->time('start_time');
       $table->time('end_time');
 
-      $table->unsignedBigInteger('event_id');
+      $table->uuid('event_id');
       $table->foreign('event_id')
         ->references('id')
         ->on('events')

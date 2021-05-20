@@ -53,7 +53,7 @@ export default {
   props: {
     LikesCount: Number,
     Likes: Array,
-    Id: Number,
+    Id: String,
   },
   data() {
     return {

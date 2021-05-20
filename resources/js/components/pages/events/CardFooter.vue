@@ -41,7 +41,7 @@
 <script>
 export default {
   props: {
-    Id: Number,
+    Id: String,
     Comments: Number,
     Likes: Number,
   },

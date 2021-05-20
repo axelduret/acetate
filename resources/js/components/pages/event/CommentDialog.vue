@@ -38,7 +38,7 @@
 <script>
 export default {
   props: {
-    Id: Number,
+    Id: String,
   },
   data() {
     return {

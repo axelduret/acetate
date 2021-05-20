@@ -15,14 +15,14 @@ class CreateEventVenueTable extends Migration
   {
     Schema::create('event_venue', function (Blueprint $table) {
 
-      $table->unsignedBigInteger('event_id')->index();
+      $table->uuid('event_id')->index();
       $table->foreign('event_id')
         ->references('id')
         ->on('events')
         ->onDelete('restrict')
         ->onUpdate('restrict');
 
-      $table->unsignedBigInteger('venue_id')->index();
+      $table->uuid('venue_id')->index();
       $table->foreign('venue_id')
         ->references('id')
         ->on('venues')

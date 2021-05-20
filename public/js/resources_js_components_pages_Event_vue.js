@@ -66,7 +66,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    Id: Number,
+    Id: String,
     Avatar: String
   },
   data: function data() {
@@ -350,7 +350,7 @@ __webpack_require__.r(__webpack_exports__);
       appURL: "http://127.0.0.1:8001",
       // Base url.
       baseURL: "/",
-      apiToken: "2|5RtanF7m7Rs2JgoSWdMhUOhD0tLBOnKV6xsrMcCi",
+      apiToken: "2|swLLv5nsRLvz02L7pYaszc11sxKCvzd3lqI5jJbZ",
       renderComponent: false,
       renderCardTitle: false,
       renderToolbox: false,
@@ -388,10 +388,10 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     editThis: function editThis(id) {
-      this.$router.push("".concat(this.baseURL).concat(this.$i18n.locale, "/admin/events/").concat(id, "/edit"));
+      this.$router.push("".concat(this.baseURL).concat(this.$i18n.locale, "/admin/events/edit/").concat(id));
     },
     deleteThis: function deleteThis(id) {
-      this.$router.push("".concat(this.baseURL).concat(this.$i18n.locale, "/admin/events/").concat(id, "/delete"));
+      this.$router.push("".concat(this.baseURL).concat(this.$i18n.locale, "/admin/events/delete/").concat(id));
     },
     logThis: function logThis(file) {
       console.log(this.appURL + this.baseURL + file.path);
@@ -603,7 +603,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
-    Id: Number
+    Id: String
   },
   data: function data() {
     return {
@@ -1325,7 +1325,7 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     LikesCount: Number,
     Likes: Array,
-    Id: Number
+    Id: String
   },
   data: function data() {
     return {
@@ -1333,7 +1333,7 @@ __webpack_require__.r(__webpack_exports__);
       appURL: "http://127.0.0.1:8001",
       // Base url.
       baseURL: "/",
-      apiToken: "2|5RtanF7m7Rs2JgoSWdMhUOhD0tLBOnKV6xsrMcCi",
+      apiToken: "2|swLLv5nsRLvz02L7pYaszc11sxKCvzd3lqI5jJbZ",
       query: null
     };
   },

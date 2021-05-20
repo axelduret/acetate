@@ -15,14 +15,14 @@ class CreatePersonTaxonomyTable extends Migration
   {
     Schema::create('person_taxonomy', function (Blueprint $table) {
 
-      $table->unsignedBigInteger('person_id')->index();
+      $table->uuid('person_id')->index();
       $table->foreign('person_id')
         ->references('id')
         ->on('people')
         ->onDelete('restrict')
         ->onUpdate('restrict');
 
-      $table->unsignedBigInteger('taxonomy_id')->index();
+      $table->uuid('taxonomy_id')->index();
       $table->foreign('taxonomy_id')
         ->references('id')
         ->on('taxonomies')
