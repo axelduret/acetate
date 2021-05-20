@@ -1,4 +1,6 @@
 // vetur.config.js
+// Acetate by Axel Duret
+
 /** @type {import('vls').VeturConfig} */
 module.exports = {
     // **optional** default: `{}`
