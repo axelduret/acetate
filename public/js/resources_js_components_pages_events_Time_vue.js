@@ -23,6 +23,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     StartTime: String,
@@ -137,7 +140,7 @@ var render = function() {
             [_vm._v("mdi-clock-time-four-outline")]
           ),
           _vm._v(
-            "\n    " +
+            "\n        " +
               _vm._s(_vm._f("formatTime")(_vm.StartTime)) +
               " - " +
               _vm._s(_vm._f("formatTime")(_vm.EndTime))

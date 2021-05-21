@@ -1,10 +1,12 @@
 <template>
-    <div>{{ $t("menu.post_events.title") }}</div>
+    <div>sdsad</div>
 </template>
 
 <script>
 export default {
-    dasds
+    data() {
+        return {};
+    }
 };
 </script>
 

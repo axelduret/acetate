@@ -64,6 +64,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Id: String,
@@ -149,7 +157,7 @@ __webpack_require__.r(__webpack_exports__);
     closeDialog: function closeDialog() {
       this.errors = false;
       this.avatarDialog = false;
-      this.$emit("refreshToolbox");
+      this.refreshAll();
     }
   }
 });
@@ -250,7 +258,7 @@ var render = function() {
       _c(
         "v-dialog",
         {
-          attrs: { width: "500" },
+          attrs: { persistent: "", width: "500" },
           model: {
             value: _vm.avatarDialog,
             callback: function($$v) {
@@ -305,9 +313,9 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n              " +
+                                    "\n                            " +
                                       _vm._s(_vm.errors) +
-                                      "\n            "
+                                      "\n                        "
                                   )
                                 ]
                               )
@@ -360,7 +368,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("cancel")]
+                        [_vm._v(_vm._s(_vm.$t("button.cancel")))]
                       ),
                       _vm._v(" "),
                       _c("v-spacer"),
@@ -375,7 +383,13 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("\n            submit\n          ")]
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(_vm.$t("button.submit")) +
+                              "\n                    "
+                          )
+                        ]
                       )
                     ],
                     1

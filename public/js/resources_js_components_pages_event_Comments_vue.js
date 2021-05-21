@@ -131,6 +131,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Comments: Array
@@ -352,7 +364,7 @@ var render = function() {
                                                 comment.created_at
                                               )
                                             ) +
-                                            " |\n                  " +
+                                            "\n                                    |\n                                    " +
                                             _vm._s(
                                               _vm._f("formatStringToTime")(
                                                 comment.created_at
@@ -365,7 +377,7 @@ var render = function() {
                                     _vm._v(" "),
                                     _c("v-spacer", { staticClass: "mb-2" }),
                                     _vm._v(
-                                      "\n                " +
+                                      "\n                                " +
                                         _vm._s(comment.text)
                                     )
                                   ],
@@ -391,7 +403,7 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                    mdi-thumb-up"
+                                              "\n                                        mdi-thumb-up"
                                             )
                                           ]
                                         ),
@@ -421,7 +433,7 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                    mdi-thumb-down "
+                                              "\n                                        mdi-thumb-down "
                                             )
                                           ]
                                         ),

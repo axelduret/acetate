@@ -59,6 +59,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     People: Array
@@ -227,7 +233,7 @@ var render = function() {
                                 },
                                 [_vm._v(_vm._s(person.nickname))]
                               ),
-                              _vm._v(",\n          ")
+                              _vm._v(",\n                    ")
                             ])
                           : _vm._e(),
                         _vm._v(" "),
@@ -282,7 +288,8 @@ var render = function() {
                   { attrs: { title: _vm.$t("page.events.no_people_title") } },
                   [
                     _vm._v(
-                      "\n        " + _vm._s(_vm.$t("page.events.no_people"))
+                      "\n                " +
+                        _vm._s(_vm.$t("page.events.no_people"))
                     )
                   ]
                 )

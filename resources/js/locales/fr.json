@@ -167,5 +167,11 @@
         "delete": {
             "title": "Suppression"
         }
+    },
+    "button": {
+        "back": { "events": "retour vers événements" },
+        "cancel": "annuler",
+        "submit": "envoyer",
+        "confirm": "confirmer"
     }
 }

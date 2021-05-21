@@ -40,6 +40,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -49,11 +53,15 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       appURL: "http://127.0.0.1:8001",
       // Base url.
       baseURL: "/",
-      errors: false
+      errors: false,
+      form: {
+        id: localStorage.getItem("user_id")
+      }
     };
   },
   methods: _objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)({
     setId: "user/setId",
+    setUserLogged: "account/setUserLogged",
     setUsername: "user/setUsername",
     setFirstname: "user/setFirstname",
     setLastname: "user/setLastname",
@@ -66,58 +74,54 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     setAbilities: "user/setAbilities"
   })),
   computed: (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
-    getUserFields: "user/getUserFields"
+    getUserFields: "user/getUserFields",
+    getUserLogged: "account/getUserLogged"
   }),
   // Logout request.
   mounted: function mounted() {
     var _this = this;
 
-    if (localStorage.getItem("user_id") !== null) {
-      axios.post(this.baseURL + "api/logout/" + localStorage.getItem("user_id")).then(function () {
-        // Clear localStorage.
-        localStorage.removeItem("user_id");
-        localStorage.removeItem("user_username");
-        localStorage.removeItem("user_firstname");
-        localStorage.removeItem("user_lastname");
-        localStorage.removeItem("user_email");
-        localStorage.removeItem("user_language");
-        localStorage.removeItem("user_avatar");
-        localStorage.removeItem("user_api_token");
-        localStorage.removeItem("user_role");
-        localStorage.removeItem("user_abilities"); // Clear vuex store.
+    axios.post(this.baseURL + "api/logout", this.form).then(function () {
+      // Clear localStorage.
+      localStorage.removeItem("user_id");
+      localStorage.removeItem("user_username");
+      localStorage.removeItem("user_firstname");
+      localStorage.removeItem("user_lastname");
+      localStorage.removeItem("user_email");
+      localStorage.removeItem("user_language");
+      localStorage.removeItem("user_avatar");
+      localStorage.removeItem("user_api_token");
+      localStorage.removeItem("user_role");
+      localStorage.removeItem("user_abilities"); // Clear vuex store.
 
-        _this.setId(null);
+      _this.setUserLogged(null);
 
-        _this.setUsername(null);
+      _this.setId(null);
 
-        _this.setFirstname(null);
+      _this.setUsername(null);
 
-        _this.setLastname(null);
+      _this.setFirstname(null);
 
-        _this.setEmail(null);
+      _this.setLastname(null);
 
-        _this.setLanguage(null);
+      _this.setEmail(null);
 
-        _this.setAvatar(null);
+      _this.setLanguage(null);
 
-        _this.setApiToken(null);
+      _this.setAvatar(null);
 
-        _this.setRole(null);
+      _this.setApiToken(null);
 
-        _this.setAbilities(null); // Redirect to home route.
-        //this.$router.push(`${this.baseURL}${this.$i18n.locale}/home`);
+      _this.setRole(null);
 
+      _this.setAbilities(null);
 
-        _this.$router.go(-1);
-      })["catch"](function (errors) {
-        // Returns errors.
-        _this.overlay = false;
-        _this.errors = _this.$t("errors.logout.wrong");
-      })["finally"](function () {});
-    } else {
-      this.overlay = false;
-      this.errors = this.$t("errors.logout.null");
-    }
+      _this.$router.go(-1);
+    })["catch"](function (errors) {
+      // Returns errors.
+      _this.overlay = false;
+      _this.errors = _this.$t("errors.logout.wrong");
+    })["finally"](function () {});
   }
 });
 
@@ -218,7 +222,7 @@ var render = function() {
         ? _c(
             "div",
             { staticClass: "error my-1 px-4 white--text py-2 rounded" },
-            [_vm._v("\n    " + _vm._s(_vm.errors) + "\n  ")]
+            [_vm._v("\n        " + _vm._s(_vm.errors) + "\n    ")]
           )
         : _vm._e(),
       _vm._v(" "),

@@ -32,6 +32,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     StartDate: String,
@@ -147,7 +153,9 @@ var render = function() {
                 [_vm._v("mdi-calendar-blank")]
               ),
               _vm._v(
-                "\n    " + _vm._s(_vm._f("formatDate")(_vm.StartDate)) + "\n  "
+                "\n        " +
+                  _vm._s(_vm._f("formatDate")(_vm.StartDate)) +
+                  "\n    "
               )
             ],
             1
@@ -169,13 +177,13 @@ var render = function() {
                 [_vm._v("mdi-calendar-blank-multiple")]
               ),
               _vm._v(
-                "\n    " +
+                "\n        " +
                   _vm._s(_vm.$t("page.events.From")) +
-                  "\n    " +
+                  "\n        " +
                   _vm._s(_vm._f("formatMultipleDates")(_vm.StartDate)) +
-                  "\n    " +
+                  "\n        " +
                   _vm._s(_vm.$t("page.events.to")) +
-                  "\n    " +
+                  "\n        " +
                   _vm._s(_vm._f("formatMultipleDates")(_vm.EndDate))
               )
             ],

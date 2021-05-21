@@ -397,6 +397,141 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Description: String,
@@ -585,7 +720,7 @@ var render = function() {
                 [
                   _vm._v(
                     _vm._s(_vm.$t("page.event.title.description")) +
-                      "\n        "
+                      "\n                "
                   )
                 ]
               ),
@@ -604,7 +739,7 @@ var render = function() {
                     )
                   : _c("span", [
                       _vm._v(
-                        "\n          " +
+                        "\n                    " +
                           _vm._s(_vm.$t("page.event.description_none"))
                       )
                     ])
@@ -636,7 +771,8 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    _vm._s(_vm.$t("page.event.title.dates")) + "\n        "
+                    _vm._s(_vm.$t("page.event.title.dates")) +
+                      "\n                "
                   )
                 ]
               ),
@@ -879,7 +1015,7 @@ var render = function() {
                                   ? _c("span", [
                                       _vm._v(
                                         _vm._s(person.firstname) +
-                                          " " +
+                                          "\n                                " +
                                           _vm._s(person.lastname)
                                       )
                                     ])
@@ -1019,17 +1155,17 @@ var render = function() {
                                               },
                                               [
                                                 _vm._v(
-                                                  "\n                  " +
+                                                  "\n                                    " +
                                                     _vm._s(address.street1) +
-                                                    ", \n                  " +
+                                                    ",\n                                    " +
                                                     _vm._s(address.zip) +
                                                     " " +
                                                     _vm._s(address.city) +
-                                                    ", \n                  " +
+                                                    ",\n                                    " +
                                                     _vm._s(address.canton) +
-                                                    ",\n                  " +
+                                                    ",\n                                    " +
                                                     _vm._s(address.country) +
-                                                    "\n                "
+                                                    "\n                                "
                                                 )
                                               ]
                                             ),
@@ -1095,17 +1231,17 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n              " +
+                                      "\n                            " +
                                         _vm._s(address.street1) +
-                                        ",  " +
+                                        ", " +
                                         _vm._s(address.zip) +
-                                        "\n              " +
+                                        "\n                            " +
                                         _vm._s(address.city) +
-                                        ",\n              " +
+                                        ", " +
                                         _vm._s(address.canton) +
-                                        ", \n              " +
+                                        ",\n                            " +
                                         _vm._s(address.country) +
-                                        "\n            "
+                                        "\n                        "
                                     )
                                   ]
                                 ),
@@ -1153,15 +1289,17 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        _vm._s(_vm.$t("page.event.title.prices")) + "\n        "
+                        _vm._s(_vm.$t("page.event.title.prices")) +
+                          "\n                "
                       )
                     ]
                   ),
                   _vm._v(" "),
-                  _c(
-                    "v-expansion-panel-content",
-                    [
-                      _c("span", { staticClass: "subtitle-2" }, [
+                  _c("v-expansion-panel-content", [
+                    _c(
+                      "span",
+                      { staticClass: "subtitle-2" },
+                      [
                         _c(
                           "span",
                           {
@@ -1188,7 +1326,7 @@ var render = function() {
                                   [_vm._v("mdi-cash-usd-outline")]
                                 ),
                                 _vm._v(
-                                  "\n                " +
+                                  "\n                            " +
                                     _vm._s(price.cost) +
                                     " chf (" +
                                     _vm._s(price.type) +
@@ -1200,12 +1338,13 @@ var render = function() {
                             )
                           }),
                           0
-                        )
-                      ]),
-                      _c("v-spacer")
-                    ],
-                    1
-                  )
+                        ),
+                        _vm._v(" "),
+                        _c("v-spacer")
+                      ],
+                      1
+                    )
+                  ])
                 ],
                 1
               )
@@ -1278,9 +1417,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n              " +
+                                  "\n                            " +
                                     _vm._s(email.address) +
-                                    "\n            "
+                                    "\n                        "
                                 )
                               ]
                             ),
@@ -1294,9 +1433,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n              (" +
+                                  "\n                            (" +
                                     _vm._s(email.type) +
-                                    ")\n            "
+                                    ")\n                        "
                                 )
                               ]
                             ),
@@ -1373,9 +1512,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n              " +
+                                  "\n                            " +
                                     _vm._s(phone.number) +
-                                    "\n            "
+                                    "\n                        "
                                 )
                               ]
                             ),
@@ -1389,9 +1528,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n              (" +
+                                  "\n                            (" +
                                     _vm._s(phone.type) +
-                                    ")\n            "
+                                    ")\n                        "
                                 )
                               ]
                             ),
@@ -1502,7 +1641,7 @@ var render = function() {
                                                 _vm._s(
                                                   website.social_network.type
                                                 ) +
-                                                "\n              "
+                                                "\n                            "
                                             )
                                           ]
                                         )
@@ -1528,9 +1667,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n              " +
+                                  "\n                            " +
                                     _vm._s(website.url) +
-                                    "\n            "
+                                    "\n                        "
                                 )
                               ]
                             ),

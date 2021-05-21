@@ -128,7 +128,9 @@ var render = function() {
           _c("v-col", [
             _c("code", { staticClass: "primary--text" }, [
               _vm._v(
-                "\n        " + _vm._s(_vm.$t("page.home.title")) + "\n      "
+                "\n                " +
+                  _vm._s(_vm.$t("page.home.title")) +
+                  "\n            "
               )
             ])
           ])

@@ -115,6 +115,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -209,6 +234,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -347,6 +386,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Name: String,
@@ -395,6 +441,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     StartDate: String,
@@ -415,6 +467,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -524,6 +582,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Prices: Array
@@ -543,6 +607,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
 //
 //
 //
@@ -611,6 +677,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     StartTime: String,
@@ -631,6 +700,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1621,7 +1696,7 @@ var render = function() {
                 staticStyle: { "margin-bottom": "0.05rem" },
                 attrs: { dark: "", small: "" }
               },
-              [_vm._v("\n        mdi-comment-outline ")]
+              [_vm._v("\n                mdi-comment-outline ")]
             ),
             _c("span", { staticClass: "subtitle-2" }, [
               _vm._v(_vm._s(_vm.Comments) + " ")
@@ -1646,7 +1721,7 @@ var render = function() {
                 staticStyle: { "margin-bottom": "0.05rem" },
                 attrs: { dark: "", small: "" }
               },
-              [_vm._v("\n        mdi-heart-outline ")]
+              [_vm._v("\n                mdi-heart-outline ")]
             ),
             _c("span", { staticClass: "subtitle-2" }, [
               _vm._v(_vm._s(_vm.Likes))
@@ -1814,7 +1889,7 @@ var render = function() {
                             },
                             [
                               _vm._v(
-                                "\n              mdi-star-outline\n            "
+                                "\n                            mdi-star-outline\n                        "
                               )
                             ]
                           )
@@ -1831,7 +1906,7 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("v-list-item-title", { staticClass: "title primary--text mb-1" }, [
-            _vm._v(_vm._s(_vm.Name) + "\n    ")
+            _vm._v(_vm._s(_vm.Name) + "\n        ")
           ])
         ],
         1
@@ -1881,7 +1956,9 @@ var render = function() {
                 [_vm._v("mdi-calendar-blank")]
               ),
               _vm._v(
-                "\n    " + _vm._s(_vm._f("formatDate")(_vm.StartDate)) + "\n  "
+                "\n        " +
+                  _vm._s(_vm._f("formatDate")(_vm.StartDate)) +
+                  "\n    "
               )
             ],
             1
@@ -1903,13 +1980,13 @@ var render = function() {
                 [_vm._v("mdi-calendar-blank-multiple")]
               ),
               _vm._v(
-                "\n    " +
+                "\n        " +
                   _vm._s(_vm.$t("page.events.From")) +
-                  "\n    " +
+                  "\n        " +
                   _vm._s(_vm._f("formatMultipleDates")(_vm.StartDate)) +
-                  "\n    " +
+                  "\n        " +
                   _vm._s(_vm.$t("page.events.to")) +
-                  "\n    " +
+                  "\n        " +
                   _vm._s(_vm._f("formatMultipleDates")(_vm.EndDate))
               )
             ],
@@ -2003,7 +2080,7 @@ var render = function() {
                                 },
                                 [_vm._v(_vm._s(person.nickname))]
                               ),
-                              _vm._v(",\n          ")
+                              _vm._v(",\n                    ")
                             ])
                           : _vm._e(),
                         _vm._v(" "),
@@ -2058,7 +2135,8 @@ var render = function() {
                   { attrs: { title: _vm.$t("page.events.no_people_title") } },
                   [
                     _vm._v(
-                      "\n        " + _vm._s(_vm.$t("page.events.no_people"))
+                      "\n                " +
+                        _vm._s(_vm.$t("page.events.no_people"))
                     )
                   ]
                 )
@@ -2165,7 +2243,8 @@ var render = function() {
                   { attrs: { title: _vm.$t("page.events.no_prices_title") } },
                   [
                     _vm._v(
-                      "\n        " + _vm._s(_vm.$t("page.events.no_prices"))
+                      "\n                " +
+                        _vm._s(_vm.$t("page.events.no_prices"))
                     )
                   ]
                 )
@@ -2334,7 +2413,7 @@ var render = function() {
             [_vm._v("mdi-clock-time-four-outline")]
           ),
           _vm._v(
-            "\n    " +
+            "\n        " +
               _vm._s(_vm._f("formatTime")(_vm.StartTime)) +
               " - " +
               _vm._s(_vm._f("formatTime")(_vm.EndTime))
@@ -2430,7 +2509,8 @@ var render = function() {
                   { attrs: { title: _vm.$t("page.events.no_venues_title") } },
                   [
                     _vm._v(
-                      "\n        " + _vm._s(_vm.$t("page.events.no_venues"))
+                      "\n                " +
+                        _vm._s(_vm.$t("page.events.no_venues"))
                     )
                   ]
                 )

@@ -167,5 +167,11 @@
         "delete": {
             "title": "Delete"
         }
+    },
+    "button": {
+        "back": { "events": "back to events" },
+        "cancel": "cancel",
+        "submit": "submit",
+        "confirm": "confirm"
     }
 }

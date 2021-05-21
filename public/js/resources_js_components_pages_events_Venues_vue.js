@@ -38,6 +38,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Venues: Array
@@ -207,7 +213,8 @@ var render = function() {
                   { attrs: { title: _vm.$t("page.events.no_venues_title") } },
                   [
                     _vm._v(
-                      "\n        " + _vm._s(_vm.$t("page.events.no_venues"))
+                      "\n                " +
+                        _vm._s(_vm.$t("page.events.no_venues"))
                     )
                   ]
                 )

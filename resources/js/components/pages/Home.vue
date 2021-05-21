@@ -1,22 +1,21 @@
 <template>
-  <div>
-    <v-row>
-      <v-col>
-        <code class="primary--text">
-          {{ $t("page.home.title") }}
-        </code>
-      </v-col>
-    </v-row>
-  </div>
+    <div>
+        <v-row>
+            <v-col>
+                <code class="primary--text">
+                    {{ $t("page.home.title") }}
+                </code>
+            </v-col>
+        </v-row>
+    </div>
 </template>
 
 <script>
 export default {
-  data() {
-    return {};
-  },
+    data() {
+        return {};
+    }
 };
 </script>
-  
-<style>
-</style>
+
+<style></style>

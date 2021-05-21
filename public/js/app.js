@@ -1951,6 +1951,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -2120,6 +2122,42 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
@@ -2141,19 +2179,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       accountMenuTitle: "account-menu.title",
       themeSwitch: true,
       language: null,
-      avatar: null
+      avatar: null,
+      apiToken: null
     };
   },
   computed: // Get states from vuex store.
   (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapGetters)({
     getLang: "getLang",
-    getAccountMenu: "getAccountMenu",
+    getAccountMenuLogged: "account/getAccountMenuLogged",
+    getAccountMenuUnlogged: "account/getAccountMenuUnlogged",
+    getUserLogged: "account/getUserLogged",
     getUserFields: "user/getUserFields"
   }),
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_1__.mapActions)({
     setLanguage: "user/setLanguage",
     setTheme: "user/setTheme",
-    setAvatar: "user/setAvatar"
+    setAvatar: "user/setAvatar",
+    setUserLogged: "account/setUserLogged"
   })), {}, {
     // Theme switch.
     themeSwitcher: function themeSwitcher() {
@@ -2245,6 +2287,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       immediate: true
     }); // Set Avatar path in store.
 
+    this.apiToken = localStorage.getItem("user_api_token");
+    !!this.apiToken ? this.setUserLogged(this.apiToken) : null; // Set Avatar path in store.
+
     this.avatar = localStorage.getItem("user_avatar");
     !!this.avatar ? this.setAvatar(this.avatar) : null; // TODO Set locale in store.
 
@@ -2267,6 +2312,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2701,32 +2764,55 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
 var state = {
-  accountMenu: [{
-    title: "account-menu.login.title",
-    path: "login"
-  }, {
-    title: "account-menu.register.title",
-    path: "register"
-  }, {
-    title: "account-menu.logout.title",
-    path: "logout"
-  }, {
-    title: "account-menu.dashboard.title",
-    path: "dashboard"
-  }]
-};
-var getters = {
-  getAccountMenu: function getAccountMenu(state) {
-    return state.accountMenu;
+  userLogged: null,
+  accountMenu: {
+    logged: [{
+      title: "account-menu.logout.title",
+      path: "logout"
+    }, {
+      title: "account-menu.dashboard.title",
+      path: "dashboard"
+    }],
+    unlogged: [{
+      title: "account-menu.login.title",
+      path: "login"
+    }, {
+      title: "account-menu.register.title",
+      path: "register"
+    }]
   }
 };
-var actions = {};
-var mutations = {};
+var getters = {
+  getAccountMenuLogged: function getAccountMenuLogged(state) {
+    return state.accountMenu.logged;
+  },
+  getAccountMenuUnlogged: function getAccountMenuUnlogged(state) {
+    return state.accountMenu.unlogged;
+  },
+  getUserLogged: function getUserLogged(state) {
+    return state.userLogged;
+  }
+};
+var actions = {
+  setUserLogged: function setUserLogged(_ref, userLogged) {
+    var commit = _ref.commit;
+    commit({
+      type: "setUserLogged",
+      userLogged: userLogged
+    });
+  }
+};
+var mutations = {
+  setUserLogged: function setUserLogged(state, payload) {
+    state.userLogged = payload;
+  }
+};
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   state: state,
   getters: getters,
   actions: actions,
-  mutations: mutations
+  mutations: mutations,
+  namespaced: true
 });
 
 /***/ }),
@@ -2977,7 +3063,7 @@ vue__WEBPACK_IMPORTED_MODULE_3__.default.use(vuex__WEBPACK_IMPORTED_MODULE_4__.d
   modules: {
     user: _modules_user__WEBPACK_IMPORTED_MODULE_0__.default,
     menu: _modules_menu__WEBPACK_IMPORTED_MODULE_1__.default,
-    accountMenu: _modules_account__WEBPACK_IMPORTED_MODULE_2__.default
+    account: _modules_account__WEBPACK_IMPORTED_MODULE_2__.default
   }
 }));
 
@@ -44573,7 +44659,11 @@ var render = function() {
             },
             [
               _c("v-icon", [
-                _vm._v("\n        " + _vm._s(socialNetwork.icon) + "\n      ")
+                _vm._v(
+                  "\n                " +
+                    _vm._s(socialNetwork.icon) +
+                    "\n            "
+                )
               ])
             ],
             1
@@ -44660,7 +44750,7 @@ var render = function() {
                         ? "primary--text"
                         : "secondary--text"
                     },
-                    [_vm._v("\n          " + _vm._s(_vm.appName))]
+                    [_vm._v("\n                    " + _vm._s(_vm.appName))]
                   )
                 ],
                 1
@@ -44853,27 +44943,60 @@ var render = function() {
                 },
                 [
                   _vm._v(" "),
-                  _c(
-                    "v-list",
-                    _vm._l(_vm.getAccountMenu, function(item, index) {
-                      return _c(
-                        "v-list-item",
-                        {
-                          key: index,
-                          attrs: {
-                            to: _vm.baseURL + _vm.$i18n.locale + "/" + item.path
-                          }
-                        },
-                        [
-                          _c("v-list-item-title", [
-                            _vm._v(_vm._s(_vm.$t(item.title)))
-                          ])
-                        ],
+                  _vm.getUserLogged != null
+                    ? _c(
+                        "v-list",
+                        _vm._l(_vm.getAccountMenuLogged, function(item, index) {
+                          return _c(
+                            "v-list-item",
+                            {
+                              key: index,
+                              attrs: {
+                                to:
+                                  _vm.baseURL +
+                                  _vm.$i18n.locale +
+                                  "/" +
+                                  item.path
+                              }
+                            },
+                            [
+                              _c("v-list-item-title", [
+                                _vm._v(_vm._s(_vm.$t(item.title)))
+                              ])
+                            ],
+                            1
+                          )
+                        }),
                         1
                       )
-                    }),
-                    1
-                  )
+                    : _c(
+                        "v-list",
+                        _vm._l(_vm.getAccountMenuUnlogged, function(
+                          item,
+                          index
+                        ) {
+                          return _c(
+                            "v-list-item",
+                            {
+                              key: index,
+                              attrs: {
+                                to:
+                                  _vm.baseURL +
+                                  _vm.$i18n.locale +
+                                  "/" +
+                                  item.path
+                              }
+                            },
+                            [
+                              _c("v-list-item-title", [
+                                _vm._v(_vm._s(_vm.$t(item.title)))
+                              ])
+                            ],
+                            1
+                          )
+                        }),
+                        1
+                      )
                 ],
                 1
               )
@@ -44973,7 +45096,11 @@ var render = function() {
                             ? "primary--text"
                             : "secondary--text"
                         },
-                        [_vm._v("\n            " + _vm._s(_vm.appName))]
+                        [
+                          _vm._v(
+                            "\n                        " + _vm._s(_vm.appName)
+                          )
+                        ]
                       )
                     ],
                     1
@@ -107684,6 +107811,14 @@ var map = {
 		"./resources/js/components/admin/events/Post.vue",
 		"resources_js_components_admin_events_Post_vue"
 	],
+	"./admin/events/Store.vue": [
+		"./resources/js/components/admin/events/Store.vue",
+		"resources_js_components_admin_events_Store_vue"
+	],
+	"./auth/Dashboard.vue": [
+		"./resources/js/components/auth/Dashboard.vue",
+		"resources_js_components_auth_Dashboard_vue"
+	],
 	"./auth/Login.vue": [
 		"./resources/js/components/auth/Login.vue",
 		"resources_js_components_auth_Login_vue"
@@ -107712,10 +107847,6 @@ var map = {
 	],
 	"./layout/Sidebar.vue": [
 		"./resources/js/components/layout/Sidebar.vue"
-	],
-	"./pages/Dashboard.vue": [
-		"./resources/js/components/pages/Dashboard.vue",
-		"resources_js_components_pages_Dashboard_vue"
 	],
 	"./pages/Event.vue": [
 		"./resources/js/components/pages/Event.vue",
@@ -107825,7 +107956,7 @@ module.exports = webpackAsyncContext;
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"lang":{"en":"English","fr":"French","switcher":{"title":"Language"}},"theme":{"switcher":{"light-title":"Light theme","dark-title":"Dark theme"}},"loading":"Loading","menu":{"home":{"title":"Home"},"events":{"title":"Events"},"post_events":{"title":"Post an event"},"people":{"title":"People"},"venues":{"title":"Venues"},"users":{"title":"Users"}},"account-menu":{"title":"Personal account","login":{"title":"Login"},"register":{"title":"Register"},"logout":{"title":"Logout"},"dashboard":{"title":"Dashboard"}},"page":{"home":{"title":"Welcome !","description":"..."},"events":{"title":"Welcome !","description":"...","no_people":"none","no_people_title":"No person to display","no_venues":"none","no_venues_title":"No venue to display","no_taxonomies":"none","no_taxonomies_title":"No tag to display","no_prices":"none","no_prices_title":"No price to display","more_info":"more info","details":"details","From":"From","to":"to","tabs":{"all":"all","conference":"conference","exhibition":"exhibition","music":"music","theater":"theater"}},"event":{"description_none":"No description found for this event.","title":{"description":"Description","dates":"Schedule","current_dates":"Current Dates","old_dates":"Past Dates","start_date":"Start Date","end_date":"End Date","start_time":"Start Time","end_time":"End Time","attendance":"Attendance","locations":"Location","prices":"Prices","emails":"Email","phones":"Phone","websites":"Website","google_map":"View on Google map.","email":"Send an email."},"comment":{"post":"post a comment"}},"people":{"title":"Welcome !","description":"..."},"venues":{"title":"Welcome !","description":"..."},"users":{"title":"Welcome !","description":"..."},"dashboard":{"title":"Dashboard","description":"..."},"error":{"notFound":{"title":"Page not found.","description":"..."},"unauthorized":{"title":"Unauthenticated.","description":"..."}}},"taxonomy":{"type":{"conference":"conference","exhibition":"exhibition","music":"music","theater":"theater"}},"price":{"free":"free entry"},"form":{"label":{"email":"Email","password":"Password"}},"errors":{"login":{"message":"Wrong email or password."},"logout":{"wrong":"Wrong user id.","null":"User id cannot be null."},"comment":{"message":"Text must contain at least 10 characters."}},"not_logged_in":"Connection required.","admin":{"edit":{"title":"Edit"},"edit_avatar":{"title":"Update avatar"},"delete":{"title":"Delete"}}}');
+module.exports = JSON.parse('{"lang":{"en":"English","fr":"French","switcher":{"title":"Language"}},"theme":{"switcher":{"light-title":"Light theme","dark-title":"Dark theme"}},"loading":"Loading","menu":{"home":{"title":"Home"},"events":{"title":"Events"},"post_events":{"title":"Post an event"},"people":{"title":"People"},"venues":{"title":"Venues"},"users":{"title":"Users"}},"account-menu":{"title":"Personal account","login":{"title":"Login"},"register":{"title":"Register"},"logout":{"title":"Logout"},"dashboard":{"title":"Dashboard"}},"page":{"home":{"title":"Welcome !","description":"..."},"events":{"title":"Welcome !","description":"...","no_people":"none","no_people_title":"No person to display","no_venues":"none","no_venues_title":"No venue to display","no_taxonomies":"none","no_taxonomies_title":"No tag to display","no_prices":"none","no_prices_title":"No price to display","more_info":"more info","details":"details","From":"From","to":"to","tabs":{"all":"all","conference":"conference","exhibition":"exhibition","music":"music","theater":"theater"}},"event":{"description_none":"No description found for this event.","title":{"description":"Description","dates":"Schedule","current_dates":"Current Dates","old_dates":"Past Dates","start_date":"Start Date","end_date":"End Date","start_time":"Start Time","end_time":"End Time","attendance":"Attendance","locations":"Location","prices":"Prices","emails":"Email","phones":"Phone","websites":"Website","google_map":"View on Google map.","email":"Send an email."},"comment":{"post":"post a comment"}},"people":{"title":"Welcome !","description":"..."},"venues":{"title":"Welcome !","description":"..."},"users":{"title":"Welcome !","description":"..."},"dashboard":{"title":"Dashboard","description":"..."},"error":{"notFound":{"title":"Page not found.","description":"..."},"unauthorized":{"title":"Unauthenticated.","description":"..."}}},"taxonomy":{"type":{"conference":"conference","exhibition":"exhibition","music":"music","theater":"theater"}},"price":{"free":"free entry"},"form":{"label":{"email":"Email","password":"Password"}},"errors":{"login":{"message":"Wrong email or password."},"logout":{"wrong":"Wrong user id.","null":"User id cannot be null."},"comment":{"message":"Text must contain at least 10 characters."}},"not_logged_in":"Connection required.","admin":{"edit":{"title":"Edit"},"edit_avatar":{"title":"Update avatar"},"delete":{"title":"Delete"}},"button":{"back":{"events":"back to events"},"cancel":"cancel","submit":"submit","confirm":"confirm"}}');
 
 /***/ }),
 
@@ -107836,7 +107967,7 @@ module.exports = JSON.parse('{"lang":{"en":"English","fr":"French","switcher":{"
 /***/ ((module) => {
 
 "use strict";
-module.exports = JSON.parse('{"lang":{"en":"Anglais","fr":"Français","switcher":{"title":"Traduction"}},"theme":{"switcher":{"light-title":"Thème clair","dark-title":"Thème sombre"}},"loading":"Chargement","menu":{"home":{"title":"Accueil"},"events":{"title":"Événements"},"post_events":{"title":"Ajouter un événement"},"people":{"title":"Personnes"},"venues":{"title":"Lieux"},"users":{"title":"Utilisateurs"}},"account-menu":{"title":"Compte personnel","login":{"title":"Connexion"},"register":{"title":"Inscription"},"logout":{"title":"Déconnexion"},"dashboard":{"title":"Tableau de bord"}},"page":{"home":{"title":"Bienvenue !","description":"..."},"events":{"title":"Bienvenue !","description":"...","no_people":"aucun","no_people_title":"Aucune personne à afficher","no_venues":"aucun","no_venues_title":"Aucun lieu à afficher","no_taxonomies":"aucun","no_taxonomies_title":"Aucune étiquette à afficher","no_prices":"aucun","no_prices_title":"Aucun prix à afficher","more_info":"plus d\'infos","details":"détails","From":"Du","to":"au","tabs":{"all":"tous","conference":"conférence","exhibition":"exposition","music":"musique","theater":"théâtre"}},"event":{"description_none":"Aucune description à afficher pour cet événement.","title":{"description":"Description","dates":"Horaires","current_dates":"Prochaines Dates","old_dates":"Anciennes Dates","start_date":"Date de Début","end_date":"Date de Fin","start_time":"Heure de Début","end_time":"Heure de Fin","attendance":"Intervenants","locations":"Localisation","prices":"Tarifs","emails":"Email","phones":"Téléphone","websites":"Site internet","google_map":"Visualiser sur Google map.","email":"Envoyer un email."},"comment":{"post":"ajouter un commentaire"}},"people":{"title":"Bienvenue !","description":"..."},"venues":{"title":"Bienvenue !","description":"..."},"users":{"title":"Bienvenue !","description":"..."},"dashboard":{"title":"Mon compte","description":"..."},"error":{"notFound":{"title":"Page non trouvée.","description":"..."},"unauthorized":{"title":"Non authentifié.","description":"..."}}},"taxonomy":{"type":{"conference":"conférence","exhibition":"exposition","music":"musique","theater":"théâtre"}},"price":{"free":"entrée libre"},"form":{"label":{"email":"Email","password":"Mot de passe"}},"errors":{"login":{"message":"Email ou mot de passe invalide."},"logout":{"wrong":"Identifiant de l\'utilisateur non valide.","null":"Identifiant de l\'utilisateur non valide."},"comment":{"message":"Le texte doit comprendre 10 caractères au minimum."}},"not_logged_in":"Connexion requise.","admin":{"edit":{"title":"Edition"},"edit_avatar":{"title":"Modifier l\'avatar"},"delete":{"title":"Suppression"}}}');
+module.exports = JSON.parse('{"lang":{"en":"Anglais","fr":"Français","switcher":{"title":"Traduction"}},"theme":{"switcher":{"light-title":"Thème clair","dark-title":"Thème sombre"}},"loading":"Chargement","menu":{"home":{"title":"Accueil"},"events":{"title":"Événements"},"post_events":{"title":"Ajouter un événement"},"people":{"title":"Personnes"},"venues":{"title":"Lieux"},"users":{"title":"Utilisateurs"}},"account-menu":{"title":"Compte personnel","login":{"title":"Connexion"},"register":{"title":"Inscription"},"logout":{"title":"Déconnexion"},"dashboard":{"title":"Tableau de bord"}},"page":{"home":{"title":"Bienvenue !","description":"..."},"events":{"title":"Bienvenue !","description":"...","no_people":"aucun","no_people_title":"Aucune personne à afficher","no_venues":"aucun","no_venues_title":"Aucun lieu à afficher","no_taxonomies":"aucun","no_taxonomies_title":"Aucune étiquette à afficher","no_prices":"aucun","no_prices_title":"Aucun prix à afficher","more_info":"plus d\'infos","details":"détails","From":"Du","to":"au","tabs":{"all":"tous","conference":"conférence","exhibition":"exposition","music":"musique","theater":"théâtre"}},"event":{"description_none":"Aucune description à afficher pour cet événement.","title":{"description":"Description","dates":"Horaires","current_dates":"Prochaines Dates","old_dates":"Anciennes Dates","start_date":"Date de Début","end_date":"Date de Fin","start_time":"Heure de Début","end_time":"Heure de Fin","attendance":"Intervenants","locations":"Localisation","prices":"Tarifs","emails":"Email","phones":"Téléphone","websites":"Site internet","google_map":"Visualiser sur Google map.","email":"Envoyer un email."},"comment":{"post":"ajouter un commentaire"}},"people":{"title":"Bienvenue !","description":"..."},"venues":{"title":"Bienvenue !","description":"..."},"users":{"title":"Bienvenue !","description":"..."},"dashboard":{"title":"Mon compte","description":"..."},"error":{"notFound":{"title":"Page non trouvée.","description":"..."},"unauthorized":{"title":"Non authentifié.","description":"..."}}},"taxonomy":{"type":{"conference":"conférence","exhibition":"exposition","music":"musique","theater":"théâtre"}},"price":{"free":"entrée libre"},"form":{"label":{"email":"Email","password":"Mot de passe"}},"errors":{"login":{"message":"Email ou mot de passe invalide."},"logout":{"wrong":"Identifiant de l\'utilisateur non valide.","null":"Identifiant de l\'utilisateur non valide."},"comment":{"message":"Le texte doit comprendre 10 caractères au minimum."}},"not_logged_in":"Connexion requise.","admin":{"edit":{"title":"Edition"},"edit_avatar":{"title":"Modifier l\'avatar"},"delete":{"title":"Suppression"}},"button":{"back":{"events":"retour vers événements"},"cancel":"annuler","submit":"envoyer","confirm":"confirmer"}}');
 
 /***/ }),
 
@@ -107979,7 +108110,7 @@ webpackContext.id = "./resources/js/locales sync recursive [A-Za-z0-9-_,\\s]+\\.
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames not based on template
-/******/ 			if ({"resources_js_components_admin_events_Delete_vue":1,"resources_js_components_admin_events_Edit_vue":1,"resources_js_components_admin_events_EditAvatar_vue":1,"resources_js_components_admin_events_Post_vue":1,"resources_js_components_auth_Login_vue":1,"resources_js_components_auth_Logout_vue":1,"resources_js_components_auth_Register_vue":1,"resources_js_components_errors_401_vue":1,"resources_js_components_errors_404_vue":1,"resources_js_components_pages_Dashboard_vue":1,"resources_js_components_pages_Event_vue":1,"resources_js_components_pages_Events_vue":1,"resources_js_components_pages_Home_vue":1,"resources_js_components_pages_People_vue":1,"resources_js_components_pages_Users_vue":1,"resources_js_components_pages_Venues_vue":1,"resources_js_components_pages_event_CardTitle_vue":1,"resources_js_components_pages_event_CommentDialog_vue":1,"resources_js_components_pages_event_Comments_vue":1,"resources_js_components_pages_event_EventDetails_vue":1,"resources_js_components_pages_event_Likes_vue":1,"resources_js_components_pages_event_Taxonomies_vue":1,"resources_js_components_pages_events_CardFooter_vue":1,"resources_js_components_pages_events_CardTitle_vue":1,"resources_js_components_pages_events_Dates_vue":1,"resources_js_components_pages_events_People_vue":1,"resources_js_components_pages_events_Prices_vue":1,"resources_js_components_pages_events_Taxonomies_vue":1,"resources_js_components_pages_events_Time_vue":1,"resources_js_components_pages_events_Venues_vue":1}[chunkId]) return "js/" + chunkId + ".js";
+/******/ 			if ({"resources_js_components_admin_events_Delete_vue":1,"resources_js_components_admin_events_Edit_vue":1,"resources_js_components_admin_events_EditAvatar_vue":1,"resources_js_components_admin_events_Post_vue":1,"resources_js_components_admin_events_Store_vue":1,"resources_js_components_auth_Dashboard_vue":1,"resources_js_components_auth_Login_vue":1,"resources_js_components_auth_Logout_vue":1,"resources_js_components_auth_Register_vue":1,"resources_js_components_errors_401_vue":1,"resources_js_components_errors_404_vue":1,"resources_js_components_pages_Event_vue":1,"resources_js_components_pages_Events_vue":1,"resources_js_components_pages_Home_vue":1,"resources_js_components_pages_People_vue":1,"resources_js_components_pages_Users_vue":1,"resources_js_components_pages_Venues_vue":1,"resources_js_components_pages_event_CardTitle_vue":1,"resources_js_components_pages_event_CommentDialog_vue":1,"resources_js_components_pages_event_Comments_vue":1,"resources_js_components_pages_event_EventDetails_vue":1,"resources_js_components_pages_event_Likes_vue":1,"resources_js_components_pages_event_Taxonomies_vue":1,"resources_js_components_pages_events_CardFooter_vue":1,"resources_js_components_pages_events_CardTitle_vue":1,"resources_js_components_pages_events_Dates_vue":1,"resources_js_components_pages_events_People_vue":1,"resources_js_components_pages_events_Prices_vue":1,"resources_js_components_pages_events_Taxonomies_vue":1,"resources_js_components_pages_events_Time_vue":1,"resources_js_components_pages_events_Venues_vue":1}[chunkId]) return "js/" + chunkId + ".js";
 /******/ 			// return url for filenames based on template
 /******/ 			return undefined;
 /******/ 		};

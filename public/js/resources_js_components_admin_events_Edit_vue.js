@@ -60,6 +60,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     id: String
@@ -338,7 +340,7 @@ var render = function() {
                     }
                   }
                 },
-                [_vm._v("cancel")]
+                [_vm._v(_vm._s(_vm.$t("button.cancel")))]
               ),
               _vm._v(" "),
               _c("v-spacer"),
@@ -350,7 +352,13 @@ var render = function() {
                   attrs: { text: "", color: "info accent-4", type: "submit" },
                   on: { click: _vm.submit }
                 },
-                [_vm._v("\n        submit\n      ")]
+                [
+                  _vm._v(
+                    "\n                " +
+                      _vm._s(_vm.$t("button.submit")) +
+                      "\n            "
+                  )
+                ]
               )
             ],
             1

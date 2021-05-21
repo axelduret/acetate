@@ -1,32 +1,51 @@
 const state = {
-    accountMenu: [
-        {
-            title: "account-menu.login.title",
-            path: "login"
-        },
-        {
-            title: "account-menu.register.title",
-            path: "register"
-        },
-        {
-            title: "account-menu.logout.title",
-            path: "logout"
-        },
-        {
-            title: "account-menu.dashboard.title",
-            path: "dashboard"
-        }
-    ]
+    userLogged: null,
+    accountMenu: {
+        logged: [
+            {
+                title: "account-menu.logout.title",
+                path: "logout"
+            },
+            {
+                title: "account-menu.dashboard.title",
+                path: "dashboard"
+            }
+        ],
+        unlogged: [
+            {
+                title: "account-menu.login.title",
+                path: "login"
+            },
+            {
+                title: "account-menu.register.title",
+                path: "register"
+            }
+        ]
+    }
 };
 const getters = {
-    getAccountMenu: state => state.accountMenu
+    getAccountMenuLogged: state => state.accountMenu.logged,
+    getAccountMenuUnlogged: state => state.accountMenu.unlogged,
+    getUserLogged: state => state.userLogged
 };
-const actions = {};
-const mutations = {};
+const actions = {
+    setUserLogged({ commit }, userLogged) {
+        commit({
+            type: "setUserLogged",
+            userLogged: userLogged
+        });
+    }
+};
+const mutations = {
+    setUserLogged(state, payload) {
+        state.userLogged = payload;
+    }
+};
 
 export default {
     state,
     getters,
     actions,
-    mutations
+    mutations,
+    namespaced: true
 };

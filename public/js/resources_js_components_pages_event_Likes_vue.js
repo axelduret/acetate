@@ -61,6 +61,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     LikesCount: Number,
@@ -91,25 +103,25 @@ __webpack_require__.r(__webpack_exports__);
       /* 
       this.apiToken = localStorage.getItem("user_api_token");
       axios
-        .request({
-          url: {
-            name: this.Name,
-            id: this.Id,
-            user_id: this.UserId,
-          },
-            method: "patch",
-          baseURL: this.baseURL + "api/events/" + this.Id,
-          headers: {
-            Authorization: "Bearer " + this.apiToken,
-          },
-        })
-        .then((response) => {
-          this.events = response.data.events;
-        })
-        .catch((errors) => {
-          // Returns errors.
-          console.log(errors.response.data);
-        }); */
+      .request({
+      url: {
+      name: this.Name,
+      id: this.Id,
+      user_id: this.UserId,
+      },
+      method: "patch",
+      baseURL: this.baseURL + "api/events/" + this.Id,
+      headers: {
+      Authorization: "Bearer " + this.apiToken,
+      },
+      })
+      .then((response) => {
+      this.events = response.data.events;
+      })
+      .catch((errors) => {
+      // Returns errors.
+      console.log(errors.response.data);
+      }); */
     },
     unlikeThis: function unlikeThis() {}
   }
@@ -235,7 +247,7 @@ var render = function() {
                       staticStyle: { "margin-bottom": "0.05rem" },
                       attrs: { dark: "", small: "" }
                     },
-                    [_vm._v("\n        mdi-heart-outline ")]
+                    [_vm._v("\n                mdi-heart-outline ")]
                   ),
                   _c("span", { staticClass: "subtitle-2" }, [
                     _vm._v(_vm._s(_vm.LikesCount))
@@ -273,7 +285,7 @@ var render = function() {
                               staticStyle: { "margin-bottom": "0.05rem" },
                               attrs: { dark: "", small: "" }
                             },
-                            [_vm._v("\n          mdi-heart-outline ")]
+                            [_vm._v("\n                    mdi-heart-outline ")]
                           ),
                           _c("span", { staticClass: "subtitle-2" }, [
                             _vm._v(_vm._s(_vm.LikesCount))
@@ -298,7 +310,7 @@ var render = function() {
                               staticStyle: { "margin-bottom": "0.05rem" },
                               attrs: { dark: "", small: "" }
                             },
-                            [_vm._v("\n          mdi-heart ")]
+                            [_vm._v("\n                    mdi-heart ")]
                           ),
                           _c(
                             "span",

@@ -64,6 +64,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Id: String,
@@ -149,7 +157,7 @@ __webpack_require__.r(__webpack_exports__);
     closeDialog: function closeDialog() {
       this.errors = false;
       this.avatarDialog = false;
-      this.$emit("refreshToolbox");
+      this.refreshAll();
     }
   }
 });
@@ -174,6 +182,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _event_Comments__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./event/Comments */ "./resources/js/components/pages/event/Comments.vue");
 /* harmony import */ var _event_CommentDialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./event/CommentDialog */ "./resources/js/components/pages/event/CommentDialog.vue");
 /* harmony import */ var _admin_events_EditAvatar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../admin/events/EditAvatar */ "./resources/js/components/admin/events/EditAvatar.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -537,6 +560,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Avatar: String,
@@ -564,6 +605,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
 //
 //
 //
@@ -657,6 +700,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1200,6 +1255,141 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Description: String,
@@ -1321,6 +1511,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     LikesCount: Number,
@@ -1351,25 +1553,25 @@ __webpack_require__.r(__webpack_exports__);
       /* 
       this.apiToken = localStorage.getItem("user_api_token");
       axios
-        .request({
-          url: {
-            name: this.Name,
-            id: this.Id,
-            user_id: this.UserId,
-          },
-            method: "patch",
-          baseURL: this.baseURL + "api/events/" + this.Id,
-          headers: {
-            Authorization: "Bearer " + this.apiToken,
-          },
-        })
-        .then((response) => {
-          this.events = response.data.events;
-        })
-        .catch((errors) => {
-          // Returns errors.
-          console.log(errors.response.data);
-        }); */
+      .request({
+      url: {
+      name: this.Name,
+      id: this.Id,
+      user_id: this.UserId,
+      },
+      method: "patch",
+      baseURL: this.baseURL + "api/events/" + this.Id,
+      headers: {
+      Authorization: "Bearer " + this.apiToken,
+      },
+      })
+      .then((response) => {
+      this.events = response.data.events;
+      })
+      .catch((errors) => {
+      // Returns errors.
+      console.log(errors.response.data);
+      }); */
     },
     unlikeThis: function unlikeThis() {}
   }
@@ -1388,6 +1590,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
 //
 //
 //
@@ -2017,7 +2221,7 @@ var render = function() {
       _c(
         "v-dialog",
         {
-          attrs: { width: "500" },
+          attrs: { persistent: "", width: "500" },
           model: {
             value: _vm.avatarDialog,
             callback: function($$v) {
@@ -2072,9 +2276,9 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n              " +
+                                    "\n                            " +
                                       _vm._s(_vm.errors) +
-                                      "\n            "
+                                      "\n                        "
                                   )
                                 ]
                               )
@@ -2127,7 +2331,7 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("cancel")]
+                        [_vm._v(_vm._s(_vm.$t("button.cancel")))]
                       ),
                       _vm._v(" "),
                       _c("v-spacer"),
@@ -2142,7 +2346,13 @@ var render = function() {
                             }
                           }
                         },
-                        [_vm._v("\n            submit\n          ")]
+                        [
+                          _vm._v(
+                            "\n                        " +
+                              _vm._s(_vm.$t("button.submit")) +
+                              "\n                    "
+                          )
+                        ]
                       )
                     ],
                     1
@@ -2211,7 +2421,7 @@ var render = function() {
                               }
                             }
                           },
-                          [_vm._v("back to events")]
+                          [_vm._v(_vm._s(_vm.$t("button.back.events")))]
                         )
                       ],
                       1
@@ -2657,7 +2867,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                mdi-star-outline\n              "
+                                    "\n                                mdi-star-outline\n                            "
                                   )
                                 ]
                               )
@@ -2676,7 +2886,7 @@ var render = function() {
               _c(
                 "v-list-item-title",
                 { staticClass: "title primary--text mb-1" },
-                [_vm._v(_vm._s(_vm.Name) + "\n      ")]
+                [_vm._v(_vm._s(_vm.Name) + "\n            ")]
               )
             ],
             1
@@ -2733,7 +2943,7 @@ var render = function() {
               _c(
                 "v-card-title",
                 { staticClass: "title greybg primary--text" },
-                [_vm._v("\n        New Comment ")]
+                [_vm._v("\n                New Comment ")]
               ),
               _c(
                 "v-card-text",
@@ -2747,9 +2957,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n          " +
+                            "\n                    " +
                               _vm._s(_vm.$t("errors.comment.message")) +
-                              "\n        "
+                              "\n                "
                           )
                         ]
                       )
@@ -2796,7 +3006,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("cancel")]
+                    [_vm._v(_vm._s(_vm.$t("button.cancel")))]
                   ),
                   _vm._v(" "),
                   _c("v-spacer"),
@@ -2811,7 +3021,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("submit")]
+                    [_vm._v(_vm._s(_vm.$t("button.submit")))]
                   )
                 ],
                 1
@@ -2956,7 +3166,7 @@ var render = function() {
                                                 comment.created_at
                                               )
                                             ) +
-                                            " |\n                  " +
+                                            "\n                                    |\n                                    " +
                                             _vm._s(
                                               _vm._f("formatStringToTime")(
                                                 comment.created_at
@@ -2969,7 +3179,7 @@ var render = function() {
                                     _vm._v(" "),
                                     _c("v-spacer", { staticClass: "mb-2" }),
                                     _vm._v(
-                                      "\n                " +
+                                      "\n                                " +
                                         _vm._s(comment.text)
                                     )
                                   ],
@@ -2995,7 +3205,7 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                    mdi-thumb-up"
+                                              "\n                                        mdi-thumb-up"
                                             )
                                           ]
                                         ),
@@ -3025,7 +3235,7 @@ var render = function() {
                                           },
                                           [
                                             _vm._v(
-                                              "\n                    mdi-thumb-down "
+                                              "\n                                        mdi-thumb-down "
                                             )
                                           ]
                                         ),
@@ -3233,7 +3443,7 @@ var render = function() {
                 [
                   _vm._v(
                     _vm._s(_vm.$t("page.event.title.description")) +
-                      "\n        "
+                      "\n                "
                   )
                 ]
               ),
@@ -3252,7 +3462,7 @@ var render = function() {
                     )
                   : _c("span", [
                       _vm._v(
-                        "\n          " +
+                        "\n                    " +
                           _vm._s(_vm.$t("page.event.description_none"))
                       )
                     ])
@@ -3284,7 +3494,8 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    _vm._s(_vm.$t("page.event.title.dates")) + "\n        "
+                    _vm._s(_vm.$t("page.event.title.dates")) +
+                      "\n                "
                   )
                 ]
               ),
@@ -3527,7 +3738,7 @@ var render = function() {
                                   ? _c("span", [
                                       _vm._v(
                                         _vm._s(person.firstname) +
-                                          " " +
+                                          "\n                                " +
                                           _vm._s(person.lastname)
                                       )
                                     ])
@@ -3667,17 +3878,17 @@ var render = function() {
                                               },
                                               [
                                                 _vm._v(
-                                                  "\n                  " +
+                                                  "\n                                    " +
                                                     _vm._s(address.street1) +
-                                                    ", \n                  " +
+                                                    ",\n                                    " +
                                                     _vm._s(address.zip) +
                                                     " " +
                                                     _vm._s(address.city) +
-                                                    ", \n                  " +
+                                                    ",\n                                    " +
                                                     _vm._s(address.canton) +
-                                                    ",\n                  " +
+                                                    ",\n                                    " +
                                                     _vm._s(address.country) +
-                                                    "\n                "
+                                                    "\n                                "
                                                 )
                                               ]
                                             ),
@@ -3743,17 +3954,17 @@ var render = function() {
                                   },
                                   [
                                     _vm._v(
-                                      "\n              " +
+                                      "\n                            " +
                                         _vm._s(address.street1) +
-                                        ",  " +
+                                        ", " +
                                         _vm._s(address.zip) +
-                                        "\n              " +
+                                        "\n                            " +
                                         _vm._s(address.city) +
-                                        ",\n              " +
+                                        ", " +
                                         _vm._s(address.canton) +
-                                        ", \n              " +
+                                        ",\n                            " +
                                         _vm._s(address.country) +
-                                        "\n            "
+                                        "\n                        "
                                     )
                                   ]
                                 ),
@@ -3801,15 +4012,17 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        _vm._s(_vm.$t("page.event.title.prices")) + "\n        "
+                        _vm._s(_vm.$t("page.event.title.prices")) +
+                          "\n                "
                       )
                     ]
                   ),
                   _vm._v(" "),
-                  _c(
-                    "v-expansion-panel-content",
-                    [
-                      _c("span", { staticClass: "subtitle-2" }, [
+                  _c("v-expansion-panel-content", [
+                    _c(
+                      "span",
+                      { staticClass: "subtitle-2" },
+                      [
                         _c(
                           "span",
                           {
@@ -3836,7 +4049,7 @@ var render = function() {
                                   [_vm._v("mdi-cash-usd-outline")]
                                 ),
                                 _vm._v(
-                                  "\n                " +
+                                  "\n                            " +
                                     _vm._s(price.cost) +
                                     " chf (" +
                                     _vm._s(price.type) +
@@ -3848,12 +4061,13 @@ var render = function() {
                             )
                           }),
                           0
-                        )
-                      ]),
-                      _c("v-spacer")
-                    ],
-                    1
-                  )
+                        ),
+                        _vm._v(" "),
+                        _c("v-spacer")
+                      ],
+                      1
+                    )
+                  ])
                 ],
                 1
               )
@@ -3926,9 +4140,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n              " +
+                                  "\n                            " +
                                     _vm._s(email.address) +
-                                    "\n            "
+                                    "\n                        "
                                 )
                               ]
                             ),
@@ -3942,9 +4156,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n              (" +
+                                  "\n                            (" +
                                     _vm._s(email.type) +
-                                    ")\n            "
+                                    ")\n                        "
                                 )
                               ]
                             ),
@@ -4021,9 +4235,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n              " +
+                                  "\n                            " +
                                     _vm._s(phone.number) +
-                                    "\n            "
+                                    "\n                        "
                                 )
                               ]
                             ),
@@ -4037,9 +4251,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n              (" +
+                                  "\n                            (" +
                                     _vm._s(phone.type) +
-                                    ")\n            "
+                                    ")\n                        "
                                 )
                               ]
                             ),
@@ -4150,7 +4364,7 @@ var render = function() {
                                                 _vm._s(
                                                   website.social_network.type
                                                 ) +
-                                                "\n              "
+                                                "\n                            "
                                             )
                                           ]
                                         )
@@ -4176,9 +4390,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n              " +
+                                  "\n                            " +
                                     _vm._s(website.url) +
-                                    "\n            "
+                                    "\n                        "
                                 )
                               ]
                             ),
@@ -4255,7 +4469,7 @@ var render = function() {
                       staticStyle: { "margin-bottom": "0.05rem" },
                       attrs: { dark: "", small: "" }
                     },
-                    [_vm._v("\n        mdi-heart-outline ")]
+                    [_vm._v("\n                mdi-heart-outline ")]
                   ),
                   _c("span", { staticClass: "subtitle-2" }, [
                     _vm._v(_vm._s(_vm.LikesCount))
@@ -4293,7 +4507,7 @@ var render = function() {
                               staticStyle: { "margin-bottom": "0.05rem" },
                               attrs: { dark: "", small: "" }
                             },
-                            [_vm._v("\n          mdi-heart-outline ")]
+                            [_vm._v("\n                    mdi-heart-outline ")]
                           ),
                           _c("span", { staticClass: "subtitle-2" }, [
                             _vm._v(_vm._s(_vm.LikesCount))
@@ -4318,7 +4532,7 @@ var render = function() {
                               staticStyle: { "margin-bottom": "0.05rem" },
                               attrs: { dark: "", small: "" }
                             },
-                            [_vm._v("\n          mdi-heart ")]
+                            [_vm._v("\n                    mdi-heart ")]
                           ),
                           _c(
                             "span",

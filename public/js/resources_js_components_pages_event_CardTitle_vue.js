@@ -76,6 +76,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Avatar: String,
@@ -323,7 +341,7 @@ var render = function() {
                                 },
                                 [
                                   _vm._v(
-                                    "\n                mdi-star-outline\n              "
+                                    "\n                                mdi-star-outline\n                            "
                                   )
                                 ]
                               )
@@ -342,7 +360,7 @@ var render = function() {
               _c(
                 "v-list-item-title",
                 { staticClass: "title primary--text mb-1" },
-                [_vm._v(_vm._s(_vm.Name) + "\n      ")]
+                [_vm._v(_vm._s(_vm.Name) + "\n            ")]
               )
             ],
             1

@@ -77,4 +77,4 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 // Public routes.
 Route::post('login', [UserController::class, 'login']);
 Route::post('register', [UserController::class, 'register']);
-Route::post('logout/{user}', [UserController::class, 'logout']);
+Route::post('logout', [UserController::class, 'logout']);

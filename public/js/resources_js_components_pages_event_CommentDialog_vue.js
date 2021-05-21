@@ -48,6 +48,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Id: String
@@ -203,7 +205,7 @@ var render = function() {
               _c(
                 "v-card-title",
                 { staticClass: "title greybg primary--text" },
-                [_vm._v("\n        New Comment ")]
+                [_vm._v("\n                New Comment ")]
               ),
               _c(
                 "v-card-text",
@@ -217,9 +219,9 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n          " +
+                            "\n                    " +
                               _vm._s(_vm.$t("errors.comment.message")) +
-                              "\n        "
+                              "\n                "
                           )
                         ]
                       )
@@ -266,7 +268,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("cancel")]
+                    [_vm._v(_vm._s(_vm.$t("button.cancel")))]
                   ),
                   _vm._v(" "),
                   _c("v-spacer"),
@@ -281,7 +283,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("submit")]
+                    [_vm._v(_vm._s(_vm.$t("button.submit")))]
                   )
                 ],
                 1

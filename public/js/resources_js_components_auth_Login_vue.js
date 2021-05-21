@@ -69,6 +69,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
@@ -86,11 +88,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       baseURL: "/"
     };
   },
-  computed: (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapGetters)({
-    getUserFields: "user/getUserFields"
-  }),
   methods: _objectSpread(_objectSpread({}, (0,vuex__WEBPACK_IMPORTED_MODULE_0__.mapActions)({
     setId: "user/setId",
+    setUserLogged: "account/setUserLogged",
     setUsername: "user/setUsername",
     setFirstname: "user/setFirstname",
     setLastname: "user/setLastname",
@@ -141,6 +141,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         localStorage.setItem("user_role", _this.role);
         localStorage.setItem("user_abilities", _this.abilities); // Set logged user's states in vuex store.
 
+        _this.setUserLogged(_this.token);
+
         _this.setId(_this.userId);
 
         _this.setUsername(_this.username);
@@ -161,9 +163,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
         _this.setRole(_this.role);
 
-        _this.setAbilities(_this.abilities); // Redirect to dashboard route.
-        //this.$router.push(`${this.baseURL}${this.$i18n.locale}/dashboard`);
-
+        _this.setAbilities(_this.abilities);
 
         _this.$router.go(-1);
       })["catch"](function (errors) {
@@ -288,7 +288,11 @@ var render = function() {
                     _c(
                       "v-card-title",
                       { staticClass: "title greybg primary--text" },
-                      [_vm._v("\n            Login\n          ")]
+                      [
+                        _vm._v(
+                          "\n                        Login\n                    "
+                        )
+                      ]
                     ),
                     _vm._v(" "),
                     _c(
@@ -345,9 +349,9 @@ var render = function() {
                               },
                               [
                                 _vm._v(
-                                  "\n              " +
+                                  "\n                            " +
                                     _vm._s(_vm.$t("errors.login.message")) +
-                                    "\n            "
+                                    "\n                        "
                                 )
                               ]
                             )
@@ -374,7 +378,11 @@ var render = function() {
                             },
                             on: { click: _vm.login }
                           },
-                          [_vm._v("\n              submit\n            ")]
+                          [
+                            _vm._v(
+                              "\n                            submit\n                        "
+                            )
+                          ]
                         )
                       ],
                       1

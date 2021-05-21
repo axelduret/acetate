@@ -51,6 +51,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Id: String,
@@ -205,7 +219,7 @@ var render = function() {
                 staticStyle: { "margin-bottom": "0.05rem" },
                 attrs: { dark: "", small: "" }
               },
-              [_vm._v("\n        mdi-comment-outline ")]
+              [_vm._v("\n                mdi-comment-outline ")]
             ),
             _c("span", { staticClass: "subtitle-2" }, [
               _vm._v(_vm._s(_vm.Comments) + " ")
@@ -230,7 +244,7 @@ var render = function() {
                 staticStyle: { "margin-bottom": "0.05rem" },
                 attrs: { dark: "", small: "" }
               },
-              [_vm._v("\n        mdi-heart-outline ")]
+              [_vm._v("\n                mdi-heart-outline ")]
             ),
             _c("span", { staticClass: "subtitle-2" }, [
               _vm._v(_vm._s(_vm.Likes))

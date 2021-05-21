@@ -136,15 +136,15 @@ class UserController extends Controller
   /**
    * User logout.
    *
-   * @param string $id
+   * @param  Request  $request
    * @return Response
    */
-  public function logout($id)
+  public function logout(Request $request)
   {
     // Check if the user exists.
-    $user = User::find($id);
+    $user = User::find($request->id);
     if (!$user) {
-      return $this->failure('User ' . $id . ' not found.', 404);
+      return $this->failure('User ' . $request->id . ' not found.', 404);
     }
     // Revoke current user's tokens.
     $user->tokens()->where('abilities', '!=', '["role:anonymous"]')->delete();
