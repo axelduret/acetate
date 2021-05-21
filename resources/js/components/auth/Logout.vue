@@ -77,7 +77,7 @@ export default {
                 localStorage.removeItem("user_role");
                 localStorage.removeItem("user_abilities");
                 // Clear vuex store.
-                this.setUserLogged(null);
+                this.$store.state.account.userLogged = null;
                 this.setId(null);
                 this.setUsername(null);
                 this.setFirstname(null);

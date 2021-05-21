@@ -94,7 +94,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       localStorage.removeItem("user_role");
       localStorage.removeItem("user_abilities"); // Clear vuex store.
 
-      _this.setUserLogged(null);
+      _this.$store.state.account.userLogged = null;
 
       _this.setId(null);
 

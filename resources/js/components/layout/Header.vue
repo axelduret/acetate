@@ -131,8 +131,8 @@
                             </v-avatar>
                         </v-btn>
                     </template>
-                    <!-- account menu list --><v-list
-                        v-if="getUserLogged != null"
+                    <!-- account menu list -->
+                    <v-list v-if="getUserLogged != null"
                         ><v-list-item
                             v-for="(item, index) in getAccountMenuLogged"
                             :key="index"
