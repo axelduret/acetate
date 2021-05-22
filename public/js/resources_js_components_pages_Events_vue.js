@@ -140,6 +140,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -163,8 +188,10 @@ __webpack_require__.r(__webpack_exports__);
     return {
       activeTab: "all",
       overlay: true,
-      perPage: 50,
+      perPage: 48,
+      page: 1,
       events: "",
+      meta: "",
       // App url.
       appURL: "http://127.0.0.1:8001",
       // Base url.
@@ -201,7 +228,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       axios.request({
-        url: this.query + this.perPage,
+        url: this.query + this.perPage + "&page=" + this.page,
         method: "get",
         baseURL: this.baseURL + "api/",
         headers: {
@@ -209,14 +236,17 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         _this.events = response.data.events;
+        _this.meta = response.data.meta;
+        _this.overlay = false;
+        return _this.events;
       })["catch"](function (error) {
         var path = "error/404";
 
         _this.$router.push("".concat(_this.baseURL).concat(_this.$i18n.locale, "/").concat(path));
-      })["finally"](function () {
-        _this.overlay = false;
-        return _this.events;
-      });
+      })["finally"](function () {});
+    },
+    onPageChange: function onPageChange() {
+      this.showTab(this.activeTab);
     }
   }
 });
@@ -607,6 +637,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
 //
 //
 //
@@ -1586,7 +1620,67 @@ var render = function() {
                             )
                           }),
                           1
-                        )
+                        ),
+                        _vm._v(" "),
+                        _vm.meta.last_page != 1 && _vm.overlay == false
+                          ? _c("v-col", { staticClass: "my-0 py-o" }, [
+                              _c(
+                                "div",
+                                { staticClass: "text-center mt-4 mb-0 py-0" },
+                                [
+                                  _c(
+                                    "v-container",
+                                    [
+                                      _c(
+                                        "v-row",
+                                        { attrs: { justify: "center" } },
+                                        [
+                                          _c(
+                                            "v-col",
+                                            { attrs: { cols: "12" } },
+                                            [
+                                              _c(
+                                                "v-container",
+                                                { staticClass: "max-width" },
+                                                [
+                                                  _c("v-pagination", {
+                                                    attrs: {
+                                                      color: _vm.$vuetify.theme
+                                                        .dark
+                                                        ? "primary"
+                                                        : "secondary",
+                                                      length:
+                                                        _vm.meta.last_page,
+                                                      circle: ""
+                                                    },
+                                                    on: {
+                                                      input: _vm.onPageChange
+                                                    },
+                                                    model: {
+                                                      value: _vm.page,
+                                                      callback: function($$v) {
+                                                        _vm.page = $$v
+                                                      },
+                                                      expression: "page"
+                                                    }
+                                                  })
+                                                ],
+                                                1
+                                              )
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ])
+                          : _vm._e()
                       ],
                       1
                     )
@@ -2294,10 +2388,13 @@ var render = function() {
                 "v-row",
                 { staticClass: "py-0" },
                 [
-                  _c("v-col", { staticClass: "my-auto col-auto" }, [
+                  _c("v-col", { staticClass: "my-auto mx-auto col-auto" }, [
                     _c(
                       "span",
-                      { staticClass: "primary--text" },
+                      {
+                        staticClass: "primary--text",
+                        attrs: { justify: "center" }
+                      },
                       [
                         _c(
                           "v-chip-group",
@@ -2354,11 +2451,24 @@ var render = function() {
                 "v-row",
                 { staticClass: "py-0" },
                 [
-                  _c("v-col", { staticClass: "my-auto col-auto" }, [
-                    _c("span", {
-                      staticClass: "mx-auto col-auto primary--text",
-                      staticStyle: { "line-height": "3rem" }
-                    })
+                  _c("v-col", { staticClass: "my-auto mx-auto col-auto" }, [
+                    _c(
+                      "span",
+                      {
+                        staticClass: "mx-auto col-auto  caption",
+                        class: _vm.$vuetify.theme.dark
+                          ? "grey--text"
+                          : "grey--text",
+                        staticStyle: { "line-height": "3rem" },
+                        attrs: { justify: "center" }
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(_vm.$t("page.events.no_taxonomies_title")) +
+                            "\n                "
+                        )
+                      ]
+                    )
                   ])
                 ],
                 1

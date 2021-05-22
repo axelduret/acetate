@@ -3,8 +3,8 @@
         <v-divider class="mx-2"></v-divider>
         <div v-if="Taxonomies.length > 0">
             <v-row class="py-0">
-                <v-col class="my-auto col-auto">
-                    <span class="primary--text">
+                <v-col class="my-auto mx-auto col-auto">
+                    <span justify="center" class="primary--text">
                         <v-chip-group show-arrows class="col-auto my-2 py-0"
                             ><span
                                 v-for="(taxonomy, index) in Taxonomies"
@@ -24,11 +24,15 @@
         </div>
         <div v-if="Taxonomies.length <= 0">
             <v-row class="py-0">
-                <v-col class="my-auto col-auto">
+                <v-col class="my-auto mx-auto col-auto">
                     <span
-                        class="mx-auto col-auto primary--text"
+                        justify="center"
+                        class="mx-auto col-auto  caption"
+                        :class="
+                            $vuetify.theme.dark ? 'grey--text' : 'grey--text'
+                        "
                         style="line-height: 3rem"
-                    >
+                        >{{ $t("page.events.no_taxonomies_title") }}
                     </span>
                 </v-col>
             </v-row>

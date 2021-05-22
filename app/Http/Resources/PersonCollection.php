@@ -26,8 +26,9 @@ class PersonCollection extends ResourceCollection
           'firstname' => $item->firstname,
           'lastname' => $item->lastname,
           'company' => $item->company,
+          'avatar' => $item->avatar,
           'created_at' => date('Y-m-d H:i:s', strtotime($item['created_at'])),
-          'updated_at' => date('Y-m-d H:i:s', strtotime($item['updated_at'])),
+          'updated_at' => date('Y-m-d H:i:s', strtotime($item['updated_at'])),/* 
           'events' => $item->events->map(function ($item) {
             return [
               'id' => $item['id'],
@@ -47,7 +48,7 @@ class PersonCollection extends ResourceCollection
               'id' => $item['id'],
               'name' => $item['name']
             ];
-          }),
+          }), */
           'taxonomies' => $item->taxonomies,
           'likes_count' => $item->likes_count,
           'dislikes_count' => $item->dislikes_count,

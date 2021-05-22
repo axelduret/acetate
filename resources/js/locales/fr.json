@@ -101,8 +101,14 @@
             }
         },
         "people": {
-            "title": "Bienvenue !",
-            "description": "..."
+            "title": {
+                "name": "Prénom et nom de famille",
+                "company": "Entreprise"
+            },
+            "description": "...",
+            "no_taxonomies": "aucun",
+            "no_taxonomies_title": "Aucune étiquette à afficher",
+            "more_info": "plus d'infos"
         },
         "venues": {
             "title": "Bienvenue !",

@@ -50,6 +50,11 @@
 .theme--dark.v-picker__body {
     background: $ac-dark-contrast-bg;
 }
+// Pagination buttons
+.theme--dark.v-pagination .v-pagination__navigation,
+.theme--dark.v-pagination .v-pagination__item {
+    background: $ac-dark-cards-bg;
+}
 // Divider
 .theme--dark.v-divider {
     background-color: $ac-dark-contrast-bg;

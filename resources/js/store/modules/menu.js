@@ -11,11 +11,6 @@ const state = {
             icon: "mdi-calendar-clock"
         },
         {
-            title: "menu.post_events.title",
-            path: "admin/events/post",
-            icon: "mdi-calendar-plus"
-        },
-        {
             title: "menu.people.title",
             path: "people",
             icon: "mdi-calendar-account"

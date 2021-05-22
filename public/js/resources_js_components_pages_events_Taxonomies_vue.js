@@ -50,6 +50,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Taxonomies: Array
@@ -159,10 +163,13 @@ var render = function() {
                 "v-row",
                 { staticClass: "py-0" },
                 [
-                  _c("v-col", { staticClass: "my-auto col-auto" }, [
+                  _c("v-col", { staticClass: "my-auto mx-auto col-auto" }, [
                     _c(
                       "span",
-                      { staticClass: "primary--text" },
+                      {
+                        staticClass: "primary--text",
+                        attrs: { justify: "center" }
+                      },
                       [
                         _c(
                           "v-chip-group",
@@ -219,11 +226,24 @@ var render = function() {
                 "v-row",
                 { staticClass: "py-0" },
                 [
-                  _c("v-col", { staticClass: "my-auto col-auto" }, [
-                    _c("span", {
-                      staticClass: "mx-auto col-auto primary--text",
-                      staticStyle: { "line-height": "3rem" }
-                    })
+                  _c("v-col", { staticClass: "my-auto mx-auto col-auto" }, [
+                    _c(
+                      "span",
+                      {
+                        staticClass: "mx-auto col-auto  caption",
+                        class: _vm.$vuetify.theme.dark
+                          ? "grey--text"
+                          : "grey--text",
+                        staticStyle: { "line-height": "3rem" },
+                        attrs: { justify: "center" }
+                      },
+                      [
+                        _vm._v(
+                          _vm._s(_vm.$t("page.events.no_taxonomies_title")) +
+                            "\n                "
+                        )
+                      ]
+                    )
                   ])
                 ],
                 1

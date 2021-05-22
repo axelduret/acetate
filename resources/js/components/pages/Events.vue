@@ -93,6 +93,31 @@
                                     </v-card>
                                 </v-col>
                             </v-row>
+                            <v-col
+                                class="my-0 py-o"
+                                v-if="meta.last_page != 1 && overlay == false"
+                            >
+                                <div class="text-center mt-4 mb-0 py-0">
+                                    <v-container>
+                                        <v-row justify="center">
+                                            <v-col cols="12">
+                                                <v-container class="max-width">
+                                                    <v-pagination
+                                                        :color="
+                                                            $vuetify.theme.dark
+                                                                ? 'primary'
+                                                                : 'secondary'
+                                                        "
+                                                        v-model="page"
+                                                        :length="meta.last_page"
+                                                        circle
+                                                        @input="onPageChange"
+                                                    ></v-pagination>
+                                                </v-container>
+                                            </v-col>
+                                        </v-row>
+                                    </v-container></div
+                            ></v-col>
                         </div>
                     </v-container>
                 </v-tab-item>
@@ -144,8 +169,10 @@ export default {
         return {
             activeTab: "all",
             overlay: true,
-            perPage: 50,
+            perPage: 48,
+            page: 1,
             events: "",
+            meta: "",
             // App url.
             appURL: process.env.MIX_APP_URL,
             // Base url.
@@ -175,7 +202,7 @@ export default {
             }
             axios
                 .request({
-                    url: this.query + this.perPage,
+                    url: this.query + this.perPage + "&page=" + this.page,
                     method: "get",
                     baseURL: this.baseURL + "api/",
                     headers: {
@@ -184,6 +211,9 @@ export default {
                 })
                 .then(response => {
                     this.events = response.data.events;
+                    this.meta = response.data.meta;
+                    this.overlay = false;
+                    return this.events;
                 })
                 .catch(error => {
                     const path = "error/404";
@@ -191,10 +221,10 @@ export default {
                         `${this.baseURL}${this.$i18n.locale}/${path}`
                     );
                 })
-                .finally(() => {
-                    this.overlay = false;
-                    return this.events;
-                });
+                .finally(() => {});
+        },
+        onPageChange() {
+            this.showTab(this.activeTab);
         }
     }
 };

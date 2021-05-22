@@ -101,8 +101,11 @@
             }
         },
         "people": {
-            "title": "Welcome !",
-            "description": "..."
+            "title": { "name": "Firstname and lastname", "company": "Company" },
+            "description": "...",
+            "no_taxonomies": "none",
+            "no_taxonomies_title": "No tag to display",
+            "more_info": "more info"
         },
         "venues": {
             "title": "Welcome !",
