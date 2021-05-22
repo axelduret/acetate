@@ -108,8 +108,11 @@
             "more_info": "more info"
         },
         "venues": {
-            "title": "Welcome !",
-            "description": "..."
+            "title": { "name": "Name" },
+            "description": "...",
+            "no_taxonomies": "none",
+            "no_taxonomies_title": "No tag to display",
+            "more_info": "more info"
         },
         "users": {
             "title": "Welcome !",
@@ -157,7 +160,8 @@
         },
         "comment": {
             "message": "Text must contain at least 10 characters."
-        }
+        },
+        "venues": { "not_found": "No corresponding venue found." }
     },
     "not_logged_in": "Connection required.",
     "admin": {
@@ -192,6 +196,8 @@
         "next": "continue",
         "cancel": "cancel",
         "submit": "submit",
-        "confirm": "confirm"
-    }
+        "confirm": "confirm",
+        "close": "close"
+    },
+    "search": { "venues": "Search a venue" }
 }

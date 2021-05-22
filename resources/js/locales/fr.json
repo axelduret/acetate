@@ -111,8 +111,13 @@
             "more_info": "plus d'infos"
         },
         "venues": {
-            "title": "Bienvenue !",
-            "description": "..."
+            "title": {
+                "name": "Nom"
+            },
+            "description": "...",
+            "no_taxonomies": "aucun",
+            "no_taxonomies_title": "Aucune étiquette à afficher",
+            "more_info": "plus d'infos"
         },
         "users": {
             "title": "Bienvenue !",
@@ -160,7 +165,8 @@
         },
         "comment": {
             "message": "Le texte doit comprendre 10 caractères au minimum."
-        }
+        },
+        "venues": { "not_found": "Aucun lieu correspondant à cette recherche." }
     },
     "not_logged_in": "Connexion requise.",
     "admin": {
@@ -195,6 +201,8 @@
         "next": "continuer",
         "cancel": "annuler",
         "submit": "envoyer",
-        "confirm": "confirmer"
-    }
+        "confirm": "confirmer",
+        "close": "fermer"
+    },
+    "search": { "venues": "Rechercher un lieu" }
 }

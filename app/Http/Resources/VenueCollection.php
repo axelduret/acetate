@@ -23,6 +23,7 @@ class VenueCollection extends ResourceCollection
         return collect([
           'id' => $item->id,
           'name' => $item->name,
+          'avatar' => $item->avatar,
           'addresses' => $item->addresses->map(function ($item) {
             return [
               'latitude' => $item['latitude'],

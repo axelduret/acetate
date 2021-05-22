@@ -23,9 +23,385 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  components: {},
   data: function data() {
-    return {};
+    return {
+      overlay: true,
+      perPage: 48,
+      page: 1,
+      searchValue: null,
+      query: null,
+      snackbar: false,
+      venues: "",
+      meta: "",
+      // App url.
+      appURL: "http://127.0.0.1:8001",
+      // Base url.
+      baseURL: "/",
+      apiToken: "2|swLLv5nsRLvz02L7pYaszc11sxKCvzd3lqI5jJbZ"
+    };
+  },
+  mounted: function mounted() {
+    this.fetchVenues();
+  },
+  methods: {
+    fetchVenues: function fetchVenues() {
+      var _this = this;
+
+      this.overlay = true;
+      this.venues = null;
+
+      if (this.searchValue != null) {
+        this.query = "venues?per_page=" + this.perPage + "&search_field=name&search_value=" + this.searchValue;
+      } else {
+        this.query = "venues?per_page=" + this.perPage + "&page=" + this.page;
+      }
+
+      axios.request({
+        url: this.query,
+        method: "get",
+        baseURL: this.baseURL + "api/",
+        headers: {
+          Authorization: "Bearer " + this.apiToken
+        }
+      }).then(function (response) {
+        _this.venues = response.data.venues;
+        _this.meta = response.data.meta;
+        _this.overlay = false;
+      })["catch"](function (error) {
+        _this.snackbar = true;
+        _this.searchValue = null;
+
+        _this.fetchVenues();
+        /* 
+        const path = "error/404";
+        this.$router.push(
+            `${this.baseURL}${this.$i18n.locale}/${path}`
+        ); */
+
+      })["finally"](function () {});
+    },
+    onSearch: function onSearch() {
+      this.fetchVenues();
+    },
+    onPageChange: function onPageChange() {
+      this.fetchVenues();
+    }
   }
 });
 
@@ -120,20 +496,716 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "div",
+    "v-container",
+    { staticClass: "my-0 py-0" },
     [
       _c(
-        "v-row",
+        "div",
+        { staticClass: "my-0 py-0" },
         [
-          _c("v-col", [
-            _c("code", { staticClass: "primary--text" }, [
+          _c(
+            "v-snackbar",
+            {
+              scopedSlots: _vm._u([
+                {
+                  key: "action",
+                  fn: function(ref) {
+                    var attrs = ref.attrs
+                    return [
+                      _c(
+                        "v-btn",
+                        _vm._b(
+                          {
+                            attrs: {
+                              centered: "",
+                              color: _vm.$vuetify.theme.dark
+                                ? "info"
+                                : "darkinfo",
+                              small: "",
+                              text: ""
+                            },
+                            on: {
+                              click: function($event) {
+                                _vm.snackbar = false
+                              }
+                            }
+                          },
+                          "v-btn",
+                          attrs,
+                          false
+                        ),
+                        [
+                          _vm._v(
+                            "\n                    " +
+                              _vm._s(_vm.$t("button.close")) +
+                              "\n                "
+                          )
+                        ]
+                      )
+                    ]
+                  }
+                }
+              ]),
+              model: {
+                value: _vm.snackbar,
+                callback: function($$v) {
+                  _vm.snackbar = $$v
+                },
+                expression: "snackbar"
+              }
+            },
+            [
               _vm._v(
-                "\n                " +
-                  _vm._s(_vm.$t("page.venues.title")) +
+                "\n            " +
+                  _vm._s(_vm.$t("errors.venues.not_found")) +
                   "\n            "
               )
-            ])
-          ])
+            ]
+          ),
+          _vm._v(" "),
+          _vm.overlay === false
+            ? _c("v-container", { staticClass: "my-0 py-0" }, [
+                _c(
+                  "div",
+                  { staticClass: "my-0 py-0" },
+                  [
+                    _c(
+                      "div",
+                      { staticClass: "my-0 py-0 mx-auto my-auto col-auto" },
+                      [
+                        _c(
+                          "v-row",
+                          { attrs: { justify: "center" } },
+                          [
+                            _c(
+                              "v-col",
+                              { staticClass: "mb-4 my-auto col-auto " },
+                              [
+                                _c("v-text-field", {
+                                  attrs: {
+                                    color: _vm.$vuetify.theme.dark
+                                      ? "primary"
+                                      : "secondary",
+                                    label: _vm.$t("search.venues"),
+                                    "hide-details": "auto",
+                                    clearable: ""
+                                  },
+                                  on: {
+                                    keyup: function($event) {
+                                      if (
+                                        !$event.type.indexOf("key") &&
+                                        _vm._k(
+                                          $event.keyCode,
+                                          "enter",
+                                          13,
+                                          $event.key,
+                                          "Enter"
+                                        )
+                                      ) {
+                                        return null
+                                      }
+                                      return _vm.onSearch($event)
+                                    }
+                                  },
+                                  model: {
+                                    value: _vm.searchValue,
+                                    callback: function($$v) {
+                                      _vm.searchValue = $$v
+                                    },
+                                    expression: "searchValue"
+                                  }
+                                })
+                              ],
+                              1
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "v-col",
+                              {
+                                staticClass:
+                                  "my-auto my-0 mx-0 px-0 py-0 col-auto "
+                              },
+                              [
+                                _c(
+                                  "v-btn",
+                                  {
+                                    staticClass: "white--text",
+                                    class: _vm.$vuetify.theme.dark
+                                      ? "primary"
+                                      : "secondary",
+                                    attrs: {
+                                      elevation: "0",
+                                      fab: "",
+                                      "x-small": ""
+                                    },
+                                    on: { click: _vm.onSearch }
+                                  },
+                                  [_c("v-icon", [_vm._v("mdi-magnify")])],
+                                  1
+                                )
+                              ],
+                              1
+                            )
+                          ],
+                          1
+                        )
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "v-row",
+                      { attrs: { dense: "" } },
+                      _vm._l(_vm.venues, function(venue, index) {
+                        return _c(
+                          "v-col",
+                          {
+                            key: index,
+                            attrs: {
+                              cols: "12",
+                              sm: "12",
+                              md: "6",
+                              lg: "4",
+                              xl: "3"
+                            }
+                          },
+                          [
+                            _c(
+                              "v-card",
+                              {
+                                staticClass: "mx-auto pb-4",
+                                attrs: { "max-width": "500px" }
+                              },
+                              [
+                                _c(
+                                  "div",
+                                  [
+                                    _c(
+                                      "v-list-item",
+                                      {
+                                        staticClass: "greybg rounded-t",
+                                        attrs: { "three-line": "" }
+                                      },
+                                      [
+                                        _c(
+                                          "v-list-item-avatar",
+                                          {
+                                            staticClass: "rounded",
+                                            attrs: {
+                                              tile: "",
+                                              size: "80",
+                                              color: _vm.$vuetify.theme.dark
+                                                ? "primary"
+                                                : "white"
+                                            }
+                                          },
+                                          [
+                                            _c("v-img", {
+                                              attrs: {
+                                                src:
+                                                  _vm.appURL +
+                                                  _vm.baseURL +
+                                                  "storage/avatar/venue/" +
+                                                  venue.avatar,
+                                                title: venue.nickname
+                                              }
+                                            })
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-list-item-content",
+                                          [
+                                            _c(
+                                              "div",
+                                              {
+                                                staticClass:
+                                                  "overline primary--text"
+                                              },
+                                              [
+                                                _c(
+                                                  "v-row",
+                                                  [
+                                                    _c(
+                                                      "v-col",
+                                                      {
+                                                        staticClass:
+                                                          "col-auto ml-auto",
+                                                        staticStyle: {
+                                                          "margin-bottom":
+                                                            "1rem"
+                                                        }
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "span",
+                                                          {
+                                                            staticClass:
+                                                              "primary--text px-0"
+                                                          },
+                                                          [
+                                                            _c(
+                                                              "v-icon",
+                                                              {
+                                                                staticClass:
+                                                                  "primary--text",
+                                                                attrs: {
+                                                                  dark: "",
+                                                                  small: ""
+                                                                }
+                                                              },
+                                                              [
+                                                                _vm._v(
+                                                                  "\n                                                            mdi-star-outline\n                                                        "
+                                                                )
+                                                              ]
+                                                            )
+                                                          ],
+                                                          1
+                                                        )
+                                                      ]
+                                                    )
+                                                  ],
+                                                  1
+                                                )
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "v-list-item-title",
+                                              {
+                                                staticClass:
+                                                  "title primary--text mb-1"
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(venue.name) +
+                                                    "\n                                        "
+                                                )
+                                              ]
+                                            )
+                                          ],
+                                          1
+                                        )
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-row",
+                                      { staticClass: "pb-3" },
+                                      [
+                                        _c("v-col", {
+                                          staticClass:
+                                            "mx-4 pt-5 col-auto mr-auto"
+                                        })
+                                      ],
+                                      1
+                                    ),
+                                    _vm._v(" "),
+                                    _c("v-divider", { staticClass: "mx-2" }),
+                                    _vm._v(" "),
+                                    venue.taxonomies.length > 0
+                                      ? _c(
+                                          "div",
+                                          [
+                                            _c(
+                                              "v-row",
+                                              { staticClass: "py-0" },
+                                              [
+                                                _c(
+                                                  "v-col",
+                                                  {
+                                                    staticClass:
+                                                      "my-auto mx-auto col-auto"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass:
+                                                          "primary--text",
+                                                        attrs: {
+                                                          justify: "center"
+                                                        }
+                                                      },
+                                                      [
+                                                        _c(
+                                                          "v-chip-group",
+                                                          {
+                                                            staticClass:
+                                                              "col-auto my-2 py-0",
+                                                            attrs: {
+                                                              "show-arrows": ""
+                                                            }
+                                                          },
+                                                          _vm._l(
+                                                            venue.taxonomies,
+                                                            function(
+                                                              taxonomy,
+                                                              index
+                                                            ) {
+                                                              return _c(
+                                                                "span",
+                                                                { key: index },
+                                                                [
+                                                                  _c(
+                                                                    "v-chip",
+                                                                    {
+                                                                      staticClass:
+                                                                        "greybg primary--text",
+                                                                      attrs: {
+                                                                        "x-small":
+                                                                          ""
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _vm._v(
+                                                                        _vm._s(
+                                                                          taxonomy.category
+                                                                        )
+                                                                      )
+                                                                    ]
+                                                                  ),
+                                                                  _c(
+                                                                    "v-chip",
+                                                                    {
+                                                                      staticClass:
+                                                                        "greybg primary--text",
+                                                                      attrs: {
+                                                                        "x-small":
+                                                                          ""
+                                                                      }
+                                                                    },
+                                                                    [
+                                                                      _vm._v(
+                                                                        _vm._s(
+                                                                          taxonomy.sub_category
+                                                                        )
+                                                                      )
+                                                                    ]
+                                                                  )
+                                                                ],
+                                                                1
+                                                              )
+                                                            }
+                                                          ),
+                                                          0
+                                                        )
+                                                      ],
+                                                      1
+                                                    )
+                                                  ]
+                                                )
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c("v-divider", {
+                                              staticClass: "mx-2"
+                                            })
+                                          ],
+                                          1
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    venue.taxonomies.length <= 0
+                                      ? _c(
+                                          "div",
+                                          [
+                                            _c(
+                                              "v-row",
+                                              { staticClass: "py-0" },
+                                              [
+                                                _c(
+                                                  "v-col",
+                                                  {
+                                                    staticClass:
+                                                      "my-auto mx-auto col-auto"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "span",
+                                                      {
+                                                        staticClass:
+                                                          "mx-auto col-auto  caption",
+                                                        class: _vm.$vuetify
+                                                          .theme.dark
+                                                          ? "grey--text"
+                                                          : "grey--text",
+                                                        staticStyle: {
+                                                          "line-height": "3rem"
+                                                        },
+                                                        attrs: {
+                                                          justify: "center"
+                                                        }
+                                                      },
+                                                      [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            _vm.$t(
+                                                              "page.venues.no_taxonomies_title"
+                                                            )
+                                                          ) +
+                                                            "\n                                            "
+                                                        )
+                                                      ]
+                                                    )
+                                                  ]
+                                                )
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c("v-divider", {
+                                              staticClass: "mx-2"
+                                            })
+                                          ],
+                                          1
+                                        )
+                                      : _vm._e(),
+                                    _vm._v(" "),
+                                    _c(
+                                      "v-row",
+                                      { staticClass: "pt-3" },
+                                      [
+                                        _c(
+                                          "v-col",
+                                          {
+                                            staticClass: "ml-4 my-auto col-auto"
+                                          },
+                                          [
+                                            _c(
+                                              "v-btn",
+                                              {
+                                                attrs: {
+                                                  text: "",
+                                                  color: "info accent-4"
+                                                },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.showPerson(
+                                                      venue.id
+                                                    )
+                                                  }
+                                                }
+                                              },
+                                              [
+                                                _vm._v(
+                                                  _vm._s(
+                                                    _vm.$t(
+                                                      "page.venues.more_info"
+                                                    )
+                                                  )
+                                                )
+                                              ]
+                                            )
+                                          ],
+                                          1
+                                        ),
+                                        _vm._v(" "),
+                                        _c(
+                                          "v-col",
+                                          {
+                                            staticClass:
+                                              "mx-4 my-auto col-auto ml-auto"
+                                          },
+                                          [
+                                            _c(
+                                              "span",
+                                              {
+                                                staticClass: "mr-3",
+                                                class: _vm.$vuetify.theme.dark
+                                                  ? "primary--text"
+                                                  : "secondary--text"
+                                              },
+                                              [
+                                                _c(
+                                                  "v-icon",
+                                                  {
+                                                    staticClass: "mr-1",
+                                                    class: _vm.$vuetify.theme
+                                                      .dark
+                                                      ? "primary--text"
+                                                      : "secondary--text",
+                                                    staticStyle: {
+                                                      "margin-bottom": "0.05rem"
+                                                    },
+                                                    attrs: {
+                                                      dark: "",
+                                                      small: ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                mdi-comment-outline "
+                                                    )
+                                                  ]
+                                                ),
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "subtitle-2" },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(
+                                                        venue.comments_count
+                                                      ) +
+                                                        "\n                                            "
+                                                    )
+                                                  ]
+                                                )
+                                              ],
+                                              1
+                                            ),
+                                            _vm._v(" "),
+                                            _c(
+                                              "span",
+                                              {
+                                                class: _vm.$vuetify.theme.dark
+                                                  ? "primary--text"
+                                                  : "secondary--text"
+                                              },
+                                              [
+                                                _c(
+                                                  "v-icon",
+                                                  {
+                                                    staticClass: "mr-1",
+                                                    class: _vm.$vuetify.theme
+                                                      .dark
+                                                      ? "primary--text"
+                                                      : "secondary--text",
+                                                    staticStyle: {
+                                                      "margin-bottom": "0.05rem"
+                                                    },
+                                                    attrs: {
+                                                      dark: "",
+                                                      small: ""
+                                                    }
+                                                  },
+                                                  [
+                                                    _vm._v(
+                                                      "\n                                                mdi-heart-outline "
+                                                    )
+                                                  ]
+                                                ),
+                                                _c(
+                                                  "span",
+                                                  { staticClass: "subtitle-2" },
+                                                  [
+                                                    _vm._v(
+                                                      _vm._s(venue.likes_count)
+                                                    )
+                                                  ]
+                                                )
+                                              ],
+                                              1
+                                            )
+                                          ]
+                                        )
+                                      ],
+                                      1
+                                    )
+                                  ],
+                                  1
+                                )
+                              ]
+                            )
+                          ],
+                          1
+                        )
+                      }),
+                      1
+                    ),
+                    _vm._v(" "),
+                    _vm.meta.last_page != 1 && _vm.overlay == false
+                      ? _c("v-col", { staticClass: "my-0 py-o" }, [
+                          _c(
+                            "div",
+                            { staticClass: "text-center mt-4 mb-0 py-0" },
+                            [
+                              _c(
+                                "v-container",
+                                [
+                                  _c(
+                                    "v-row",
+                                    { attrs: { justify: "center" } },
+                                    [
+                                      _c(
+                                        "v-col",
+                                        { attrs: { cols: "12" } },
+                                        [
+                                          _c(
+                                            "v-container",
+                                            { staticClass: "max-width" },
+                                            [
+                                              _c("v-pagination", {
+                                                attrs: {
+                                                  color: _vm.$vuetify.theme.dark
+                                                    ? "primary"
+                                                    : "secondary",
+                                                  length: _vm.meta.last_page,
+                                                  circle: ""
+                                                },
+                                                on: { input: _vm.onPageChange },
+                                                model: {
+                                                  value: _vm.page,
+                                                  callback: function($$v) {
+                                                    _vm.page = $$v
+                                                  },
+                                                  expression: "page"
+                                                }
+                                              })
+                                            ],
+                                            1
+                                          )
+                                        ],
+                                        1
+                                      )
+                                    ],
+                                    1
+                                  )
+                                ],
+                                1
+                              )
+                            ],
+                            1
+                          )
+                        ])
+                      : _vm._e()
+                  ],
+                  1
+                )
+              ])
+            : _vm._e()
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-overlay",
+        {
+          class: _vm.$vuetify.theme.dark ? "primary--text" : "secondary--text",
+          attrs: { opacity: 0.1, value: _vm.overlay }
+        },
+        [
+          _c(
+            "v-progress-circular",
+            { attrs: { indeterminate: "", size: "90" } },
+            [
+              _c(
+                "span",
+                {
+                  staticClass: "caption",
+                  class: _vm.$vuetify.theme.dark
+                    ? "primary--text"
+                    : "secondary--text"
+                },
+                [_vm._v(_vm._s(_vm.$t("loading")))]
+              )
+            ]
+          )
         ],
         1
       )
