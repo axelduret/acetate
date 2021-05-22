@@ -20,6 +20,11 @@
     margin-left: 0.5rem;
 }
 
+// Vuetify Theme stepper content
+.v-stepper__content {
+    padding: 0;
+}
+
 .no-uppercase {
     text-transform: none;
 }

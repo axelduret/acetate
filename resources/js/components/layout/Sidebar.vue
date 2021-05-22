@@ -20,7 +20,9 @@
                                 ? 'secondary--text'
                                 : 'primary--text'
                         "
-                        style="font-family: monospace"
+                        style="font-family: monospace; cursor:pointer"
+                        :title="$t('button.back.home')"
+                        @click="backToHome()"
                     >
                         <v-icon
                             class="flaticon-music-disc-with-white-curve-details mr-0"
@@ -79,7 +81,16 @@ export default {
         drawer: false
     }),
     // Get sidebar menu content.
-    computed: mapGetters(["getMenu"])
+    computed: mapGetters(["getMenu"]),
+    methods: {
+        backToHome: function() {
+            if (
+                this.$route.path != `${this.baseURL + this.$i18n.locale}/home`
+            ) {
+                this.$router.push(`${this.baseURL + this.$i18n.locale}/home`);
+            }
+        }
+    }
 };
 </script>
 

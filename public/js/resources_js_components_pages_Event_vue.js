@@ -2264,7 +2264,7 @@ var render = function() {
                         {
                           staticClass: "mt-4 col-auto mx-auto my-auto",
                           class: _vm.$vuetify.theme.dark ? "greybg" : "greybg",
-                          attrs: { elevation: "-1", width: "300" }
+                          attrs: { elevation: "0", width: "300" }
                         },
                         [
                           _vm.errors

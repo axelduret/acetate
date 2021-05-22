@@ -20,7 +20,9 @@
                             ? 'secondary--text'
                             : 'primary--text'
                     "
-                    style="font-family: monospace"
+                    style="font-family: monospace; cursor:pointer"
+                    :title="$t('button.back.home')"
+                    @click="backToHome()"
                 >
                     <!-- App icon -->
                     <v-icon
@@ -203,6 +205,13 @@ export default {
             setAvatar: "user/setAvatar",
             setUserLogged: "account/setUserLogged"
         }),
+        backToHome: function() {
+            if (
+                this.$route.path != `${this.baseURL + this.$i18n.locale}/home`
+            ) {
+                this.$router.push(`${this.baseURL + this.$i18n.locale}/home`);
+            }
+        },
         // Theme switch.
         themeSwitcher: function() {
             // Switch theme.

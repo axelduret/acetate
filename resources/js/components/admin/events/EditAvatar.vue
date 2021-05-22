@@ -9,7 +9,7 @@
                     </v-card-title>
                     <v-card-text>
                         <v-card
-                            elevation="-1"
+                            elevation="0"
                             width="300"
                             :class="$vuetify.theme.dark ? 'greybg' : 'greybg'"
                             class="mt-4 col-auto mx-auto my-auto"

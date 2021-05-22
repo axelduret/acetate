@@ -104,6 +104,10 @@ i[class*=" flaticon-"]:before {
   margin-left: 0.5rem;
 }
 
+.v-stepper__content {
+  padding: 0;
+}
+
 .no-uppercase {
   text-transform: none;
 }
@@ -166,6 +170,10 @@ i[class*=" flaticon-"]:before {
   background-color: transparent;
 }
 
+.theme--light.v-picker__body {
+  background: #e0f2f1;
+}
+
 .theme--light.v-divider {
   background-color: #e0f2f1;
   color: #e0f2f1;
@@ -211,6 +219,10 @@ i[class*=" flaticon-"]:before {
 
 .theme--dark.v-data-table {
   background-color: transparent;
+}
+
+.theme--dark.v-picker__body {
+  background: #006064;
 }
 
 .theme--dark.v-divider {

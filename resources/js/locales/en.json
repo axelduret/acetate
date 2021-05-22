@@ -166,10 +166,27 @@
         },
         "delete": {
             "title": "Delete"
+        },
+        "event": {
+            "title": "Title",
+            "description": "Description",
+            "stepper": {
+                "info": "Info",
+                "dates": "Dates",
+                "people": "Attendance",
+                "venues": "Location",
+                "prices": "Prices",
+                "contact": "Contact"
+            }
         }
     },
     "button": {
-        "back": { "events": "back to events" },
+        "back": {
+            "back": "back",
+            "home": "Back to home",
+            "events": "back to events"
+        },
+        "next": "continue",
         "cancel": "cancel",
         "submit": "submit",
         "confirm": "confirm"

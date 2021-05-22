@@ -46,6 +46,10 @@
 .theme--light.v-data-table {
     background-color: transparent;
 }
+// Picker body
+.theme--light.v-picker__body {
+    background: $ac-light-contrast-bg;
+}
 // Divider
 .theme--light.v-divider {
     background-color: $ac-light-contrast-bg;

@@ -46,6 +46,10 @@
 .theme--dark.v-data-table {
     background-color: transparent;
 }
+// Picker body
+.theme--dark.v-picker__body {
+    background: $ac-dark-contrast-bg;
+}
 // Divider
 .theme--dark.v-divider {
     background-color: $ac-dark-contrast-bg;
