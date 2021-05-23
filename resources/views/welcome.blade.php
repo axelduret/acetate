@@ -12,9 +12,9 @@
   <title>{{ config('app.name', 'My Site') }}</title>
 
   <!-- Vuetify Styles and Material Design Icons -->
-  <link href="{{ mix('css/styles.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/styles.css') }}" rel="stylesheet">
   <!-- Custom Styles and Flaticons -->
-  <link href="{{ mix('css/app.css') }}" rel="stylesheet">
+  <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
 </head>
 
@@ -23,7 +23,7 @@
   <div id="app">
   </div>
 
-  <script src={{ mix('js/app.js') }}></script>
+  <script src={{ asset('js/app.js') }}></script>
 </body>
 
 </html>
