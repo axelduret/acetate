@@ -193,7 +193,7 @@ class DatabaseSeeder extends Seeder
 
     // Create likes.
     $likes = Like::factory()
-      ->count(10000)
+      ->count(5000)
       ->make()->each(function ($like) use ($users, $events, $people, $venues, $comments) {
         // Attach a random user_id to each like.
         $like->user_id = $users->random()->id;
@@ -243,7 +243,7 @@ class DatabaseSeeder extends Seeder
 
     // Create files.
     $files = File::factory()
-      ->count(2000)
+      ->count(1000)
       ->make()->each(function ($file) use ($users, $events, $people, $venues) {
         $random = rand(1, 4);
         if ($random == 1) {
@@ -305,7 +305,7 @@ class DatabaseSeeder extends Seeder
 
     // Create emails.
     $emails = Email::factory()
-      ->count(1000)
+      ->count(500)
       ->make()->each(function ($email) use ($users, $events, $people, $venues, $tickets) {
         $random = rand(1, 5);
         if ($random == 1) {
@@ -333,7 +333,7 @@ class DatabaseSeeder extends Seeder
 
     // Create phones.
     $phones = Phone::factory()
-      ->count(1000)
+      ->count(500)
       ->make()->each(function ($phone) use ($users, $events, $people, $venues, $tickets) {
         $random = rand(1, 5);
         if ($random == 1) {
@@ -361,7 +361,7 @@ class DatabaseSeeder extends Seeder
 
     // Create websites.
     $websites = Website::factory()
-      ->count(1000)
+      ->count(500)
       ->make()->each(function ($website) use ($users, $events, $people, $venues) {
         $random = rand(1, 4);
         if ($random == 1) {
@@ -392,18 +392,18 @@ class DatabaseSeeder extends Seeder
 
     // Create taxonomies.
     $taxonomies = Taxonomy::factory()
-      ->count(200)
+      ->count(100)
       ->create()
       ->each(function ($taxonomy) use ($people, $venues) {
         if ($taxonomy->type == 'venue') {
           // Attach some random venues to the taxonomy.
           $taxonomy->venues()->attach(
-            $venues->random(rand(1, 20))->pluck('id')->toArray()
+            $venues->random(rand(1, 10))->pluck('id')->toArray()
           );
         } elseif ($taxonomy->type == 'people') {
           // Attach some random people to the taxonomy.
           $taxonomy->people()->attach(
-            $people->random(rand(1, 20))->pluck('id')->toArray()
+            $people->random(rand(1, 10))->pluck('id')->toArray()
           );
         }
       });
