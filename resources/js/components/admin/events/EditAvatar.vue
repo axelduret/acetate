@@ -22,6 +22,7 @@
                             </div>
                             <v-card-text class="white"
                                 ><img
+                                    v-if="currentAvatar"
                                     class="mx-4 my-3 primary--text col-auto mx-auto my-auto"
                                     width="213"
                                     :src="currentAvatar"/>
@@ -45,6 +46,16 @@
                         >
                         <v-spacer></v-spacer>
                         <v-btn
+                            v-if="currentAvatar"
+                            @click="deleteAvatar()"
+                            text
+                            color="warning"
+                            type="submit"
+                        >
+                            {{ $t("button.delete") }}
+                        </v-btn>
+                        <v-btn
+                            v-if="currentAvatar"
                             @click="submit()"
                             text
                             color="info"
@@ -81,8 +92,15 @@ export default {
     },
     mounted() {
         // Load event.avatar
-        this.currentAvatar =
-            this.appURL + this.baseURL + "storage/avatar/event/" + this.Avatar;
+        if (this.Avatar) {
+            this.currentAvatar =
+                this.appURL +
+                this.baseURL +
+                "storage/avatar/event/" +
+                this.Avatar;
+        } else {
+            this.currentAvatar = null;
+        }
     },
     methods: {
         // Validate file type.
@@ -137,6 +155,37 @@ export default {
                         console.log(error);
                     });
             }
+        },
+        // DELETE
+        deleteAvatar() {
+            const formData = new FormData();
+            formData.append("upload", "");
+            const config = {
+                headers: {
+                    "Content-Type":
+                        "multipart/form-data; charset=utf-8; boundary=" +
+                        Math.random()
+                            .toString()
+                            .substr(2),
+                    Authorization: "Bearer " + this.apiToken
+                }
+            };
+            axios
+                .post(
+                    this.baseURL + "api/events/" + this.Id + "/avatar",
+                    formData,
+                    config
+                )
+                .then(
+                    function(response) {
+                        this.currentAvatar = null;
+                        this.refreshAll();
+                        this.closeDialog();
+                    }.bind(this)
+                )
+                .catch(function(error) {
+                    console.log(error);
+                });
         },
         // GET
         fetchAPI() {

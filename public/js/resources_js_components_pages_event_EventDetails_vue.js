@@ -505,33 +505,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Description: String,
@@ -777,131 +750,40 @@ var render = function() {
                 ]
               ),
               _vm._v(" "),
-              _c(
-                "v-expansion-panel-content",
-                [
-                  _vm.CurrentDates !== null && _vm.CurrentDates.length > 0
-                    ? _c(
-                        "span",
-                        {
-                          staticClass: "subtitle-2",
-                          class: _vm.$vuetify.theme.dark
-                            ? "primary--text"
-                            : "primary--text"
-                        },
-                        [
-                          _c(
-                            "pre",
-                            [
-                              _c(
-                                "v-icon",
-                                {
-                                  staticClass: "mr-1 primary--text",
-                                  staticStyle: { "margin-bottom": "0.08rem" },
-                                  attrs: { small: "" }
-                                },
-                                [_vm._v("mdi-calendar-blank-multiple")]
-                              ),
-                              _vm._v(
-                                " " +
-                                  _vm._s(
-                                    _vm.$t("page.event.title.current_dates")
-                                  )
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("v-data-table", {
-                            staticClass: "primary--text",
-                            attrs: {
-                              headers: _vm.headers,
-                              items: _vm.CurrentDates,
-                              "sort-by": _vm.sortBy,
-                              "disable-pagination": "",
-                              "hide-default-footer": ""
+              _c("v-expansion-panel-content", [
+                _vm.CurrentDates !== null && _vm.CurrentDates.length > 0
+                  ? _c(
+                      "span",
+                      {
+                        staticClass: "subtitle-2",
+                        class: _vm.$vuetify.theme.dark
+                          ? "primary--text"
+                          : "primary--text"
+                      },
+                      [
+                        _c("v-data-table", {
+                          staticClass: "primary--text",
+                          attrs: {
+                            headers: _vm.headers,
+                            items: _vm.CurrentDates,
+                            "sort-by": _vm.sortBy,
+                            "disable-pagination": "",
+                            "hide-default-footer": ""
+                          },
+                          on: {
+                            "update:sortBy": function($event) {
+                              _vm.sortBy = $event
                             },
-                            on: {
-                              "update:sortBy": function($event) {
-                                _vm.sortBy = $event
-                              },
-                              "update:sort-by": function($event) {
-                                _vm.sortBy = $event
-                              }
+                            "update:sort-by": function($event) {
+                              _vm.sortBy = $event
                             }
-                          })
-                        ],
-                        1
-                      )
-                    : _vm._e(),
-                  _c("v-divider", {
-                    staticClass: "mb-2",
-                    class: _vm.$vuetify.theme.dark
-                      ? "primary--text"
-                      : "primary--text"
-                  }),
-                  _vm._v(" "),
-                  _vm.OldDates !== null && _vm.OldDates.length > 0
-                    ? _c(
-                        "span",
-                        {
-                          staticClass: "subtitle-2",
-                          class: _vm.$vuetify.theme.dark
-                            ? "primary--text"
-                            : "primary--text"
-                        },
-                        [
-                          _c(
-                            "pre",
-                            [
-                              _c(
-                                "v-icon",
-                                {
-                                  staticClass: "mr-1 primary--text",
-                                  staticStyle: { "margin-bottom": "0.08rem" },
-                                  attrs: { small: "" }
-                                },
-                                [_vm._v("mdi-calendar-blank-multiple")]
-                              ),
-                              _vm._v(
-                                " " +
-                                  _vm._s(_vm.$t("page.event.title.old_dates"))
-                              )
-                            ],
-                            1
-                          ),
-                          _vm._v(" "),
-                          _c("v-data-table", {
-                            staticClass: "primary--text",
-                            attrs: {
-                              headers: _vm.headers,
-                              items: _vm.OldDates,
-                              "sort-by": _vm.sortBy,
-                              "disable-pagination": "",
-                              "hide-default-footer": ""
-                            },
-                            on: {
-                              "update:sortBy": function($event) {
-                                _vm.sortBy = $event
-                              },
-                              "update:sort-by": function($event) {
-                                _vm.sortBy = $event
-                              }
-                            }
-                          })
-                        ],
-                        1
-                      )
-                    : _vm._e(),
-                  _c("v-divider", {
-                    staticClass: "mb-2",
-                    class: _vm.$vuetify.theme.dark
-                      ? "primary--text"
-                      : "primary--text"
-                  })
-                ],
-                1
-              )
+                          }
+                        })
+                      ],
+                      1
+                    )
+                  : _vm._e()
+              ])
             ],
             1
           ),
@@ -948,7 +830,7 @@ var render = function() {
                               "v-avatar",
                               {
                                 staticStyle: { cursor: "pointer" },
-                                attrs: { size: "30" }
+                                attrs: { size: "20" }
                               },
                               [
                                 person.avatar !== null &&
@@ -975,10 +857,7 @@ var render = function() {
                                         class: _vm.$vuetify.theme.dark
                                           ? "info--text"
                                           : "secondary--text",
-                                        attrs: {
-                                          large: "",
-                                          title: person.nickname
-                                        },
+                                        attrs: { title: person.nickname },
                                         on: {
                                           click: function($event) {
                                             return _vm.showPerson(person.id)
@@ -1010,22 +889,10 @@ var render = function() {
                                   }
                                 }
                               },
-                              [
-                                person.firstname && person.lastname !== null
-                                  ? _c("span", [
-                                      _vm._v(
-                                        _vm._s(person.firstname) +
-                                          "\n                                " +
-                                          _vm._s(person.lastname)
-                                      )
-                                    ])
-                                  : _c("span", [
-                                      _vm._v(_vm._s(person.nickname))
-                                    ])
-                              ]
+                              [_vm._v(_vm._s(person.nickname))]
                             ),
                             _vm._v(" "),
-                            _c("v-divider", { staticClass: "my-2 greybg" })
+                            _c("v-spacer")
                           ],
                           1
                         )
@@ -1071,188 +938,210 @@ var render = function() {
                   _vm._v(" "),
                   _c("v-expansion-panel-content", [
                     _vm.Venues !== null && _vm.Venues.length > 0
-                      ? _c(
-                          "span",
-                          _vm._l(_vm.Venues, function(venue, index) {
-                            return _c(
-                              "span",
-                              { key: index },
-                              [
-                                _c(
-                                  "v-icon",
-                                  {
-                                    class: _vm.$vuetify.theme.dark
-                                      ? "info--text"
-                                      : "secondary--text",
-                                    attrs: { small: "" }
-                                  },
-                                  [_vm._v("mdi-office-building-marker")]
-                                ),
-                                _c(
-                                  "v-btn",
-                                  {
-                                    staticClass: "no-uppercase",
-                                    class: _vm.$vuetify.theme.dark
-                                      ? "info--text"
-                                      : "secondary--text",
-                                    attrs: {
-                                      text: "",
-                                      tile: "",
-                                      small: "",
-                                      title: venue.name
+                      ? _c("div", { staticClass: "mt-0 mb-4 py-0 mx-0 px-0" }, [
+                          _c(
+                            "span",
+                            [
+                              _vm.Venues.length > 1
+                                ? _c(
+                                    "div",
+                                    {
+                                      staticClass: "mb-2 subtitle-2 grey--text"
                                     },
-                                    on: {
-                                      click: function($event) {
-                                        return _vm.showVenue(venue.id)
-                                      }
-                                    }
-                                  },
-                                  [_vm._v(_vm._s(venue.name))]
-                                ),
-                                _c("v-spacer"),
-                                _vm._v(" "),
-                                venue.addresses !== null &&
-                                venue.addresses.length > 0
-                                  ? _c(
-                                      "span",
-                                      { staticClass: "caption primary--text" },
-                                      _vm._l(venue.addresses, function(
-                                        address,
-                                        index
-                                      ) {
-                                        return _c(
-                                          "span",
-                                          { key: index },
-                                          [
-                                            _c(
+                                    [
+                                      _vm._v(
+                                        "\n                            " +
+                                          _vm._s(
+                                            _vm.$t("page.event.title.venues")
+                                          ) +
+                                          " :\n                        "
+                                      )
+                                    ]
+                                  )
+                                : _c(
+                                    "div",
+                                    {
+                                      staticClass: "mb-2 subtitle-2 grey--text"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                            " +
+                                          _vm._s(
+                                            _vm.$t("page.event.title.venue")
+                                          ) +
+                                          " :\n                        "
+                                      )
+                                    ]
+                                  ),
+                              _vm._v(" "),
+                              _c("v-spacer"),
+                              _vm._v(" "),
+                              _vm._l(_vm.Venues, function(venue, index) {
+                                return _c(
+                                  "span",
+                                  { key: index },
+                                  [
+                                    _c(
+                                      "v-avatar",
+                                      {
+                                        staticStyle: { cursor: "pointer" },
+                                        attrs: { tile: "", size: "20" }
+                                      },
+                                      [
+                                        venue.avatar !== null &&
+                                        venue.avatar.length > 0
+                                          ? _c("img", {
+                                              attrs: {
+                                                alt: "Avatar",
+                                                src:
+                                                  _vm.appURL +
+                                                  _vm.baseURL +
+                                                  "storage/avatar/venue/" +
+                                                  venue.avatar,
+                                                title: venue.name
+                                              },
+                                              on: {
+                                                click: function($event) {
+                                                  return _vm.showVenue(venue.id)
+                                                }
+                                              }
+                                            })
+                                          : _c(
                                               "v-icon",
                                               {
                                                 class: _vm.$vuetify.theme.dark
                                                   ? "info--text"
                                                   : "secondary--text",
-                                                attrs: { small: "" }
-                                              },
-                                              [_vm._v("mdi-earth-arrow-right")]
-                                            ),
-                                            _vm._v(" "),
-                                            _c(
-                                              "v-btn",
-                                              {
-                                                staticClass: "no-uppercase",
-                                                class: _vm.$vuetify.theme.dark
-                                                  ? "info--text"
-                                                  : "secondary--text",
-                                                attrs: {
-                                                  text: "",
-                                                  tile: "",
-                                                  small: "",
-                                                  href: _vm.mapQuery(address),
-                                                  title: _vm.$t(
-                                                    "page.event.title.google_map"
-                                                  ),
-                                                  target: "_blank"
+                                                attrs: { title: venue.name },
+                                                on: {
+                                                  click: function($event) {
+                                                    return _vm.showVenue(
+                                                      venue.id
+                                                    )
+                                                  }
                                                 }
                                               },
-                                              [
-                                                _vm._v(
-                                                  "\n                                    " +
-                                                    _vm._s(address.street1) +
-                                                    ",\n                                    " +
-                                                    _vm._s(address.zip) +
-                                                    " " +
-                                                    _vm._s(address.city) +
-                                                    ",\n                                    " +
-                                                    _vm._s(address.canton) +
-                                                    ",\n                                    " +
-                                                    _vm._s(address.country) +
-                                                    "\n                                "
-                                                )
-                                              ]
-                                            ),
-                                            _vm._v(" "),
-                                            _c("span", {
-                                              class: _vm.$vuetify.theme.dark
-                                                ? "grey--text"
-                                                : "primary--text"
-                                            }),
-                                            _c("v-spacer")
-                                          ],
-                                          1
-                                        )
-                                      }),
-                                      0
-                                    )
-                                  : _vm._e(),
-                                _c("v-divider", { staticClass: "my-2 greybg" })
-                              ],
-                              1
-                            )
-                          }),
-                          0
-                        )
+                                              [_vm._v("mdi-office-building")]
+                                            )
+                                      ],
+                                      1
+                                    ),
+                                    _c(
+                                      "v-btn",
+                                      {
+                                        staticClass: "no-uppercase",
+                                        class: _vm.$vuetify.theme.dark
+                                          ? "info--text"
+                                          : "secondary--text",
+                                        attrs: {
+                                          text: "",
+                                          tile: "",
+                                          small: "",
+                                          title: venue.name
+                                        },
+                                        on: {
+                                          click: function($event) {
+                                            return _vm.showVenue(venue.id)
+                                          }
+                                        }
+                                      },
+                                      [_vm._v(_vm._s(venue.name))]
+                                    ),
+                                    _c("v-spacer")
+                                  ],
+                                  1
+                                )
+                              })
+                            ],
+                            2
+                          )
+                        ])
                       : _vm._e(),
                     _vm._v(" "),
                     _vm.Addresses !== null && _vm.Addresses.length > 0
-                      ? _c(
-                          "span",
-                          _vm._l(_vm.Addresses, function(address, index) {
-                            return _c(
-                              "span",
-                              { key: index },
-                              [
-                                _c(
-                                  "v-icon",
-                                  {
-                                    class: _vm.$vuetify.theme.dark
-                                      ? "info--text"
-                                      : "secondary--text",
-                                    attrs: { small: "" }
-                                  },
-                                  [_vm._v("mdi-earth-arrow-right")]
-                                ),
-                                _vm._v(" "),
-                                _c(
-                                  "v-btn",
-                                  {
-                                    staticClass: "no-uppercase",
-                                    class: _vm.$vuetify.theme.dark
-                                      ? "info--text"
-                                      : "secondary--text",
-                                    attrs: {
-                                      text: "",
-                                      tile: "",
-                                      small: "",
-                                      href: _vm.mapQuery(address),
-                                      title: _vm.$t(
-                                        "page.event.title.google_map"
-                                      ),
-                                      target: "_blank"
-                                    }
-                                  },
-                                  [
-                                    _vm._v(
-                                      "\n                            " +
-                                        _vm._s(address.street1) +
-                                        ", " +
-                                        _vm._s(address.zip) +
+                      ? _c("div", { staticClass: "mt-0 mb-4 py-0 mx-0 px-0" }, [
+                          _c(
+                            "span",
+                            [
+                              _vm.Addresses.length > 1
+                                ? _c(
+                                    "div",
+                                    {
+                                      staticClass: "mb-2 subtitle-2 grey--text"
+                                    },
+                                    [
+                                      _vm._v(
                                         "\n                            " +
-                                        _vm._s(address.city) +
-                                        ", " +
-                                        _vm._s(address.canton) +
-                                        ",\n                            " +
-                                        _vm._s(address.country) +
-                                        "\n                        "
-                                    )
-                                  ]
-                                ),
-                                _vm._v(" "),
-                                _c("v-divider", { staticClass: "my-2 greybg" })
-                              ],
-                              1
-                            )
-                          }),
-                          0
-                        )
+                                          _vm._s(
+                                            _vm.$t("page.event.title.addresses")
+                                          ) +
+                                          " :\n                        "
+                                      )
+                                    ]
+                                  )
+                                : _c(
+                                    "div",
+                                    {
+                                      staticClass: "mb-2 subtitle-2 grey--text"
+                                    },
+                                    [
+                                      _vm._v(
+                                        "\n                            " +
+                                          _vm._s(
+                                            _vm.$t("page.event.title.address")
+                                          ) +
+                                          " :\n                        "
+                                      )
+                                    ]
+                                  ),
+                              _vm._v(" "),
+                              _c("v-spacer"),
+                              _vm._v(" "),
+                              _vm._l(_vm.Addresses, function(address, index) {
+                                return _c("span", { key: index }, [
+                                  _c(
+                                    "span",
+                                    [
+                                      _c(
+                                        "v-icon",
+                                        {
+                                          staticClass: "mr-1 primary--text",
+                                          staticStyle: {
+                                            "margin-bottom": "0.08rem"
+                                          },
+                                          attrs: {
+                                            small: "",
+                                            title: _vm.$t(
+                                              "page.venues.title.company"
+                                            )
+                                          }
+                                        },
+                                        [_vm._v("mdi-map-marker")]
+                                      ),
+                                      _vm._v(" "),
+                                      _c("span", [
+                                        _vm._v(
+                                          _vm._s(address.street1) +
+                                            ",\n                                    " +
+                                            _vm._s(address.zip) +
+                                            "\n                                    " +
+                                            _vm._s(address.city) +
+                                            ",\n                                    " +
+                                            _vm._s(address.canton) +
+                                            ",\n                                    " +
+                                            _vm._s(address.country)
+                                        )
+                                      ])
+                                    ],
+                                    1
+                                  )
+                                ])
+                              }),
+                              _c("v-spacer")
+                            ],
+                            2
+                          )
+                        ])
                       : _vm._e()
                   ])
                 ],
@@ -1440,7 +1329,7 @@ var render = function() {
                               ]
                             ),
                             _vm._v(" "),
-                            _c("v-divider", { staticClass: "my-2 greybg" })
+                            _c("v-spacer")
                           ],
                           1
                         )
@@ -1535,7 +1424,7 @@ var render = function() {
                               ]
                             ),
                             _vm._v(" "),
-                            _c("v-divider", { staticClass: "my-2 greybg" })
+                            _c("v-spacer")
                           ],
                           1
                         )
@@ -1674,7 +1563,7 @@ var render = function() {
                               ]
                             ),
                             _vm._v(" "),
-                            _c("v-divider", { staticClass: "my-2 greybg" })
+                            _c("v-spacer")
                           ],
                           1
                         )

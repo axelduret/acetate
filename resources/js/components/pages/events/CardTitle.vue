@@ -5,11 +5,20 @@
             tile
             size="80"
             class="rounded"
-            :color="$vuetify.theme.dark ? 'primary' : 'white'"
+            :color="
+                $vuetify.theme.dark ? 'primary darken-1' : 'greybg darken-1'
+            "
             ><v-img
+                v-if="Avatar != null"
                 :src="appURL + baseURL + 'storage/avatar/event/' + Avatar"
                 :title="Name"
             ></v-img>
+            <v-icon
+                :title="$t('avatar.no_avatar')"
+                :color="$vuetify.theme.dark ? 'greybg' : 'primary lighten-1'"
+                v-else
+                >mdi-camera-off</v-icon
+            >
         </v-list-item-avatar>
         <v-list-item-content>
             <div class="overline primary--text">

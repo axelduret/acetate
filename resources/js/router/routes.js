@@ -89,9 +89,21 @@ const routes = [
                 component: loadComponent("pages/People")
             },
             {
+                path: "people/:id",
+                name: "Person",
+                props: true,
+                component: loadComponent("pages/Person")
+            },
+            {
                 path: "venues",
                 name: "Venues",
                 component: loadComponent("pages/Venues")
+            },
+            {
+                path: "venues/:id",
+                name: "Venue",
+                props: true,
+                component: loadComponent("pages/Venue")
             },
             {
                 path: "users",
@@ -101,7 +113,7 @@ const routes = [
             {
                 path: "dashboard",
                 name: "Dashboard",
-                component: loadComponent("pages/Dashboard"),
+                component: loadComponent("admin/Dashboard"),
                 meta: { auth: true }
             },
             {

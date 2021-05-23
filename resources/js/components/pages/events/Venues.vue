@@ -19,11 +19,15 @@
         <span v-if="Venues.length <= 0" class="caption primary--text"
             ><span
                 ><v-icon
-                    class="mr-1 primary--text"
+                    class="mr-1 "
+                    :class="$vuetify.theme.dark ? 'grey--text' : 'grey--text'"
                     style="margin-bottom: 0.08rem"
                     small
                     >mdi-office-building-marker</v-icon
-                ><span :title="$t('page.events.no_venues_title')">
+                ><span
+                    :class="$vuetify.theme.dark ? 'grey--text' : 'grey--text'"
+                    :title="$t('page.events.no_venues_title')"
+                >
                     {{ $t("page.events.no_venues") }}</span
                 ></span
             ><v-spacer></v-spacer>

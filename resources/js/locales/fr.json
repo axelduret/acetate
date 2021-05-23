@@ -89,6 +89,10 @@
                 "end_time": "Heure de Fin",
                 "attendance": "Intervenants",
                 "locations": "Localisation",
+                "venues": "Lieux",
+                "venue": "Lieu",
+                "addresses": "Adresses",
+                "address": "Adresse",
                 "prices": "Tarifs",
                 "emails": "Email",
                 "phones": "Téléphone",
@@ -102,19 +106,26 @@
         },
         "people": {
             "title": {
-                "name": "Prénom et nom de famille",
+                "name": "Nom",
                 "company": "Entreprise"
             },
             "description": "...",
+            "no_name": "aucun",
+            "no_name_title": "Aucun nom à afficher",
+            "no_company": "aucun",
+            "no_company_title": "Aucune entreprise à afficher",
             "no_taxonomies": "aucun",
             "no_taxonomies_title": "Aucune étiquette à afficher",
             "more_info": "plus d'infos"
         },
         "venues": {
             "title": {
-                "name": "Nom"
+                "name": "Nom",
+                "address": "Addresse"
             },
             "description": "...",
+            "no_addresses": "inconnu",
+            "no_addresses_title": "Aucune adresse à afficher",
             "no_taxonomies": "aucun",
             "no_taxonomies_title": "Aucune étiquette à afficher",
             "more_info": "plus d'infos"
@@ -166,7 +177,12 @@
         "comment": {
             "message": "Le texte doit comprendre 10 caractères au minimum."
         },
-        "venues": { "not_found": "Aucun lieu correspondant à cette recherche." }
+        "venues": {
+            "not_found": "Aucun lieu correspondant à cette recherche."
+        },
+        "people": {
+            "not_found": "Aucune personne correspondant à cette recherche."
+        }
     },
     "not_logged_in": "Connexion requise.",
     "admin": {
@@ -196,13 +212,20 @@
         "back": {
             "back": "retour",
             "home": "Retour à la page d'accueil",
-            "events": "retour vers événements"
+            "events": "retour vers événements",
+            "people": "retour vers personnes",
+            "venues": "retour vers lieux"
         },
         "next": "continuer",
         "cancel": "annuler",
+        "delete": "supprimer",
         "submit": "envoyer",
         "confirm": "confirmer",
         "close": "fermer"
     },
-    "search": { "venues": "Rechercher un lieu" }
+    "search": {
+        "venues": "Rechercher un lieu",
+        "people": "Rechercher une personne"
+    },
+    "avatar": { "no_avatar": "Aucune image à afficher" }
 }

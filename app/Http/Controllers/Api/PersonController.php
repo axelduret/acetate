@@ -62,13 +62,6 @@ class PersonController extends Controller
   protected $sortFields = ['nickname', 'firstname', 'lastname', 'type', 'company'];
 
   /**
-   * Searchable fields.
-   *
-   * @var array
-   */
-  protected $searchFields = ['nickname', 'firstname', 'lastname', 'type', 'company'];
-
-  /**
    * Display the list of all people.
    *
    * @param Request $request
@@ -123,16 +116,12 @@ class PersonController extends Controller
         'favorites'
       ]);
     // Search data.
-    $searchValue = $request->input('search_value');
-    $searchField = in_array(
-      $request->input('search_field'),
-      $this->searchFields
-    ) // Accepted values.
-      ? $request->input('search_field') // Submitted value.
-      : null; // Default value.
-    if (!is_null($searchValue) && !is_null($searchField)) {
-      $searchQuery = "%$searchValue%";
-      $query = $query->where($searchField, 'like', $searchQuery);
+    $search = $request->input('search');
+    if (!is_null($search)) {
+      $query = $query->where("nickname", "like", "%$search%")
+        ->orWhere("firstname", "like", "%$search%")
+        ->orWhere("lastname", "like", "%$search%")
+        ->orWhere("company", "like", "%$search%");
     }
     // Pagination.
     $perPage = $request->input('per_page') ?? self::PER_PAGE;

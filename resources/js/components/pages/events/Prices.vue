@@ -20,11 +20,15 @@
         <span v-if="Prices.length <= 0" class="caption primary--text">
             <span
                 ><v-icon
+                    :class="$vuetify.theme.dark ? 'grey--text' : 'grey--text'"
                     class="mr-1 primary--text"
                     style="margin-bottom: 0.08rem"
                     small
                     >mdi-cash-usd-outline</v-icon
-                ><span :title="$t('page.events.no_prices_title')">
+                ><span
+                    :class="$vuetify.theme.dark ? 'grey--text' : 'grey--text'"
+                    :title="$t('page.events.no_prices_title')"
+                >
                     {{ $t("page.events.no_prices") }}</span
                 ></span
             ><v-spacer></v-spacer>

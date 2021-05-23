@@ -98,12 +98,12 @@
 </template>
 
 <script>
-import Info from "./edit/stepper/Info";
-import Dates from "./edit/stepper/Dates";
-import People from "./edit/stepper/People";
-import Venues from "./edit/stepper/Venues";
-import Prices from "./edit/stepper/Prices";
-import Contact from "./edit/stepper/Contact";
+import Info from "./edit/Info";
+import Dates from "./edit/Dates";
+import People from "./edit/People";
+import Venues from "./edit/Venues";
+import Prices from "./edit/Prices";
+import Contact from "./edit/Contact";
 
 export default {
     props: { id: String },

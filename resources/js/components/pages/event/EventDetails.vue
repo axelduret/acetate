@@ -46,9 +46,9 @@
                                 : 'primary--text'
                         "
                     >
-                        <pre><v-icon class="mr-1 primary--text" style="margin-bottom: 0.08rem" small
+                        <!-- <pre><v-icon class="mr-1 primary--text" style="margin-bottom: 0.08rem" small
         >mdi-calendar-blank-multiple</v-icon
-      > {{ $t("page.event.title.current_dates") }}</pre>
+      > {{ $t("page.event.title.current_dates") }}</pre> -->
                         <v-data-table
                             :headers="headers"
                             :items="CurrentDates"
@@ -56,16 +56,9 @@
                             class="primary--text"
                             disable-pagination
                             hide-default-footer
-                        ></v-data-table></span
-                    ><v-divider
-                        :class="
-                            $vuetify.theme.dark
-                                ? 'primary--text'
-                                : 'primary--text'
-                        "
-                        class="mb-2"
-                    ></v-divider>
-                    <span
+                        ></v-data-table
+                    ></span>
+                    <!-- <span
                         v-if="OldDates !== null && OldDates.length > 0"
                         class="subtitle-2"
                         :class="
@@ -93,7 +86,8 @@
                         "
                         class="mb-2"
                     ></v-divider
-                ></v-expansion-panel-content>
+                > --></v-expansion-panel-content
+                >
             </v-expansion-panel>
             <!-- People -->
             <v-expansion-panel
@@ -109,7 +103,7 @@
                 <v-expansion-panel-content>
                     <span>
                         <span v-for="(person, index) in People" :key="index">
-                            <v-avatar size="30" style="cursor: pointer">
+                            <v-avatar size="20" style="cursor: pointer">
                                 <img
                                     v-if="
                                         person.avatar !== null &&
@@ -126,7 +120,6 @@
                                     :title="person.nickname"
                                 /><v-icon
                                     v-else
-                                    large
                                     :class="
                                         $vuetify.theme.dark
                                             ? 'info--text'
@@ -149,17 +142,9 @@
                                 class="no-uppercase"
                                 @click="showPerson(person.id)"
                                 :title="person.nickname"
-                                ><span
-                                    v-if="
-                                        person.firstname &&
-                                            person.lastname !== null
-                                    "
-                                    >{{ person.firstname }}
-                                    {{ person.lastname }}</span
-                                >
-                                <span v-else>{{ person.nickname }}</span></v-btn
+                                >{{ person.nickname }}</v-btn
                             >
-                            <v-divider class="my-2 greybg"></v-divider
+                            <v-spacer></v-spacer
                         ></span>
                     </span>
                 </v-expansion-panel-content>
@@ -179,120 +164,108 @@
                     </template></v-expansion-panel-header
                 >
                 <v-expansion-panel-content>
-                    <span v-if="Venues !== null && Venues.length > 0">
-                        <span v-for="(venue, index) in Venues" :key="index">
-                            <!-- Venue name --><v-icon
-                                :class="
-                                    $vuetify.theme.dark
-                                        ? 'info--text'
-                                        : 'secondary--text'
-                                "
-                                small
-                                >mdi-office-building-marker</v-icon
-                            ><v-btn
-                                text
-                                tile
-                                small
-                                :class="
-                                    $vuetify.theme.dark
-                                        ? 'info--text'
-                                        : 'secondary--text'
-                                "
-                                class="no-uppercase"
-                                @click="showVenue(venue.id)"
-                                :title="venue.name"
-                                >{{ venue.name }}</v-btn
-                            ><v-spacer></v-spacer>
-                            <span
-                                v-if="
-                                    venue.addresses !== null &&
-                                        venue.addresses.length > 0
-                                "
-                                class="caption primary--text"
+                    <div
+                        v-if="Venues !== null && Venues.length > 0"
+                        class="mt-0 mb-4 py-0 mx-0 px-0"
+                    >
+                        <span>
+                            <div
+                                v-if="Venues.length > 1"
+                                class="mb-2 subtitle-2 grey--text"
                             >
-                                <span
-                                    v-for="(address, index) in venue.addresses"
-                                    :key="index"
+                                {{ $t("page.event.title.venues") }} :
+                            </div>
+                            <div v-else class="mb-2 subtitle-2 grey--text">
+                                {{ $t("page.event.title.venue") }} :
+                            </div>
+                            <v-spacer></v-spacer>
+                            <span v-for="(venue, index) in Venues" :key="index">
+                                <!-- Venue name -->
+                                <v-avatar
+                                    tile
+                                    size="20"
+                                    style="cursor: pointer"
                                 >
-                                    <!-- Venue addresses -->
-                                    <v-icon
+                                    <img
+                                        v-if="
+                                            venue.avatar !== null &&
+                                                venue.avatar.length > 0
+                                        "
+                                        alt="Avatar"
+                                        @click="showVenue(venue.id)"
+                                        :src="
+                                            appURL +
+                                                baseURL +
+                                                'storage/avatar/venue/' +
+                                                venue.avatar
+                                        "
+                                        :title="venue.name"
+                                    /><v-icon
+                                        v-else
                                         :class="
                                             $vuetify.theme.dark
                                                 ? 'info--text'
                                                 : 'secondary--text'
                                         "
-                                        small
-                                        >mdi-earth-arrow-right</v-icon
-                                    >
-                                    <v-btn
-                                        text
-                                        tile
-                                        small
-                                        :class="
-                                            $vuetify.theme.dark
-                                                ? 'info--text'
-                                                : 'secondary--text'
-                                        "
-                                        class="no-uppercase"
-                                        :href="mapQuery(address)"
-                                        :title="
-                                            $t('page.event.title.google_map')
-                                        "
-                                        target="_blank"
-                                    >
-                                        {{ address.street1 }},
-                                        {{ address.zip }} {{ address.city }},
-                                        {{ address.canton }},
-                                        {{ address.country }}
-                                    </v-btn>
-                                    <span
-                                        :class="
-                                            $vuetify.theme.dark
-                                                ? 'grey--text'
-                                                : 'primary--text'
-                                        "
-                                    >
-                                    </span
-                                    ><v-spacer></v-spacer>
-                                </span> </span
-                            ><v-divider class="my-2 greybg"></v-divider
-                        ></span>
-                    </span>
+                                        :title="venue.name"
+                                        @click="showVenue(venue.id)"
+                                        >mdi-office-building</v-icon
+                                    > </v-avatar
+                                ><v-btn
+                                    text
+                                    tile
+                                    small
+                                    :class="
+                                        $vuetify.theme.dark
+                                            ? 'info--text'
+                                            : 'secondary--text'
+                                    "
+                                    class="no-uppercase"
+                                    @click="showVenue(venue.id)"
+                                    :title="venue.name"
+                                    >{{ venue.name }}</v-btn
+                                ><v-spacer></v-spacer
+                            ></span>
+                        </span>
+                    </div>
                     <!-- Event adresses -->
-                    <span v-if="Addresses !== null && Addresses.length > 0">
-                        <span
-                            v-for="(address, index) in Addresses"
-                            :key="index"
-                        >
-                            <v-icon
-                                :class="
-                                    $vuetify.theme.dark
-                                        ? 'info--text'
-                                        : 'secondary--text'
-                                "
-                                small
-                                >mdi-earth-arrow-right</v-icon
+                    <div
+                        v-if="Addresses !== null && Addresses.length > 0"
+                        class="mt-0 mb-4 py-0 mx-0 px-0"
+                    >
+                        <span>
+                            <div
+                                v-if="Addresses.length > 1"
+                                class="mb-2 subtitle-2 grey--text"
                             >
-                            <v-btn
-                                text
-                                tile
-                                small
-                                :class="
-                                    $vuetify.theme.dark
-                                        ? 'info--text'
-                                        : 'secondary--text'
-                                "
-                                class="no-uppercase"
-                                :href="mapQuery(address)"
-                                :title="$t('page.event.title.google_map')"
-                                target="_blank"
+                                {{ $t("page.event.title.addresses") }} :
+                            </div>
+                            <div v-else class="mb-2 subtitle-2 grey--text">
+                                {{ $t("page.event.title.address") }} :
+                            </div>
+                            <v-spacer></v-spacer>
+                            <span
+                                v-for="(address, index) in Addresses"
+                                :key="index"
                             >
-                                {{ address.street1 }}, {{ address.zip }}
-                                {{ address.city }}, {{ address.canton }},
-                                {{ address.country }}
-                            </v-btn>
-                            <v-divider class="my-2 greybg"></v-divider></span
-                    ></span>
+                                <span>
+                                    <v-icon
+                                        class="mr-1 primary--text"
+                                        style="margin-bottom: 0.08rem"
+                                        small
+                                        :title="$t('page.venues.title.company')"
+                                        >mdi-map-marker</v-icon
+                                    >&nbsp;<span
+                                        >{{ address.street1 }},
+                                        {{ address.zip }}
+                                        {{ address.city }},
+                                        {{ address.canton }},
+                                        {{ address.country }}</span
+                                    ></span
+                                > </span
+                            ><v-spacer></v-spacer
+                        ></span>
+                    </div>
                 </v-expansion-panel-content>
             </v-expansion-panel>
             <!-- Prices -->
@@ -382,7 +355,7 @@
                             >
                                 ({{ email.type }})
                             </span>
-                            <v-divider class="my-2 greybg"></v-divider
+                            <v-spacer></v-spacer
                         ></span>
                     </span>
                 </v-expansion-panel-content>
@@ -430,7 +403,7 @@
                                 ({{ phone.type }})
                             </span>
 
-                            <v-divider class="my-2 greybg"></v-divider
+                            <v-spacer></v-spacer
                         ></span> </span
                 ></v-expansion-panel-content>
             </v-expansion-panel>
@@ -510,7 +483,7 @@
                             >
                                 {{ website.url }}
                             </v-btn>
-                            <v-divider class="my-2 greybg"></v-divider
+                            <v-spacer></v-spacer
                         ></span>
                     </span>
                 </v-expansion-panel-content>

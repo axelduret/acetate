@@ -337,6 +337,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {},
   data: function data() {
@@ -388,12 +399,6 @@ __webpack_require__.r(__webpack_exports__);
         _this.searchValue = null;
 
         _this.fetchVenues();
-        /* 
-        const path = "error/404";
-        this.$router.push(
-            `${this.baseURL}${this.$i18n.locale}/${path}`
-        ); */
-
       })["finally"](function () {});
     },
     onSearch: function onSearch() {
@@ -401,6 +406,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     onPageChange: function onPageChange() {
       this.fetchVenues();
+    },
+    showVenue: function showVenue(id) {
+      var path = "venues/" + id;
+      this.$router.push("".concat(this.baseURL).concat(this.$i18n.locale, "/").concat(path));
     }
   }
 });
@@ -579,7 +588,10 @@ var render = function() {
                           [
                             _c(
                               "v-col",
-                              { staticClass: "mb-4 my-auto col-auto " },
+                              {
+                                staticClass: "mb-4 my-auto col-auto ",
+                                attrs: { cols: "10", sm: "6", md: "4" }
+                              },
                               [
                                 _c("v-text-field", {
                                   attrs: {
@@ -659,22 +671,13 @@ var render = function() {
                       _vm._l(_vm.venues, function(venue, index) {
                         return _c(
                           "v-col",
-                          {
-                            key: index,
-                            attrs: {
-                              cols: "12",
-                              sm: "12",
-                              md: "6",
-                              lg: "4",
-                              xl: "3"
-                            }
-                          },
+                          { key: index, attrs: { cols: "12", md: "6" } },
                           [
                             _c(
                               "v-card",
                               {
                                 staticClass: "mx-auto pb-4",
-                                attrs: { "max-width": "500px" }
+                                attrs: { "max-width": "570px" }
                               },
                               [
                                 _c(
@@ -695,21 +698,37 @@ var render = function() {
                                               tile: "",
                                               size: "80",
                                               color: _vm.$vuetify.theme.dark
-                                                ? "primary"
-                                                : "white"
+                                                ? "primary darken-1"
+                                                : "greybg darken-1"
                                             }
                                           },
                                           [
-                                            _c("v-img", {
-                                              attrs: {
-                                                src:
-                                                  _vm.appURL +
-                                                  _vm.baseURL +
-                                                  "storage/avatar/venue/" +
-                                                  venue.avatar,
-                                                title: venue.nickname
-                                              }
-                                            })
+                                            venue.avatar != null
+                                              ? _c("v-img", {
+                                                  attrs: {
+                                                    src:
+                                                      _vm.appURL +
+                                                      _vm.baseURL +
+                                                      "storage/avatar/venue/" +
+                                                      venue.avatar,
+                                                    title: venue.nickname
+                                                  }
+                                                })
+                                              : _c(
+                                                  "v-icon",
+                                                  {
+                                                    attrs: {
+                                                      title: _vm.$t(
+                                                        "avatar.no_avatar"
+                                                      ),
+                                                      color: _vm.$vuetify.theme
+                                                        .dark
+                                                        ? "greybg"
+                                                        : "primary lighten-1"
+                                                    }
+                                                  },
+                                                  [_vm._v("mdi-camera-off")]
+                                                )
                                           ],
                                           1
                                         ),
@@ -795,177 +814,146 @@ var render = function() {
                                     _vm._v(" "),
                                     _c(
                                       "v-row",
-                                      { staticClass: "pb-3" },
+                                      { staticClass: "py-3 mx-2" },
                                       [
-                                        _c("v-col", {
-                                          staticClass:
-                                            "mx-4 pt-5 col-auto mr-auto"
-                                        })
+                                        _c("v-col", [
+                                          venue.addresses.length > 0
+                                            ? _c(
+                                                "span",
+                                                {
+                                                  staticClass:
+                                                    "caption primary--text"
+                                                },
+                                                [
+                                                  _c(
+                                                    "span",
+                                                    [
+                                                      _c(
+                                                        "v-icon",
+                                                        {
+                                                          staticClass:
+                                                            "mr-1 primary--text",
+                                                          staticStyle: {
+                                                            "margin-bottom":
+                                                              "0.08rem"
+                                                          },
+                                                          attrs: {
+                                                            small: "",
+                                                            title: _vm.$t(
+                                                              "page.venues.title.address"
+                                                            )
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "mdi-map-marker"
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _vm._v(" "),
+                                                      _c("span", [
+                                                        _vm._v(
+                                                          _vm._s(
+                                                            venue.addresses[0]
+                                                              .street1
+                                                          ) +
+                                                            ",\n                                                    " +
+                                                            _vm._s(
+                                                              venue.addresses[0]
+                                                                .zip
+                                                            ) +
+                                                            "\n                                                    " +
+                                                            _vm._s(
+                                                              venue.addresses[0]
+                                                                .city
+                                                            ) +
+                                                            ",\n                                                    " +
+                                                            _vm._s(
+                                                              venue.addresses[0]
+                                                                .canton
+                                                            ) +
+                                                            ",\n                                                    " +
+                                                            _vm._s(
+                                                              venue.addresses[0]
+                                                                .country
+                                                            )
+                                                        )
+                                                      ])
+                                                    ],
+                                                    1
+                                                  )
+                                                ]
+                                              )
+                                            : _c(
+                                                "span",
+                                                {
+                                                  staticClass:
+                                                    "caption primary--text"
+                                                },
+                                                [
+                                                  _c(
+                                                    "span",
+                                                    [
+                                                      _c(
+                                                        "v-icon",
+                                                        {
+                                                          staticClass: "mr-1 ",
+                                                          class: _vm.$vuetify
+                                                            .theme.dark
+                                                            ? "grey--text"
+                                                            : "grey--text",
+                                                          staticStyle: {
+                                                            "margin-bottom":
+                                                              "0.08rem"
+                                                          },
+                                                          attrs: {
+                                                            small: "",
+                                                            title: _vm.$t(
+                                                              "page.venues.no_addresses_title"
+                                                            )
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "mdi-map-marker"
+                                                          )
+                                                        ]
+                                                      ),
+                                                      _c(
+                                                        "span",
+                                                        {
+                                                          class: _vm.$vuetify
+                                                            .theme.dark
+                                                            ? "grey--text"
+                                                            : "grey--text",
+                                                          attrs: {
+                                                            title: _vm.$t(
+                                                              "page.venues.no_addresses_title"
+                                                            )
+                                                          }
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "\n                                                    " +
+                                                              _vm._s(
+                                                                _vm.$t(
+                                                                  "page.venues.no_addresses"
+                                                                )
+                                                              )
+                                                          )
+                                                        ]
+                                                      )
+                                                    ],
+                                                    1
+                                                  )
+                                                ]
+                                              )
+                                        ])
                                       ],
                                       1
                                     ),
                                     _vm._v(" "),
                                     _c("v-divider", { staticClass: "mx-2" }),
-                                    _vm._v(" "),
-                                    venue.taxonomies.length > 0
-                                      ? _c(
-                                          "div",
-                                          [
-                                            _c(
-                                              "v-row",
-                                              { staticClass: "py-0" },
-                                              [
-                                                _c(
-                                                  "v-col",
-                                                  {
-                                                    staticClass:
-                                                      "my-auto mx-auto col-auto"
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "span",
-                                                      {
-                                                        staticClass:
-                                                          "primary--text",
-                                                        attrs: {
-                                                          justify: "center"
-                                                        }
-                                                      },
-                                                      [
-                                                        _c(
-                                                          "v-chip-group",
-                                                          {
-                                                            staticClass:
-                                                              "col-auto my-2 py-0",
-                                                            attrs: {
-                                                              "show-arrows": ""
-                                                            }
-                                                          },
-                                                          _vm._l(
-                                                            venue.taxonomies,
-                                                            function(
-                                                              taxonomy,
-                                                              index
-                                                            ) {
-                                                              return _c(
-                                                                "span",
-                                                                { key: index },
-                                                                [
-                                                                  _c(
-                                                                    "v-chip",
-                                                                    {
-                                                                      staticClass:
-                                                                        "greybg primary--text",
-                                                                      attrs: {
-                                                                        "x-small":
-                                                                          ""
-                                                                      }
-                                                                    },
-                                                                    [
-                                                                      _vm._v(
-                                                                        _vm._s(
-                                                                          taxonomy.category
-                                                                        )
-                                                                      )
-                                                                    ]
-                                                                  ),
-                                                                  _c(
-                                                                    "v-chip",
-                                                                    {
-                                                                      staticClass:
-                                                                        "greybg primary--text",
-                                                                      attrs: {
-                                                                        "x-small":
-                                                                          ""
-                                                                      }
-                                                                    },
-                                                                    [
-                                                                      _vm._v(
-                                                                        _vm._s(
-                                                                          taxonomy.sub_category
-                                                                        )
-                                                                      )
-                                                                    ]
-                                                                  )
-                                                                ],
-                                                                1
-                                                              )
-                                                            }
-                                                          ),
-                                                          0
-                                                        )
-                                                      ],
-                                                      1
-                                                    )
-                                                  ]
-                                                )
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c("v-divider", {
-                                              staticClass: "mx-2"
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      : _vm._e(),
-                                    _vm._v(" "),
-                                    venue.taxonomies.length <= 0
-                                      ? _c(
-                                          "div",
-                                          [
-                                            _c(
-                                              "v-row",
-                                              { staticClass: "py-0" },
-                                              [
-                                                _c(
-                                                  "v-col",
-                                                  {
-                                                    staticClass:
-                                                      "my-auto mx-auto col-auto"
-                                                  },
-                                                  [
-                                                    _c(
-                                                      "span",
-                                                      {
-                                                        staticClass:
-                                                          "mx-auto col-auto  caption",
-                                                        class: _vm.$vuetify
-                                                          .theme.dark
-                                                          ? "grey--text"
-                                                          : "grey--text",
-                                                        staticStyle: {
-                                                          "line-height": "3rem"
-                                                        },
-                                                        attrs: {
-                                                          justify: "center"
-                                                        }
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          _vm._s(
-                                                            _vm.$t(
-                                                              "page.venues.no_taxonomies_title"
-                                                            )
-                                                          ) +
-                                                            "\n                                            "
-                                                        )
-                                                      ]
-                                                    )
-                                                  ]
-                                                )
-                                              ],
-                                              1
-                                            ),
-                                            _vm._v(" "),
-                                            _c("v-divider", {
-                                              staticClass: "mx-2"
-                                            })
-                                          ],
-                                          1
-                                        )
-                                      : _vm._e(),
                                     _vm._v(" "),
                                     _c(
                                       "v-row",
@@ -986,7 +974,7 @@ var render = function() {
                                                 },
                                                 on: {
                                                   click: function($event) {
-                                                    return _vm.showPerson(
+                                                    return _vm.showVenue(
                                                       venue.id
                                                     )
                                                   }

@@ -40,11 +40,15 @@
         ><span v-if="People.length <= 0" class="caption primary--text"
             ><span
                 ><v-icon
-                    class="mr-1 primary--text"
+                    class="mr-1 "
+                    :class="$vuetify.theme.dark ? 'grey--text' : 'grey--text'"
                     style="margin-bottom: 0.08rem"
                     small
                     >mdi-account-group</v-icon
-                ><span :title="$t('page.events.no_people_title')">
+                ><span
+                    :class="$vuetify.theme.dark ? 'grey--text' : 'grey--text'"
+                    :title="$t('page.events.no_people_title')"
+                >
                     {{ $t("page.events.no_people") }}</span
                 ></span
             ><v-spacer></v-spacer>

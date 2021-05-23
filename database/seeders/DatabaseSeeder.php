@@ -41,7 +41,7 @@ class DatabaseSeeder extends Seeder
 
     // Create users.
     $users = User::factory()
-      ->count(100)
+      ->count(97)
       // Assign a random role to each user.
       ->make()->each(function ($user) {
         $random = rand(1, 2);
@@ -278,7 +278,7 @@ class DatabaseSeeder extends Seeder
 
     // Create addresses.
     $addresses = Address::factory()
-      ->count(1000)
+      ->count(500)
       ->make()->each(function ($address) use ($users, $events, $people, $venues, $tickets) {
         if ($address->type == 'event') {
           // Attach a random event_id to the address.
@@ -392,18 +392,18 @@ class DatabaseSeeder extends Seeder
 
     // Create taxonomies.
     $taxonomies = Taxonomy::factory()
-      ->count(100)
+      ->count(200)
       ->create()
       ->each(function ($taxonomy) use ($people, $venues) {
         if ($taxonomy->type == 'venue') {
           // Attach some random venues to the taxonomy.
           $taxonomy->venues()->attach(
-            $venues->random(rand(1, 10))->pluck('id')->toArray()
+            $venues->random(rand(1, 20))->pluck('id')->toArray()
           );
         } elseif ($taxonomy->type == 'people') {
           // Attach some random people to the taxonomy.
           $taxonomy->people()->attach(
-            $people->random(rand(1, 10))->pluck('id')->toArray()
+            $people->random(rand(1, 20))->pluck('id')->toArray()
           );
         }
       });

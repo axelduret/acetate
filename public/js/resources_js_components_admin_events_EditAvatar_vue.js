@@ -72,6 +72,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Id: String,
@@ -93,7 +104,11 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     // Load event.avatar
-    this.currentAvatar = this.appURL + this.baseURL + "storage/avatar/event/" + this.Avatar;
+    if (this.Avatar) {
+      this.currentAvatar = this.appURL + this.baseURL + "storage/avatar/event/" + this.Avatar;
+    } else {
+      this.currentAvatar = null;
+    }
   },
   methods: {
     // Validate file type.
@@ -131,6 +146,24 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
         });
       }
+    },
+    // DELETE
+    deleteAvatar: function deleteAvatar() {
+      var formData = new FormData();
+      formData.append("upload", "");
+      var config = {
+        headers: {
+          "Content-Type": "multipart/form-data; charset=utf-8; boundary=" + Math.random().toString().substr(2),
+          Authorization: "Bearer " + this.apiToken
+        }
+      };
+      axios.post(this.baseURL + "api/events/" + this.Id + "/avatar", formData, config).then(function (response) {
+        this.currentAvatar = null;
+        this.refreshAll();
+        this.closeDialog();
+      }.bind(this))["catch"](function (error) {
+        console.log(error);
+      });
     },
     // GET
     fetchAPI: function fetchAPI() {
@@ -325,11 +358,16 @@ var render = function() {
                             "v-card-text",
                             { staticClass: "white" },
                             [
-                              _c("img", {
-                                staticClass:
-                                  "mx-4 my-3 primary--text col-auto mx-auto my-auto",
-                                attrs: { width: "213", src: _vm.currentAvatar }
-                              }),
+                              _vm.currentAvatar
+                                ? _c("img", {
+                                    staticClass:
+                                      "mx-4 my-3 primary--text col-auto mx-auto my-auto",
+                                    attrs: {
+                                      width: "213",
+                                      src: _vm.currentAvatar
+                                    }
+                                  })
+                                : _vm._e(),
                               _vm._v(" "),
                               _c("v-spacer"),
                               _c("input", {
@@ -373,24 +411,55 @@ var render = function() {
                       _vm._v(" "),
                       _c("v-spacer"),
                       _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        {
-                          attrs: { text: "", color: "info", type: "submit" },
-                          on: {
-                            click: function($event) {
-                              return _vm.submit()
-                            }
-                          }
-                        },
-                        [
-                          _vm._v(
-                            "\n                        " +
-                              _vm._s(_vm.$t("button.submit")) +
-                              "\n                    "
+                      _vm.currentAvatar
+                        ? _c(
+                            "v-btn",
+                            {
+                              attrs: {
+                                text: "",
+                                color: "warning",
+                                type: "submit"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.deleteAvatar()
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(_vm.$t("button.delete")) +
+                                  "\n                    "
+                              )
+                            ]
                           )
-                        ]
-                      )
+                        : _vm._e(),
+                      _vm._v(" "),
+                      _vm.currentAvatar
+                        ? _c(
+                            "v-btn",
+                            {
+                              attrs: {
+                                text: "",
+                                color: "info",
+                                type: "submit"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.submit()
+                                }
+                              }
+                            },
+                            [
+                              _vm._v(
+                                "\n                        " +
+                                  _vm._s(_vm.$t("button.submit")) +
+                                  "\n                    "
+                              )
+                            ]
+                          )
+                        : _vm._e()
                     ],
                     1
                   )

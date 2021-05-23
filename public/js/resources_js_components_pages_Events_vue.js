@@ -423,6 +423,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Name: String,
@@ -551,6 +560,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     People: Array
@@ -584,6 +597,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
 //
 //
 //
@@ -734,6 +751,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
 //
 //
 //
@@ -1862,17 +1883,35 @@ var render = function() {
           attrs: {
             tile: "",
             size: "80",
-            color: _vm.$vuetify.theme.dark ? "primary" : "white"
+            color: _vm.$vuetify.theme.dark
+              ? "primary darken-1"
+              : "greybg darken-1"
           }
         },
         [
-          _c("v-img", {
-            attrs: {
-              src:
-                _vm.appURL + _vm.baseURL + "storage/avatar/event/" + _vm.Avatar,
-              title: _vm.Name
-            }
-          })
+          _vm.Avatar != null
+            ? _c("v-img", {
+                attrs: {
+                  src:
+                    _vm.appURL +
+                    _vm.baseURL +
+                    "storage/avatar/event/" +
+                    _vm.Avatar,
+                  title: _vm.Name
+                }
+              })
+            : _c(
+                "v-icon",
+                {
+                  attrs: {
+                    title: _vm.$t("avatar.no_avatar"),
+                    color: _vm.$vuetify.theme.dark
+                      ? "greybg"
+                      : "primary lighten-1"
+                  }
+                },
+                [_vm._v("mdi-camera-off")]
+              )
         ],
         1
       ),
@@ -2218,7 +2257,10 @@ var render = function() {
                 _c(
                   "v-icon",
                   {
-                    staticClass: "mr-1 primary--text",
+                    staticClass: "mr-1 ",
+                    class: _vm.$vuetify.theme.dark
+                      ? "grey--text"
+                      : "grey--text",
                     staticStyle: { "margin-bottom": "0.08rem" },
                     attrs: { small: "" }
                   },
@@ -2226,7 +2268,12 @@ var render = function() {
                 ),
                 _c(
                   "span",
-                  { attrs: { title: _vm.$t("page.events.no_people_title") } },
+                  {
+                    class: _vm.$vuetify.theme.dark
+                      ? "grey--text"
+                      : "grey--text",
+                    attrs: { title: _vm.$t("page.events.no_people_title") }
+                  },
                   [
                     _vm._v(
                       "\n                " +
@@ -2327,6 +2374,9 @@ var render = function() {
                   "v-icon",
                   {
                     staticClass: "mr-1 primary--text",
+                    class: _vm.$vuetify.theme.dark
+                      ? "grey--text"
+                      : "grey--text",
                     staticStyle: { "margin-bottom": "0.08rem" },
                     attrs: { small: "" }
                   },
@@ -2334,7 +2384,12 @@ var render = function() {
                 ),
                 _c(
                   "span",
-                  { attrs: { title: _vm.$t("page.events.no_prices_title") } },
+                  {
+                    class: _vm.$vuetify.theme.dark
+                      ? "grey--text"
+                      : "grey--text",
+                    attrs: { title: _vm.$t("page.events.no_prices_title") }
+                  },
                   [
                     _vm._v(
                       "\n                " +
@@ -2608,7 +2663,10 @@ var render = function() {
                 _c(
                   "v-icon",
                   {
-                    staticClass: "mr-1 primary--text",
+                    staticClass: "mr-1 ",
+                    class: _vm.$vuetify.theme.dark
+                      ? "grey--text"
+                      : "grey--text",
                     staticStyle: { "margin-bottom": "0.08rem" },
                     attrs: { small: "" }
                   },
@@ -2616,7 +2674,12 @@ var render = function() {
                 ),
                 _c(
                   "span",
-                  { attrs: { title: _vm.$t("page.events.no_venues_title") } },
+                  {
+                    class: _vm.$vuetify.theme.dark
+                      ? "grey--text"
+                      : "grey--text",
+                    attrs: { title: _vm.$t("page.events.no_venues_title") }
+                  },
                   [
                     _vm._v(
                       "\n                " +

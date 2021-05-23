@@ -89,6 +89,10 @@
                 "end_time": "End Time",
                 "attendance": "Attendance",
                 "locations": "Location",
+                "venues": "Venues",
+                "venue": "Venue",
+                "addresses": "Addresses",
+                "address": "Address",
                 "prices": "Prices",
                 "emails": "Email",
                 "phones": "Phone",
@@ -101,15 +105,21 @@
             }
         },
         "people": {
-            "title": { "name": "Firstname and lastname", "company": "Company" },
+            "title": { "name": "Name", "company": "Company" },
             "description": "...",
+            "no_name": "none",
+            "no_name_title": "No name to display",
+            "no_company": "none",
+            "no_company_title": "No company to display",
             "no_taxonomies": "none",
             "no_taxonomies_title": "No tag to display",
             "more_info": "more info"
         },
         "venues": {
-            "title": { "name": "Name" },
+            "title": { "name": "Name", "address": "Address" },
             "description": "...",
+            "no_addresses": "unknown",
+            "no_addresses_title": "No address to display",
             "no_taxonomies": "none",
             "no_taxonomies_title": "No tag to display",
             "more_info": "more info"
@@ -161,7 +171,8 @@
         "comment": {
             "message": "Text must contain at least 10 characters."
         },
-        "venues": { "not_found": "No corresponding venue found." }
+        "venues": { "not_found": "No corresponding venue found." },
+        "people": { "not_found": "No corresponding person found." }
     },
     "not_logged_in": "Connection required.",
     "admin": {
@@ -191,13 +202,17 @@
         "back": {
             "back": "back",
             "home": "Back to home",
-            "events": "back to events"
+            "events": "back to events",
+            "people": "back to people",
+            "venues": "back to venues"
         },
         "next": "continue",
         "cancel": "cancel",
+        "delete": "delete",
         "submit": "submit",
         "confirm": "confirm",
         "close": "close"
     },
-    "search": { "venues": "Search a venue" }
+    "search": { "venues": "Search a venue", "people": "Search a person" },
+    "avatar": { "no_avatar": "No avatar to display" }
 }

@@ -24,12 +24,7 @@ class VenueCollection extends ResourceCollection
           'id' => $item->id,
           'name' => $item->name,
           'avatar' => $item->avatar,
-          'addresses' => $item->addresses->map(function ($item) {
-            return [
-              'latitude' => $item['latitude'],
-              'longitude' => $item['longitude']
-            ];
-          }),
+          'addresses' => $item->addresses,
           'created_at' => date('Y-m-d H:i:s', strtotime($item['created_at'])),
           'updated_at' => date('Y-m-d H:i:s', strtotime($item['updated_at'])),
           'events' => $item->events->map(function ($item) {

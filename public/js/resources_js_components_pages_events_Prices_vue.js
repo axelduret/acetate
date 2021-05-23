@@ -45,6 +45,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Prices: Array
@@ -201,6 +205,9 @@ var render = function() {
                   "v-icon",
                   {
                     staticClass: "mr-1 primary--text",
+                    class: _vm.$vuetify.theme.dark
+                      ? "grey--text"
+                      : "grey--text",
                     staticStyle: { "margin-bottom": "0.08rem" },
                     attrs: { small: "" }
                   },
@@ -208,7 +215,12 @@ var render = function() {
                 ),
                 _c(
                   "span",
-                  { attrs: { title: _vm.$t("page.events.no_prices_title") } },
+                  {
+                    class: _vm.$vuetify.theme.dark
+                      ? "grey--text"
+                      : "grey--text",
+                    attrs: { title: _vm.$t("page.events.no_prices_title") }
+                  },
                   [
                     _vm._v(
                       "\n                " +

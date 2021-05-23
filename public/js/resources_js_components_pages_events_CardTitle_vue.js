@@ -81,6 +81,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Name: String,
@@ -196,17 +205,35 @@ var render = function() {
           attrs: {
             tile: "",
             size: "80",
-            color: _vm.$vuetify.theme.dark ? "primary" : "white"
+            color: _vm.$vuetify.theme.dark
+              ? "primary darken-1"
+              : "greybg darken-1"
           }
         },
         [
-          _c("v-img", {
-            attrs: {
-              src:
-                _vm.appURL + _vm.baseURL + "storage/avatar/event/" + _vm.Avatar,
-              title: _vm.Name
-            }
-          })
+          _vm.Avatar != null
+            ? _c("v-img", {
+                attrs: {
+                  src:
+                    _vm.appURL +
+                    _vm.baseURL +
+                    "storage/avatar/event/" +
+                    _vm.Avatar,
+                  title: _vm.Name
+                }
+              })
+            : _c(
+                "v-icon",
+                {
+                  attrs: {
+                    title: _vm.$t("avatar.no_avatar"),
+                    color: _vm.$vuetify.theme.dark
+                      ? "greybg"
+                      : "primary lighten-1"
+                  }
+                },
+                [_vm._v("mdi-camera-off")]
+              )
         ],
         1
       ),

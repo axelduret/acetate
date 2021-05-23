@@ -20,7 +20,12 @@
                 <div class="my-0 py-0">
                     <div class="my-0 py-0 mx-auto my-auto col-auto">
                         <v-row justify="center">
-                            <v-col class="mb-4 my-auto col-auto ">
+                            <v-col
+                                cols="10"
+                                sm="6"
+                                md="4"
+                                class="mb-4 my-auto col-auto "
+                            >
                                 <v-text-field
                                     v-model="searchValue"
                                     :color="
@@ -56,13 +61,9 @@
                             v-for="(venue, index) in venues"
                             :key="index"
                             cols="12"
-                            sm="12"
                             md="6"
-                            lg="4"
-                            xl="3"
-                            class=""
                         >
-                            <v-card max-width="500px" class="mx-auto pb-4">
+                            <v-card max-width="570px" class="mx-auto pb-4">
                                 <div>
                                     <v-list-item
                                         three-line
@@ -75,10 +76,11 @@
                                             class="rounded"
                                             :color="
                                                 $vuetify.theme.dark
-                                                    ? 'primary'
-                                                    : 'white'
+                                                    ? 'primary darken-1'
+                                                    : 'greybg darken-1'
                                             "
                                             ><v-img
+                                                v-if="venue.avatar != null"
                                                 :src="
                                                     appURL +
                                                         baseURL +
@@ -87,6 +89,16 @@
                                                 "
                                                 :title="venue.nickname"
                                             ></v-img>
+                                            <v-icon
+                                                :title="$t('avatar.no_avatar')"
+                                                :color="
+                                                    $vuetify.theme.dark
+                                                        ? 'greybg'
+                                                        : 'primary lighten-1'
+                                                "
+                                                v-else
+                                                >mdi-camera-off</v-icon
+                                            >
                                         </v-list-item-avatar>
                                         <v-list-item-content>
                                             <div class="overline primary--text">
@@ -118,12 +130,15 @@
                                         </v-list-item-content>
                                     </v-list-item>
                                     <!-- card content -->
-                                    <v-row class="pb-3">
-                                        <v-col
-                                            class="mx-4 pt-5 col-auto mr-auto"
-                                        >
-                                            <!-- company -->
-                                            <!-- <span class="caption primary--text">
+                                    <v-row class="py-3 mx-2">
+                                        <v-col>
+                                            <!-- address -->
+                                            <span
+                                                class="caption primary--text"
+                                                v-if="
+                                                    venue.addresses.length > 0
+                                                "
+                                            >
                                                 <span>
                                                     <v-icon
                                                         class="mr-1 primary--text"
@@ -131,79 +146,75 @@
                                                         small
                                                         :title="
                                                             $t(
-                                                                'page.venues.title.company'
+                                                                'page.venues.title.address'
                                                             )
                                                         "
-                                                        >mdi-briefcase</v-icon
-                                                    >&nbsp;<span>{{
-                                                        venue.company
-                                                    }}</span>
-                                                    <v-spacer></v-spacer
-                                                ></span>
-                                            </span> -->
+                                                        >mdi-map-marker</v-icon
+                                                    >&nbsp;<span
+                                                        >{{
+                                                            venue.addresses[0]
+                                                                .street1
+                                                        }},
+                                                        {{
+                                                            venue.addresses[0]
+                                                                .zip
+                                                        }}
+                                                        {{
+                                                            venue.addresses[0]
+                                                                .city
+                                                        }},
+                                                        {{
+                                                            venue.addresses[0]
+                                                                .canton
+                                                        }},
+                                                        {{
+                                                            venue.addresses[0]
+                                                                .country
+                                                        }}</span
+                                                    ></span
+                                                > </span
+                                            ><span
+                                                v-else
+                                                class="caption primary--text"
+                                                ><span
+                                                    ><v-icon
+                                                        class="mr-1 "
+                                                        :class="
+                                                            $vuetify.theme.dark
+                                                                ? 'grey--text'
+                                                                : 'grey--text'
+                                                        "
+                                                        style="margin-bottom: 0.08rem"
+                                                        small
+                                                        :title="
+                                                            $t(
+                                                                'page.venues.no_addresses_title'
+                                                            )
+                                                        "
+                                                        >mdi-map-marker</v-icon
+                                                    ><span
+                                                        :class="
+                                                            $vuetify.theme.dark
+                                                                ? 'grey--text'
+                                                                : 'grey--text'
+                                                        "
+                                                        :title="
+                                                            $t(
+                                                                'page.venues.no_addresses_title'
+                                                            )
+                                                        "
+                                                    >
+                                                        {{
+                                                            $t(
+                                                                "page.venues.no_addresses"
+                                                            )
+                                                        }}</span
+                                                    ></span
+                                                >
+                                            </span>
                                         </v-col>
                                     </v-row>
                                     <v-divider class="mx-2"></v-divider>
-                                    <div v-if="venue.taxonomies.length > 0">
-                                        <v-row class="py-0">
-                                            <v-col
-                                                class="my-auto mx-auto col-auto"
-                                            >
-                                                <span
-                                                    justify="center"
-                                                    class="primary--text"
-                                                >
-                                                    <v-chip-group
-                                                        show-arrows
-                                                        class="col-auto my-2 py-0"
-                                                        ><span
-                                                            v-for="(taxonomy,
-                                                            index) in venue.taxonomies"
-                                                            :key="index"
-                                                            ><v-chip
-                                                                class="greybg primary--text"
-                                                                x-small
-                                                                >{{
-                                                                    taxonomy.category
-                                                                }}</v-chip
-                                                            ><v-chip
-                                                                class="greybg primary--text"
-                                                                x-small
-                                                                >{{
-                                                                    taxonomy.sub_category
-                                                                }}</v-chip
-                                                            ></span
-                                                        >
-                                                    </v-chip-group>
-                                                </span>
-                                            </v-col>
-                                        </v-row>
-                                        <v-divider class="mx-2"></v-divider>
-                                    </div>
-                                    <div v-if="venue.taxonomies.length <= 0">
-                                        <v-row class="py-0">
-                                            <v-col
-                                                class="my-auto mx-auto col-auto"
-                                            >
-                                                <span
-                                                    justify="center"
-                                                    class="mx-auto col-auto  caption"
-                                                    :class="
-                                                        $vuetify.theme.dark
-                                                            ? 'grey--text'
-                                                            : 'grey--text'
-                                                    "
-                                                    style="line-height: 3rem"
-                                                    >{{
-                                                        $t(
-                                                            "page.venues.no_taxonomies_title"
-                                                        )
-                                                    }}
-                                                </span>
-                                            </v-col>
-                                        </v-row>
-                                        <v-divider class="mx-2"></v-divider>
-                                    </div>
                                     <!-- card footer -->
                                     <v-row class="pt-3">
                                         <!-- more info button -->
@@ -211,7 +222,7 @@
                                             <v-btn
                                                 text
                                                 color="info accent-4"
-                                                @click="showPerson(venue.id)"
+                                                @click="showVenue(venue.id)"
                                                 >{{
                                                     $t("page.venues.more_info")
                                                 }}</v-btn
@@ -379,11 +390,6 @@ export default {
                     this.snackbar = true;
                     this.searchValue = null;
                     this.fetchVenues();
-                    /* 
-                    const path = "error/404";
-                    this.$router.push(
-                        `${this.baseURL}${this.$i18n.locale}/${path}`
-                    ); */
                 })
                 .finally(() => {});
         },
@@ -392,6 +398,10 @@ export default {
         },
         onPageChange() {
             this.fetchVenues();
+        },
+        showVenue: function(id) {
+            const path = "venues/" + id;
+            this.$router.push(`${this.baseURL}${this.$i18n.locale}/${path}`);
         }
     }
 };
