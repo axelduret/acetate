@@ -99,8 +99,8 @@
                 "emails": "Email",
                 "phones": "Téléphone",
                 "websites": "Site internet",
-                "google_map": "Visualiser sur Google map.",
-                "email": "Envoyer un email."
+                "google_map": "Visualiser sur Google map",
+                "email": "Envoyer un email"
             },
             "comment": {
                 "post": "ajouter un commentaire"
@@ -142,11 +142,11 @@
         },
         "error": {
             "notFound": {
-                "title": "Page non trouvée.",
+                "title": "Page non trouvée",
                 "description": "..."
             },
             "unauthorized": {
-                "title": "Non authentifié.",
+                "title": "Non authentifié",
                 "description": "..."
             }
         }
@@ -170,7 +170,7 @@
     },
     "errors": {
         "login": {
-            "message": "Email ou mot de passe invalide."
+            "message": "Email ou mot de passe non valide."
         },
         "logout": {
             "wrong": "Identifiant de l'utilisateur non valide.",
@@ -186,7 +186,7 @@
             "not_found": "Aucune personne correspondant à cette recherche."
         }
     },
-    "not_logged_in": "Connexion requise.",
+    "not_logged_in": "Connexion requise",
     "admin": {
         "edit": {
             "title": "Edition"

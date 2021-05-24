@@ -99,8 +99,8 @@
                 "emails": "Email",
                 "phones": "Phone",
                 "websites": "Website",
-                "google_map": "View on Google map.",
-                "email": "Send an email."
+                "google_map": "View on Google map",
+                "email": "Send an email"
             },
             "comment": {
                 "post": "post a comment"
@@ -136,11 +136,11 @@
         },
         "error": {
             "notFound": {
-                "title": "Page not found.",
+                "title": "Page not found",
                 "description": "..."
             },
             "unauthorized": {
-                "title": "Unauthenticated.",
+                "title": "Unauthenticated",
                 "description": "..."
             }
         }
@@ -176,7 +176,7 @@
         "venues": { "not_found": "No corresponding venue found." },
         "people": { "not_found": "No corresponding person found." }
     },
-    "not_logged_in": "Connection required.",
+    "not_logged_in": "Connection required",
     "admin": {
         "edit": {
             "title": "Edit"
