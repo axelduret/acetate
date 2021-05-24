@@ -40,10 +40,7 @@ router.beforeEach((to, from, next) => {
     if (to.matched.some(record => record.meta.auth)) {
         if (!loggedIn()) {
             next({
-                path:
-                    process.env.MIX_BASE_URL +
-                    process.env.MIX_VUE_APP_I18N_DEFAULT_LOCALE +
-                    "/login",
+                path: process.env.MIX_BASE_URL + i18n.locale + "/login",
                 query: { redirect: to.fullPath }
             });
         } else {
@@ -52,10 +49,7 @@ router.beforeEach((to, from, next) => {
     } else if (to.matched.some(record => record.meta.guest)) {
         if (loggedIn()) {
             next({
-                path:
-                    process.env.MIX_BASE_URL +
-                    process.env.MIX_VUE_APP_I18N_DEFAULT_LOCALE +
-                    "/home",
+                path: process.env.MIX_BASE_URL + i18n.locale + "/home",
                 query: { redirect: to.fullPath }
             });
         } else {
