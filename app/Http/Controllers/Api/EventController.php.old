@@ -92,6 +92,7 @@ class EventController extends Controller
    */
   public function index(Request $request)
   {
+    $this->request = $request;
     // Search dates.
     $searchField = in_array(
       $request->input('search_field'),
@@ -110,7 +111,7 @@ class EventController extends Controller
       : Carbon::now()->toDateString();
     // By default, only returns events where date is superior or equal to today.
     $query = Date::whereDate($searchField, $searchValue, $searchReference)
-      /* // Returns the list of dates with attached relationships.
+      // Returns the list of dates with attached relationships.
       ->with([
         // Returns event:id, event:name and event:avatar.
         'event' => function ($filter) {
@@ -169,16 +170,16 @@ class EventController extends Controller
         }
       ])
       // Search in event's relationships.
-      ->whereHas('event', function ($filter)use($request) {
+      ->whereHas('event', function ($filter) {
         $filter
           // Search taxonomy type.
-          ->whereHas('taxonomies', function ($filter)use($request)  {
-            if ($request->input('type')) {
+          ->whereHas('taxonomies', function ($filter) {
+            if ($this->request->input('type')) {
               if (in_array(
-                $request->input('type'),
+                $this->request->input('type'),
                 $this->taxonomyTypes
               )) {
-                $filter->where('type', $request->input('type'));
+                $filter->where('type', $this->request->input('type'));
               }
             } else {
               $filter->where('type', 'conference');
@@ -188,18 +189,18 @@ class EventController extends Controller
             }
           })
           // Search taxonomy category.
-          ->whereHas('taxonomies', function ($filter)use($request) {
-            if ($request->input('category')) {
-              $filter->where('category', $request->input('category'));
+          ->whereHas('taxonomies', function ($filter) {
+            if ($this->request->input('category')) {
+              $filter->where('category', $this->request->input('category'));
             }
           })
           // Search taxonomy sub_category.
-          ->whereHas('taxonomies', function ($filter)use($request) {
-            if ($request->input('sub_category')) {
-              $filter->where('sub_category', $request->input('sub_category'));
+          ->whereHas('taxonomies', function ($filter) {
+            if ($this->request->input('sub_category')) {
+              $filter->where('sub_category', $this->request->input('sub_category'));
             }
           });
-      }) */;
+      });
     // Sort data.
     $sortField = in_array(
       $request->input('sort_by'),
