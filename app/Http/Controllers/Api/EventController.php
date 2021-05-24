@@ -112,7 +112,7 @@ class EventController extends Controller
     // By default, only returns events where date is superior or equal to today.
     $query = Date::whereDate($searchField, $searchValue, $searchReference)
       // Returns the list of dates with attached relationships.
-      /* ->with([
+      ->with([
         // Returns event:id, event:name and event:avatar.
         'event' => function ($filter) {
           $filter
@@ -168,7 +168,7 @@ class EventController extends Controller
               'comments as comments_count'
             ]);
         }
-      ]) */
+      ])
       // Search in event's relationships.
       ->whereHas('event', function ($filter) {
         $filter
