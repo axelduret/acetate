@@ -18,6 +18,11 @@ export default {
         return {
             baseURL: process.env.MIX_BASE_URL
         };
+    },
+    methods: {
+        goBack() {
+            this.$router.go(-1);
+        }
     }
 };
 </script>

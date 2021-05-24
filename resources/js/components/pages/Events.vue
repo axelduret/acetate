@@ -196,13 +196,13 @@ export default {
             this.overlay = true;
             this.events = null;
             if (item === "all") {
-                this.query = "events?per_page=";
+                this.query = "events?page=" + this.page + "&per_page=";
             } else {
                 this.query = "events?type=" + item + "&per_page=";
             }
             axios
                 .request({
-                    url: this.query + this.perPage + "&page=" + this.page,
+                    url: this.query + this.perPage,
                     method: "get",
                     baseURL: this.baseURL + "api/",
                     headers: {
