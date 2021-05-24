@@ -12,6 +12,10 @@
                     : '/img/page/contact/light_contact.gif'
             "
         />
+        <v-spacer></v-spacer>
+        <v-btn text color="info" @click="goBack()">{{
+            $t("button.back.back")
+        }}</v-btn>
     </div>
 </template>
 
@@ -19,6 +23,11 @@
 export default {
     data() {
         return {};
+    },
+    methods: {
+        goBack() {
+            this.$router.go(-1);
+        }
     }
 };
 </script>

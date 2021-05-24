@@ -119,7 +119,7 @@
                 <v-btn
                     @click.stop="$emit('comment-dialog')"
                     text
-                    color="info accent-4"
+                    color="info"
                     >{{ $t("page.event.comment.post") }}</v-btn
                 >
             </v-col>

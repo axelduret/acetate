@@ -220,7 +220,7 @@
                                         <v-col class="ml-4 my-auto col-auto">
                                             <v-btn
                                                 text
-                                                color="info accent-4"
+                                                color="info"
                                                 @click="showVenue(venue.id)"
                                                 >{{
                                                     $t("page.venues.more_info")

@@ -318,7 +318,7 @@
                                         <v-col class="ml-4 my-auto col-auto">
                                             <v-btn
                                                 text
-                                                color="info accent-4"
+                                                color="info"
                                                 @click="showPerson(person.id)"
                                                 >{{
                                                     $t("page.people.more_info")

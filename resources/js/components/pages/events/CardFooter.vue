@@ -2,7 +2,7 @@
     <v-row class="pt-3">
         <!-- more info button -->
         <v-col class="ml-4 my-auto col-auto">
-            <v-btn text color="info accent-4" @click="showEvent(Id)">{{
+            <v-btn text color="info" @click="showEvent(Id)">{{
                 $t("page.events.more_info")
             }}</v-btn>
         </v-col>
