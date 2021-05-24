@@ -1,18 +1,22 @@
 <template>
     <div class="mx-auto my-auto col-auto d-flex align-center justify-center">
-        <img
-            width="100%"
-            style="max-width:550px"
-            :src="
-                $vuetify.theme.dark
-                    ? baseURL + 'img/errors/dark_404.gif'
-                    : baseURL + 'img/errors/light_404.gif'
-            "
-        />
+        <div>
+            <img
+                width="100%"
+                style="max-width:550px"
+                :src="
+                    $vuetify.theme.dark
+                        ? baseURL + 'img/errors/dark_404.gif'
+                        : baseURL + 'img/errors/light_404.gif'
+                "
+            />
+        </div>
         <v-spacer></v-spacer>
-        <v-btn text color="info" @click="goBack()">{{
-            $t("button.back.back")
-        }}</v-btn>
+        <div>
+            <v-btn text color="info" @click="goBack()">{{
+                $t("button.back.back")
+            }}</v-btn>
+        </div>
     </div>
 </template>
 
