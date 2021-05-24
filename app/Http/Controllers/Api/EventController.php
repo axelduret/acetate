@@ -92,7 +92,7 @@ class EventController extends Controller
    */
   public function index(Request $request)
   {
-    $type = $request->input('type');
+    $this->request = $request;
     // Search dates.
     $searchField = in_array(
       $request->input('search_field'),
@@ -110,10 +110,8 @@ class EventController extends Controller
       ? Carbon::parse($request->input('search_reference'))->toDateString()
       : Carbon::now()->toDateString();
     // By default, only returns events where date is superior or equal to today.
-    $query = Event::with('dates')->get()/* ->whereHas('taxonomies', function ($filter) {
-      $filter->where('type', '=', 'music');
-    })->get() */;
-    /* // Returns the list of dates with attached relationships.
+    $query = Date::whereDate($searchField, $searchValue, $searchReference)
+      // Returns the list of dates with attached relationships.
       ->with([
         // Returns event:id, event:name and event:avatar.
         'event' => function ($filter) {
@@ -170,7 +168,39 @@ class EventController extends Controller
               'comments as comments_count'
             ]);
         }
-      ]) */
+      ])
+      // Search in event's relationships.
+      ->whereHas('event', function ($filter) {
+        $filter
+          // Search taxonomy type.
+          ->whereHas('taxonomies', function ($filter) {
+            if ($this->request->input('type')) {
+              if (in_array(
+                $this->request->input('type'),
+                $this->taxonomyTypes
+              )) {
+                $filter->where('type', $this->request->input('type'));
+              }
+            } else {
+              $filter->where('type', 'conference');
+              $filter->orWhere('type', 'exhibition');
+              $filter->orWhere('type', 'music');
+              $filter->orWhere('type', 'theater');
+            }
+          })
+          // Search taxonomy category.
+          ->whereHas('taxonomies', function ($filter) {
+            if ($this->request->input('category')) {
+              $filter->where('category', $this->request->input('category'));
+            }
+          })
+          // Search taxonomy sub_category.
+          ->whereHas('taxonomies', function ($filter) {
+            if ($this->request->input('sub_category')) {
+              $filter->where('sub_category', $this->request->input('sub_category'));
+            }
+          });
+      });
     // Sort data.
     $sortField = in_array(
       $request->input('sort_by'),
@@ -184,16 +214,16 @@ class EventController extends Controller
     ) // Accepted values.
       ? $request->input('order_by') // Submitted value.
       : 'asc'; // Default value.
-    //$query = $query->orderBy($sortField, $sortOrder);
+    $query = $query->orderBy($sortField, $sortOrder);
     // Pagination.
     $perPage = $request->input('per_page') ?? self::PER_PAGE;
-    //$events = $query->paginate((int)$perPage);
+    $events = $query->paginate((int)$perPage);
     // Check if events exist.
-    if ($query->isEmpty()) {
+    if ($events->isEmpty()) {
       return $this->failure('No events found.', 404);
     }
     // Returns events data's collection.
-    return $query;
+    return new EventCollection($events);
   }
 
   /**
