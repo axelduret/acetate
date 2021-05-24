@@ -184,16 +184,16 @@ class EventController extends Controller
     ) // Accepted values.
       ? $request->input('order_by') // Submitted value.
       : 'asc'; // Default value.
-    $query = $query->orderBy($sortField, $sortOrder);
+    //$query = $query->orderBy($sortField, $sortOrder);
     // Pagination.
     $perPage = $request->input('per_page') ?? self::PER_PAGE;
-    $events = $query->paginate((int)$perPage);
+    //$events = $query->paginate((int)$perPage);
     // Check if events exist.
-    if ($events->isEmpty()) {
+    if ($query->isEmpty()) {
       return $this->failure('No events found.', 404);
     }
     // Returns events data's collection.
-    return new EventCollection($events);
+    return new EventCollection($query);
   }
 
   /**
