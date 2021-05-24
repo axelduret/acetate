@@ -170,8 +170,8 @@ class EventController extends Controller
         }
       ]) */
       // Search in event's relationships.
-      ->whereHas('event', function ($filter) use ($type) {
-        $filter
+      ->whereHas('event', function ($f) use ($type) {
+        $f
           // Search taxonomy type.
           ->whereHas('taxonomies', function ($filter) use ($type) {
             if ($type) {
