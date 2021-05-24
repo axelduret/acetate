@@ -193,7 +193,7 @@ class EventController extends Controller
       return $this->failure('No events found.', 404);
     }
     // Returns events data's collection.
-    return new EventCollection($query);
+    return $query;
   }
 
   /**
