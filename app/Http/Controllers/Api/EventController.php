@@ -111,19 +111,7 @@ class EventController extends Controller
       : Carbon::now()->toDateString();
     // By default, only returns events where date is superior or equal to today.
     $query = Event::whereHas('taxonomies', function ($filter) use ($type) {
-      if ($type) {
-        if (in_array(
-          $type,
-          $this->taxonomyTypes
-        )) {
-          $filter->where('type', $type);
-        }
-      } else {
-        $filter->where('type', 'conference');
-        $filter->orWhere('type', 'exhibition');
-        $filter->orWhere('type', 'music');
-        $filter->orWhere('type', 'theater');
-      }
+      $filter->where('type', $type);
     });
     /* // Returns the list of dates with attached relationships.
       ->with([
