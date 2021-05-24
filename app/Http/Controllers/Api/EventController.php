@@ -112,7 +112,7 @@ class EventController extends Controller
     // By default, only returns events where date is superior or equal to today.
     $query = Event::whereHas('taxonomies', function ($filter) use ($type) {
       $filter->where('type', $type);
-    });
+    })->get();
     /* // Returns the list of dates with attached relationships.
       ->with([
         // Returns event:id, event:name and event:avatar.
