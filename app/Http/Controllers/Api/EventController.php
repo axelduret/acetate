@@ -167,12 +167,12 @@ class EventController extends Controller
               'comments as comments_count'
             ]);
         }
-      ])
+      ]) */
       // Search in event's relationships.
-      ->whereHas('event', function ($filter)use($request) {
+      ->whereHas('event', function ($filter) use ($request) {
         $filter
           // Search taxonomy type.
-          ->whereHas('taxonomies', function ($filter)use($request)  {
+          ->whereHas('taxonomies', function ($filter) use ($request) {
             if ($request->input('type')) {
               if (in_array(
                 $request->input('type'),
@@ -188,18 +188,18 @@ class EventController extends Controller
             }
           })
           // Search taxonomy category.
-          ->whereHas('taxonomies', function ($filter)use($request) {
+          ->whereHas('taxonomies', function ($filter) use ($request) {
             if ($request->input('category')) {
               $filter->where('category', $request->input('category'));
             }
           })
           // Search taxonomy sub_category.
-          ->whereHas('taxonomies', function ($filter)use($request) {
+          ->whereHas('taxonomies', function ($filter) use ($request) {
             if ($request->input('sub_category')) {
               $filter->where('sub_category', $request->input('sub_category'));
             }
           });
-      }) */;
+      });
     // Sort data.
     $sortField = in_array(
       $request->input('sort_by'),
