@@ -110,8 +110,22 @@ class EventController extends Controller
       ? Carbon::parse($request->input('search_reference'))->toDateString()
       : Carbon::now()->toDateString();
     // By default, only returns events where date is superior or equal to today.
-    $query = Date::whereDate($searchField, $searchValue, $searchReference)
-      /* // Returns the list of dates with attached relationships.
+    $query = Event::whereHas('taxonomies', function ($filter) use ($type) {
+      if ($type) {
+        if (in_array(
+          $type,
+          $this->taxonomyTypes
+        )) {
+          $filter->where('type', $type);
+        }
+      } else {
+        $filter->where('type', 'conference');
+        $filter->orWhere('type', 'exhibition');
+        $filter->orWhere('type', 'music');
+        $filter->orWhere('type', 'theater');
+      }
+    });
+    /* // Returns the list of dates with attached relationships.
       ->with([
         // Returns event:id, event:name and event:avatar.
         'event' => function ($filter) {
@@ -169,26 +183,6 @@ class EventController extends Controller
             ]);
         }
       ]) */
-      // Search in event's relationships.
-      ->whereHas('event', function ($f) use ($type) {
-        $f
-          // Search taxonomy type.
-          ->whereHas('taxonomies', function ($filter) use ($type) {
-            if ($type) {
-              if (in_array(
-                $type,
-                $this->taxonomyTypes
-              )) {
-                $filter->where('type', $type);
-              }
-            } else {
-              $filter->where('type', 'conference');
-              $filter->orWhere('type', 'exhibition');
-              $filter->orWhere('type', 'music');
-              $filter->orWhere('type', 'theater');
-            }
-          });
-      });
     // Sort data.
     $sortField = in_array(
       $request->input('sort_by'),
