@@ -92,6 +92,7 @@ class EventController extends Controller
    */
   public function index(Request $request)
   {
+    $type = $request->input('type');
     // Search dates.
     $searchField = in_array(
       $request->input('search_field'),
@@ -169,34 +170,22 @@ class EventController extends Controller
         }
       ]) */
       // Search in event's relationships.
-      ->whereHas('event', function ($filter) use ($request) {
+      ->whereHas('event', function ($filter) use ($type) {
         $filter
           // Search taxonomy type.
-          ->whereHas('taxonomies', function ($filter) use ($request) {
-            if ($request->input('type')) {
+          ->whereHas('taxonomies', function ($filter) use ($type) {
+            if ($type) {
               if (in_array(
-                $request->input('type'),
+                $type,
                 $this->taxonomyTypes
               )) {
-                $filter->where('type', $request->input('type'));
+                $filter->where('type', $type);
               }
             } else {
               $filter->where('type', 'conference');
               $filter->orWhere('type', 'exhibition');
               $filter->orWhere('type', 'music');
               $filter->orWhere('type', 'theater');
-            }
-          })
-          // Search taxonomy category.
-          ->whereHas('taxonomies', function ($filter) use ($request) {
-            if ($request->input('category')) {
-              $filter->where('category', $request->input('category'));
-            }
-          })
-          // Search taxonomy sub_category.
-          ->whereHas('taxonomies', function ($filter) use ($request) {
-            if ($request->input('sub_category')) {
-              $filter->where('sub_category', $request->input('sub_category'));
             }
           });
       });
