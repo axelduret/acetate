@@ -81,8 +81,7 @@
                                             ><v-img
                                                 v-if="person.avatar != null"
                                                 :src="
-                                                    appURL +
-                                                        baseURL +
+                                                    baseURL +
                                                         'storage/avatar/person/' +
                                                         person.avatar
                                                 "

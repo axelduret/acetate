@@ -124,8 +124,7 @@
                                     v-if="getUserFields.avatar != null"
                                     alt="Avatar"
                                     :src="
-                                        appURL +
-                                            baseURL +
+                                        baseURL +
                                             'storage/avatar/user/' +
                                             getUserFields.avatar
                                     "

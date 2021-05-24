@@ -11,7 +11,7 @@
                 "
                 ><v-img
                     v-if="Avatar != null"
-                    :src="appURL + baseURL + 'storage/avatar/event/' + Avatar"
+                    :src="baseURL + 'storage/avatar/event/' + Avatar"
                     :title="Name"
                 ></v-img>
                 <v-icon

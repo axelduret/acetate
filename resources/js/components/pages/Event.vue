@@ -67,12 +67,7 @@
                             <v-carousel-item
                                 v-for="(file, index) in event.files"
                                 :key="index"
-                                :src="
-                                    appURL +
-                                        baseURL +
-                                        'storage/file/' +
-                                        file.path
-                                "
+                                :src="baseURL + 'storage/file/' + file.path"
                                 :title="file.name"
                             ></v-carousel-item>
                         </v-carousel>

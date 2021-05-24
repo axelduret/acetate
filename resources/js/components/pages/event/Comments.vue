@@ -22,8 +22,7 @@
                                             comment.user_avatar.length > 0
                                     "
                                     :src="
-                                        appURL +
-                                            baseURL +
+                                        baseURL +
                                             'storage/avatar/user/' +
                                             comment.user_avatar
                                     "
@@ -47,9 +46,7 @@
                                         >{{ comment.user_name }}</a
                                     >
                                     <span class="caption grey--text"
-                                        >({{
-                                            comment.created_at | formatDate
-                                        }}
+                                        >({{ comment.created_at | formatDate }}
                                         |
                                         {{
                                             comment.created_at

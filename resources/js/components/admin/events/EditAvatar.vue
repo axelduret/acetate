@@ -94,10 +94,7 @@ export default {
         // Load event.avatar
         if (this.Avatar) {
             this.currentAvatar =
-                this.appURL +
-                this.baseURL +
-                "storage/avatar/event/" +
-                this.Avatar;
+                this.baseURL + "storage/avatar/event/" + this.Avatar;
         } else {
             this.currentAvatar = null;
         }

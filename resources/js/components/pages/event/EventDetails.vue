@@ -112,8 +112,7 @@
                                     alt="Avatar"
                                     @click="showPerson(person.id)"
                                     :src="
-                                        appURL +
-                                            baseURL +
+                                        baseURL +
                                             'storage/avatar/person/' +
                                             person.avatar
                                     "
@@ -194,8 +193,7 @@
                                         alt="Avatar"
                                         @click="showVenue(venue.id)"
                                         :src="
-                                            appURL +
-                                                baseURL +
+                                            baseURL +
                                                 'storage/avatar/venue/' +
                                                 venue.avatar
                                         "

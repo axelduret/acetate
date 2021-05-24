@@ -82,8 +82,7 @@
                                             ><v-img
                                                 v-if="venue.avatar != null"
                                                 :src="
-                                                    appURL +
-                                                        baseURL +
+                                                    baseURL +
                                                         'storage/avatar/venue/' +
                                                         venue.avatar
                                                 "
