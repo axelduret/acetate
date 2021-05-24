@@ -222,13 +222,13 @@ __webpack_require__.r(__webpack_exports__);
       this.events = null;
 
       if (item === "all") {
-        this.query = "events?per_page=";
+        this.query = "events?page=" + this.page + "&per_page=";
       } else {
         this.query = "events?type=" + item + "&per_page=";
       }
 
       axios.request({
-        url: this.query + this.perPage + "&page=" + this.page,
+        url: this.query + this.perPage,
         method: "get",
         baseURL: this.baseURL + "api/",
         headers: {
@@ -1780,7 +1780,7 @@ var render = function() {
           _c(
             "v-btn",
             {
-              attrs: { text: "", color: "info accent-4" },
+              attrs: { text: "", color: "info" },
               on: {
                 click: function($event) {
                   return _vm.showEvent(_vm.Id)

@@ -25,9 +25,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {};
+    return {
+      baseURL: "/"
+    };
+  },
+  methods: {
+    goBack: function goBack() {
+      this.$router.go(-1);
+    }
   }
 });
 
@@ -123,20 +142,52 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass: "mx-auto my-auto col-auto d-flex align-center justify-center"
-    },
     [
-      _c("img", {
-        staticStyle: { "max-width": "550px" },
-        attrs: {
-          width: "100%",
-          src: _vm.$vuetify.theme.dark
-            ? "/img/errors/dark_404.gif"
-            : "/img/errors/light_404.gif"
-        }
-      })
-    ]
+      _c(
+        "div",
+        {
+          staticClass:
+            "mx-auto my-auto col-auto d-flex align-center justify-center"
+        },
+        [
+          _c("img", {
+            staticStyle: { "max-width": "550px" },
+            attrs: {
+              width: "100%",
+              src: _vm.$vuetify.theme.dark
+                ? _vm.baseURL + "img/errors/dark_404.gif"
+                : _vm.baseURL + "img/errors/light_404.gif"
+            }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _c("v-spacer"),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass:
+            "mx-auto my-auto col-auto d-flex align-center justify-center"
+        },
+        [
+          _c(
+            "v-btn",
+            {
+              attrs: { text: "", color: "info" },
+              on: {
+                click: function($event) {
+                  return _vm.goBack()
+                }
+              }
+            },
+            [_vm._v(_vm._s(_vm.$t("button.back.back")))]
+          )
+        ],
+        1
+      )
+    ],
+    1
   )
 }
 var staticRenderFns = []

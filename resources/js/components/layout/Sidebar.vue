@@ -48,7 +48,7 @@
             </v-app-bar>
             <v-spacer></v-spacer>
             <v-list nav dense>
-                <v-list-item-group class="mb-2">
+                <v-list-item-group>
                     <v-list-item
                         v-for="(item, index) in getMenu"
                         :key="index"
@@ -64,9 +64,9 @@
                 </v-list-item-group>
             </v-list>
             <template v-slot:append>
-                <v-divider></v-divider>
+                <v-divider class="mx-2"></v-divider>
                 <v-list nav dense>
-                    <v-list-item-group class="mt-2">
+                    <v-list-item-group class="mb-2">
                         <v-list-item :to="baseURL + `${$i18n.locale}/contact`">
                             <v-list-item-icon>
                                 <v-icon>mdi-email-outline</v-icon>

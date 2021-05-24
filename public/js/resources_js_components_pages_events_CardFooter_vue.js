@@ -188,7 +188,7 @@ var render = function() {
           _c(
             "v-btn",
             {
-              attrs: { text: "", color: "info accent-4" },
+              attrs: { text: "", color: "info" },
               on: {
                 click: function($event) {
                   return _vm.showEvent(_vm.Id)

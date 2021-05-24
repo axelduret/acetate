@@ -968,7 +968,7 @@ var render = function() {
                                               {
                                                 attrs: {
                                                   text: "",
-                                                  color: "info accent-4"
+                                                  color: "info"
                                                 },
                                                 on: {
                                                   click: function($event) {

@@ -1,9 +1,8 @@
 <template>
-    <div
-        :class="$vuetify.theme.dark ? 'tealBackground' : ''"
-        class="mx-auto my-auto col-auto d-flex align-center justify-center"
-    >
-        <div>
+    <div :class="$vuetify.theme.dark ? 'tealBackground' : ''">
+        <div
+            class="mx-auto my-auto col-auto d-flex align-center justify-center"
+        >
             <img
                 width="100%"
                 style="max-width:550px"
@@ -15,7 +14,9 @@
             />
         </div>
         <v-spacer></v-spacer>
-        <div>
+        <div
+            class="mx-auto my-auto col-auto d-flex align-center justify-center"
+        >
             <v-btn text color="info" @click="goBack()">{{
                 $t("button.back.back")
             }}</v-btn>
