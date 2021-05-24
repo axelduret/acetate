@@ -33,7 +33,8 @@ export default new Vuetify({
                 lightprimary: "#455A64",
                 lightsecondary: "#136c83",
                 lightinfo: "#2196F3",
-                appBackground: "#263238"
+                appBackground: "#263238",
+                tealBackground: "#006064"
             }
         }
     }

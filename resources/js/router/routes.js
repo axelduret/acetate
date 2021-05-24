@@ -71,13 +71,6 @@ const routes = [
                 meta: { auth: true }
             },
             {
-                path: "admin/events/delete/:id",
-                name: "DeleteEvent",
-                component: loadComponent("admin/events/Delete"),
-                props: true,
-                meta: { auth: true }
-            },
-            {
                 path: "events/:id",
                 name: "Event",
                 props: true,
@@ -109,6 +102,16 @@ const routes = [
                 path: "users",
                 name: "Users",
                 component: loadComponent("pages/Users")
+            },
+            {
+                path: "contact",
+                name: "Contact",
+                component: loadComponent("pages/Contact")
+            },
+            {
+                path: "tos",
+                name: "Tos",
+                component: loadComponent("pages/Tos")
             },
             {
                 path: "dashboard",

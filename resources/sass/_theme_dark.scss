@@ -4,6 +4,10 @@
 * Released under the MIT License.
 */
 
+// Material background
+$material-dark: (
+    "background": $ac-black
+);
 // Main background
 .theme--dark.v-application,
 // Header background

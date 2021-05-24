@@ -503,8 +503,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Description: String,
@@ -839,7 +837,6 @@ var render = function() {
                                       attrs: {
                                         alt: "Avatar",
                                         src:
-                                          _vm.appURL +
                                           _vm.baseURL +
                                           "storage/avatar/person/" +
                                           person.avatar,
@@ -994,7 +991,6 @@ var render = function() {
                                               attrs: {
                                                 alt: "Avatar",
                                                 src:
-                                                  _vm.appURL +
                                                   _vm.baseURL +
                                                   "storage/avatar/venue/" +
                                                   venue.avatar,

@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     // Load event.avatar
     if (this.Avatar) {
-      this.currentAvatar = this.appURL + this.baseURL + "storage/avatar/event/" + this.Avatar;
+      this.currentAvatar = this.baseURL + "storage/avatar/event/" + this.Avatar;
     } else {
       this.currentAvatar = null;
     }
@@ -215,11 +215,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _event_Comments__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./event/Comments */ "./resources/js/components/pages/event/Comments.vue");
 /* harmony import */ var _event_CommentDialog__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./event/CommentDialog */ "./resources/js/components/pages/event/CommentDialog.vue");
 /* harmony import */ var _admin_events_EditAvatar__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../admin/events/EditAvatar */ "./resources/js/components/admin/events/EditAvatar.vue");
-//
-//
-//
-//
-//
 //
 //
 //
@@ -873,9 +868,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Comments: Array
@@ -913,8 +905,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-//
-//
 //
 //
 //
@@ -2600,7 +2590,6 @@ var render = function() {
                                       key: index,
                                       attrs: {
                                         src:
-                                          _vm.appURL +
                                           _vm.baseURL +
                                           "storage/file/" +
                                           file.path,
@@ -2801,11 +2790,7 @@ var render = function() {
               _vm.Avatar != null
                 ? _c("v-img", {
                     attrs: {
-                      src:
-                        _vm.appURL +
-                        _vm.baseURL +
-                        "storage/avatar/event/" +
-                        _vm.Avatar,
+                      src: _vm.baseURL + "storage/avatar/event/" + _vm.Avatar,
                       title: _vm.Name
                     }
                   })
@@ -3170,7 +3155,6 @@ var render = function() {
                                     ? _c("v-img", {
                                         attrs: {
                                           src:
-                                            _vm.appURL +
                                             _vm.baseURL +
                                             "storage/avatar/user/" +
                                             comment.user_avatar,
@@ -3657,7 +3641,6 @@ var render = function() {
                                       attrs: {
                                         alt: "Avatar",
                                         src:
-                                          _vm.appURL +
                                           _vm.baseURL +
                                           "storage/avatar/person/" +
                                           person.avatar,
@@ -3812,7 +3795,6 @@ var render = function() {
                                               attrs: {
                                                 alt: "Avatar",
                                                 src:
-                                                  _vm.appURL +
                                                   _vm.baseURL +
                                                   "storage/avatar/venue/" +
                                                   venue.avatar,

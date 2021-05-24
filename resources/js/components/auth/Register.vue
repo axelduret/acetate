@@ -1,42 +1,21 @@
 <template>
-    <v-row justify="center">
-        <v-col cols="12" sm="8" md="6" lg="5" xl="4">
-            <form @submit.prevent="submit">
-                <v-card>
-                    <v-card-text>
-                        <v-text-field
-                            v-model="email"
-                            type="email"
-                            label="E-mail"
-                        ></v-text-field>
-                        <v-text-field
-                            v-model="password"
-                            label="Password"
-                            :append-icon="showPw ? 'mdi-eye-off' : 'mdi-eye'"
-                            :type="showPw ? 'text' : 'password'"
-                            autocomplete="on"
-                            @click:append="showPw = !showPw"
-                        ></v-text-field>
-                    </v-card-text>
-                    <v-divider class="mt-2"></v-divider>
-                    <v-card-actions>
-                        <v-spacer></v-spacer>
-                        <v-btn class="mr-4" type="submit"> submit </v-btn>
-                    </v-card-actions>
-                </v-card>
-            </form>
-        </v-col>
-    </v-row>
+    <div class="mx-auto my-auto col-auto d-flex align-center justify-center">
+        <img
+            width="100%"
+            style="max-width:550px"
+            :src="
+                $vuetify.theme.dark
+                    ? '/img/errors/dark_404.gif'
+                    : '/img/errors/light_404.gif'
+            "
+        />
+    </div>
 </template>
 
 <script>
 export default {
     data() {
-        return {
-            email: "",
-            showPw: false,
-            password: ""
-        };
+        return {};
     }
 };
 </script>

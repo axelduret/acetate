@@ -1,12 +1,17 @@
 <template>
-    <div>
-        <v-row>
-            <v-col>
-                <code class="primary--text">
-                    {{ $t("page.home.title") }}
-                </code>
-            </v-col>
-        </v-row>
+    <div
+        :class="$vuetify.theme.dark ? 'tealBackground' : ''"
+        class="mx-auto my-auto col-auto d-flex align-center justify-center"
+    >
+        <img
+            width="100%"
+            style="max-width:550px"
+            :src="
+                $vuetify.theme.dark
+                    ? '/img/page/home/teal_home.gif'
+                    : '/img/page/home/light_home.gif'
+            "
+        />
     </div>
 </template>
 

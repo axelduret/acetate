@@ -140,9 +140,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Comments: Array
@@ -300,7 +297,6 @@ var render = function() {
                                     ? _c("v-img", {
                                         attrs: {
                                           src:
-                                            _vm.appURL +
                                             _vm.baseURL +
                                             "storage/avatar/user/" +
                                             comment.user_avatar,

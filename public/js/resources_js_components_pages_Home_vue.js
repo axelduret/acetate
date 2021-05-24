@@ -23,6 +23,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {};
@@ -121,24 +126,22 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
+    {
+      staticClass:
+        "mx-auto my-auto col-auto d-flex align-center justify-center",
+      class: _vm.$vuetify.theme.dark ? "tealBackground" : ""
+    },
     [
-      _c(
-        "v-row",
-        [
-          _c("v-col", [
-            _c("code", { staticClass: "primary--text" }, [
-              _vm._v(
-                "\n                " +
-                  _vm._s(_vm.$t("page.home.title")) +
-                  "\n            "
-              )
-            ])
-          ])
-        ],
-        1
-      )
-    ],
-    1
+      _c("img", {
+        staticStyle: { "max-width": "550px" },
+        attrs: {
+          width: "100%",
+          src: _vm.$vuetify.theme.dark
+            ? "/img/page/home/teal_home.gif"
+            : "/img/page/home/light_home.gif"
+        }
+      })
+    ]
   )
 }
 var staticRenderFns = []

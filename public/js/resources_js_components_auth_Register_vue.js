@@ -25,30 +25,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
-    return {
-      email: "",
-      showPw: false,
-      password: ""
-    };
+    return {};
   }
 });
 
@@ -143,90 +122,21 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c(
-    "v-row",
-    { attrs: { justify: "center" } },
+    "div",
+    {
+      staticClass: "mx-auto my-auto col-auto d-flex align-center justify-center"
+    },
     [
-      _c(
-        "v-col",
-        { attrs: { cols: "12", sm: "8", md: "6", lg: "5", xl: "4" } },
-        [
-          _c(
-            "form",
-            {
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.submit($event)
-                }
-              }
-            },
-            [
-              _c(
-                "v-card",
-                [
-                  _c(
-                    "v-card-text",
-                    [
-                      _c("v-text-field", {
-                        attrs: { type: "email", label: "E-mail" },
-                        model: {
-                          value: _vm.email,
-                          callback: function($$v) {
-                            _vm.email = $$v
-                          },
-                          expression: "email"
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("v-text-field", {
-                        attrs: {
-                          label: "Password",
-                          "append-icon": _vm.showPw ? "mdi-eye-off" : "mdi-eye",
-                          type: _vm.showPw ? "text" : "password",
-                          autocomplete: "on"
-                        },
-                        on: {
-                          "click:append": function($event) {
-                            _vm.showPw = !_vm.showPw
-                          }
-                        },
-                        model: {
-                          value: _vm.password,
-                          callback: function($$v) {
-                            _vm.password = $$v
-                          },
-                          expression: "password"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c("v-divider", { staticClass: "mt-2" }),
-                  _vm._v(" "),
-                  _c(
-                    "v-card-actions",
-                    [
-                      _c("v-spacer"),
-                      _vm._v(" "),
-                      _c(
-                        "v-btn",
-                        { staticClass: "mr-4", attrs: { type: "submit" } },
-                        [_vm._v(" submit ")]
-                      )
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ]
-      )
-    ],
-    1
+      _c("img", {
+        staticStyle: { "max-width": "550px" },
+        attrs: {
+          width: "100%",
+          src: _vm.$vuetify.theme.dark
+            ? "/img/errors/dark_404.gif"
+            : "/img/errors/light_404.gif"
+        }
+      })
+    ]
   )
 }
 var staticRenderFns = []

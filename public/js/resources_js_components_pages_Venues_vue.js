@@ -347,7 +347,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {},
   data: function data() {
@@ -707,7 +706,6 @@ var render = function() {
                                               ? _c("v-img", {
                                                   attrs: {
                                                     src:
-                                                      _vm.appURL +
                                                       _vm.baseURL +
                                                       "storage/avatar/venue/" +
                                                       venue.avatar,

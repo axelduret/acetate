@@ -105,7 +105,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     // Load event.avatar
     if (this.Avatar) {
-      this.currentAvatar = this.appURL + this.baseURL + "storage/avatar/event/" + this.Avatar;
+      this.currentAvatar = this.baseURL + "storage/avatar/event/" + this.Avatar;
     } else {
       this.currentAvatar = null;
     }

@@ -31,7 +31,9 @@
         },
         "users": {
             "title": "Utilisateurs"
-        }
+        },
+        "contact": { "title": "Contact" },
+        "tos": { "title": "Conditions d'utilisation" }
     },
     "account-menu": {
         "title": "Compte personnel",

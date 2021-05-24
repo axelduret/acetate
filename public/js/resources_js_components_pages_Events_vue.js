@@ -1892,11 +1892,7 @@ var render = function() {
           _vm.Avatar != null
             ? _c("v-img", {
                 attrs: {
-                  src:
-                    _vm.appURL +
-                    _vm.baseURL +
-                    "storage/avatar/event/" +
-                    _vm.Avatar,
+                  src: _vm.baseURL + "storage/avatar/event/" + _vm.Avatar,
                   title: _vm.Name
                 }
               })
