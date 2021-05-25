@@ -92,7 +92,6 @@ class EventController extends Controller
    */
   public function index(Request $request)
   {
-    $this->request = $request;
     // Search dates.
     $searchField = in_array(
       $request->input('search_field'),
@@ -170,31 +169,31 @@ class EventController extends Controller
         }
       ])
       // Search in event's relationships.
-      ->whereHas('event', function ($filter) {
+      ->whereHas('event', function ($filter) use ($request) {
         // Search taxonomy type.
-        if ($this->request->input('type')) {
+        if ($request->input('type')) {
           $filter
-            ->whereHas('taxonomies', function ($filter) {
+            ->whereHas('taxonomies', function ($filter) use ($request) {
               if (in_array(
-                $this->request->input('type'),
+                $request->input('type'),
                 $this->taxonomyTypes
               )) {
-                $filter->where('type', $this->request->input('type'));
+                $filter->where('type', $request->input('type'));
               }
             });
         }
         // Search taxonomy category.
-        if ($this->request->input('category')) {
+        if ($request->input('category')) {
           $filter
-            ->whereHas('taxonomies', function ($filter) {
-              $filter->where('category', $this->request->input('category'));
+            ->whereHas('taxonomies', function ($filter) use ($request) {
+              $filter->where('category', $request->input('category'));
             });
         }
         // Search taxonomy sub_category.
-        if ($this->request->input('sub_category')) {
+        if ($request->input('sub_category')) {
           $filter
-            ->whereHas('taxonomies', function ($filter) {
-              $filter->where('sub_category', $this->request->input('sub_category'));
+            ->whereHas('taxonomies', function ($filter) use ($request) {
+              $filter->where('sub_category', $request->input('sub_category'));
             });
         }
       });
