@@ -15,11 +15,11 @@ trait CreditTrait
   {
     return collect(
       [
-        'APP name' => 'Acetate',
-        'APP url' => 'https://acetate.unitysound.ch',
-        'APP timezone' => 'Europe/Paris',
-        'developed by' => 'Axel Duret 2021 ©',
-        'license' => 'MIT License',
+        'APP name' => env('MIX_APP_NAME'),
+        'APP url' => env('APP_URL'),
+        'APP timezone' => env('TIME_ZONE'),
+        'developed by' => env('APP_CREDIT'),
+        'license' => env('APP_LICENSE'),
       ]
     );
   }
