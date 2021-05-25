@@ -171,8 +171,8 @@ class EventController extends Controller
       ])
       // Search in event's relationships.
       ->whereHas('event', function ($filter) {
+        // Search taxonomy type.
         if ($this->request->input('type')) {
-          // Search taxonomy type.
           $filter
             ->whereHas('taxonomies', function ($filter) {
               if (in_array(
@@ -183,15 +183,15 @@ class EventController extends Controller
               }
             });
         }
+        // Search taxonomy category.
         if ($this->request->input('category')) {
-          // Search taxonomy category.
           $filter
             ->whereHas('taxonomies', function ($filter) {
               $filter->where('category', $this->request->input('category'));
             });
         }
+        // Search taxonomy sub_category.
         if ($this->request->input('sub_category')) {
-          // Search taxonomy sub_category.
           $filter
             ->whereHas('taxonomies', function ($filter) {
               $filter->where('sub_category', $this->request->input('sub_category'));
