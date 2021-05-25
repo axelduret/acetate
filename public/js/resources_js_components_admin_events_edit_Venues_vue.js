@@ -77,7 +77,9 @@ __webpack_require__.r(__webpack_exports__);
     Step: Number
   },
   data: function data() {
-    return {};
+    return {
+      attachedVenues: null
+    };
   },
   computed: {
     selectedVenues: {
@@ -86,10 +88,24 @@ __webpack_require__.r(__webpack_exports__);
       },
       set: function set(val) {
         this.$emit("selectedVenues", val);
+        this.attachedVenues = val;
       }
     }
   },
-  methods: {},
+  methods: {
+    nextStep: function nextStep() {
+      var venues = [];
+
+      if (this.attachedVenues != null) {
+        venues = this.attachedVenues;
+      } else {
+        venues = this.selectedVenues;
+      }
+
+      console.log("venues: ", venues);
+      this.$emit("Step4");
+    }
+  },
   mounted: function mounted() {}
 });
 
@@ -302,7 +318,7 @@ var render = function() {
                       attrs: { color: "info", outlined: "" },
                       on: {
                         click: function($event) {
-                          return _vm.$emit("Step4")
+                          return _vm.nextStep()
                         }
                       }
                     },

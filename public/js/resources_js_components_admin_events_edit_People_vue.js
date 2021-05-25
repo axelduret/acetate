@@ -40,14 +40,51 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Id: String,
     People: Array,
+    AllPeople: Array,
     Step: Number
   },
   data: function data() {
-    return {};
+    return {
+      attachedPeople: null
+    };
+  },
+  computed: {
+    selectedPeople: {
+      get: function get() {
+        return this.People;
+      },
+      set: function set(val) {
+        this.$emit("selectedPeople", val);
+        this.attachedPeople = val;
+      }
+    }
+  },
+  methods: {
+    nextStep: function nextStep() {
+      var people = [];
+
+      if (this.attachedPeople != null) {
+        people = this.attachedPeople;
+      } else {
+        people = this.selectedPeople;
+      }
+
+      console.log("people: ", people);
+      this.$emit("Step5");
+    }
   }
 });
 
@@ -154,13 +191,40 @@ var render = function() {
             [
               _c("v-divider"),
               _vm._v(" "),
-              _vm._l(_vm.People, function(person, index) {
-                return _c(
-                  "v-card-text",
-                  { key: index, staticClass: "m-0 p-0" },
-                  [_vm._v("\n                " + _vm._s(person))]
-                )
-              }),
+              _c(
+                "div",
+                { staticClass: "pt-8" },
+                [
+                  _c(
+                    "v-card-text",
+                    { staticClass: " mb-0 py-0" },
+                    [
+                      _c("v-combobox", {
+                        attrs: {
+                          items: _vm.AllPeople,
+                          "item-value": "id",
+                          "item-text": "nickname",
+                          label: "People",
+                          clearable: "",
+                          multiple: "",
+                          outlined: "",
+                          "return-object": ""
+                        },
+                        model: {
+                          value: _vm.selectedPeople,
+                          callback: function($$v) {
+                            _vm.selectedPeople = $$v
+                          },
+                          expression: "selectedPeople"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
               _c("v-divider"),
               _vm._v(" "),
               _c(
@@ -193,7 +257,7 @@ var render = function() {
                       attrs: { color: "info", outlined: "" },
                       on: {
                         click: function($event) {
-                          return _vm.$emit("Step5")
+                          return _vm.nextStep()
                         }
                       }
                     },
@@ -209,7 +273,7 @@ var render = function() {
                 1
               )
             ],
-            2
+            1
           )
         ],
         1

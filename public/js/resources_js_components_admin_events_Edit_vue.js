@@ -116,6 +116,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 
 
@@ -138,6 +139,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       event: "",
       venues: [],
+      people: [],
       stepper: 1,
       // App url.
       appURL: "http://127.0.0.1:8001",
@@ -179,11 +181,28 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log(error);
       })["finally"](function () {});
+    },
+    // GET People
+    fetchPeople: function fetchPeople() {
+      var _this3 = this;
+
+      axios.request({
+        method: "get",
+        baseURL: this.baseURL + "api/people?per_page=1000",
+        headers: {
+          Authorization: "Bearer " + this.apiToken
+        }
+      }).then(function (response) {
+        _this3.people = response.data.people;
+      })["catch"](function (error) {
+        console.log(error);
+      })["finally"](function () {});
     }
   },
   mounted: function mounted() {
     this.fetchAPI();
     this.fetchVenues();
+    this.fetchPeople();
   }
 });
 
@@ -200,6 +219,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -264,24 +340,58 @@ __webpack_require__.r(__webpack_exports__);
       // Base url.
       baseURL: "/",
       apiToken: localStorage.getItem("user_api_token"),
-      errors: false
+      errors: false,
+      dialog: false
     };
   },
   methods: {
     // PATCH
     submit: function submit() {
-      if (!this.errors) {
-        var config = {
-          headers: {
-            Authorization: "Bearer " + this.apiToken
-          }
-        };
-        axios.patch(this.baseURL + "api/events/" + this.Id, this.form, config).then(function () {
-          this.historyBack();
-        }.bind(this))["catch"](function (error) {
-          console.log(error);
-        });
+      var _this = this;
+
+      var emails = [];
+
+      for (var i = 0; i < this.Emails.length; i++) {
+        if (document.getElementById("email[" + i + "]").value) {
+          emails.push(JSON.parse(document.getElementById("email[" + i + "]").value));
+        }
       }
+
+      var phones = [];
+
+      for (var _i = 0; _i < this.Phones.length; _i++) {
+        if (document.getElementById("phone[" + _i + "]").value) {
+          phones.push(JSON.parse(document.getElementById("phone[" + _i + "]").value));
+        }
+      }
+
+      var websites = [];
+
+      for (var _i2 = 0; _i2 < this.Websites.length; _i2++) {
+        if (document.getElementById("website[" + _i2 + "]").value) {
+          websites.push(JSON.parse(document.getElementById("website[" + _i2 + "]").value));
+        }
+      }
+
+      console.log("emails: ", emails);
+      console.log("phones: ", phones);
+      console.log("websites: ", websites);
+      var config = {
+        headers: {
+          Authorization: "Bearer " + this.apiToken
+        }
+      };
+      axios.patch(this.baseURL + "api/events/" + this.Id, this.form, config).then(function (response) {
+        _this.historyBack();
+      })["catch"](function (error) {
+        _this.errors = error.response.data.message;
+        _this.dialog = true;
+        return _this.errors;
+      });
+    },
+    closeDialog: function closeDialog() {
+      this.errors = false;
+      this.dialog = false;
     }
   }
 });
@@ -342,79 +452,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Id: String,
@@ -430,7 +467,20 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {},
-  methods: {}
+  methods: {
+    nextStep: function nextStep() {
+      var dates = [];
+
+      for (var i = 0; i < this.Dates.length; i++) {
+        if (document.getElementById("date[" + i + "]").value) {
+          dates.push(JSON.parse(document.getElementById("date[" + i + "]").value));
+        }
+      }
+
+      console.log("dates: ", dates);
+      this.$emit("Step3");
+    }
+  }
 });
 
 /***/ }),
@@ -503,10 +553,18 @@ __webpack_require__.r(__webpack_exports__);
     return {};
   },
   methods: {
+    nextStep: function nextStep() {
+      var name = document.getElementById("name").value;
+      var description = document.getElementById("description").value;
+      console.log("name: ", name);
+      console.log("description: ", description);
+      this.$emit("Step2");
+    },
     historyBack: function historyBack() {
       this.$router.push("/".concat(this.$i18n.locale, "/events/").concat(this.Id));
     }
-  }
+  },
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -551,14 +609,51 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Id: String,
     People: Array,
+    AllPeople: Array,
     Step: Number
   },
   data: function data() {
-    return {};
+    return {
+      attachedPeople: null
+    };
+  },
+  computed: {
+    selectedPeople: {
+      get: function get() {
+        return this.People;
+      },
+      set: function set(val) {
+        this.$emit("selectedPeople", val);
+        this.attachedPeople = val;
+      }
+    }
+  },
+  methods: {
+    nextStep: function nextStep() {
+      var people = [];
+
+      if (this.attachedPeople != null) {
+        people = this.attachedPeople;
+      } else {
+        people = this.selectedPeople;
+      }
+
+      console.log("people: ", people);
+      this.$emit("Step5");
+    }
   }
 });
 
@@ -604,6 +699,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Id: String,
@@ -612,6 +720,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {};
+  },
+  methods: {
+    nextStep: function nextStep() {
+      var prices = [];
+
+      for (var i = 0; i < this.Prices.length; i++) {
+        if (document.getElementById("price[" + i + "]").value) {
+          prices.push(JSON.parse(document.getElementById("price[" + i + "]").value));
+        }
+      }
+
+      console.log("prices: ", prices);
+      this.$emit("Step6");
+    }
   }
 });
 
@@ -694,7 +816,9 @@ __webpack_require__.r(__webpack_exports__);
     Step: Number
   },
   data: function data() {
-    return {};
+    return {
+      attachedVenues: null
+    };
   },
   computed: {
     selectedVenues: {
@@ -703,10 +827,24 @@ __webpack_require__.r(__webpack_exports__);
       },
       set: function set(val) {
         this.$emit("selectedVenues", val);
+        this.attachedVenues = val;
       }
     }
   },
-  methods: {},
+  methods: {
+    nextStep: function nextStep() {
+      var venues = [];
+
+      if (this.attachedVenues != null) {
+        venues = this.attachedVenues;
+      } else {
+        venues = this.selectedVenues;
+      }
+
+      console.log("venues: ", venues);
+      this.$emit("Step4");
+    }
+  },
   mounted: function mounted() {}
 });
 
@@ -1382,7 +1520,12 @@ var render = function() {
               }),
               _vm._v(" "),
               _c("People", {
-                attrs: { Id: this.id, People: _vm.event.people, Step: 4 },
+                attrs: {
+                  Id: this.id,
+                  People: _vm.event.people,
+                  AllPeople: _vm.people,
+                  Step: 4
+                },
                 on: {
                   Step3: function($event) {
                     _vm.stepper = 3
@@ -1465,29 +1608,121 @@ var render = function() {
             [
               _c("v-divider"),
               _vm._v(" "),
-              _vm._l(_vm.Emails, function(email) {
-                return _c(
-                  "v-card-text",
-                  { key: email.id, staticClass: "m-0 p-0" },
-                  [_vm._v("\n                " + _vm._s(email))]
-                )
-              }),
-              _c("v-spacer"),
-              _vm._l(_vm.Phones, function(phone) {
-                return _c(
-                  "v-card-text",
-                  { key: phone.id, staticClass: "m-0 p-0" },
-                  [_vm._v("\n                " + _vm._s(phone))]
-                )
-              }),
-              _c("v-spacer"),
-              _vm._l(_vm.Websites, function(website) {
-                return _c(
-                  "v-card-text",
-                  { key: website.id, staticClass: "m-0 p-0" },
-                  [_vm._v("\n                " + _vm._s(website))]
-                )
-              }),
+              _c(
+                "div",
+                { staticClass: "pt-8" },
+                _vm._l(_vm.Emails, function(email, index) {
+                  return _c(
+                    "v-card-text",
+                    { key: index, staticClass: " mb-0 py-0" },
+                    [
+                      _c("v-textarea", {
+                        staticClass: "my-0 py-0 primary--text",
+                        attrs: {
+                          height: "160",
+                          clearable: "",
+                          "no-resize": "",
+                          outlined: "",
+                          rows: "1",
+                          "row-height": "25",
+                          id: "email[" + index + "]",
+                          label: "Email " + (index + 1)
+                        },
+                        model: {
+                          value: JSON.stringify(email, undefined, 4),
+                          callback: function($$v) {
+                            _vm.$set(
+                              JSON,
+                              "stringify(email, undefined, 4)",
+                              $$v
+                            )
+                          },
+                          expression: "JSON.stringify(email, undefined, 4)"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                }),
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                _vm._l(_vm.Phones, function(phone, index) {
+                  return _c(
+                    "v-card-text",
+                    { key: index, staticClass: " mb-0 py-0" },
+                    [
+                      _c("v-textarea", {
+                        staticClass: "my-0 py-0 primary--text",
+                        attrs: {
+                          height: "240",
+                          clearable: "",
+                          "no-resize": "",
+                          outlined: "",
+                          rows: "1",
+                          "row-height": "25",
+                          id: "phone[" + index + "]",
+                          label: "Phone " + (index + 1)
+                        },
+                        model: {
+                          value: JSON.stringify(phone, undefined, 4),
+                          callback: function($$v) {
+                            _vm.$set(
+                              JSON,
+                              "stringify(phone, undefined, 4)",
+                              $$v
+                            )
+                          },
+                          expression: "JSON.stringify(phone, undefined, 4)"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                }),
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                _vm._l(_vm.Websites, function(website, index) {
+                  return _c(
+                    "v-card-text",
+                    { key: index, staticClass: " mb-0 py-0" },
+                    [
+                      _c("v-textarea", {
+                        staticClass: "my-0 py-0 primary--text",
+                        attrs: {
+                          height: "310",
+                          clearable: "",
+                          "no-resize": "",
+                          outlined: "",
+                          rows: "1",
+                          "row-height": "25",
+                          id: "website[" + index + "]",
+                          label: "Website " + (index + 1)
+                        },
+                        model: {
+                          value: JSON.stringify(website, undefined, 4),
+                          callback: function($$v) {
+                            _vm.$set(
+                              JSON,
+                              "stringify(website, undefined, 4)",
+                              $$v
+                            )
+                          },
+                          expression: "JSON.stringify(website, undefined, 4)"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                }),
+                1
+              ),
+              _vm._v(" "),
               _c("v-divider"),
               _vm._v(" "),
               _c(
@@ -1536,7 +1771,72 @@ var render = function() {
                 1
               )
             ],
-            2
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: { width: "500" },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-card-title",
+                { staticClass: "title greybg primary--text" },
+                [_vm._v("\n                Error ")]
+              ),
+              _c("v-card-text", [
+                _c(
+                  "div",
+                  { staticClass: "error--text mx-4 mt-4 px-4  py-2 rounded" },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(JSON.stringify(_vm.errors, undefined, 4)) +
+                        "\n                "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      staticClass: "primary--text",
+                      attrs: { text: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.closeDialog()
+                        }
+                      }
+                    },
+                    [_vm._v(_vm._s(_vm.$t("button.close")))]
+                  )
+                ],
+                1
+              )
+            ],
+            1
           )
         ],
         1
@@ -1596,9 +1896,10 @@ var render = function() {
                           clearable: "",
                           "no-resize": "",
                           outlined: "",
-                          label: "Date " + (index + 1),
                           rows: "1",
-                          "row-height": "25"
+                          "row-height": "25",
+                          id: "date[" + index + "]",
+                          label: "Date " + (index + 1)
                         },
                         model: {
                           value: JSON.stringify(date, undefined, 4),
@@ -1647,7 +1948,7 @@ var render = function() {
                       attrs: { color: "info", outlined: "" },
                       on: {
                         click: function($event) {
-                          return _vm.$emit("Step3")
+                          return _vm.nextStep()
                         }
                       }
                     },
@@ -1716,25 +2017,20 @@ var render = function() {
                     staticClass: "primary--text p-0 m-0",
                     attrs: {
                       type: "text",
-                      id: "Name",
+                      id: "name",
+                      value: _vm.Name,
                       clearable: "",
                       required: "",
                       counter: "100",
                       label: _vm.$t("admin.event.title")
-                    },
-                    model: {
-                      value: _vm.Name,
-                      callback: function($$v) {
-                        _vm.Name = $$v
-                      },
-                      expression: "Name"
                     }
                   }),
                   _vm._v(" "),
                   _c("v-textarea", {
                     staticClass: "mt-4 m-0 m-0 primary--text",
                     attrs: {
-                      id: "Text",
+                      id: "description",
+                      value: _vm.Description,
                       height: "400",
                       clearable: "",
                       "no-resize": "",
@@ -1742,13 +2038,6 @@ var render = function() {
                       rows: "1",
                       label: _vm.$t("admin.event.description"),
                       "row-height": "25"
-                    },
-                    model: {
-                      value: _vm.Description,
-                      callback: function($$v) {
-                        _vm.Description = $$v
-                      },
-                      expression: "Description"
                     }
                   })
                 ],
@@ -1786,7 +2075,7 @@ var render = function() {
                       attrs: { color: "info", outlined: "" },
                       on: {
                         click: function($event) {
-                          return _vm.$emit("Step2")
+                          return _vm.nextStep()
                         }
                       }
                     },
@@ -1847,13 +2136,40 @@ var render = function() {
             [
               _c("v-divider"),
               _vm._v(" "),
-              _vm._l(_vm.People, function(person, index) {
-                return _c(
-                  "v-card-text",
-                  { key: index, staticClass: "m-0 p-0" },
-                  [_vm._v("\n                " + _vm._s(person))]
-                )
-              }),
+              _c(
+                "div",
+                { staticClass: "pt-8" },
+                [
+                  _c(
+                    "v-card-text",
+                    { staticClass: " mb-0 py-0" },
+                    [
+                      _c("v-combobox", {
+                        attrs: {
+                          items: _vm.AllPeople,
+                          "item-value": "id",
+                          "item-text": "nickname",
+                          label: "People",
+                          clearable: "",
+                          multiple: "",
+                          outlined: "",
+                          "return-object": ""
+                        },
+                        model: {
+                          value: _vm.selectedPeople,
+                          callback: function($$v) {
+                            _vm.selectedPeople = $$v
+                          },
+                          expression: "selectedPeople"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
               _c("v-divider"),
               _vm._v(" "),
               _c(
@@ -1886,7 +2202,7 @@ var render = function() {
                       attrs: { color: "info", outlined: "" },
                       on: {
                         click: function($event) {
-                          return _vm.$emit("Step5")
+                          return _vm.nextStep()
                         }
                       }
                     },
@@ -1902,7 +2218,7 @@ var render = function() {
                 1
               )
             ],
-            2
+            1
           )
         ],
         1
@@ -1947,13 +2263,45 @@ var render = function() {
             [
               _c("v-divider"),
               _vm._v(" "),
-              _vm._l(_vm.Prices, function(price, index) {
-                return _c(
-                  "v-card-text",
-                  { key: index, staticClass: "m-0 p-0" },
-                  [_vm._v("\n                " + _vm._s(price))]
-                )
-              }),
+              _c(
+                "div",
+                { staticClass: "pt-8" },
+                _vm._l(_vm.Prices, function(price, index) {
+                  return _c(
+                    "v-card-text",
+                    { key: index, staticClass: " mb-0 py-0" },
+                    [
+                      _c("v-textarea", {
+                        staticClass: "my-0 py-0 primary--text",
+                        attrs: {
+                          height: "160",
+                          clearable: "",
+                          "no-resize": "",
+                          outlined: "",
+                          rows: "1",
+                          "row-height": "25",
+                          id: "price[" + index + "]",
+                          label: "Price " + (index + 1)
+                        },
+                        model: {
+                          value: JSON.stringify(price, undefined, 4),
+                          callback: function($$v) {
+                            _vm.$set(
+                              JSON,
+                              "stringify(price, undefined, 4)",
+                              $$v
+                            )
+                          },
+                          expression: "JSON.stringify(price, undefined, 4)"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                }),
+                1
+              ),
+              _vm._v(" "),
               _c("v-divider"),
               _vm._v(" "),
               _c(
@@ -1986,7 +2334,7 @@ var render = function() {
                       attrs: { color: "info", outlined: "" },
                       on: {
                         click: function($event) {
-                          return _vm.$emit("Step6")
+                          return _vm.nextStep()
                         }
                       }
                     },
@@ -2002,7 +2350,7 @@ var render = function() {
                 1
               )
             ],
-            2
+            1
           )
         ],
         1
@@ -2153,7 +2501,7 @@ var render = function() {
                       attrs: { color: "info", outlined: "" },
                       on: {
                         click: function($event) {
-                          return _vm.$emit("Step4")
+                          return _vm.nextStep()
                         }
                       }
                     },

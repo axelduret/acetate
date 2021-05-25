@@ -54,79 +54,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Id: String,
@@ -142,7 +69,20 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {},
-  methods: {}
+  methods: {
+    nextStep: function nextStep() {
+      var dates = [];
+
+      for (var i = 0; i < this.Dates.length; i++) {
+        if (document.getElementById("date[" + i + "]").value) {
+          dates.push(JSON.parse(document.getElementById("date[" + i + "]").value));
+        }
+      }
+
+      console.log("dates: ", dates);
+      this.$emit("Step3");
+    }
+  }
 });
 
 /***/ }),
@@ -263,9 +203,10 @@ var render = function() {
                           clearable: "",
                           "no-resize": "",
                           outlined: "",
-                          label: "Date " + (index + 1),
                           rows: "1",
-                          "row-height": "25"
+                          "row-height": "25",
+                          id: "date[" + index + "]",
+                          label: "Date " + (index + 1)
                         },
                         model: {
                           value: JSON.stringify(date, undefined, 4),
@@ -314,7 +255,7 @@ var render = function() {
                       attrs: { color: "info", outlined: "" },
                       on: {
                         click: function($event) {
-                          return _vm.$emit("Step3")
+                          return _vm.nextStep()
                         }
                       }
                     },

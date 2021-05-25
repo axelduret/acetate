@@ -68,10 +68,18 @@ __webpack_require__.r(__webpack_exports__);
     return {};
   },
   methods: {
+    nextStep: function nextStep() {
+      var name = document.getElementById("name").value;
+      var description = document.getElementById("description").value;
+      console.log("name: ", name);
+      console.log("description: ", description);
+      this.$emit("Step2");
+    },
     historyBack: function historyBack() {
       this.$router.push("/".concat(this.$i18n.locale, "/events/").concat(this.Id));
     }
-  }
+  },
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -185,25 +193,20 @@ var render = function() {
                     staticClass: "primary--text p-0 m-0",
                     attrs: {
                       type: "text",
-                      id: "Name",
+                      id: "name",
+                      value: _vm.Name,
                       clearable: "",
                       required: "",
                       counter: "100",
                       label: _vm.$t("admin.event.title")
-                    },
-                    model: {
-                      value: _vm.Name,
-                      callback: function($$v) {
-                        _vm.Name = $$v
-                      },
-                      expression: "Name"
                     }
                   }),
                   _vm._v(" "),
                   _c("v-textarea", {
                     staticClass: "mt-4 m-0 m-0 primary--text",
                     attrs: {
-                      id: "Text",
+                      id: "description",
+                      value: _vm.Description,
                       height: "400",
                       clearable: "",
                       "no-resize": "",
@@ -211,13 +214,6 @@ var render = function() {
                       rows: "1",
                       label: _vm.$t("admin.event.description"),
                       "row-height": "25"
-                    },
-                    model: {
-                      value: _vm.Description,
-                      callback: function($$v) {
-                        _vm.Description = $$v
-                      },
-                      expression: "Description"
                     }
                   })
                 ],
@@ -255,7 +251,7 @@ var render = function() {
                       attrs: { color: "info", outlined: "" },
                       on: {
                         click: function($event) {
-                          return _vm.$emit("Step2")
+                          return _vm.nextStep()
                         }
                       }
                     },

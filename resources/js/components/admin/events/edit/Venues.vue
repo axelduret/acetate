@@ -46,7 +46,7 @@
                     >
                         {{ $t("button.back.back") }} </v-btn
                     ><v-spacer></v-spacer
-                    ><v-btn color="info" outlined @click="$emit('Step4')">
+                    ><v-btn color="info" outlined @click="nextStep()">
                         {{ $t("button.next") }}
                     </v-btn>
                 </v-card-actions>
@@ -65,7 +65,7 @@ export default {
         Step: Number
     },
     data() {
-        return {};
+        return { attachedVenues: null };
     },
     computed: {
         selectedVenues: {
@@ -74,10 +74,22 @@ export default {
             },
             set(val) {
                 this.$emit("selectedVenues", val);
+                this.attachedVenues = val;
             }
         }
     },
-    methods: {},
+    methods: {
+        nextStep() {
+            let venues = [];
+            if (this.attachedVenues != null) {
+                venues = this.attachedVenues;
+            } else {
+                venues = this.selectedVenues;
+            }
+            console.log("venues: ", venues);
+            this.$emit("Step4");
+        }
+    },
     mounted() {}
 };
 </script>

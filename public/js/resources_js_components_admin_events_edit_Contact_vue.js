@@ -54,6 +54,63 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Id: String,
@@ -75,24 +132,58 @@ __webpack_require__.r(__webpack_exports__);
       // Base url.
       baseURL: "/",
       apiToken: localStorage.getItem("user_api_token"),
-      errors: false
+      errors: false,
+      dialog: false
     };
   },
   methods: {
     // PATCH
     submit: function submit() {
-      if (!this.errors) {
-        var config = {
-          headers: {
-            Authorization: "Bearer " + this.apiToken
-          }
-        };
-        axios.patch(this.baseURL + "api/events/" + this.Id, this.form, config).then(function () {
-          this.historyBack();
-        }.bind(this))["catch"](function (error) {
-          console.log(error);
-        });
+      var _this = this;
+
+      var emails = [];
+
+      for (var i = 0; i < this.Emails.length; i++) {
+        if (document.getElementById("email[" + i + "]").value) {
+          emails.push(JSON.parse(document.getElementById("email[" + i + "]").value));
+        }
       }
+
+      var phones = [];
+
+      for (var _i = 0; _i < this.Phones.length; _i++) {
+        if (document.getElementById("phone[" + _i + "]").value) {
+          phones.push(JSON.parse(document.getElementById("phone[" + _i + "]").value));
+        }
+      }
+
+      var websites = [];
+
+      for (var _i2 = 0; _i2 < this.Websites.length; _i2++) {
+        if (document.getElementById("website[" + _i2 + "]").value) {
+          websites.push(JSON.parse(document.getElementById("website[" + _i2 + "]").value));
+        }
+      }
+
+      console.log("emails: ", emails);
+      console.log("phones: ", phones);
+      console.log("websites: ", websites);
+      var config = {
+        headers: {
+          Authorization: "Bearer " + this.apiToken
+        }
+      };
+      axios.patch(this.baseURL + "api/events/" + this.Id, this.form, config).then(function (response) {
+        _this.historyBack();
+      })["catch"](function (error) {
+        _this.errors = error.response.data.message;
+        _this.dialog = true;
+        return _this.errors;
+      });
+    },
+    closeDialog: function closeDialog() {
+      this.errors = false;
+      this.dialog = false;
     }
   }
 });
@@ -200,29 +291,121 @@ var render = function() {
             [
               _c("v-divider"),
               _vm._v(" "),
-              _vm._l(_vm.Emails, function(email) {
-                return _c(
-                  "v-card-text",
-                  { key: email.id, staticClass: "m-0 p-0" },
-                  [_vm._v("\n                " + _vm._s(email))]
-                )
-              }),
-              _c("v-spacer"),
-              _vm._l(_vm.Phones, function(phone) {
-                return _c(
-                  "v-card-text",
-                  { key: phone.id, staticClass: "m-0 p-0" },
-                  [_vm._v("\n                " + _vm._s(phone))]
-                )
-              }),
-              _c("v-spacer"),
-              _vm._l(_vm.Websites, function(website) {
-                return _c(
-                  "v-card-text",
-                  { key: website.id, staticClass: "m-0 p-0" },
-                  [_vm._v("\n                " + _vm._s(website))]
-                )
-              }),
+              _c(
+                "div",
+                { staticClass: "pt-8" },
+                _vm._l(_vm.Emails, function(email, index) {
+                  return _c(
+                    "v-card-text",
+                    { key: index, staticClass: " mb-0 py-0" },
+                    [
+                      _c("v-textarea", {
+                        staticClass: "my-0 py-0 primary--text",
+                        attrs: {
+                          height: "160",
+                          clearable: "",
+                          "no-resize": "",
+                          outlined: "",
+                          rows: "1",
+                          "row-height": "25",
+                          id: "email[" + index + "]",
+                          label: "Email " + (index + 1)
+                        },
+                        model: {
+                          value: JSON.stringify(email, undefined, 4),
+                          callback: function($$v) {
+                            _vm.$set(
+                              JSON,
+                              "stringify(email, undefined, 4)",
+                              $$v
+                            )
+                          },
+                          expression: "JSON.stringify(email, undefined, 4)"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                }),
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                _vm._l(_vm.Phones, function(phone, index) {
+                  return _c(
+                    "v-card-text",
+                    { key: index, staticClass: " mb-0 py-0" },
+                    [
+                      _c("v-textarea", {
+                        staticClass: "my-0 py-0 primary--text",
+                        attrs: {
+                          height: "240",
+                          clearable: "",
+                          "no-resize": "",
+                          outlined: "",
+                          rows: "1",
+                          "row-height": "25",
+                          id: "phone[" + index + "]",
+                          label: "Phone " + (index + 1)
+                        },
+                        model: {
+                          value: JSON.stringify(phone, undefined, 4),
+                          callback: function($$v) {
+                            _vm.$set(
+                              JSON,
+                              "stringify(phone, undefined, 4)",
+                              $$v
+                            )
+                          },
+                          expression: "JSON.stringify(phone, undefined, 4)"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                }),
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                _vm._l(_vm.Websites, function(website, index) {
+                  return _c(
+                    "v-card-text",
+                    { key: index, staticClass: " mb-0 py-0" },
+                    [
+                      _c("v-textarea", {
+                        staticClass: "my-0 py-0 primary--text",
+                        attrs: {
+                          height: "310",
+                          clearable: "",
+                          "no-resize": "",
+                          outlined: "",
+                          rows: "1",
+                          "row-height": "25",
+                          id: "website[" + index + "]",
+                          label: "Website " + (index + 1)
+                        },
+                        model: {
+                          value: JSON.stringify(website, undefined, 4),
+                          callback: function($$v) {
+                            _vm.$set(
+                              JSON,
+                              "stringify(website, undefined, 4)",
+                              $$v
+                            )
+                          },
+                          expression: "JSON.stringify(website, undefined, 4)"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                }),
+                1
+              ),
+              _vm._v(" "),
               _c("v-divider"),
               _vm._v(" "),
               _c(
@@ -271,7 +454,72 @@ var render = function() {
                 1
               )
             ],
-            2
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "v-dialog",
+        {
+          attrs: { width: "500" },
+          model: {
+            value: _vm.dialog,
+            callback: function($$v) {
+              _vm.dialog = $$v
+            },
+            expression: "dialog"
+          }
+        },
+        [
+          _c(
+            "v-card",
+            [
+              _c(
+                "v-card-title",
+                { staticClass: "title greybg primary--text" },
+                [_vm._v("\n                Error ")]
+              ),
+              _c("v-card-text", [
+                _c(
+                  "div",
+                  { staticClass: "error--text mx-4 mt-4 px-4  py-2 rounded" },
+                  [
+                    _vm._v(
+                      "\n                    " +
+                        _vm._s(JSON.stringify(_vm.errors, undefined, 4)) +
+                        "\n                "
+                    )
+                  ]
+                )
+              ]),
+              _vm._v(" "),
+              _c("v-divider"),
+              _vm._v(" "),
+              _c(
+                "v-card-actions",
+                [
+                  _c("v-spacer"),
+                  _vm._v(" "),
+                  _c(
+                    "v-btn",
+                    {
+                      staticClass: "primary--text",
+                      attrs: { text: "" },
+                      on: {
+                        click: function($event) {
+                          return _vm.closeDialog()
+                        }
+                      }
+                    },
+                    [_vm._v(_vm._s(_vm.$t("button.close")))]
+                  )
+                ],
+                1
+              )
+            ],
+            1
           )
         ],
         1

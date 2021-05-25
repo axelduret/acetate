@@ -7,8 +7,8 @@
                     <v-text-field
                         class="primary--text p-0 m-0"
                         type="text"
-                        id="Name"
-                        v-model="Name"
+                        id="name"
+                        :value="Name"
                         clearable
                         required
                         counter="100"
@@ -16,7 +16,8 @@
                     ></v-text-field>
                     <v-textarea
                         class="mt-4 m-0 m-0 primary--text"
-                        id="Text"
+                        id="description"
+                        :value="Description"
                         height="400"
                         clearable
                         no-resize
@@ -24,7 +25,6 @@
                         rows="1"
                         :label="$t('admin.event.description')"
                         row-height="25"
-                        v-model="Description"
                     ></v-textarea> </v-card-text
                 ><v-divider></v-divider>
                 <v-card-actions class="mx-1 mt-4 p-0">
@@ -35,7 +35,7 @@
                     >
                         {{ $t("button.cancel") }} </v-btn
                     ><v-spacer></v-spacer
-                    ><v-btn color="info" outlined @click="$emit('Step2')">
+                    ><v-btn color="info" outlined @click="nextStep()">
                         {{ $t("button.next") }}
                     </v-btn>
                 </v-card-actions>
@@ -51,10 +51,18 @@ export default {
         return {};
     },
     methods: {
+        nextStep() {
+            const name = document.getElementById("name").value;
+            const description = document.getElementById("description").value;
+            console.log("name: ", name);
+            console.log("description: ", description);
+            this.$emit("Step2");
+        },
         historyBack() {
             this.$router.push(`/${this.$i18n.locale}/events/${this.Id}`);
         }
-    }
+    },
+    mounted() {}
 };
 </script>
 

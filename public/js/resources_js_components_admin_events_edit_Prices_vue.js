@@ -40,6 +40,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     Id: String,
@@ -48,6 +61,20 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {};
+  },
+  methods: {
+    nextStep: function nextStep() {
+      var prices = [];
+
+      for (var i = 0; i < this.Prices.length; i++) {
+        if (document.getElementById("price[" + i + "]").value) {
+          prices.push(JSON.parse(document.getElementById("price[" + i + "]").value));
+        }
+      }
+
+      console.log("prices: ", prices);
+      this.$emit("Step6");
+    }
   }
 });
 
@@ -154,13 +181,45 @@ var render = function() {
             [
               _c("v-divider"),
               _vm._v(" "),
-              _vm._l(_vm.Prices, function(price, index) {
-                return _c(
-                  "v-card-text",
-                  { key: index, staticClass: "m-0 p-0" },
-                  [_vm._v("\n                " + _vm._s(price))]
-                )
-              }),
+              _c(
+                "div",
+                { staticClass: "pt-8" },
+                _vm._l(_vm.Prices, function(price, index) {
+                  return _c(
+                    "v-card-text",
+                    { key: index, staticClass: " mb-0 py-0" },
+                    [
+                      _c("v-textarea", {
+                        staticClass: "my-0 py-0 primary--text",
+                        attrs: {
+                          height: "160",
+                          clearable: "",
+                          "no-resize": "",
+                          outlined: "",
+                          rows: "1",
+                          "row-height": "25",
+                          id: "price[" + index + "]",
+                          label: "Price " + (index + 1)
+                        },
+                        model: {
+                          value: JSON.stringify(price, undefined, 4),
+                          callback: function($$v) {
+                            _vm.$set(
+                              JSON,
+                              "stringify(price, undefined, 4)",
+                              $$v
+                            )
+                          },
+                          expression: "JSON.stringify(price, undefined, 4)"
+                        }
+                      })
+                    ],
+                    1
+                  )
+                }),
+                1
+              ),
+              _vm._v(" "),
               _c("v-divider"),
               _vm._v(" "),
               _c(
@@ -193,7 +252,7 @@ var render = function() {
                       attrs: { color: "info", outlined: "" },
                       on: {
                         click: function($event) {
-                          return _vm.$emit("Step6")
+                          return _vm.nextStep()
                         }
                       }
                     },
@@ -209,7 +268,7 @@ var render = function() {
                 1
               )
             ],
-            2
+            1
           )
         ],
         1

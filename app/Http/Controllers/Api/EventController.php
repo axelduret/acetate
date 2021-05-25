@@ -364,12 +364,6 @@ class EventController extends Controller
     $this->deleteEntity($event, $this->related, 'phones');
     // Store new phones into the event.
     $this->storeEntity($event, 'phones', 'App\Models\Phone', $request);
-    // Detach current files from the event.
-    $this->detachEntity($event, 'event', 'files');
-    // Delete current files from the event.
-    $this->deleteEntity($event, $this->related, 'files');
-    // Attach submitted files to the event.
-    $this->attachEntity($event, 'files', 'File', 'App\Models\File', $request);
     // Detach current taxonomies from the event.
     $event->taxonomies()->detach();
     // Attach submitted taxonomies to the event.

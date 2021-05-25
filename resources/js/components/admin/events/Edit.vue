@@ -73,6 +73,7 @@
                 <People
                     :Id="this.id"
                     :People="event.people"
+                    :AllPeople="people"
                     :Step="4"
                     @Step3="stepper = 3"
                     @Step5="stepper = 5"
@@ -119,6 +120,7 @@ export default {
         return {
             event: "",
             venues: [],
+            people: [],
             stepper: 1,
             // App url.
             appURL: process.env.MIX_APP_URL,
@@ -164,11 +166,30 @@ export default {
                     console.log(error);
                 })
                 .finally(() => {});
+        },
+        // GET People
+        fetchPeople() {
+            axios
+                .request({
+                    method: "get",
+                    baseURL: this.baseURL + "api/people?per_page=1000",
+                    headers: {
+                        Authorization: "Bearer " + this.apiToken
+                    }
+                })
+                .then(response => {
+                    this.people = response.data.people;
+                })
+                .catch(error => {
+                    console.log(error);
+                })
+                .finally(() => {});
         }
     },
     mounted() {
         this.fetchAPI();
         this.fetchVenues();
+        this.fetchPeople();
     }
 };
 </script>

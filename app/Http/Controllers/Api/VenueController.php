@@ -281,12 +281,6 @@ class VenueController extends Controller
     $this->deleteEntity($venue, $this->related, 'phones');
     // Store new phones into the venue.
     $this->storeEntity($venue, 'phones', 'App\Models\Phone', $request);
-    // Detach current files from the venue.
-    $this->detachEntity($venue, 'venue', 'files');
-    // Delete current files from the venue.
-    $this->deleteEntity($venue, $this->related, 'files');
-    // Attach submitted files to the venue.
-    $this->attachEntity($venue, 'files', 'File', 'App\Models\File', $request);
     // Detach current taxonomies from the venue.
     $venue->taxonomies()->detach();
     // TODO Check if new taxonomies's types are valid.

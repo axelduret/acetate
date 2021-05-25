@@ -274,12 +274,6 @@ class PersonController extends Controller
     $this->deleteEntity($person, $this->related, 'phones');
     // Store new phones into the person.
     $this->storeEntity($person, 'phones', 'App\Models\Phone', $request);
-    // Detach current files from the person.
-    $this->detachEntity($person, 'person', 'files');
-    // Delete current files from the person.
-    $this->deleteEntity($person, $this->related, 'files');
-    // Attach submitted files to the person.
-    $this->attachEntity($person, 'files', 'File', 'App\Models\File', $request);
     // Detach current taxonomies from the person.
     $person->taxonomies()->detach();
     // TODO Check if new taxonomies's types are valid.
