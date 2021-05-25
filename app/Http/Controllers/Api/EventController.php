@@ -171,35 +171,32 @@ class EventController extends Controller
       ])
       // Search in event's relationships.
       ->whereHas('event', function ($filter) {
-        $filter
+        if ($this->request->input('type')) {
           // Search taxonomy type.
-          ->whereHas('taxonomies', function ($filter) {
-            if ($this->request->input('type')) {
+          $filter
+            ->whereHas('taxonomies', function ($filter) {
               if (in_array(
                 $this->request->input('type'),
                 $this->taxonomyTypes
               )) {
                 $filter->where('type', $this->request->input('type'));
               }
-            } else {
-              $filter->where('type', 'conference');
-              $filter->orWhere('type', 'exhibition');
-              $filter->orWhere('type', 'music');
-              $filter->orWhere('type', 'theater');
-            }
-          })
+            });
+        }
+        if ($this->request->input('category')) {
           // Search taxonomy category.
-          ->whereHas('taxonomies', function ($filter) {
-            if ($this->request->input('category')) {
+          $filter
+            ->whereHas('taxonomies', function ($filter) {
               $filter->where('category', $this->request->input('category'));
-            }
-          })
+            });
+        }
+        if ($this->request->input('sub_category')) {
           // Search taxonomy sub_category.
-          ->whereHas('taxonomies', function ($filter) {
-            if ($this->request->input('sub_category')) {
+          $filter
+            ->whereHas('taxonomies', function ($filter) {
               $filter->where('sub_category', $this->request->input('sub_category'));
-            }
-          });
+            });
+        }
       });
     // Sort data.
     $sortField = in_array(
