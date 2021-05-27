@@ -28,6 +28,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {};
@@ -126,22 +157,78 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c(
     "div",
-    {
-      staticClass:
-        "mx-auto my-auto col-auto d-flex align-center justify-center",
-      class: _vm.$vuetify.theme.dark ? "tealBackground" : ""
-    },
     [
-      _c("img", {
-        staticStyle: { "max-width": "550px" },
-        attrs: {
-          width: "100%",
-          src: _vm.$vuetify.theme.dark
-            ? "/img/page/home/teal_home.gif"
-            : "/img/page/home/light_home.gif"
-        }
-      })
-    ]
+      _c(
+        "div",
+        {
+          staticClass:
+            "mx-auto my-auto col-auto d-flex align-center justify-center",
+          class: _vm.$vuetify.theme.dark ? "tealBackground" : ""
+        },
+        [
+          _c("img", {
+            staticStyle: { "max-width": "550px" },
+            attrs: {
+              width: "100%",
+              src: _vm.$vuetify.theme.dark
+                ? "/img/page/home/teal_home.gif"
+                : "/img/page/home/light_home.gif"
+            }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _c("v-spacer"),
+      _vm._v(" "),
+      _c("div", [
+        _c(
+          "div",
+          {
+            staticClass: "px-10 mx-auto my-auto col-auto",
+            class: _vm.$vuetify.theme.dark ? "tealBackground" : ""
+          },
+          [
+            _c(
+              "div",
+              {
+                staticClass: "mb-4 d-flex align-center justify-center",
+                class: _vm.$vuetify.theme.dark
+                  ? "primary--text"
+                  : "secondary--text"
+              },
+              [
+                _vm._v(
+                  "\r\n                    " +
+                    _vm._s(_vm.$t("page.home.title")) +
+                    "\r\n                "
+                )
+              ]
+            ),
+            _vm._v(" "),
+            _c("v-spacer"),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "mb-8 d-flex align-center justify-center",
+                class: _vm.$vuetify.theme.dark
+                  ? "primary--text"
+                  : "secondary--text"
+              },
+              [
+                _vm._v(
+                  "\r\n                    " +
+                    _vm._s(_vm.$t("page.home.description")) +
+                    "\r\n                "
+                )
+              ]
+            )
+          ],
+          1
+        )
+      ])
+    ],
+    1
   )
 }
 var staticRenderFns = []

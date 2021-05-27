@@ -52,8 +52,8 @@
     },
     "page": {
         "home": {
-            "title": "Bienvenue !",
-            "description": "..."
+            "title": "Bienvenue sur Acetate.",
+            "description": "Acetate est un projet en cours de développement. Débuté le 26 avril avril 2021, ce projet a été réalisé dans le cadre d'un travail personnel de fin de formation de développeur web. Acetate a pour but de ressenser les activité disponibles, en Suisse, dans le domaine de l'événementiel (conférences, expositions, musique, théâtre). Le contenu du site est composé de données fictives. L'ensemble des pages et des fonctionnalités est publié à titre de démonstration. Le code source du projet est libre d'accés et entièrement disponible sur github. N'hésitez pas à me contacter pour plus d'informations. Bonne visite."
         },
         "events": {
             "title": "Bienvenue !",
@@ -143,11 +143,15 @@
         "error": {
             "notFound": {
                 "title": "Page non trouvée",
-                "description": "..."
+                "description": "Page non trouvée."
             },
             "unauthorized": {
                 "title": "Non authentifié",
                 "description": "..."
+            },
+            "construction": {
+                "title": "En construction",
+                "description": "Cette page est en cours de développement."
             }
         }
     },

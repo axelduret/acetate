@@ -37,6 +37,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -147,7 +160,8 @@ var render = function() {
         "div",
         {
           staticClass:
-            "mx-auto my-auto col-auto d-flex align-center justify-center"
+            "mx-auto my-auto col-auto d-flex align-center justify-center",
+          class: _vm.$vuetify.theme.dark ? "tealBackground" : ""
         },
         [
           _c("img", {
@@ -155,8 +169,8 @@ var render = function() {
             attrs: {
               width: "100%",
               src: _vm.$vuetify.theme.dark
-                ? _vm.baseURL + "img/errors/dark_404.gif"
-                : _vm.baseURL + "img/errors/light_404.gif"
+                ? _vm.baseURL + "img/errors/teal_construction.gif"
+                : _vm.baseURL + "img/errors/light_construction.gif"
             }
           })
         ]
@@ -167,21 +181,47 @@ var render = function() {
       _c(
         "div",
         {
-          staticClass:
-            "mx-auto my-auto col-auto d-flex align-center justify-center"
+          staticClass: "mx-auto my-auto col-auto",
+          class: _vm.$vuetify.theme.dark ? "tealBackground" : ""
         },
         [
           _c(
-            "v-btn",
+            "div",
             {
-              attrs: { text: "", color: "info" },
-              on: {
-                click: function($event) {
-                  return _vm.goBack()
-                }
-              }
+              staticClass: "mt-2 mb-2 d-flex align-center justify-center",
+              class: _vm.$vuetify.theme.dark
+                ? "primary--text"
+                : "secondary--text"
             },
-            [_vm._v(_vm._s(_vm.$t("button.back.back")))]
+            [
+              _vm._v(
+                "\n            " +
+                  _vm._s(_vm.$t("page.error.construction.description")) +
+                  "\n        "
+              )
+            ]
+          ),
+          _vm._v(" "),
+          _c("v-spacer"),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "mt-0 mb-4 d-flex align-center justify-center" },
+            [
+              _c(
+                "v-btn",
+                {
+                  attrs: { text: "", color: "info" },
+                  on: {
+                    click: function($event) {
+                      return _vm.goBack()
+                    }
+                  }
+                },
+                [_vm._v(_vm._s(_vm.$t("button.back.back")))]
+              )
+            ],
+            1
           )
         ],
         1
