@@ -8,8 +8,8 @@
                 style="max-width:550px"
                 :src="
                     $vuetify.theme.dark
-                        ? baseURL + 'img/errors/dark_404.gif'
-                        : baseURL + 'img/errors/light_404.gif'
+                        ? baseURL + 'img/errors/teal_construction.gif'
+                        : baseURL + 'img/errors/light_construction.gif'
                 "
             />
         </div>
