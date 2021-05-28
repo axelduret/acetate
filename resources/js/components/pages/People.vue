@@ -67,318 +67,314 @@
                             xl="2"
                         >
                             <v-card max-width="570px" class="mx-auto pb-4">
-                                <div>
-                                    <v-list-item
-                                        three-line
-                                        class="greybg rounded-t"
-                                    >
-                                        <!-- avatar -->
-                                        <v-list-item-avatar
-                                            size="80"
-                                            rounded
+                                <v-list-item
+                                    three-line
+                                    class="greybg rounded-t"
+                                >
+                                    <!-- avatar -->
+                                    <v-list-item-avatar
+                                        size="80"
+                                        rounded
+                                        :color="
+                                            $vuetify.theme.dark
+                                                ? 'primary darken-1'
+                                                : 'greybg darken-1'
+                                        "
+                                        ><v-img
+                                            v-if="person.avatar != null"
+                                            :src="
+                                                baseURL +
+                                                    'storage/avatar/person/' +
+                                                    person.avatar
+                                            "
+                                            :title="person.nickname"
+                                        ></v-img>
+                                        <v-icon
+                                            :title="$t('avatar.no_avatar')"
                                             :color="
                                                 $vuetify.theme.dark
-                                                    ? 'primary darken-1'
-                                                    : 'greybg darken-1'
+                                                    ? 'greybg'
+                                                    : 'primary lighten-1'
                                             "
-                                            ><v-img
-                                                v-if="person.avatar != null"
-                                                :src="
-                                                    baseURL +
-                                                        'storage/avatar/person/' +
-                                                        person.avatar
-                                                "
-                                                :title="person.nickname"
-                                            ></v-img>
-                                            <v-icon
-                                                :title="$t('avatar.no_avatar')"
-                                                :color="
-                                                    $vuetify.theme.dark
-                                                        ? 'greybg'
-                                                        : 'primary lighten-1'
-                                                "
-                                                v-else
-                                                >mdi-camera-off</v-icon
-                                            >
-                                        </v-list-item-avatar>
-                                        <v-list-item-content>
-                                            <div class="overline primary--text">
-                                                <v-row>
-                                                    <!-- favorite -->
-                                                    <v-col
-                                                        class="col-auto ml-auto"
-                                                        style="margin-bottom: 1rem"
-                                                    >
-                                                        <span
-                                                            class="primary--text px-0"
-                                                        >
-                                                            <v-icon
-                                                                class="primary--text"
-                                                                dark
-                                                                small
-                                                            >
-                                                                mdi-star-outline
-                                                            </v-icon>
-                                                        </span></v-col
-                                                    ></v-row
-                                                >
-                                            </div>
-                                            <!-- nickname -->
-                                            <v-list-item-title
-                                                class="title primary--text mb-1"
-                                                >{{ person.nickname }}
-                                            </v-list-item-title>
-                                        </v-list-item-content>
-                                    </v-list-item>
-                                    <!-- card content -->
-                                    <v-row class="py-3 mx-2">
-                                        <!-- firstname and lastname -->
-                                        <v-col class="my-0 pt-3 pb-0">
-                                            <span
-                                                class="caption primary--text"
-                                                v-if="
-                                                    person.firstname &&
-                                                        person.lastname
-                                                "
-                                            >
-                                                <span>
-                                                    <v-icon
-                                                        class="mr-1 primary--text"
-                                                        style="margin-bottom: 0.08rem"
-                                                        small
-                                                        :title="
-                                                            $t(
-                                                                'page.people.title.name'
-                                                            )
-                                                        "
-                                                        >mdi-account-box</v-icon
-                                                    ><span
-                                                        >&nbsp;{{
-                                                            person.firstname
-                                                        }}
-                                                        {{
-                                                            person.lastname
-                                                        }}</span
-                                                    ><v-spacer></v-spacer></span></span
-                                            ><span
-                                                class="caption primary--text"
-                                                v-else-if="
-                                                    person.firstname &&
-                                                        !person.lastname
-                                                "
-                                            >
-                                                <span>
-                                                    <v-icon
-                                                        class="mr-1 primary--text"
-                                                        style="margin-bottom: 0.08rem"
-                                                        small
-                                                        :title="
-                                                            $t(
-                                                                'page.people.title.name'
-                                                            )
-                                                        "
-                                                        >mdi-account-box</v-icon
-                                                    ><span
-                                                        >&nbsp;{{
-                                                            person.firstname
-                                                        }}</span
-                                                    ><v-spacer></v-spacer></span></span
-                                            ><span
-                                                class="caption primary--text"
-                                                v-else-if="
-                                                    !person.firstname &&
-                                                        person.lastname
-                                                "
-                                            >
-                                                <span>
-                                                    <v-icon
-                                                        class="mr-1 primary--text"
-                                                        style="margin-bottom: 0.08rem"
-                                                        small
-                                                        :title="
-                                                            $t(
-                                                                'page.people.title.name'
-                                                            )
-                                                        "
-                                                        >mdi-account-box</v-icon
-                                                    ><span
-                                                        >&nbsp;{{
-                                                            person.lastname
-                                                        }}</span
-                                                    ><v-spacer></v-spacer></span></span
-                                            ><span
-                                                v-else
-                                                class="caption primary--text"
-                                                ><span
-                                                    ><v-icon
-                                                        class="mr-1 "
-                                                        :class="
-                                                            $vuetify.theme.dark
-                                                                ? 'grey--text'
-                                                                : 'grey--text'
-                                                        "
-                                                        style="margin-bottom: 0.08rem"
-                                                        small
-                                                        :title="
-                                                            $t(
-                                                                'page.people.no_name_title'
-                                                            )
-                                                        "
-                                                        >mdi-account-box</v-icon
-                                                    ><span
-                                                        :class="
-                                                            $vuetify.theme.dark
-                                                                ? 'grey--text'
-                                                                : 'grey--text'
-                                                        "
-                                                        :title="
-                                                            $t(
-                                                                'page.people.no_name_title'
-                                                            )
-                                                        "
-                                                    >
-                                                        {{
-                                                            $t(
-                                                                "page.people.no_name"
-                                                            )
-                                                        }}</span
-                                                    ><v-spacer></v-spacer
-                                                ></span>
-                                            </span>
-                                        </v-col>
-                                        <!-- company -->
-                                        <v-col cols="12">
-                                            <span
-                                                class="caption primary--text"
-                                                v-if="person.company"
-                                            >
-                                                <span>
-                                                    <v-icon
-                                                        class="mr-1 primary--text"
-                                                        style="margin-bottom: 0.08rem"
-                                                        small
-                                                        :title="
-                                                            $t(
-                                                                'page.people.title.company'
-                                                            )
-                                                        "
-                                                        >mdi-briefcase</v-icon
-                                                    ><span
-                                                        >&nbsp;{{
-                                                            person.company
-                                                        }}</span
-                                                    ></span
-                                                ></span
-                                            ><span
-                                                v-else
-                                                class="caption primary--text"
-                                                ><span
-                                                    ><v-icon
-                                                        class="mr-1 "
-                                                        :class="
-                                                            $vuetify.theme.dark
-                                                                ? 'grey--text'
-                                                                : 'grey--text'
-                                                        "
-                                                        style="margin-bottom: 0.08rem"
-                                                        small
-                                                        :title="
-                                                            $t(
-                                                                'page.people.no_company_title'
-                                                            )
-                                                        "
-                                                        >mdi-briefcase</v-icon
-                                                    ><span
-                                                        :class="
-                                                            $vuetify.theme.dark
-                                                                ? 'grey--text'
-                                                                : 'grey--text'
-                                                        "
-                                                        :title="
-                                                            $t(
-                                                                'page.people.no_company_title'
-                                                            )
-                                                        "
-                                                    >
-                                                        {{
-                                                            $t(
-                                                                "page.people.no_company"
-                                                            )
-                                                        }}</span
-                                                    ></span
-                                                >
-                                            </span>
-                                        </v-col>
-                                    </v-row>
-                                    <v-divider class="mx-2"></v-divider>
-                                    <!-- card footer -->
-                                    <v-row class="pt-3">
-                                        <!-- more info button -->
-                                        <v-col class="ml-4 my-auto col-auto">
-                                            <v-btn
-                                                text
-                                                color="info"
-                                                @click="showPerson(person.id)"
-                                                >{{
-                                                    $t("page.people.more_info")
-                                                }}</v-btn
-                                            >
-                                        </v-col>
-                                        <v-col
-                                            class="mx-4 my-auto col-auto ml-auto"
+                                            v-else
+                                            >mdi-camera-off</v-icon
                                         >
-                                            <!-- comments count -->
-                                            <span
+                                    </v-list-item-avatar>
+                                    <v-list-item-content>
+                                        <div class="overline primary--text">
+                                            <v-row>
+                                                <!-- favorite -->
+                                                <v-col
+                                                    class="col-auto ml-auto"
+                                                    style="margin-bottom: 1rem"
+                                                >
+                                                    <span
+                                                        class="primary--text px-0"
+                                                    >
+                                                        <v-icon
+                                                            class="primary--text"
+                                                            dark
+                                                            small
+                                                        >
+                                                            mdi-star-outline
+                                                        </v-icon>
+                                                    </span></v-col
+                                                ></v-row
+                                            >
+                                        </div>
+                                        <!-- nickname -->
+                                        <v-list-item-title
+                                            class="title primary--text mb-1"
+                                            >{{ person.nickname }}
+                                        </v-list-item-title>
+                                    </v-list-item-content>
+                                </v-list-item>
+                                <!-- card content -->
+                                <v-row class="py-3 mx-1">
+                                    <!-- firstname and lastname -->
+                                    <v-col class="my-0 pt-2 pb-0">
+                                        <span
+                                            class="caption primary--text"
+                                            v-if="
+                                                person.firstname &&
+                                                    person.lastname
+                                            "
+                                        >
+                                            <span>
+                                                <v-icon
+                                                    class="mr-1 primary--text"
+                                                    style="margin-bottom: 0.08rem"
+                                                    small
+                                                    :title="
+                                                        $t(
+                                                            'page.people.title.name'
+                                                        )
+                                                    "
+                                                    >mdi-account-box</v-icon
+                                                ><span
+                                                    >&nbsp;{{
+                                                        person.firstname
+                                                    }}
+                                                    {{ person.lastname }}</span
+                                                ><v-spacer></v-spacer></span></span
+                                        ><span
+                                            class="caption primary--text"
+                                            v-else-if="
+                                                person.firstname &&
+                                                    !person.lastname
+                                            "
+                                        >
+                                            <span>
+                                                <v-icon
+                                                    class="mr-1 primary--text"
+                                                    style="margin-bottom: 0.08rem"
+                                                    small
+                                                    :title="
+                                                        $t(
+                                                            'page.people.title.name'
+                                                        )
+                                                    "
+                                                    >mdi-account-box</v-icon
+                                                ><span
+                                                    >&nbsp;{{
+                                                        person.firstname
+                                                    }}</span
+                                                ><v-spacer></v-spacer></span></span
+                                        ><span
+                                            class="caption primary--text"
+                                            v-else-if="
+                                                !person.firstname &&
+                                                    person.lastname
+                                            "
+                                        >
+                                            <span>
+                                                <v-icon
+                                                    class="mr-1 primary--text"
+                                                    style="margin-bottom: 0.08rem"
+                                                    small
+                                                    :title="
+                                                        $t(
+                                                            'page.people.title.name'
+                                                        )
+                                                    "
+                                                    >mdi-account-box</v-icon
+                                                ><span
+                                                    >&nbsp;{{
+                                                        person.lastname
+                                                    }}</span
+                                                ><v-spacer></v-spacer></span></span
+                                        ><span
+                                            v-else
+                                            class="caption primary--text"
+                                            ><span
+                                                ><v-icon
+                                                    class="mr-1 "
+                                                    :class="
+                                                        $vuetify.theme.dark
+                                                            ? 'grey--text'
+                                                            : 'grey--text'
+                                                    "
+                                                    style="margin-bottom: 0.08rem"
+                                                    small
+                                                    :title="
+                                                        $t(
+                                                            'page.people.no_name_title'
+                                                        )
+                                                    "
+                                                    >mdi-account-box</v-icon
+                                                ><span
+                                                    :class="
+                                                        $vuetify.theme.dark
+                                                            ? 'grey--text'
+                                                            : 'grey--text'
+                                                    "
+                                                    :title="
+                                                        $t(
+                                                            'page.people.no_name_title'
+                                                        )
+                                                    "
+                                                >
+                                                    {{
+                                                        $t(
+                                                            "page.people.no_name"
+                                                        )
+                                                    }}</span
+                                                ><v-spacer></v-spacer
+                                            ></span>
+                                        </span>
+                                    </v-col>
+                                    <!-- company -->
+                                    <v-col class="my-0 pt-0 pb-2" cols="12">
+                                        <span
+                                            class="caption primary--text"
+                                            v-if="person.company"
+                                        >
+                                            <span>
+                                                <v-icon
+                                                    class="mr-1 primary--text"
+                                                    style="margin-bottom: 0.08rem"
+                                                    small
+                                                    :title="
+                                                        $t(
+                                                            'page.people.title.company'
+                                                        )
+                                                    "
+                                                    >mdi-briefcase</v-icon
+                                                ><span
+                                                    >&nbsp;{{
+                                                        person.company
+                                                    }}</span
+                                                ></span
+                                            ></span
+                                        ><span
+                                            v-else
+                                            class="caption primary--text"
+                                            ><span
+                                                ><v-icon
+                                                    class="mr-1 "
+                                                    :class="
+                                                        $vuetify.theme.dark
+                                                            ? 'grey--text'
+                                                            : 'grey--text'
+                                                    "
+                                                    style="margin-bottom: 0.08rem"
+                                                    small
+                                                    :title="
+                                                        $t(
+                                                            'page.people.no_company_title'
+                                                        )
+                                                    "
+                                                    >mdi-briefcase</v-icon
+                                                ><span
+                                                    :class="
+                                                        $vuetify.theme.dark
+                                                            ? 'grey--text'
+                                                            : 'grey--text'
+                                                    "
+                                                    :title="
+                                                        $t(
+                                                            'page.people.no_company_title'
+                                                        )
+                                                    "
+                                                >
+                                                    {{
+                                                        $t(
+                                                            "page.people.no_company"
+                                                        )
+                                                    }}</span
+                                                ></span
+                                            >
+                                        </span>
+                                    </v-col>
+                                </v-row>
+                                <v-divider class="mx-2"></v-divider>
+                                <!-- card footer -->
+                                <v-row class="pt-3">
+                                    <!-- more info button -->
+                                    <v-col class="ml-4 my-auto col-auto">
+                                        <v-btn
+                                            text
+                                            color="info"
+                                            @click="showPerson(person.id)"
+                                            >{{
+                                                $t("page.people.more_info")
+                                            }}</v-btn
+                                        >
+                                    </v-col>
+                                    <v-col
+                                        class="mx-4 my-auto col-auto ml-auto"
+                                    >
+                                        <!-- comments count -->
+                                        <span
+                                            :class="
+                                                $vuetify.theme.dark
+                                                    ? 'primary--text'
+                                                    : 'secondary--text'
+                                            "
+                                            class="mr-3"
+                                        >
+                                            <v-icon
+                                                class="mr-1"
                                                 :class="
                                                     $vuetify.theme.dark
                                                         ? 'primary--text'
                                                         : 'secondary--text'
                                                 "
-                                                class="mr-3"
+                                                dark
+                                                small
+                                                style="margin-bottom: 0.05rem"
                                             >
-                                                <v-icon
-                                                    class="mr-1"
-                                                    :class="
-                                                        $vuetify.theme.dark
-                                                            ? 'primary--text'
-                                                            : 'secondary--text'
-                                                    "
-                                                    dark
-                                                    small
-                                                    style="margin-bottom: 0.05rem"
-                                                >
-                                                    mdi-comment-outline </v-icon
-                                                ><span class="subtitle-2"
-                                                    >{{ person.comments_count }}
-                                                </span>
+                                                mdi-comment-outline </v-icon
+                                            ><span class="subtitle-2"
+                                                >{{ person.comments_count }}
                                             </span>
-                                            <!-- likes count -->
-                                            <span
+                                        </span>
+                                        <!-- likes count -->
+                                        <span
+                                            :class="
+                                                $vuetify.theme.dark
+                                                    ? 'primary--text'
+                                                    : 'secondary--text'
+                                            "
+                                        >
+                                            <v-icon
+                                                class="mr-1"
                                                 :class="
                                                     $vuetify.theme.dark
                                                         ? 'primary--text'
                                                         : 'secondary--text'
                                                 "
+                                                dark
+                                                small
+                                                style="margin-bottom: 0.05rem"
                                             >
-                                                <v-icon
-                                                    class="mr-1"
-                                                    :class="
-                                                        $vuetify.theme.dark
-                                                            ? 'primary--text'
-                                                            : 'secondary--text'
-                                                    "
-                                                    dark
-                                                    small
-                                                    style="margin-bottom: 0.05rem"
-                                                >
-                                                    mdi-heart-outline </v-icon
-                                                ><span class="subtitle-2">{{
-                                                    person.likes_count
-                                                }}</span>
-                                            </span>
-                                        </v-col>
-                                    </v-row>
-                                </div>
+                                                mdi-heart-outline </v-icon
+                                            ><span class="subtitle-2">{{
+                                                person.likes_count
+                                            }}</span>
+                                        </span>
+                                    </v-col>
+                                </v-row>
                             </v-card>
                         </v-col>
                     </v-row>

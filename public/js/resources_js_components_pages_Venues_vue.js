@@ -820,137 +820,146 @@ var render = function() {
                                     _vm._v(" "),
                                     _c(
                                       "v-row",
-                                      { staticClass: "py-3 mx-2" },
+                                      { staticClass: "py-3 mx-1" },
                                       [
-                                        _c("v-col", [
-                                          venue.addresses.length > 0
-                                            ? _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "caption primary--text"
-                                                },
-                                                [
-                                                  _c(
-                                                    "span",
-                                                    [
-                                                      _c(
-                                                        "v-icon",
-                                                        {
-                                                          staticClass:
-                                                            "mr-1 primary--text",
-                                                          staticStyle: {
-                                                            "margin-bottom":
-                                                              "0.08rem"
+                                        _c(
+                                          "v-col",
+                                          { staticClass: "my-0 py-2" },
+                                          [
+                                            venue.addresses.length > 0
+                                              ? _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "caption primary--text"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "span",
+                                                      [
+                                                        _c(
+                                                          "v-icon",
+                                                          {
+                                                            staticClass:
+                                                              "mr-1 primary--text",
+                                                            staticStyle: {
+                                                              "margin-bottom":
+                                                                "0.08rem"
+                                                            },
+                                                            attrs: {
+                                                              small: "",
+                                                              title: _vm.$t(
+                                                                "page.venues.title.address"
+                                                              )
+                                                            }
                                                           },
-                                                          attrs: {
-                                                            small: "",
-                                                            title: _vm.$t(
-                                                              "page.venues.title.address"
+                                                          [
+                                                            _vm._v(
+                                                              "mdi-map-marker"
                                                             )
-                                                          }
-                                                        },
-                                                        [
-                                                          _vm._v(
-                                                            "mdi-map-marker"
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _vm._v(" "),
-                                                      _c("span", [
-                                                        _vm._v(
-                                                          "\n                                                    " +
-                                                            _vm._s(
-                                                              venue.addresses[0]
-                                                                .zip
-                                                            ) +
-                                                            "\n                                                    " +
-                                                            _vm._s(
-                                                              venue.addresses[0]
-                                                                .city
-                                                            ) +
-                                                            ",\n                                                    " +
-                                                            _vm._s(
-                                                              venue.addresses[0]
-                                                                .canton
-                                                            ) +
-                                                            ",\n                                                    " +
-                                                            _vm._s(
-                                                              venue.addresses[0]
-                                                                .country
-                                                            )
-                                                        )
-                                                      ])
-                                                    ],
-                                                    1
-                                                  )
-                                                ]
-                                              )
-                                            : _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "caption primary--text"
-                                                },
-                                                [
-                                                  _c(
-                                                    "span",
-                                                    [
-                                                      _c(
-                                                        "v-icon",
-                                                        {
-                                                          staticClass: "mr-1 ",
-                                                          class: _vm.$vuetify
-                                                            .theme.dark
-                                                            ? "grey--text"
-                                                            : "grey--text",
-                                                          staticStyle: {
-                                                            "margin-bottom":
-                                                              "0.08rem"
-                                                          },
-                                                          attrs: {
-                                                            small: "",
-                                                            title: _vm.$t(
-                                                              "page.venues.no_addresses_title"
-                                                            )
-                                                          }
-                                                        },
-                                                        [
-                                                          _vm._v(
-                                                            "mdi-map-marker"
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _c(
-                                                        "span",
-                                                        {
-                                                          class: _vm.$vuetify
-                                                            .theme.dark
-                                                            ? "grey--text"
-                                                            : "grey--text",
-                                                          attrs: {
-                                                            title: _vm.$t(
-                                                              "page.venues.no_addresses_title"
-                                                            )
-                                                          }
-                                                        },
-                                                        [
+                                                          ]
+                                                        ),
+                                                        _vm._v(" "),
+                                                        _c("span", [
                                                           _vm._v(
                                                             "\n                                                    " +
                                                               _vm._s(
-                                                                _vm.$t(
-                                                                  "page.venues.no_addresses"
-                                                                )
+                                                                venue
+                                                                  .addresses[0]
+                                                                  .zip
+                                                              ) +
+                                                              "\n                                                    " +
+                                                              _vm._s(
+                                                                venue
+                                                                  .addresses[0]
+                                                                  .city
+                                                              ) +
+                                                              ",\n                                                    " +
+                                                              _vm._s(
+                                                                venue
+                                                                  .addresses[0]
+                                                                  .canton
+                                                              ) +
+                                                              ",\n                                                    " +
+                                                              _vm._s(
+                                                                venue
+                                                                  .addresses[0]
+                                                                  .country
                                                               )
                                                           )
-                                                        ]
-                                                      )
-                                                    ],
-                                                    1
-                                                  )
-                                                ]
-                                              )
-                                        ])
+                                                        ])
+                                                      ],
+                                                      1
+                                                    )
+                                                  ]
+                                                )
+                                              : _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "caption primary--text"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "span",
+                                                      [
+                                                        _c(
+                                                          "v-icon",
+                                                          {
+                                                            staticClass:
+                                                              "mr-1 ",
+                                                            class: _vm.$vuetify
+                                                              .theme.dark
+                                                              ? "grey--text"
+                                                              : "grey--text",
+                                                            staticStyle: {
+                                                              "margin-bottom":
+                                                                "0.08rem"
+                                                            },
+                                                            attrs: {
+                                                              small: "",
+                                                              title: _vm.$t(
+                                                                "page.venues.no_addresses_title"
+                                                              )
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "mdi-map-marker"
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _c(
+                                                          "span",
+                                                          {
+                                                            class: _vm.$vuetify
+                                                              .theme.dark
+                                                              ? "grey--text"
+                                                              : "grey--text",
+                                                            attrs: {
+                                                              title: _vm.$t(
+                                                                "page.venues.no_addresses_title"
+                                                              )
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                                                    " +
+                                                                _vm._s(
+                                                                  _vm.$t(
+                                                                    "page.venues.no_addresses"
+                                                                  )
+                                                                )
+                                                            )
+                                                          ]
+                                                        )
+                                                      ],
+                                                      1
+                                                    )
+                                                  ]
+                                                )
+                                          ]
+                                        )
                                       ],
                                       1
                                     ),

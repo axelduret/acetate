@@ -132,9 +132,9 @@
                                         </v-list-item-content>
                                     </v-list-item>
                                     <!-- card content -->
-                                    <v-row class="py-3 mx-2">
+                                    <v-row class="py-3 mx-1">
                                         <!-- address -->
-                                        <v-col>
+                                        <v-col class="my-0 py-2">
                                             <span
                                                 class="caption primary--text"
                                                 v-if="

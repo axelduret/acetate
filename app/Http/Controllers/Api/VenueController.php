@@ -69,6 +69,16 @@ class VenueController extends Controller
   protected $searchFields = ['name'];
 
   /**
+   * Adresses cantons.
+   *
+   * @var array
+   */
+  protected $addressesCantons = [
+    'AG', 'AI', 'AR', 'BE', 'BL', 'BS', 'FR', 'GE', 'GL', 'GR', 'JU', 'LU', 'NE', 'NW',
+    'OW', 'SG', 'SH', 'SO', 'SZ', 'TG', 'TI', 'UR', 'VD', 'VS', 'ZG', 'ZH'
+  ];
+
+  /**
    * Display the list of all venues.
    *
    * @param Request $request
@@ -123,7 +133,29 @@ class VenueController extends Controller
         // Returns favorites of the specified user.
         // TODO show favorites only if the user is logged in.
         'favorites'
-      ]);
+      ])
+      // Search in venues's relationships.
+      ->whereHas('addresses', function ($filter) use ($request) {
+        // Search addresses canton.
+        if ($request->input('canton')) {
+          if (in_array(
+            $request->input('canton'),
+            $this->addressesCantons
+          )) {
+            $filter->where('canton', $request->input('canton'));
+          }
+        }
+        // Search addresses city.
+        if ($request->input('city')) {
+          $city = $request->input('city');
+          $filter->where('city', 'like', "%$city%");
+        }
+        // Search addresses region.
+        if ($request->input('region')) {
+          $region = $request->input('region');
+          $filter->where('region', 'like', "%$region%");
+        }
+      });
     // Search data.
     $searchValue = $request->input('search_value');
     $searchField = in_array(
