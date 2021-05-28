@@ -61,7 +61,10 @@
                             v-for="(person, index) in people"
                             :key="index"
                             cols="12"
-                            md="6"
+                            sm="6"
+                            md="4"
+                            lg="3"
+                            xl="2"
                         >
                             <v-card max-width="570px" class="mx-auto pb-4">
                                 <div>
@@ -130,7 +133,7 @@
                                     <!-- card content -->
                                     <v-row class="py-3 mx-2">
                                         <!-- firstname and lastname -->
-                                        <v-col>
+                                        <v-col class="my-0 pt-3 pb-0">
                                             <span
                                                 class="caption primary--text"
                                                 v-if="
@@ -243,12 +246,8 @@
                                                 ></span>
                                             </span>
                                         </v-col>
-                                        <v-divider
-                                            class="my-2"
-                                            vertical
-                                        ></v-divider>
                                         <!-- company -->
-                                        <v-col cols="6">
+                                        <v-col cols="12">
                                             <span
                                                 class="caption primary--text"
                                                 v-if="person.company"

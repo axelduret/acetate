@@ -109,7 +109,7 @@ class VenueController extends Controller
     ])
       ->with([
         // Returns addresses.
-        'addresses',
+        'addresses',/* 
         // Returns taxonomies.
         'taxonomies' => function ($filter) {
           $filter
@@ -119,7 +119,7 @@ class VenueController extends Controller
             ->orderBy('category')
             // Order taxonomies by sub_category.
             ->orderBy('sub_category');
-        },
+        }, */
         // Returns favorites of the specified user.
         // TODO show favorites only if the user is logged in.
         'favorites'

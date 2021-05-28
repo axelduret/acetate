@@ -444,7 +444,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {},
   data: function data() {
@@ -768,7 +767,16 @@ var render = function() {
                       _vm._l(_vm.people, function(person, index) {
                         return _c(
                           "v-col",
-                          { key: index, attrs: { cols: "12", md: "6" } },
+                          {
+                            key: index,
+                            attrs: {
+                              cols: "12",
+                              sm: "6",
+                              md: "4",
+                              lg: "3",
+                              xl: "2"
+                            }
+                          },
                           [
                             _c(
                               "v-card",
@@ -911,227 +919,227 @@ var render = function() {
                                       "v-row",
                                       { staticClass: "py-3 mx-2" },
                                       [
-                                        _c("v-col", [
-                                          person.firstname && person.lastname
-                                            ? _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "caption primary--text"
-                                                },
-                                                [
-                                                  _c(
-                                                    "span",
-                                                    [
-                                                      _c(
-                                                        "v-icon",
-                                                        {
-                                                          staticClass:
-                                                            "mr-1 primary--text",
-                                                          staticStyle: {
-                                                            "margin-bottom":
-                                                              "0.08rem"
+                                        _c(
+                                          "v-col",
+                                          { staticClass: "my-0 pt-3 pb-0" },
+                                          [
+                                            person.firstname && person.lastname
+                                              ? _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "caption primary--text"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "span",
+                                                      [
+                                                        _c(
+                                                          "v-icon",
+                                                          {
+                                                            staticClass:
+                                                              "mr-1 primary--text",
+                                                            staticStyle: {
+                                                              "margin-bottom":
+                                                                "0.08rem"
+                                                            },
+                                                            attrs: {
+                                                              small: "",
+                                                              title: _vm.$t(
+                                                                "page.people.title.name"
+                                                              )
+                                                            }
                                                           },
-                                                          attrs: {
-                                                            small: "",
-                                                            title: _vm.$t(
-                                                              "page.people.title.name"
+                                                          [
+                                                            _vm._v(
+                                                              "mdi-account-box"
                                                             )
-                                                          }
-                                                        },
-                                                        [
+                                                          ]
+                                                        ),
+                                                        _c("span", [
                                                           _vm._v(
-                                                            "mdi-account-box"
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _c("span", [
-                                                        _vm._v(
-                                                          " " +
-                                                            _vm._s(
-                                                              person.firstname
-                                                            ) +
-                                                            "\n                                                    " +
-                                                            _vm._s(
-                                                              person.lastname
-                                                            )
-                                                        )
-                                                      ]),
-                                                      _c("v-spacer")
-                                                    ],
-                                                    1
-                                                  )
-                                                ]
-                                              )
-                                            : person.firstname &&
-                                              !person.lastname
-                                            ? _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "caption primary--text"
-                                                },
-                                                [
-                                                  _c(
-                                                    "span",
-                                                    [
-                                                      _c(
-                                                        "v-icon",
-                                                        {
-                                                          staticClass:
-                                                            "mr-1 primary--text",
-                                                          staticStyle: {
-                                                            "margin-bottom":
-                                                              "0.08rem"
-                                                          },
-                                                          attrs: {
-                                                            small: "",
-                                                            title: _vm.$t(
-                                                              "page.people.title.name"
-                                                            )
-                                                          }
-                                                        },
-                                                        [
-                                                          _vm._v(
-                                                            "mdi-account-box"
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _c("span", [
-                                                        _vm._v(
-                                                          " " +
-                                                            _vm._s(
-                                                              person.firstname
-                                                            )
-                                                        )
-                                                      ]),
-                                                      _c("v-spacer")
-                                                    ],
-                                                    1
-                                                  )
-                                                ]
-                                              )
-                                            : !person.firstname &&
-                                              person.lastname
-                                            ? _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "caption primary--text"
-                                                },
-                                                [
-                                                  _c(
-                                                    "span",
-                                                    [
-                                                      _c(
-                                                        "v-icon",
-                                                        {
-                                                          staticClass:
-                                                            "mr-1 primary--text",
-                                                          staticStyle: {
-                                                            "margin-bottom":
-                                                              "0.08rem"
-                                                          },
-                                                          attrs: {
-                                                            small: "",
-                                                            title: _vm.$t(
-                                                              "page.people.title.name"
-                                                            )
-                                                          }
-                                                        },
-                                                        [
-                                                          _vm._v(
-                                                            "mdi-account-box"
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _c("span", [
-                                                        _vm._v(
-                                                          " " +
-                                                            _vm._s(
-                                                              person.lastname
-                                                            )
-                                                        )
-                                                      ]),
-                                                      _c("v-spacer")
-                                                    ],
-                                                    1
-                                                  )
-                                                ]
-                                              )
-                                            : _c(
-                                                "span",
-                                                {
-                                                  staticClass:
-                                                    "caption primary--text"
-                                                },
-                                                [
-                                                  _c(
-                                                    "span",
-                                                    [
-                                                      _c(
-                                                        "v-icon",
-                                                        {
-                                                          staticClass: "mr-1 ",
-                                                          class: _vm.$vuetify
-                                                            .theme.dark
-                                                            ? "grey--text"
-                                                            : "grey--text",
-                                                          staticStyle: {
-                                                            "margin-bottom":
-                                                              "0.08rem"
-                                                          },
-                                                          attrs: {
-                                                            small: "",
-                                                            title: _vm.$t(
-                                                              "page.people.no_name_title"
-                                                            )
-                                                          }
-                                                        },
-                                                        [
-                                                          _vm._v(
-                                                            "mdi-account-box"
-                                                          )
-                                                        ]
-                                                      ),
-                                                      _c(
-                                                        "span",
-                                                        {
-                                                          class: _vm.$vuetify
-                                                            .theme.dark
-                                                            ? "grey--text"
-                                                            : "grey--text",
-                                                          attrs: {
-                                                            title: _vm.$t(
-                                                              "page.people.no_name_title"
-                                                            )
-                                                          }
-                                                        },
-                                                        [
-                                                          _vm._v(
-                                                            "\n                                                    " +
+                                                            " " +
                                                               _vm._s(
-                                                                _vm.$t(
-                                                                  "page.people.no_name"
-                                                                )
+                                                                person.firstname
+                                                              ) +
+                                                              "\n                                                    " +
+                                                              _vm._s(
+                                                                person.lastname
                                                               )
                                                           )
-                                                        ]
-                                                      ),
-                                                      _c("v-spacer")
-                                                    ],
-                                                    1
-                                                  )
-                                                ]
-                                              )
-                                        ]),
+                                                        ]),
+                                                        _c("v-spacer")
+                                                      ],
+                                                      1
+                                                    )
+                                                  ]
+                                                )
+                                              : person.firstname &&
+                                                !person.lastname
+                                              ? _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "caption primary--text"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "span",
+                                                      [
+                                                        _c(
+                                                          "v-icon",
+                                                          {
+                                                            staticClass:
+                                                              "mr-1 primary--text",
+                                                            staticStyle: {
+                                                              "margin-bottom":
+                                                                "0.08rem"
+                                                            },
+                                                            attrs: {
+                                                              small: "",
+                                                              title: _vm.$t(
+                                                                "page.people.title.name"
+                                                              )
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "mdi-account-box"
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _c("span", [
+                                                          _vm._v(
+                                                            " " +
+                                                              _vm._s(
+                                                                person.firstname
+                                                              )
+                                                          )
+                                                        ]),
+                                                        _c("v-spacer")
+                                                      ],
+                                                      1
+                                                    )
+                                                  ]
+                                                )
+                                              : !person.firstname &&
+                                                person.lastname
+                                              ? _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "caption primary--text"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "span",
+                                                      [
+                                                        _c(
+                                                          "v-icon",
+                                                          {
+                                                            staticClass:
+                                                              "mr-1 primary--text",
+                                                            staticStyle: {
+                                                              "margin-bottom":
+                                                                "0.08rem"
+                                                            },
+                                                            attrs: {
+                                                              small: "",
+                                                              title: _vm.$t(
+                                                                "page.people.title.name"
+                                                              )
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "mdi-account-box"
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _c("span", [
+                                                          _vm._v(
+                                                            " " +
+                                                              _vm._s(
+                                                                person.lastname
+                                                              )
+                                                          )
+                                                        ]),
+                                                        _c("v-spacer")
+                                                      ],
+                                                      1
+                                                    )
+                                                  ]
+                                                )
+                                              : _c(
+                                                  "span",
+                                                  {
+                                                    staticClass:
+                                                      "caption primary--text"
+                                                  },
+                                                  [
+                                                    _c(
+                                                      "span",
+                                                      [
+                                                        _c(
+                                                          "v-icon",
+                                                          {
+                                                            staticClass:
+                                                              "mr-1 ",
+                                                            class: _vm.$vuetify
+                                                              .theme.dark
+                                                              ? "grey--text"
+                                                              : "grey--text",
+                                                            staticStyle: {
+                                                              "margin-bottom":
+                                                                "0.08rem"
+                                                            },
+                                                            attrs: {
+                                                              small: "",
+                                                              title: _vm.$t(
+                                                                "page.people.no_name_title"
+                                                              )
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "mdi-account-box"
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _c(
+                                                          "span",
+                                                          {
+                                                            class: _vm.$vuetify
+                                                              .theme.dark
+                                                              ? "grey--text"
+                                                              : "grey--text",
+                                                            attrs: {
+                                                              title: _vm.$t(
+                                                                "page.people.no_name_title"
+                                                              )
+                                                            }
+                                                          },
+                                                          [
+                                                            _vm._v(
+                                                              "\n                                                    " +
+                                                                _vm._s(
+                                                                  _vm.$t(
+                                                                    "page.people.no_name"
+                                                                  )
+                                                                )
+                                                            )
+                                                          ]
+                                                        ),
+                                                        _c("v-spacer")
+                                                      ],
+                                                      1
+                                                    )
+                                                  ]
+                                                )
+                                          ]
+                                        ),
                                         _vm._v(" "),
-                                        _c("v-divider", {
-                                          staticClass: "my-2",
-                                          attrs: { vertical: "" }
-                                        }),
-                                        _vm._v(" "),
-                                        _c("v-col", { attrs: { cols: "6" } }, [
+                                        _c("v-col", { attrs: { cols: "12" } }, [
                                           person.company
                                             ? _c(
                                                 "span",

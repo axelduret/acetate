@@ -100,7 +100,7 @@ class PersonController extends Controller
       // Returns the total number of comments.
       'comments as comments_count'
     ])
-      ->with([
+      ->with([/* 
         // Returns taxonomies.
         'taxonomies' => function ($filter) {
           $filter
@@ -110,7 +110,7 @@ class PersonController extends Controller
             ->orderBy('category')
             // Order taxonomies by sub_category.
             ->orderBy('sub_category');
-        },
+        }, */
         // Returns favorites of the specified user.
         // TODO show favorites only if the user is logged in.
         'favorites'

@@ -346,7 +346,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {},
   data: function data() {
@@ -670,7 +669,16 @@ var render = function() {
                       _vm._l(_vm.venues, function(venue, index) {
                         return _c(
                           "v-col",
-                          { key: index, attrs: { cols: "12", md: "6" } },
+                          {
+                            key: index,
+                            attrs: {
+                              cols: "12",
+                              sm: "6",
+                              md: "4",
+                              lg: "3",
+                              xl: "2"
+                            }
+                          },
                           [
                             _c(
                               "v-card",
@@ -851,11 +859,7 @@ var render = function() {
                                                       _vm._v(" "),
                                                       _c("span", [
                                                         _vm._v(
-                                                          _vm._s(
-                                                            venue.addresses[0]
-                                                              .street1
-                                                          ) +
-                                                            ",\n                                                    " +
+                                                          "\n                                                    " +
                                                             _vm._s(
                                                               venue.addresses[0]
                                                                 .zip
