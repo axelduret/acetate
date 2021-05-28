@@ -61,7 +61,10 @@
                             v-for="(venue, index) in venues"
                             :key="index"
                             cols="12"
-                            md="6"
+                            sm="6"
+                            md="4"
+                            lg="3"
+                            xl="2"
                         >
                             <v-card max-width="570px" class="mx-auto pb-4">
                                 <div>
@@ -129,9 +132,9 @@
                                         </v-list-item-content>
                                     </v-list-item>
                                     <!-- card content -->
-                                    <v-row class="py-3 mx-2">
-                                        <v-col>
-                                            <!-- address -->
+                                    <v-row class="py-3 mx-1">
+                                        <!-- address -->
+                                        <v-col class="my-0 py-2">
                                             <span
                                                 class="caption primary--text"
                                                 v-if="
@@ -149,11 +152,7 @@
                                                             )
                                                         "
                                                         >mdi-map-marker</v-icon
-                                                    >&nbsp;<span
-                                                        >{{
-                                                            venue.addresses[0]
-                                                                .street1
-                                                        }},
+                                                    >&nbsp;<span>
                                                         {{
                                                             venue.addresses[0]
                                                                 .zip
